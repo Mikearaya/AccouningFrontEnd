@@ -1,0 +1,30 @@
+<ejs-grid [dataSource]='data' #grid [allowExcelExport]="true" id='accounts' [toolbar]='toolbarOptions' [allowPaging]="true"
+ [allowFiltering]="true" [allowSorting]="true" [allowResizing]='true' (rowSelected)='rowSelected($event)'
+  allowFiltering='true' [editSettings]='editSettings' [showColumnChooser]="true" [selectionSettings]='selectionOptions'
+  [allowPdfExport]='true' (toolbarClick)='toolbarClick($event)' [pageSettings]='initialPage' [filterSettings]="filterOptions"
+  [childGrid]="childGrid" (actionComplete)='actionEndHandler($event)'>
+  <e-columns>
+    <e-column field="AccountId" textAlign="left" headerText="ID" isPrimaryKey="true" type="number" width='30' editable="false"
+      filterable="false" groupable="false">
+    </e-column>
+    <e-column field="AccountCode" textAlign="left" headerText="Parent" isPrimaryKey="false" type="string" editType="textbox"
+      filterable="true" editable="true" groupable="false" width='50'></e-column>
+    <e-column field="AccountName" textAlign="left" headerText="Name" isPrimaryKey="false" type="string" editType="textbox"
+      filterable="true" editable="true" groupable="false"></e-column>
+    <!--     <e-column field="TotalAmount" textAlign="left" headerText="Amount" isPrimaryKey="false" type="string" editType="textbox"
+      filterable="true" editable="true" groupable="true" width='50'></e-column> -->
+    <e-column field="Active" textAlign="left" headerText="Active" isPrimaryKey="false" type="bool" editType="booleanedit"
+      filterable="true" editable="true" groupable="true" width='30'></e-column>
+    <e-column [commands]="commands" textAlign="center" width=25></e-column>
+  </e-columns>
+  <e-aggregates>
+    <e-aggregate>
+      <e-columns>
+        <e-column field="TotalAmount" type="sum" format="C2">
+          <ng-template #groupFooterTemplate let-data>Sum: {{data.sum}}</ng-template>
+        </e-column>
+      </e-columns>
+    </e-aggregate>
+  </e-aggregates>
+
+</ejs-grid>

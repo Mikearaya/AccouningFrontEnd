@@ -1,0 +1,17 @@
+div {
+
+  display: flex;
+  border-top: 1px solid lightseagreen;
+  height: 2.5em;
+}
+
+
+.title {
+  width: 50%;
+  float: left;
+}
+
+.bread-crumb {
+  width: 50%;
+  float: left;
+}
