@@ -5,7 +5,7 @@ import { AccountCatagoryFormComponent } from "./account-catagory-form/account-ca
 
 const routes: Routes = [
   { path: "", component: AccountCatagoryViewComponent },
-  { path: "new", component: AccountCatagoryFormComponent },
+  { path: "add", component: AccountCatagoryFormComponent },
   { path: ":catagoryId/update", component: AccountCatagoryFormComponent }
 ];
 

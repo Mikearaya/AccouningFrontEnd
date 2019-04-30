@@ -96,5 +96,12 @@
       "GlType": "",
       "id": "wDsiB40"
     }
+  ],
+  "account-catagory": [
+    {
+      "Id": 0,
+      "CatagoryName": "catagory",
+      "AccountType": "posting type"
+    }
   ]
 }

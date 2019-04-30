@@ -222,14 +222,14 @@ fdescribe(" Account form component", () => {
         }
       });
     }));
-    beforeEach(setupTestVars);
+    /*     beforeEach(setupTestVars);
     describe("Initialize function", () => {
       it("Should be called", () => {
         spyOn(component, "initializeFunction");
         component.initializeFunction;
         expect(component.initializeFunction).toHaveBeenCalled();
       });
-    });
+    }); */
 
     it("should show selected item", () => {
       // const a = fixture.debugElement.injector.get(ActivatedRoute);

@@ -1,40 +1,39 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Routes, RouterModule } from '@angular/router';
-import { AccountsViewComponent } from './accounts-view/accounts-view.component';
-import { AccountFormComponent } from './account-form/account-form.component';
-
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { Routes, RouterModule } from "@angular/router";
+import { AccountsViewComponent } from "./accounts-view/accounts-view.component";
+import { AccountFormComponent } from "./account-form/account-form.component";
 
 const routes: Routes = [
   {
-    path: '', component: AccountsViewComponent,
+    path: "",
+    component: AccountsViewComponent,
     data: {
-      title: 'Account Chart',
-      breadCrum: ''
+      title: "Account Chart",
+      breadCrum: ""
     }
   },
   {
-    path: 'new', component: AccountFormComponent,
+    path: "new",
+    component: AccountFormComponent,
     data: {
-      title: 'Create accounts',
-      breadCrum: 'Create'
+      title: "Create accounts",
+      breadCrum: "Create"
     }
   },
   {
-    path: ':accountId/update', component: AccountFormComponent,
+    path: ":accountId/update",
+    component: AccountFormComponent,
     data: {
-      title: 'Update accounts',
-      breadCrum: 'Update'
+      title: "Update accounts",
+      breadCrum: "Update"
     }
   }
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes)
-  ],
+  imports: [CommonModule, RouterModule.forChild(routes)],
   exports: [RouterModule],
   declarations: []
 })
-export class AccountsRoutingModule { }
+export class AccountsRoutingModule {}

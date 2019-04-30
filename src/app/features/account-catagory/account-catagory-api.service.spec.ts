@@ -2,7 +2,7 @@ import { of, Observable } from "rxjs";
 import { AccountCatagoryApiService } from "./account-catagory-api.service";
 import { AccountCatagory } from "./account-catagory-domain";
 
-describe("Account catagory api", () => {
+fdescribe("Account catagory api", () => {
   let accountCatagApi: AccountCatagoryApiService;
   let httpClient;
   let accountCatagories: AccountCatagory[];
