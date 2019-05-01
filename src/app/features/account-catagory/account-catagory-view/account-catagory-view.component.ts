@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Output } from "@angular/core";
 import { AccountCatagoryApiService } from "../account-catagory-api.service";
 import { AccountCatagory } from "../account-catagory-domain";
 
@@ -37,14 +37,20 @@ export class AccountCatagoryViewComponent implements OnInit {
   constructor(private accountCatagApi: AccountCatagoryApiService) {}
 
   ngOnInit() {
+    this.loadCatagories();
+  }
+
+  deleteCatagory(data: any) {
+    this.accountCatagApi
+      .deleteAccountCatagory(data["Id"] as number)
+      .subscribe();
+    console.log(data);
+  }
+  loadCatagories() {
     this.accountCatagApi
       .getAccountCatagories()
       .subscribe((data: AccountCatagory[]) => {
         this.data = data;
       });
-  }
-
-  deleteCategory(data: any) {
-    console.log(data);
   }
 }
