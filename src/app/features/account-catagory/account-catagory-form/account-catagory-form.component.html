@@ -1,24 +1,51 @@
-<!--   <div class="row">
-    <div class="col-12">
-      <label for="accountId">Account ID</label>
-      <div>
-        <input type="text" id="accountId" name="accountId" class="e-input" formControlName="AccountId">
-        <div class="e-error" *ngIf="AccountId.errors && AccountId.touched">
-          <div *ngIf="AccountId.errors['required']">*Account Id is Required</div>
-          <div *ngIf="AccountId.errors['minlength'] || AccountId.errors['maxlength']">*Account ID must be 4
-            chars long</div>
+<form [formGroup]="catagoryForm" (ngSubmit)="onSubmit()" name="accountForm">
+  <div class="container">
+    <div class="row">
+      <div class="col-6">
+        <label for="Catagory name">Catagory Name</label>
+        <div>
+          <input
+            type="text"
+            id="CatagoryName"
+            name="CatagoryName"
+            class="e-input"
+            formControlName="CatagoryName"
+          />
+          <div
+            class="e-error"
+            *ngIf="CatagoryName.errors && CatagoryName.touched"
+          >
+            <div *ngIf="CatagoryName.errors['required']">
+              *Catagory name is Required
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <label for="Account type"> Account Type</label>
+        <div>
+          <ejs-dropdownlist
+            id="AccountType"
+            name="AccountType"
+            [width]="550"
+            formControlName="AccountType"
+            [dataSource]="accountTypes"
+          ></ejs-dropdownlist>
+          <div
+            class="e-error"
+            *ngIf="AccountType.errors && AccountType.touched"
+          >
+            <div *ngIf="AccountType.errors['required']">
+              *Account type is Required
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="row">
     <div class="col-12">
-      <label for="parentAccount"> Parent Account</label>
-      <div>
-        <ejs-dropdownlist id='parentAccount' name="parentAccount" [width]='550' [fields]="accountFields"
-          formControlName="ParentAccount" [dataSource]='accountList'></ejs-dropdownlist>
-        <div class="e-error" *ngIf="ParentAccount.errors && ParentAccount.touched"></div>
-      </div>
+      <app-form-options
+        [submitDisabled]="catagoryForm.invalid"
+      ></app-form-options>
     </div>
   </div>
- -->
+</form>

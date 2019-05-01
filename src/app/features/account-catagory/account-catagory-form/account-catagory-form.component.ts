@@ -1,15 +1,104 @@
-import { Component, OnInit } from '@angular/core';
+/*
+ * @CreateTime: May 1, 2019 11:29 AM
+ * @Author: Naol
+ * @Contact: nnale8899@gmail.com
+ * @Last Modified By: Naol
+ * @Last Modified Time: May 1, 2019 12:42 PM
+ * @Description: Modify Here, Please
+ */
+import { Component, OnInit } from "@angular/core";
+import {
+  FormBuilder,
+  Validators,
+  FormGroup,
+  FormControl
+} from "@angular/forms";
+import { AccountCatagory } from "../account-catagory-domain";
+import { AccountCatagoryApiService } from "../account-catagory-api.service";
+import { HttpErrorResponse } from "@angular/common/http";
+import { Location } from "@angular/common";
 
 @Component({
-  selector: 'app-account-catagory-form',
-  templateUrl: './account-catagory-form.component.html',
-  styleUrls: ['./account-catagory-form.component.css']
+  selector: "app-account-catagory-form",
+  templateUrl: "./account-catagory-form.component.html",
+  styleUrls: ["./account-catagory-form.component.css"]
 })
 export class AccountCatagoryFormComponent implements OnInit {
+  public catagoryForm: FormGroup;
+  public accountTypes: object;
+  public isUpdate: boolean = false;
+  public accountId: string;
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(
+    private formBuilder: FormBuilder,
+    private accountCatagoryApi: AccountCatagoryApiService,
+    private location: Location
+  ) {
+    // intialize the form
+    this.createCatagoryForm();
+    this.accountTypes = ["ASSET", "LIABILITY", "REVENUE", "EXPENCE", "INCOME"];
   }
 
+  ngOnInit() {}
+
+  /* Creating value accessors for the reactive form
+  for use inside the template
+  */
+  get CatagoryName(): FormControl {
+    return this.catagoryForm.get("CatagoryName") as FormControl;
+  }
+
+  get AccountType(): FormControl {
+    return this.catagoryForm.get("AccountType") as FormControl;
+  }
+
+  createCatagoryForm() {
+    this.catagoryForm = this.formBuilder.group({
+      CatagoryName: ["", Validators.required],
+      AccountType: ["", Validators.required]
+    });
+  }
+
+  initializeCatagory(data: AccountCatagory) {
+    this.catagoryForm = this.formBuilder.group({
+      CatagoryName: [data.CatagoryName, Validators.required],
+      AccountType: [data.AccountType, Validators.required]
+    });
+  }
+  /*
+  called on the form submit event to handel
+  the request with appropriate action
+  i.e. add or update
+  */
+  onSubmit() {
+    // check if  current operation is update
+    if (!this.isUpdate) {
+      this.accountCatagoryApi
+        .createAccountCatagory(this.catagoryForm.value)
+        .subscribe(
+          success => {
+            alert("Account catagory Created Successfully");
+            this.location.back(); // on success return back to where the user previously was
+          },
+          (error: HttpErrorResponse) => {
+            alert(error.message); // on error show the error message
+          }
+        );
+    } else {
+      this.accountCatagoryApi
+        .updateAccountCatagory(this.accountId, this.catagoryForm.value)
+        .subscribe(
+          (success: Object) => {
+            this.location.back();
+            alert("Account Updated Successfully"); // on success return back to where the user previously was
+          },
+          (error: HttpErrorResponse) => {
+            alert(error.message); // on error show the error message
+          }
+        );
+    }
+  }
+  cancel() {
+    this.location.back();
+  }
 }
