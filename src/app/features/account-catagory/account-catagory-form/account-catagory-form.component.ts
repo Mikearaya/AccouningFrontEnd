@@ -6,7 +6,7 @@
  * @Last Modified Time: May 1, 2019 12:42 PM
  * @Description: Modify Here, Please
  */
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import {
   FormBuilder,
   Validators,
@@ -17,6 +17,8 @@ import { AccountCatagory } from "../account-catagory-domain";
 import { AccountCatagoryApiService } from "../account-catagory-api.service";
 import { HttpErrorResponse } from "@angular/common/http";
 import { Location } from "@angular/common";
+import { ActivatedRoute } from "@angular/router";
+import { ButtonComponent } from "@syncfusion/ej2-angular-buttons";
 
 @Component({
   selector: "app-account-catagory-form",
@@ -27,19 +29,51 @@ export class AccountCatagoryFormComponent implements OnInit {
   public catagoryForm: FormGroup;
   public accountTypes: object;
   public isUpdate: boolean = false;
-  public accountId: string;
+  public accountCatagoryId: any;
+  public accountTypeFields: Object;
+  public accountTypeList: Object;
 
   constructor(
     private formBuilder: FormBuilder,
     private accountCatagoryApi: AccountCatagoryApiService,
-    private location: Location
+    private location: Location,
+    private activatedRoute: ActivatedRoute
   ) {
     // intialize the form
     this.createCatagoryForm();
     this.accountTypes = ["ASSET", "LIABILITY", "REVENUE", "EXPENCE", "INCOME"];
   }
 
-  ngOnInit() {}
+  @ViewChild("statusBtn") statusBtn: ButtonComponent;
+
+  ngOnInit() {
+    // get the accountId from route parameter if present
+    this.accountCatagoryId = this.activatedRoute.snapshot.paramMap.get(
+      "catagoryId"
+    );
+
+    if (this.accountCatagoryId) {
+      // if account catagory id is present get the related account value
+      this.isUpdate = true;
+      // initialize the form with the retrived account value
+      this.accountCatagoryApi
+        .getAccountCatagoryById(this.accountCatagoryId)
+        .subscribe((data: AccountCatagory) => this.initializeCatagory(data));
+    }
+
+    this.accountTypeFields = {
+      text: "Account Type",
+      value: "AccountType"
+    };
+
+    // get account list to fill the Accounts drop down from back end
+    this.accountCatagoryApi
+      .getAccountCatagories()
+      .subscribe(
+        (data: AccountCatagory[]) => (this.accountTypeList = data),
+        (error: HttpErrorResponse) => alert(error.message)
+      );
+  }
 
   /* Creating value accessors for the reactive form
   for use inside the template
@@ -86,11 +120,11 @@ export class AccountCatagoryFormComponent implements OnInit {
         );
     } else {
       this.accountCatagoryApi
-        .updateAccountCatagory(this.accountId, this.catagoryForm.value)
+        .updateAccountCatagory(this.accountCatagoryId, this.catagoryForm.value)
         .subscribe(
           (success: Object) => {
             this.location.back();
-            alert("Account Updated Successfully"); // on success return back to where the user previously was
+            alert("Account catagory Updated Successfully"); // on success return back to where the user previously was
           },
           (error: HttpErrorResponse) => {
             alert(error.message); // on error show the error message

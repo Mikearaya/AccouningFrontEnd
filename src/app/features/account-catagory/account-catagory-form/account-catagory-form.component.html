@@ -1,7 +1,7 @@
 <form [formGroup]="catagoryForm" (ngSubmit)="onSubmit()" name="accountForm">
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
-      <div class="col-6">
+      <div class="col-sm-6 col-xs-12">
         <label for="Catagory name">Catagory Name</label>
         <div>
           <input
@@ -21,7 +21,7 @@
           </div>
         </div>
       </div>
-      <div class="col-6">
+      <div class="col-sm-6 col-xs-12">
         <label for="Account type"> Account Type</label>
         <div>
           <ejs-dropdownlist
@@ -42,10 +42,14 @@
         </div>
       </div>
     </div>
-    <div class="col-12">
-      <app-form-options
-        [submitDisabled]="catagoryForm.invalid"
-      ></app-form-options>
+    <div class="row">
+      <div class="col-4"></div>
+      <div class="col-4">
+        <app-form-options
+          [submitDisabled]="catagoryForm.invalid"
+        ></app-form-options>
+      </div>
+      <div class="col-4"></div>
     </div>
   </div>
 </form>
