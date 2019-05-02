@@ -20,23 +20,30 @@ export class AccountCatagoryApiService {
       .pipe(catchError(this.handleError));
   }
 
+  getAccountCatagoryById(id: number): Observable<AccountCatagory> {
+    return this.httpClient.get<AccountCatagory>(`${this.url}/${id}`);
+  }
+
   getAccountCatagories(): Observable<AccountCatagory[]> {
     return this.httpClient.get<AccountCatagory[]>(`${this.url}`);
   }
 
   updateAccountCatagory(
-    id: string,
+    id: number,
     updatedAccountCatagory: AccountCatagory
   ): Observable<boolean> {
+    updatedAccountCatagory.Id = id;
     return this.httpClient
       .put<boolean>(`${this.url}/${id}`, updatedAccountCatagory)
       .pipe(catchError(this.handleError));
   }
 
-  deleteAccountCatagory(id: string): Observable<boolean> {
-    return this.httpClient
-      .delete<boolean>(`${this.url}/${id}`)
-      .pipe(catchError(this.handleError));
+  deleteAccountCatagory(id: number): Observable<boolean> {
+    if (id) {
+      return this.httpClient
+        .delete<boolean>(`${this.url}/${id}`)
+        .pipe(catchError(this.handleError));
+    }
   }
 
   private handleError(error: Response | any) {
