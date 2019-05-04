@@ -27,6 +27,8 @@ import {
   ToolbarModule
 } from "@syncfusion/ej2-angular-navigations";
 import { ButtonModule } from "@syncfusion/ej2-angular-buttons";
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { RmHeaderInterceptorService } from "./features/Services/rm-header-interceptor.service";
 
 @NgModule({
   declarations: [AppComponent],
@@ -54,7 +56,12 @@ import { ButtonModule } from "@syncfusion/ej2-angular-buttons";
     CommandColumnService,
     ToolbarService,
     ResizeService,
-    PageService
+    PageService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RmHeaderInterceptorService,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

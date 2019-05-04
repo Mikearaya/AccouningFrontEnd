@@ -8,7 +8,7 @@ import { catchError } from "rxjs/operators";
   providedIn: "root"
 })
 export class AccountCatagoryApiService {
-  private url = " http://localhost:3000/account-catagory";
+  private url = "account-catagory";
 
   constructor(private httpClient: HttpClient) {}
 
