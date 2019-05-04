@@ -8,7 +8,7 @@ import { catchError } from "rxjs/operators";
   providedIn: "root"
 })
 export class AccountCatagoryApiService {
-  private url = "account-catagory";
+  private url = "account-categories";
 
   constructor(private httpClient: HttpClient) {}
 
