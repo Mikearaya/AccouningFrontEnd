@@ -9,13 +9,13 @@
             id="CatagoryName"
             name="CatagoryName"
             class="e-input"
-            formControlName="CatagoryName"
+            formControlName="CategoryName"
           />
           <div
             class="e-error"
-            *ngIf="CatagoryName.errors && CatagoryName.touched"
+            *ngIf="CategoryName.errors && CategoryName.touched"
           >
-            <div *ngIf="CatagoryName.errors['required']">
+            <div *ngIf="CategoryName.errors['required']">
               *Catagory name is Required
             </div>
           </div>

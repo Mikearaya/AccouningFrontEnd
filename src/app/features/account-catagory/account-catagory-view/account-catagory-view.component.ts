@@ -20,7 +20,7 @@ export class AccountCatagoryViewComponent implements OnInit {
       type: "number"
     },
     {
-      key: "CatagoryName",
+      key: "CategoryName",
       header: "Catagory Name",
       visible: true,
       width: "100",
@@ -42,15 +42,18 @@ export class AccountCatagoryViewComponent implements OnInit {
 
   deleteCatagory(data: any) {
     this.accountCatagApi
-      .deleteAccountCatagory(data["Id"] as number)
-      .subscribe();
-    console.log(data);
+      .deleteAccountCatagory(data["Id"])
+      .subscribe(() => alert("called"));
   }
-  loadCatagories() {
+  loadCatagories(search: string = "") {
     this.accountCatagApi
-      .getAccountCatagories()
+      .getAccountCatagories(search)
       .subscribe((data: AccountCatagoryView[]) => {
         this.data = data;
       });
+  }
+
+  filterAccountCategory(data: any) {
+    this.loadCatagories(data);
   }
 }

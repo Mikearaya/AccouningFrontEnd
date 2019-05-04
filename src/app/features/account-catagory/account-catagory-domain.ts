@@ -1,4 +1,4 @@
-export interface AccountCatagories {
+export interface AccountCategory {
   Id?: number;
   AccountType: string;
   CatagoryName: string;
@@ -7,7 +7,12 @@ export interface AccountCatagories {
 export interface AccountCatagoryView {
   Id?: number;
   AccountType: string;
-  CatagoryName: string;
+  CategoryName: string;
   DateAdded: Date;
   DateUpdated: Date;
+}
+
+export interface AccountCategoryIndex {
+  Id: number;
+  Name: string;
 }

@@ -1,59 +1,67 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Observable, of } from "rxjs";
 
 import { catchError } from "rxjs/operators";
-import { AccountCatagories } from "../features/account-catagory/account-catagory-domain";
+import {
+  AccountCatagoryView,
+  AccountCategoryIndex,
+  AccountCategory
+} from "../features/account-catagory/account-catagory-domain";
 
-@Injectable({
-  providedIn: "root"
-})
+@Injectable()
 export class AccountCatagoryApiService {
   private url = "account-categories";
 
   constructor(private httpClient: HttpClient) {}
 
   createAccountCatagory(
-    newAccountCatag: AccountCatagories
-  ): Observable<AccountCatagories> {
+    newAccountCatag: AccountCategory
+  ): Observable<AccountCatagoryView> {
     return this.httpClient
-      .post<AccountCatagories>(`${this.url}`, newAccountCatag)
+      .post<AccountCatagoryView>(`${this.url}`, newAccountCatag)
       .pipe(catchError(this.handleError));
   }
 
-  getAccountCatagoryById(id: number): Observable<AccountCatagories> {
-    return this.httpClient.get<AccountCatagories>(`${this.url}/${id}`);
+  getAccountCatagoryById(id: number): Observable<AccountCatagoryView> {
+    return this.httpClient.get<AccountCatagoryView>(`${this.url}/${id}`);
   }
 
-  getAccountCatagoryIndex(searchString: string): Observable<AccountCatagories> {
-    return this.httpClient.get<AccountCatagories>(
-      `${this.url}/index?searchString=${searchString}`
+  getAccountCatagoryIndex(
+    searchString: string
+  ): Observable<AccountCategoryIndex> {
+    return this.httpClient.get<AccountCategoryIndex>(
+      `${this.url}/index?${searchString}`
     );
   }
 
-  getAccountCatagories(): Observable<AccountCatagories[]> {
-    return this.httpClient.get<AccountCatagories[]>(`${this.url}`);
+  getAccountCatagories(
+    searchString: string = ""
+  ): Observable<AccountCatagoryView[]> {
+    return this.httpClient.get<AccountCatagoryView[]>(
+      `${this.url}?${searchString}`
+    );
   }
 
   updateAccountCatagory(
     id: number,
-    updatedAccountCatagory: AccountCatagories
-  ): Observable<boolean> {
+    updatedAccountCatagory: AccountCategory
+  ): Observable<void> {
     updatedAccountCatagory.Id = id;
-    return this.httpClient
-      .put<boolean>(`${this.url}/${id}`, updatedAccountCatagory)
-      .pipe(catchError(this.handleError));
+
+    return this.httpClient.put<void>(
+      `${this.url}/${id}`,
+      updatedAccountCatagory
+    );
   }
 
-  deleteAccountCatagory(id: number): Observable<boolean> {
-    if (id) {
-      return this.httpClient
-        .delete<boolean>(`${this.url}/${id}`)
-        .pipe(catchError(this.handleError));
-    }
+  deleteAccountCatagory(id: number): Observable<void> {
+    alert("in");
+    return this.httpClient.delete<void>(`${this.url}/${id}`);
   }
 
   private handleError(error: Response | any) {
-    return Observable.throw(error.status);
+    console.log(error);
+    return of(error);
   }
 }

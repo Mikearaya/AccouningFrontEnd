@@ -20,6 +20,7 @@ import { Location } from "@angular/common";
 import { ActivatedRoute } from "@angular/router";
 import { ButtonComponent } from "@syncfusion/ej2-angular-buttons";
 import { AccountCatagoryView } from "../account-catagory-domain";
+
 @Component({
   selector: "app-account-catagory-form",
   templateUrl: "./account-catagory-form.component.html",
@@ -41,7 +42,7 @@ export class AccountCatagoryFormComponent implements OnInit {
   ) {
     // intialize the form
     this.createCatagoryForm();
-    this.accountTypes = ["ASSET", "LIABILITY", "REVENUE", "EXPENCE", "INCOME"];
+    this.accountTypes = ["Asset", "Liability", "Revenue", "Expence", "Capital"];
   }
 
   @ViewChild("statusBtn") statusBtn: ButtonComponent;
@@ -80,8 +81,8 @@ export class AccountCatagoryFormComponent implements OnInit {
   /* Creating value accessors for the reactive form
   for use inside the template
   */
-  get CatagoryName(): FormControl {
-    return this.catagoryForm.get("CatagoryName") as FormControl;
+  get CategoryName(): FormControl {
+    return this.catagoryForm.get("CategoryName") as FormControl;
   }
 
   get AccountType(): FormControl {
@@ -90,14 +91,14 @@ export class AccountCatagoryFormComponent implements OnInit {
 
   createCatagoryForm() {
     this.catagoryForm = this.formBuilder.group({
-      CatagoryName: ["", Validators.required],
+      CategoryName: ["", Validators.required],
       AccountType: ["", Validators.required]
     });
   }
 
   initializeCatagory(data: AccountCatagoryView) {
     this.catagoryForm = this.formBuilder.group({
-      CatagoryName: [data.CatagoryName, Validators.required],
+      CategoryName: [data.CategoryName, Validators.required],
       AccountType: [data.AccountType, Validators.required]
     });
   }
@@ -124,9 +125,9 @@ export class AccountCatagoryFormComponent implements OnInit {
       this.accountCatagoryApi
         .updateAccountCatagory(this.accountCatagoryId, this.catagoryForm.value)
         .subscribe(
-          (success: Object) => {
-            this.location.back();
+          () => {
             alert("Account catagory Updated Successfully"); // on success return back to where the user previously was
+            this.location.back();
           },
           (error: HttpErrorResponse) => {
             alert(error.message); // on error show the error message

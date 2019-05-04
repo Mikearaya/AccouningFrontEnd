@@ -25,7 +25,6 @@ export class RmHeaderInterceptorService implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    console.log("hello");
     const requestUrl = request.url;
 
     if (request.method === "GET") {

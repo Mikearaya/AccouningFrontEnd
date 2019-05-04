@@ -1,3 +1,13 @@
-<app-data-view [data]='data' [showAdd]=true [showDelete]=true [showUpdate]=true (deleteRecord)="deleteCatagory($event)"
-  [showPdfExport]=true [columnsList]='columnBluePrint'>
+<app-data-view
+  [data]="data"
+  [showAdd]="true"
+  [showDelete]="true"
+  [showUpdate]="true"
+  (deleteRecord)="deleteCatagory($event)"
+  [showPdfExport]="true"
+  [columnsList]="columnBluePrint"
+  [enableSearching]="true"
+  [showColumnChooser]="true"
+  (dataQueried)="filterAccountCategory($event)"
+>
 </app-data-view>
