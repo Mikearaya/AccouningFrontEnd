@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { AccountCatagory } from "./account-catagory-domain";
+
 import { catchError } from "rxjs/operators";
+import { AccountCatagories } from "../features/account-catagory/account-catagory-domain";
 
 @Injectable({
   providedIn: "root"
@@ -13,28 +14,30 @@ export class AccountCatagoryApiService {
   constructor(private httpClient: HttpClient) {}
 
   createAccountCatagory(
-    newAccountCatag: AccountCatagory
-  ): Observable<AccountCatagory> {
+    newAccountCatag: AccountCatagories
+  ): Observable<AccountCatagories> {
     return this.httpClient
-      .post<AccountCatagory>(`${this.url}`, newAccountCatag)
+      .post<AccountCatagories>(`${this.url}`, newAccountCatag)
       .pipe(catchError(this.handleError));
   }
 
-  getAccountCatagoryById(id: number): Observable<AccountCatagory> {
-    return this.httpClient.get<AccountCatagory>(`${this.url}/${id}`);
+  getAccountCatagoryById(id: number): Observable<AccountCatagories> {
+    return this.httpClient.get<AccountCatagories>(`${this.url}/${id}`);
   }
 
-  getAccountCatagoryIndex(index: number): Observable<AccountCatagory> {
-    return this.httpClient.get<AccountCatagory>(`${this.url}/${index}`);
+  getAccountCatagoryIndex(searchString: string): Observable<AccountCatagories> {
+    return this.httpClient.get<AccountCatagories>(
+      `${this.url}/index?searchString=${searchString}`
+    );
   }
 
-  getAccountCatagories(): Observable<AccountCatagory[]> {
-    return this.httpClient.get<AccountCatagory[]>(`${this.url}`);
+  getAccountCatagories(): Observable<AccountCatagories[]> {
+    return this.httpClient.get<AccountCatagories[]>(`${this.url}`);
   }
 
   updateAccountCatagory(
     id: number,
-    updatedAccountCatagory: AccountCatagory
+    updatedAccountCatagory: AccountCatagories
   ): Observable<boolean> {
     updatedAccountCatagory.Id = id;
     return this.httpClient

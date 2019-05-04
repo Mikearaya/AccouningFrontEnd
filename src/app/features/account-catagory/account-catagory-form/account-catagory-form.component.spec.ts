@@ -14,7 +14,7 @@ import { RouterTestingModule } from "@angular/router/testing";
 import { ActivatedRoute, convertToParamMap } from "@angular/router";
 
 import { AccountCatagoryFormComponent } from "./account-catagory-form.component";
-import { AccountCatagoryApiService } from "../account-catagory-api.service";
+import { AccountCatagoryApiService } from "../../../core/account-catagory-api.service";
 
 fdescribe(" Account catagory form component", () => {
   let component: AccountCatagoryFormComponent;

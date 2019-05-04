@@ -7,7 +7,7 @@ const routes: Routes = [
     loadChildren: "./features/accounts/accounts.module#AccountsModule"
   },
   {
-    path: "account-catagory",
+    path: "account-catagories",
     loadChildren:
       "./features/account-catagory/account-catagory.module#AccountCatagoryModule"
   }

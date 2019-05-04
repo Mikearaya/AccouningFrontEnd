@@ -1,6 +1,6 @@
 import { Component, OnInit, Output } from "@angular/core";
-import { AccountCatagoryApiService } from "../account-catagory-api.service";
-import { AccountCatagory } from "../account-catagory-domain";
+import { AccountCatagoryApiService } from "../../../core/account-catagory-api.service";
+import { AccountCatagoryView } from "../account-catagory-domain";
 
 @Component({
   selector: "app-account-catagory-view",
@@ -49,7 +49,7 @@ export class AccountCatagoryViewComponent implements OnInit {
   loadCatagories() {
     this.accountCatagApi
       .getAccountCatagories()
-      .subscribe((data: AccountCatagory[]) => {
+      .subscribe((data: AccountCatagoryView[]) => {
         this.data = data;
       });
   }

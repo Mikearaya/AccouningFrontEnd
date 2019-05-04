@@ -113,7 +113,7 @@ describe(" Account form component", () => {
       });
 
       it("Account type field validity", () => {
-        const accountType = component.AccountType;
+        const accountType = component.AccountCatagory;
         expect(accountType.valid).toBeFalsy();
         accountType.setValue("appdiv");
         expect(accountType.valid).toBeTruthy();
@@ -132,24 +132,6 @@ describe(" Account form component", () => {
         expect(parentAccount.value).toEqual("Appdiv");
       });
 
-      it("Posting type field validity", () => {
-        const postingType = component.PostingType;
-        expect(postingType.valid).toBeTruthy();
-        postingType.setValue("Appdiv");
-        expect(postingType.value).toEqual("Appdiv");
-      });
-      it("Is posting account field validity", () => {
-        const isPosting = component.IsPosting;
-        expect(isPosting.valid).toBeTruthy();
-        isPosting.setValue("Appdiv");
-        expect(isPosting.value).toEqual("Appdiv");
-      });
-      it("Is reconcilation field validity", () => {
-        const isReconcilation = component.IsReconcilation;
-        expect(isReconcilation.valid).toBeTruthy();
-        isReconcilation.setValue("Appdiv");
-        expect(isReconcilation.value).toEqual("Appdiv");
-      });
       it("Active field validity", () => {
         const active = component.Active;
         expect(active.valid).toBeTruthy();
@@ -162,32 +144,13 @@ describe(" Account form component", () => {
         openingBalance.setValue("Appdiv");
         expect(openingBalance.value).toEqual("Appdiv");
       });
-
-      it("GlType field validity", () => {
-        const glType = component.GlType;
-        expect(glType.valid).toBeFalsy();
-        glType.setValue("Appdiv");
-        expect(glType.value).toEqual("Appdiv");
-        err = glType.errors || {};
-
-        expect(err["required"]).toBeFalsy();
-        glType.setValue("");
-        err = glType.errors || {};
-
-        expect(err["required"]).toBeTruthy();
-      });
       it("Should be valid when not empty", () => {
         component.AccountName.setValue("Appdiv");
-        component.AccountType.setValue("Appdiv");
+        component.AccountCatagory.setValue("Appdiv");
         component.AccountId.setValue("Appd");
         component.ParentAccount.setValue("Appdiv");
-        component.PostingType.setValue("Appdiv");
-        component.IsPosting.setValue(true);
-        component.IsReconcilation.setValue(false);
         component.Active.setValue(true);
         component.OpeningBalance.setValue(0);
-        component.GlType.setValue("Appdiv");
-        component.OrganizationId.setValue("Appdiv");
         expect(component.accountForm.valid).toBeTruthy();
       });
     });

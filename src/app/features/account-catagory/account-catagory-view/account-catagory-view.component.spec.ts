@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { AccountCatagoryViewComponent } from "./account-catagory-view.component";
-import { AccountCatagoryApiService } from "../account-catagory-api.service";
+import { AccountCatagoryApiService } from "../../../core/account-catagory-api.service";
 import { SharedModule } from "src/app/shared/shared.module";
 import { RouterTestingModule } from "@angular/router/testing";
 import { AccountCatagory } from "../account-catagory-domain";

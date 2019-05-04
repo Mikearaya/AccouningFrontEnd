@@ -6,7 +6,7 @@
  * @Last Modified Time: Apr 25, 2019 2:25 PM
  * @Description: Modify Here, Please
  */
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild, ɵConsole } from "@angular/core";
 import {
   FormGroup,
   FormBuilder,
@@ -21,6 +21,9 @@ import { ActivatedRoute } from "@angular/router";
 import { HttpErrorResponse } from "@angular/common/http";
 import { Accounts } from "../accounts";
 import { AccountsService } from "../accounts.service";
+import { AccountCatagoryApiService } from "src/app/core/account-catagory-api.service";
+import { AccountCatagories } from "../../account-catagory/account-catagory-domain";
+import { all } from "q";
 
 @Component({
   selector: "app-account-form",
@@ -28,7 +31,7 @@ import { AccountsService } from "../accounts.service";
   styleUrls: ["./account-form.component.css"]
 })
 export class AccountFormComponent implements OnInit {
-  public accountList: Object[]; // Holds Accounts for the drop down
+  public accountList: Object; // Holds Accounts for the drop down
   public organizationList: Object[]; // holds organization for the drop down
   public accountForm: FormGroup; // tmain formgroup
 
@@ -38,25 +41,48 @@ export class AccountFormComponent implements OnInit {
   public organizationFields: Object; // holds the selected fields to display on the drop down
   public calendarQuery: Query; // used  to filter the fields we want to use for calander period
   public calendarFields: Object; // holds the selected fields to display on the drop down
-  public postingType: Object[]; // holdes values for available general ledger posting types
-  public glType: Object[]; // holdes values for available general ledger  types
 
   public accountId: string; // used to hold the account Id passed in the route
-
-  public accountTypes: Object;
+  public accountCatagories: Object;
+  public index: string;
   @ViewChild("statusBtn") statusBtn: ButtonComponent;
 
   constructor(
     private formBuilder: FormBuilder,
     private accountApi: AccountsService,
     private location: Location,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private accountCatagoryApi: AccountCatagoryApiService
   ) {
     // intialize the form
     this.createForm();
-    this.accountTypes = ["ASSET", "LIABILITY", "REVENUE", "EXPENCE", "INCOME"];
-    this.postingType = ["CREDIT", "DEBIT", "BOTH"];
-    this.glType = ["INCOME STATEMENT", "BALANCE SHEET"];
+    // this.accountCatagories = [
+    //   "ASSET",
+    //   "LIABILITY",
+    //   "REVENUE",
+    //   "EXPENCE",
+    //   "INCOME"
+    // ];
+    /*    this.accountCatagories = [
+      this.accountCatagoryApi
+        .getAccountCatagoryIndex(this.index)
+        .subscribe((data: AccountCatagories) => {
+          console.log(data);
+        })
+    ]; */
+    /*     this.accountCatagories = [
+      this.accountCatagoryApi
+        .getAccountCatagories()
+        .subscribe((data: AccountCatagories[]) => {
+          this.accountCatagories = data[0];
+          let i: number;
+          for (i = 0; i <= 2; i++) {
+            let s: string = data[i].CatagoryName;
+            this.accountCatagories = s;
+            // console.log(s);
+          }
+        })
+    ]; */
   }
 
   ngOnInit() {
@@ -109,8 +135,8 @@ export class AccountFormComponent implements OnInit {
     return this.accountForm.get("AccountId") as FormControl;
   }
 
-  get AccountType(): FormControl {
-    return this.accountForm.get("AccountType") as FormControl;
+  get AccountCatagory(): FormControl {
+    return this.accountForm.get("AccountCatagory") as FormControl;
   }
 
   get AccountName(): FormControl {
@@ -119,26 +145,6 @@ export class AccountFormComponent implements OnInit {
 
   get ParentAccount(): FormControl {
     return this.accountForm.get("ParentAccount") as FormControl;
-  }
-
-  get PostingType(): FormControl {
-    return this.accountForm.get("PostingType") as FormControl;
-  }
-
-  get GlType(): FormControl {
-    return this.accountForm.get("GlType") as FormControl;
-  }
-
-  get OrganizationId(): FormControl {
-    return this.accountForm.get("OrganizationId") as FormControl;
-  }
-
-  get IsPosting(): FormControl {
-    return this.accountForm.get("IsPosting") as FormControl;
-  }
-
-  get IsReconcilation(): FormControl {
-    return this.accountForm.get("IsReconcilation") as FormControl;
   }
 
   get Active(): FormControl {
@@ -158,7 +164,7 @@ export class AccountFormComponent implements OnInit {
         "",
         [Validators.required, Validators.minLength(4), Validators.maxLength(4)]
       ],
-      AccountType: ["", Validators.required],
+      AccountCatagory: ["", Validators.required],
       AccountName: ["", Validators.required],
       ParentAccount: [""],
       Active: [true],
@@ -174,7 +180,7 @@ export class AccountFormComponent implements OnInit {
   initializeFunction(data: Accounts) {
     this.accountForm = this.formBuilder.group({
       AccountId: [data.Id, [Validators.minLength(4), Validators.maxLength(4)]],
-      AccountType: [data.AccountType, Validators.required],
+      AccountCatagory: [data.AccountCatagory, Validators.required],
       AccountName: [
         data.AccountName,
         [Validators.required, Validators.minLength(3)]

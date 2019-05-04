@@ -13,13 +13,13 @@ import {
   FormGroup,
   FormControl
 } from "@angular/forms";
-import { AccountCatagory } from "../account-catagory-domain";
-import { AccountCatagoryApiService } from "../account-catagory-api.service";
+
+import { AccountCatagoryApiService } from "../../../core/account-catagory-api.service";
 import { HttpErrorResponse } from "@angular/common/http";
 import { Location } from "@angular/common";
 import { ActivatedRoute } from "@angular/router";
 import { ButtonComponent } from "@syncfusion/ej2-angular-buttons";
-
+import { AccountCatagoryView } from "../account-catagory-domain";
 @Component({
   selector: "app-account-catagory-form",
   templateUrl: "./account-catagory-form.component.html",
@@ -28,7 +28,7 @@ import { ButtonComponent } from "@syncfusion/ej2-angular-buttons";
 export class AccountCatagoryFormComponent implements OnInit {
   public catagoryForm: FormGroup;
   public accountTypes: object;
-  public isUpdate: boolean = false;
+  public isUpdate = false;
   public accountCatagoryId: any;
   public accountTypeFields: Object;
   public accountTypeList: Object;
@@ -58,7 +58,9 @@ export class AccountCatagoryFormComponent implements OnInit {
       // initialize the form with the retrived account value
       this.accountCatagoryApi
         .getAccountCatagoryById(this.accountCatagoryId)
-        .subscribe((data: AccountCatagory) => this.initializeCatagory(data));
+        .subscribe((data: AccountCatagoryView) =>
+          this.initializeCatagory(data)
+        );
     }
 
     this.accountTypeFields = {
@@ -70,7 +72,7 @@ export class AccountCatagoryFormComponent implements OnInit {
     this.accountCatagoryApi
       .getAccountCatagories()
       .subscribe(
-        (data: AccountCatagory[]) => (this.accountTypeList = data),
+        (data: AccountCatagoryView[]) => (this.accountTypeList = data),
         (error: HttpErrorResponse) => alert(error.message)
       );
   }
@@ -93,7 +95,7 @@ export class AccountCatagoryFormComponent implements OnInit {
     });
   }
 
-  initializeCatagory(data: AccountCatagory) {
+  initializeCatagory(data: AccountCatagoryView) {
     this.catagoryForm = this.formBuilder.group({
       CatagoryName: [data.CatagoryName, Validators.required],
       AccountType: [data.AccountType, Validators.required]

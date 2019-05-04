@@ -4,29 +4,12 @@ import { NgModule } from "@angular/core";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import {
-  SearchService,
-  AggregateService,
-  SortService,
-  FilterService,
-  GroupService,
-  EditService,
-  ExcelExportService,
-  ColumnChooserService,
-  ColumnMenuService,
-  DetailRowService,
-  PdfExportService,
-  ReorderService,
-  CommandColumnService,
-  ToolbarService,
-  ResizeService,
-  PageService
-} from "@syncfusion/ej2-angular-grids";
-import {
   SidebarModule,
   TreeViewModule,
   ToolbarModule
 } from "@syncfusion/ej2-angular-navigations";
 import { ButtonModule } from "@syncfusion/ej2-angular-buttons";
+import { CoreModule } from "./core/core.module";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { RmHeaderInterceptorService } from "./features/Services/rm-header-interceptor.service";
 
@@ -38,25 +21,10 @@ import { RmHeaderInterceptorService } from "./features/Services/rm-header-interc
     SidebarModule,
     TreeViewModule,
     ToolbarModule,
-    ButtonModule
+    ButtonModule,
+    CoreModule
   ],
   providers: [
-    AggregateService,
-    SortService,
-    FilterService,
-    GroupService,
-    EditService,
-    ExcelExportService,
-    ColumnChooserService,
-    ColumnMenuService,
-    DetailRowService,
-    SearchService,
-    PdfExportService,
-    ReorderService,
-    CommandColumnService,
-    ToolbarService,
-    ResizeService,
-    PageService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: RmHeaderInterceptorService,
