@@ -20,6 +20,7 @@ fdescribe(" Account catagory form component", () => {
   let component: AccountCatagoryFormComponent;
   let fixture: ComponentFixture<AccountCatagoryFormComponent>;
   let debugEl: DebugElement;
+  let activatedRoute;
 
   const makeCompiledTestBed = (provider?: object): void => {
     const moduleDef: TestModuleMetadata = {
@@ -37,6 +38,9 @@ fdescribe(" Account catagory form component", () => {
     component = fixture.componentInstance;
     debugEl = fixture.debugElement;
     fixture.detectChanges();
+    activatedRoute = fixture.debugElement.injector.get(ActivatedRoute) as any;
+    activatedRoute.testParamMap = { category: "api-02" };
+    activatedRoute.testQueryParamMap = { period: "2018", size: "14" };
   };
 
   describe("When id is not provided in the url param--(Create account catagory form)", () => {
@@ -125,20 +129,20 @@ fdescribe(" Account catagory form component", () => {
       });
     }));
     beforeEach(setupTestVars);
-    /* describe("Initialize catagory", () => {
+
+    /*  let catagoryId = 1;
+    let accountCatagory;
+    accountCatagory = ActivatedRoute.snapshot.paramMap.get(catagoryId);
+    it("should ..", () => {
+      expect(accountCatagory).toBe(1);
+    }); */
+    describe("Initialize catagory", () => {
       let data: any;
       it("Should be called", () => {
         spyOn(component, "initializeCatagory");
         component.initializeCatagory(data);
         expect(component.initializeCatagory).toHaveBeenCalled();
       });
-    }); */
-
-    let catagoryId = 1;
-    let accountCatagory;
-    accountCatagory = ActivatedRoute.snapshot.paramMap.get(catagoryId);
-    it("should ..", () => {
-      expect(accountCatagory).toBe(1);
     });
   });
 });
