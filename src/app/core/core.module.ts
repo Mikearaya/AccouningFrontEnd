@@ -19,10 +19,11 @@ import {
   PageService
 } from "@syncfusion/ej2-angular-grids";
 import { AccountCatagoryApiService } from "./account-catagory-api.service";
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [],
-  imports: [CommonModule],
+  imports: [CommonModule, HttpClientModule],
   providers: [
     AggregateService,
     SortService,

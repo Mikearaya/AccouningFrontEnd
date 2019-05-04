@@ -1,4 +1,4 @@
-export interface AccountCatagory {
+export interface AccountCatagories {
   Id?: number;
   AccountType: string;
   CatagoryName: string;

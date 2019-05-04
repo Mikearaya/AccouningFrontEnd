@@ -43,7 +43,7 @@ export class AppComponent {
         {
           id: "01-02",
           name: "Account catagory",
-          url: "/account-catagory",
+          url: "/account-catagories",
           expanded: false,
           enabled: true,
           selected: false

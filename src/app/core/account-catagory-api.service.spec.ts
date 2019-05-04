@@ -1,6 +1,6 @@
 import { of, Observable } from "rxjs";
 import { AccountCatagoryApiService } from "./account-catagory-api.service";
-import { AccountCatagory } from "./account-catagory-domain";
+import { AccountCatagory } from "../features/account-catagory/account-catagory-domain";
 
 describe("Account catagory api", () => {
   let accountCatagApi: AccountCatagoryApiService;

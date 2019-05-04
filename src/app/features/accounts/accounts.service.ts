@@ -14,7 +14,7 @@ import { Accounts, AccountBalanceView } from "./accounts";
 
 @Injectable()
 export class AccountsService {
-  public url = "http://localhost:3000/accounts";
+  public url = "accounts";
 
   constructor(private httpClient: HttpClient) {}
   // Gets a single Account information by Id and returns an observable of Account
