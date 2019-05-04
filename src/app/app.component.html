@@ -1,1 +1,31 @@
-<router-outlet></router-outlet>
+<ejs-sidebar id="default-sidebar" #sidebar [type]="type" [target]="target">
+  <div class="center-align">
+    <ejs-treeview
+      #tree
+      (nodeClicked)="loadRoutingContent($event)"
+      id="treeelement"
+      [fields]="field"
+    ></ejs-treeview>
+  </div>
+</ejs-sidebar>
+
+<div id="maincontent" class="content">
+  <div>
+    <div id="head">
+      <button
+        ejs-button
+        id="toggle"
+        #togglebtn
+        cssClass="e-flat"
+        iconCss="e-icons burg-icon"
+        isToggle="true"
+        (click)="btnClick()"
+        content="Open"
+      ></button>
+    </div>
+    <div class="title">Main content</div>
+    <div class="rows">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

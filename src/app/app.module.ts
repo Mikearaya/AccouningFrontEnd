@@ -21,10 +21,23 @@ import {
   ResizeService,
   PageService
 } from "@syncfusion/ej2-angular-grids";
+import {
+  SidebarModule,
+  TreeViewModule,
+  ToolbarModule
+} from "@syncfusion/ej2-angular-navigations";
+import { ButtonModule } from "@syncfusion/ej2-angular-buttons";
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    SidebarModule,
+    TreeViewModule,
+    ToolbarModule,
+    ButtonModule
+  ],
   providers: [
     AggregateService,
     SortService,

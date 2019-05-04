@@ -21,30 +21,11 @@ import { Accounts } from "../accounts";
 import { ActivatedRoute, convertToParamMap } from "@angular/router";
 import { DebugElement } from "@angular/core";
 
-fdescribe(" Account form component", () => {
+describe(" Account form component", () => {
   let component: AccountFormComponent;
   let fixture: ComponentFixture<AccountFormComponent>;
   let debugEl: DebugElement;
 
-  /*   beforeEach(async () => {
-    TestBed.configureTestingModule({
-      imports: [SharedModule, RouterTestingModule],
-      declarations: [AccountFormComponent],
-      providers: [
-        AccountsService,
-        {
-          provide: ActivatedRoute,
-          useValue: {
-            snapshot: { paramMap: convertToParamMap({ id: 1 }) }
-          }
-        }
-      ]
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(AccountFormComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  }); */
   const makeCompiledTestBed = (provider?: object): void => {
     const moduleDef: TestModuleMetadata = {
       imports: [SharedModule, RouterTestingModule],
@@ -222,14 +203,14 @@ fdescribe(" Account form component", () => {
         }
       });
     }));
-    /*     beforeEach(setupTestVars);
-    describe("Initialize function", () => {
+    beforeEach(setupTestVars);
+    /*   describe("Initialize function", () => {
       it("Should be called", () => {
         spyOn(component, "initializeFunction");
         component.initializeFunction;
         expect(component.initializeFunction).toHaveBeenCalled();
       });
-    }); */
+    });  */
 
     it("should show selected item", () => {
       // const a = fixture.debugElement.injector.get(ActivatedRoute);

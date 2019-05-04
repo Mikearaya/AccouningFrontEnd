@@ -2,7 +2,7 @@ import { of, Observable } from "rxjs";
 import { AccountCatagoryApiService } from "./account-catagory-api.service";
 import { AccountCatagory } from "./account-catagory-domain";
 
-fdescribe("Account catagory api", () => {
+describe("Account catagory api", () => {
   let accountCatagApi: AccountCatagoryApiService;
   let httpClient;
   let accountCatagories: AccountCatagory[];
@@ -69,7 +69,7 @@ fdescribe("Account catagory api", () => {
         AccountType: "Revenue"
       };
       accountCatagApi
-        .updateAccountCatagory("1", updatedComp)
+        .updateAccountCatagory(1, updatedComp)
         .subscribe(result => (updated = result));
 
       expect(updated).toBe(true);
@@ -79,10 +79,12 @@ fdescribe("Account catagory api", () => {
   // Test AccountsService Deleteaccount Function
   describe("Delete account catagory", () => {
     it("Should return true on Success", () => {
-      httpClient.delete.and.returnValue(of(true));
+      // httpClient.delete.and.returnValue(of(true));
       let deleted = false;
+      let id: number;
+      spyOn(accountCatagApi, "deleteAccountCatagory").and.returnValue(of(true));
       accountCatagApi
-        .deleteAccountCatagory("Catag 1")
+        .deleteAccountCatagory(id)
         .subscribe(res => (deleted = res));
 
       expect(deleted).toBe(true);

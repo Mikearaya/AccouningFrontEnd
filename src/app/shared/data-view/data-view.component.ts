@@ -274,6 +274,10 @@ export class DataViewComponent implements OnInit {
   rowIsSelected(event: RowSelectEventArgs): void {
     this.rowSelected.emit(event);
   }
+
+  deleteCatagory(event: Event) {
+    this.deleteRecord.emit(event);
+  }
 }
 
 export interface CustomGridColumns {

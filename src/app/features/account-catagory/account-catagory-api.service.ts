@@ -24,6 +24,10 @@ export class AccountCatagoryApiService {
     return this.httpClient.get<AccountCatagory>(`${this.url}/${id}`);
   }
 
+  getAccountCatagoryIndex(index: number): Observable<AccountCatagory> {
+    return this.httpClient.get<AccountCatagory>(`${this.url}/${index}`);
+  }
+
   getAccountCatagories(): Observable<AccountCatagory[]> {
     return this.httpClient.get<AccountCatagory[]>(`${this.url}`);
   }
