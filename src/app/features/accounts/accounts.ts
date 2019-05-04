@@ -1,7 +1,7 @@
 export class Accounts {
   Id: string;
   AccountName: string;
-  AccountType: string;
+  AccountCatagory: string;
   ParentAccount?: string;
   OrganizationId: number;
   OpeningBalance: number;

@@ -1,6 +1,6 @@
 import { Component, OnInit, Output } from "@angular/core";
-import { AccountCatagoryApiService } from "../account-catagory-api.service";
 import { AccountCatagory } from "../account-catagory-domain";
+import { AccountCatagoryApiService } from "../../../core/account-catagory-api.service";
 
 @Component({
   selector: "app-account-catagory-view",

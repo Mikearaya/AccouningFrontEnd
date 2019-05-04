@@ -31,6 +31,7 @@
               "./node_modules/@syncfusion/ej2-angular-navigations/styles/material.css",
               "./node_modules/@syncfusion/ej2-angular-lists/styles/material.css",
               "./node_modules/@syncfusion/ej2-splitbuttons/styles/material.css",
+              "./node_modules/@syncfusion/ej2-angular-dropdowns/styles/material.css",
               "./node_modules/@syncfusion/ej2-dropdowns/styles/material.css"
             ],
             "scripts": [],

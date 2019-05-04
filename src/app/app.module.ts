@@ -27,6 +27,8 @@ import {
   ToolbarModule
 } from "@syncfusion/ej2-angular-navigations";
 import { ButtonModule } from "@syncfusion/ej2-angular-buttons";
+import { AutoCompleteModule } from "@syncfusion/ej2-angular-dropdowns";
+import { CoreModule } from "./core/core.module";
 
 @NgModule({
   declarations: [AppComponent],
@@ -36,26 +38,10 @@ import { ButtonModule } from "@syncfusion/ej2-angular-buttons";
     SidebarModule,
     TreeViewModule,
     ToolbarModule,
-    ButtonModule
+    ButtonModule,
+    CoreModule
   ],
-  providers: [
-    AggregateService,
-    SortService,
-    FilterService,
-    GroupService,
-    EditService,
-    ExcelExportService,
-    ColumnChooserService,
-    ColumnMenuService,
-    DetailRowService,
-    SearchService,
-    PdfExportService,
-    ReorderService,
-    CommandColumnService,
-    ToolbarService,
-    ResizeService,
-    PageService
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

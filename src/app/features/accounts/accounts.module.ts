@@ -27,7 +27,10 @@ import {
 import { ReactiveFormsModule } from "@angular/forms";
 import { SwitchModule, ButtonModule } from "@syncfusion/ej2-angular-buttons";
 import { HttpClientModule } from "@angular/common/http";
-import { DropDownListModule } from "@syncfusion/ej2-angular-dropdowns";
+import {
+  DropDownListModule,
+  AutoCompleteModule
+} from "@syncfusion/ej2-angular-dropdowns";
 import { NumericTextBoxModule } from "@syncfusion/ej2-angular-inputs";
 
 @NgModule({
@@ -41,7 +44,8 @@ import { NumericTextBoxModule } from "@syncfusion/ej2-angular-inputs";
     ButtonModule,
     HttpClientModule,
     DropDownListModule,
-    NumericTextBoxModule
+    NumericTextBoxModule,
+    AutoCompleteModule
   ],
   declarations: [AccountFormComponent, AccountsViewComponent],
   providers: [

@@ -38,12 +38,10 @@ export class AccountFormComponent implements OnInit {
   public organizationFields: Object; // holds the selected fields to display on the drop down
   public calendarQuery: Query; // used  to filter the fields we want to use for calander period
   public calendarFields: Object; // holds the selected fields to display on the drop down
-  public postingType: Object[]; // holdes values for available general ledger posting types
-  public glType: Object[]; // holdes values for available general ledger  types
 
   public accountId: string; // used to hold the account Id passed in the route
 
-  public accountTypes: Object;
+  public accountCatagories: Object;
   @ViewChild("statusBtn") statusBtn: ButtonComponent;
 
   constructor(
@@ -54,9 +52,13 @@ export class AccountFormComponent implements OnInit {
   ) {
     // intialize the form
     this.createForm();
-    this.accountTypes = ["ASSET", "LIABILITY", "REVENUE", "EXPENCE", "INCOME"];
-    this.postingType = ["CREDIT", "DEBIT", "BOTH"];
-    this.glType = ["INCOME STATEMENT", "BALANCE SHEET"];
+    this.accountCatagories = [
+      "ASSET",
+      "LIABILITY",
+      "REVENUE",
+      "EXPENCE",
+      "INCOME"
+    ];
   }
 
   ngOnInit() {
@@ -109,8 +111,8 @@ export class AccountFormComponent implements OnInit {
     return this.accountForm.get("AccountId") as FormControl;
   }
 
-  get AccountType(): FormControl {
-    return this.accountForm.get("AccountType") as FormControl;
+  get AccountCatagory(): FormControl {
+    return this.accountForm.get("AccountCatagory") as FormControl;
   }
 
   get AccountName(): FormControl {
@@ -158,7 +160,7 @@ export class AccountFormComponent implements OnInit {
         "",
         [Validators.required, Validators.minLength(4), Validators.maxLength(4)]
       ],
-      AccountType: ["", Validators.required],
+      AccountCatagory: ["", Validators.required],
       AccountName: ["", Validators.required],
       ParentAccount: [""],
       Active: [true],
@@ -174,7 +176,7 @@ export class AccountFormComponent implements OnInit {
   initializeFunction(data: Accounts) {
     this.accountForm = this.formBuilder.group({
       AccountId: [data.Id, [Validators.minLength(4), Validators.maxLength(4)]],
-      AccountType: [data.AccountType, Validators.required],
+      AccountCatagory: [data.AccountCatagory, Validators.required],
       AccountName: [
         data.AccountName,
         [Validators.required, Validators.minLength(3)]

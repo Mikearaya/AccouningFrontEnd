@@ -1,25 +1,46 @@
 <section>
-
   <h3 class="text-left text-info">
     <span class="delete">
-      <button ejs-button type="button" class="e-warning" *ngIf="isUpdate" iconCss="e-icons e-delete-icon"
-        (click)="deleteAccount()">
-        Delete</button>
-    </span></h3>
+      <button
+        ejs-button
+        type="button"
+        class="e-warning"
+        *ngIf="isUpdate"
+        iconCss="e-icons e-delete-icon"
+        (click)="deleteAccount()"
+      >
+        Delete
+      </button>
+    </span>
+  </h3>
 
-  <form [formGroup]="accountForm" novalidate (ngSubmit)="onSubmit()" name="accountForm">
-
+  <form
+    [formGroup]="accountForm"
+    novalidate
+    (ngSubmit)="onSubmit()"
+    name="accountForm"
+  >
     <div class="content">
-
       <div class="row">
         <div class="col-md-6 col-sm-12">
           <div class="row">
             <div class="col-12">
               <label for="accountName">Account Name</label>
               <div>
-                <input type="text" id="accountName" name="AccountName" class="e-input" formControlName="AccountName">
-                <div class="e-error" *ngIf="AccountName.errors && AccountName.touched">
-                  <div *ngIf="AccountName.errors['required']">*Account Name is Required</div>
+                <input
+                  type="text"
+                  id="accountName"
+                  name="AccountName"
+                  class="e-input"
+                  formControlName="AccountName"
+                />
+                <div
+                  class="e-error"
+                  *ngIf="AccountName.errors && AccountName.touched"
+                >
+                  <div *ngIf="AccountName.errors['required']">
+                    *Account Name is Required
+                  </div>
                 </div>
               </div>
             </div>
@@ -29,11 +50,28 @@
             <div class="col-12">
               <label for="accountId">Account ID</label>
               <div>
-                <input type="text" id="accountId" name="accountId" class="e-input" formControlName="AccountId">
-                <div class="e-error" *ngIf="AccountId.errors && AccountId.touched">
-                  <div *ngIf="AccountId.errors['required']">*Account Id is Required</div>
-                  <div *ngIf="AccountId.errors['minlength'] || AccountId.errors['maxlength']">*Account ID must be 4
-                    chars long</div>
+                <input
+                  type="text"
+                  id="accountId"
+                  name="accountId"
+                  class="e-input"
+                  formControlName="AccountId"
+                />
+                <div
+                  class="e-error"
+                  *ngIf="AccountId.errors && AccountId.touched"
+                >
+                  <div *ngIf="AccountId.errors['required']">
+                    *Account Id is Required
+                  </div>
+                  <div
+                    *ngIf="
+                      AccountId.errors['minlength'] ||
+                      AccountId.errors['maxlength']
+                    "
+                  >
+                    *Account ID must be 4 chars long
+                  </div>
                 </div>
               </div>
             </div>
@@ -42,88 +80,59 @@
             <div class="col-12">
               <label for="parentAccount"> Parent Account</label>
               <div>
-                <ejs-dropdownlist id='parentAccount' name="parentAccount" [width]='550' [fields]="accountFields"
-                  formControlName="ParentAccount" [dataSource]='accountList'></ejs-dropdownlist>
-                <div class="e-error" *ngIf="ParentAccount.errors && ParentAccount.touched"></div>
+                <ejs-autocomplete
+                  id="parentAccount"
+                  name="parentAccount"
+                  [width]="550"
+                  placeholder="find the parent account"
+                  formControlName="ParentAccount"
+                  [dataSource]="accountList"
+                ></ejs-autocomplete>
+                <div
+                  class="e-error"
+                  *ngIf="ParentAccount.errors && ParentAccount.touched"
+                ></div>
               </div>
             </div>
           </div>
-          <!-- Account Type-->
-          <div class="row">
-            <div class="col-12">
-              <label for="accountType">Account Type</label>
-              <div>
-                <ejs-dropdownlist id='accountType' name="AccountType" [width]="300" formControlName="AccountType"
-                  [dataSource]='accountTypes'></ejs-dropdownlist>
-                <div class="e-error" *ngIf="AccountType.errors && AccountType.touched">
-                  <div *ngIf="AccountType.errors['required']">*Account Type is Required</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Account Posting Type Area-->
-
-
-          <!-- Opening Balance Input Field-->
         </div>
         <!-- Second Column Starts-->
         <div class="col-md-6 col-sm-12">
+          <!-- Account Catagory-->
           <div class="row">
             <div class="col-12">
-              <label for="postingType">Posting Type</label>
+              <label for="accountCatagory">Account Catagory</label>
               <div>
-                <ejs-dropdownlist id='postingType' name="postingType" formControlName="PostingType" [width]=300
-                  [dataSource]='postingType'></ejs-dropdownlist>
-                <div class="e-error" *ngIf="PostingType.errors && PostingType.touched">
-                  <div *ngIf="PostingType.errors['required']">*Account Posting Type is Required</div>
+                <ejs-autocomplete
+                  id="accountCatagory"
+                  name="accountCatagory"
+                  placeholder="find account catagory"
+                  [width]="400"
+                  formControlName="accountCatagory"
+                  [dataSource]="accountCatagories"
+                ></ejs-autocomplete>
+                <div
+                  class="e-error"
+                  *ngIf="AccountCatagory.errors && AccountCatagory.touched"
+                >
+                  <div *ngIf="AccountCatagory.errors['required']">
+                    *Account Catagory is Required
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-
-
-
-          <!--Ledger Entry Type Selection Area-->
-          <div class="row">
-            <div class="col-12">
-              <label for="glType">Income Statement/ Balance Sheet</label>
-              <div>
-                <ejs-dropdownlist id='glType' name="glType" formControlName="GlType" [width]=300 [dataSource]='glType'>
-                </ejs-dropdownlist>
-                <div class="e-error" *ngIf="GlType.errors && GlType.touched">
-                  <div *ngIf="GlType.errors['required']">*General Ledger Entry Type is Required</div>
-                </div>
-
-              </div>
-            </div>
-          </div>
-          <!--Parent Account Selection Area-->
-
-          <div class="row">
-            <div class="col-12">
-              <!-- Is Reconciliation Check box area-->
-              <label for="isReconcilation">Is Reconciliation
-                <ejs-switch formControlName="IsReconcilation" id="isReconciliation" name="isReconciliation">
-                </ejs-switch>
-              </label>
-            </div>
-          </div>
-          <!--Posting Account Selection area -->
-          <div class="row">
-            <div class="col-12">
-              <label for="isPosting">Is Posting Account
-                <ejs-switch formControlName="IsPosting" id="isPosting" name="isPosting"></ejs-switch>
-              </label>
-            </div>
-          </div>
-          <!-- Opening Balance Input Field-->
           <div class="row">
             <div class="col-12" *ngIf="!isUpdate">
               <label for="openingBalance"> Opening Balance </label>
               <div>
-                <ejs-numerictextbox id="openingBalance" name="openingBalance" class="e-input" [width]='150'
-                  formControlName="OpeningBalance">
+                <ejs-numerictextbox
+                  id="openingBalance"
+                  name="openingBalance"
+                  class="e-input"
+                  [width]="150"
+                  formControlName="OpeningBalance"
+                >
                 </ejs-numerictextbox>
               </div>
             </div>
@@ -131,15 +140,23 @@
           <!--Account Status Block Active-->
           <div class="row">
             <div class="col-12">
-              <label for="status">Active
-                <ejs-switch formControlName="Active" id="status" name="status"></ejs-switch>
+              <label for="status"
+                >Active
+                <ejs-switch
+                  formControlName="Active"
+                  id="status"
+                  name="status"
+                ></ejs-switch>
               </label>
             </div>
           </div>
         </div>
       </div>
       <!--Submit Button Area-->
-      <app-form-options [submitDisabled]="accountForm.invalid"></app-form-options>
+      <app-form-options
+        [submitDisabled]="accountForm.invalid"
+      ></app-form-options>
     </div>
   </form>
 </section>
+<!-- Opening Balance Input Field-->
