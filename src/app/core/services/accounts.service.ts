@@ -8,9 +8,13 @@
  */
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
-import {  HttpClient } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { catchError } from "rxjs/operators";
-import { Accounts, AccountsIndexView, AccountViewModel } from "./accounts";
+import {
+  Accounts,
+  AccountsIndexView,
+  AccountViewModel
+} from "../../features/accounts/accounts";
 
 @Injectable()
 export class AccountsService {
@@ -36,7 +40,9 @@ export class AccountsService {
   }
 
   getAccountIndex(searchString: string = ""): Observable<AccountsIndexView[]> {
-    return this.httpClient.get<AccountsIndexView[]>(`${this.url}/index`);
+    return this.httpClient.get<AccountsIndexView[]>(
+      `${this.url}/index?searchString=${searchString}`
+    );
   }
 
   // Creates a new instance of Account record in the system amd returns an observable

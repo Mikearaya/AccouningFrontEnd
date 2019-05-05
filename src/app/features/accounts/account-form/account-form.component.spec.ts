@@ -14,7 +14,7 @@ import {
   TestModuleMetadata,
   async
 } from "@angular/core/testing";
-import { AccountsService } from "../accounts.service";
+import { AccountsService } from "../../../core/services/accounts.service";
 import { RouterTestingModule } from "@angular/router/testing";
 import { SharedModule } from "src/app/shared/shared.module";
 import { Accounts } from "../accounts";
@@ -88,7 +88,7 @@ describe(" Account form component", () => {
         expect(component.accountForm.valid).toBeFalsy();
       });
       it("Account name field validity", () => {
-        const accountName = component.AccountName;
+        const accountName = component.Name;
         expect(accountName.valid).toBeFalsy();
         accountName.setValue("appdiv");
         expect(accountName.valid).toBeTruthy();
@@ -145,7 +145,7 @@ describe(" Account form component", () => {
         expect(openingBalance.value).toEqual("Appdiv");
       });
       it("Should be valid when not empty", () => {
-        component.AccountName.setValue("Appdiv");
+        component.Name.setValue("Appdiv");
         component.AccountCatagory.setValue("Appdiv");
         component.AccountId.setValue("Appd");
         component.ParentAccount.setValue("Appdiv");

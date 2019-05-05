@@ -27,14 +27,13 @@ export class RmHeaderInterceptorService implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     const requestUrl = request.url;
 
-      const modifiedRequest = request.clone({
-        url: `http://localhost:5000/api/${requestUrl}`,
-        setHeaders: {
-          "Content-Type": "application/json; charset=utf-8",
-          Accept: "application/json"
-        }
-      });
-      return next.handle(modifiedRequest);
-    
+    const modifiedRequest = request.clone({
+      url: `http://localhost:5000/api/${requestUrl}`,
+      setHeaders: {
+        "Content-Type": "application/json; charset=utf-8",
+        Accept: "application/json"
+      }
+    });
+    return next.handle(modifiedRequest);
   }
 }

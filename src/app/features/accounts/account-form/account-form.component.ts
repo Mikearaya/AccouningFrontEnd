@@ -6,23 +6,20 @@
  * @Last Modified Time: Apr 25, 2019 2:25 PM
  * @Description: Modify Here, Please
  */
-import { Component, OnInit, ViewChild, ɵConsole } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import {
   FormGroup,
   FormBuilder,
   Validators,
   FormControl
 } from "@angular/forms";
-
-import { ButtonComponent } from "@syncfusion/ej2-angular-buttons";
 import { Query } from "@syncfusion/ej2-data";
 import { Location } from "@angular/common";
 import { ActivatedRoute } from "@angular/router";
 import { HttpErrorResponse } from "@angular/common/http";
-import { Accounts, AccountsIndexView, AccountViewModel } from "../accounts";
-import { AccountsService } from "../accounts.service";
+import { Accounts, AccountsIndexView } from "../accounts";
+import { AccountsService } from "../../../core/services/accounts.service";
 import { AccountCatagoryApiService } from "src/app/core/account-catagory-api.service";
-import { all } from "q";
 import { AccountCategoryIndex } from "../../account-catagory/account-catagory-domain";
 
 @Component({
@@ -31,7 +28,6 @@ import { AccountCategoryIndex } from "../../account-catagory/account-catagory-do
   styleUrls: ["./account-form.component.css"]
 })
 export class AccountFormComponent implements OnInit {
-  public accountList: Object; // Holds Accounts for the drop down
   public organizationList: AccountsIndexView[]; // holds organization for the drop down
   public accountForm: FormGroup; // tmain formgroup
 
@@ -44,8 +40,6 @@ export class AccountFormComponent implements OnInit {
 
   public accountId: number; // used to hold the account Id passed in the route
   public accountCatagories: AccountCategoryIndex[] = [];
-  public index: string;
-  @ViewChild("statusBtn") statusBtn: ButtonComponent;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -61,9 +55,9 @@ export class AccountFormComponent implements OnInit {
     // get the accountId from route parameter if present
     this.accountId = +this.activatedRoute.snapshot.paramMap.get("accountId");
 
-    this.accountApi
+    /*  this.accountApi
       .getAccountIndex("")
-      .subscribe((data: AccountsIndexView[]) => (this.accountList = data));
+      .subscribe((data: AccountsIndexView[]) => (this.accountList = data)); */
     this.accountCatagoryApi
       .getAccountCatagoryIndex("")
       .subscribe(
@@ -79,16 +73,7 @@ export class AccountFormComponent implements OnInit {
         .subscribe((data: Accounts) => this.initializeFunction(data));
     }
 
-    this.accountFields = { text: "Name", value: "Id" };
-    this.organizationQuery = new Query().select(["Name", "Id"]);
-    this.organizationFields = { text: "Name", value: "Id" };
-
-    // get organization list to fill the organization drop down from back end
-    /*     this.companyApi.getOrganizationsList().subscribe(
-      (data) => this.organizationList = data
-    ); */
-
-    // get account list to fill the Accounts drop down from back end
+    this.accountFields = { value: "Name" };
   }
 
   deleteAccount(): void {
@@ -110,12 +95,12 @@ export class AccountFormComponent implements OnInit {
     return this.accountForm.get("AccountId") as FormControl;
   }
 
-  get AccountCatagory(): FormControl {
-    return this.accountForm.get("AccountCatagory") as FormControl;
+  get CatagoryId(): FormControl {
+    return this.accountForm.get("CatagoryId") as FormControl;
   }
 
-  get AccountName(): FormControl {
-    return this.accountForm.get("AccountName") as FormControl;
+  get Name(): FormControl {
+    return this.accountForm.get("Name") as FormControl;
   }
 
   get ParentAccount(): FormControl {
@@ -139,9 +124,9 @@ export class AccountFormComponent implements OnInit {
         "",
         [Validators.required, Validators.minLength(4), Validators.maxLength(4)]
       ],
-      AccountCatagory: ["", Validators.required],
-      AccountName: ["", Validators.required],
-      ParentAccount: [""],
+      CatagoryId: [""],
+      Name: ["", Validators.required],
+      ParentAccount: [0],
       Active: [true],
       OpeningBalance: [0],
       OrganizationId: [""]
@@ -151,8 +136,8 @@ export class AccountFormComponent implements OnInit {
   initializeFunction(data: Accounts) {
     this.accountForm = this.formBuilder.group({
       AccountId: [data.Id, [Validators.minLength(4), Validators.maxLength(4)]],
-      AccountCatagory: [data.CatagoryId, Validators.required],
-      AccountName: [data.Name, [Validators.required, Validators.minLength(3)]],
+      CatagoryId: [data.CatagoryId, Validators.required],
+      Name: [data.Name, [Validators.required, Validators.minLength(3)]],
       ParentAccount: [data.ParentAccount],
       Active: [data.Active],
       OpeningBalance: [data.OpeningBalance],

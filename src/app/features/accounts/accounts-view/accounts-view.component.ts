@@ -31,7 +31,7 @@ import {
   QueryString,
   FilterEventModel
 } from "src/app/shared/data-view/data-view.model";
-import { AccountsService } from "../accounts.service";
+import { AccountsService } from "../../../core/services/accounts.service";
 
 @Component({
   selector: "app-accounts-view",

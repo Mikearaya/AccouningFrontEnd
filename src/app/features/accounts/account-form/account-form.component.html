@@ -21,6 +21,7 @@
     name="accountForm"
   >
     <div class="content">
+      {{ this.accountForm.value | json }}
       <div class="row">
         <div class="col-md-6 col-sm-12">
           <div class="row">
@@ -32,13 +33,10 @@
                   id="accountName"
                   name="AccountName"
                   class="e-input"
-                  formControlName="AccountName"
+                  formControlName="Name"
                 />
-                <div
-                  class="e-error"
-                  *ngIf="AccountName.errors && AccountName.touched"
-                >
-                  <div *ngIf="AccountName.errors['required']">
+                <div class="e-error" *ngIf="Name.errors && Name.touched">
+                  <div *ngIf="Name.errors['required']">
                     *Account Name is Required
                   </div>
                 </div>
@@ -80,15 +78,9 @@
             <div class="col-12">
               <label for="parentAccount"> Parent Account</label>
               <div>
-                <ejs-autocomplete
-                  id="parentAccount"
-                  name="parentAccount"
-                  [width]="550"
-                  placeholder="find the parent account"
+                <app-account-selector
                   formControlName="ParentAccount"
-                  [fields]="accountFields"
-                  [dataSource]="accountList"
-                ></ejs-autocomplete>
+                ></app-account-selector>
                 <div
                   class="e-error"
                   *ngIf="ParentAccount.errors && ParentAccount.touched"
@@ -104,20 +96,14 @@
             <div class="col-12">
               <label for="accountCatagory">Account Catagory</label>
               <div>
-                <ejs-autocomplete
-                  id="accountCatagory"
-                  name="accountCatagory"
-                  placeholder="find account catagory"
-                  [width]="400"
-                  [fields]="accountFields"
-                  formControlName="AccountCatagory"
-                  [dataSource]="accountCatagories"
-                ></ejs-autocomplete>
+                <app-account-category-selector
+                  formControlName="CatagoryId"
+                ></app-account-category-selector>
                 <div
                   class="e-error"
-                  *ngIf="AccountCatagory.errors && AccountCatagory.touched"
+                  *ngIf="CatagoryId.errors && CatagoryId.touched"
                 >
-                  <div *ngIf="AccountCatagory.errors['required']">
+                  <div *ngIf="CatagoryId.errors['required']">
                     *Account Catagory is Required
                   </div>
                 </div>

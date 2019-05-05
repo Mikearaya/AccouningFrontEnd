@@ -5,7 +5,7 @@ import {
 } from "@angular/common/http/testing";
 import { AccountsService } from "./accounts.service";
 import { of, Observable } from "rxjs";
-import { Accounts } from "./accounts";
+import { Accounts } from "../../features/accounts/accounts";
 import { getTypeNameForDebugging } from "@angular/common/src/directives/ng_for_of";
 
 describe("AccountsService", () => {
