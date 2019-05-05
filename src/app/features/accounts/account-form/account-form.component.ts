@@ -17,7 +17,7 @@ import { Query } from "@syncfusion/ej2-data";
 import { Location } from "@angular/common";
 import { ActivatedRoute } from "@angular/router";
 import { HttpErrorResponse } from "@angular/common/http";
-import { Accounts, AccountsIndexView } from "../accounts";
+import { Accounts, AccountsIndexView, AccountViewModel } from "../accounts";
 import { AccountsService } from "../../../core/services/accounts.service";
 import { AccountCatagoryApiService } from "src/app/core/account-catagory-api.service";
 import { AccountCategoryIndex } from "../../account-catagory/account-catagory-domain";
@@ -70,7 +70,7 @@ export class AccountFormComponent implements OnInit {
       // initialize the form with the retrived account value
       this.accountApi
         .getAccountById(this.accountId)
-        .subscribe((data: Accounts) => this.initializeFunction(data));
+        .subscribe((data: AccountViewModel) => this.initializeFunction(data));
     }
 
     this.accountFields = { value: "Name" };
@@ -128,21 +128,28 @@ export class AccountFormComponent implements OnInit {
       Name: ["", Validators.required],
       ParentAccount: [0],
       Active: [true],
-      OpeningBalance: [0],
-      OrganizationId: [""]
+      OpeningBalance: [0]
     });
   }
 
-  initializeFunction(data: Accounts) {
+  initializeFunction(data: AccountViewModel) {
     this.accountForm = this.formBuilder.group({
-      AccountId: [data.Id, [Validators.minLength(4), Validators.maxLength(4)]],
-      CatagoryId: [data.CatagoryId, Validators.required],
-      Name: [data.Name, [Validators.required, Validators.minLength(3)]],
+      AccountId: [
+        data.AccountId,
+        [Validators.minLength(4), Validators.maxLength(4)]
+      ],
+      CatagoryId: [
+        { value: data.CategoryId, disabled: true },
+        Validators.required
+      ],
+      Name: [data.AccountName, [Validators.required, Validators.minLength(3)]],
       ParentAccount: [data.ParentAccount],
       Active: [data.Active],
-      OpeningBalance: [data.OpeningBalance],
-      OrganizationId: [data.OrganizationId]
+      OpeningBalance: [data.OpeningBalance]
     });
+
+    this.CatagoryId.disable();
+    this.ParentAccount.disable();
   }
 
   /*

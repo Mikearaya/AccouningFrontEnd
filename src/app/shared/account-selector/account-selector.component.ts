@@ -1,17 +1,20 @@
 import { Component, OnInit, forwardRef } from "@angular/core";
 import { AccountsService } from "src/app/core/services/accounts.service";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
+import { AccountsIndexView } from "src/app/features/accounts/accounts";
 
 @Component({
   selector: "app-account-selector",
   template: `
     <ejs-autocomplete
       id="account"
+      #accountElement
       name="account"
       placeholder="search for account"
       [width]="400"
+      [text]="text"
       [fields]="fields"
-      [dataSource]="data"
+      [dataSource]="accounts"
       (change)="categoryChanged($event)"
     ></ejs-autocomplete>
   `,
@@ -29,10 +32,10 @@ export class AccountSelectorComponent implements OnInit, ControlValueAccessor {
   public _value: any;
   public disabled: boolean;
 
-  public data: any;
+  public accounts: any;
   public fields: Object = { value: "Id", text: "Name" };
   // set the placeholder to the AutoComplete input
-  public text = "Find a country";
+  public text = "";
 
   categoryChanged($event: any) {
     if ($event.itemData) {
@@ -40,6 +43,7 @@ export class AccountSelectorComponent implements OnInit, ControlValueAccessor {
     } else {
       this.onChanged("");
     }
+
     this.onTouched();
   }
 
@@ -62,6 +66,12 @@ export class AccountSelectorComponent implements OnInit, ControlValueAccessor {
   ngOnInit() {
     this.accountApi
       .getAccountIndex("")
-      .subscribe((data: any) => (this.data = data));
+      .subscribe((result: AccountsIndexView[]) => {
+        this.accounts = result;
+        if (this._value) {
+          const data = this.accounts.filter(a => a.Id === this._value);
+          this.text = data[0].Name;
+        }
+      });
   }
 }

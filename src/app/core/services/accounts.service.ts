@@ -22,8 +22,8 @@ export class AccountsService {
 
   constructor(private httpClient: HttpClient) {}
   // Gets a single Account information by Id and returns an observable of Account
-  getAccountById(id: number): Observable<Accounts> {
-    return this.httpClient.get<Accounts>(`${this.url}/${id}`);
+  getAccountById(id: number): Observable<AccountViewModel> {
+    return this.httpClient.get<AccountViewModel>(`${this.url}/${id}`);
   }
 
   // Gets all the record of Account and returns and observable of Account object

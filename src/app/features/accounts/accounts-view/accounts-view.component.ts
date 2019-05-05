@@ -20,7 +20,10 @@ import {
   CommandModel,
   RowSelectEventArgs,
   GridModel,
-  ActionEventArgs
+  ActionEventArgs,
+  DeleteEventArgs,
+  Column,
+  IRow
 } from "@syncfusion/ej2-angular-grids";
 import { Router, ActivatedRoute } from "@angular/router";
 
@@ -32,6 +35,7 @@ import {
   FilterEventModel
 } from "src/app/shared/data-view/data-view.model";
 import { AccountsService } from "../../../core/services/accounts.service";
+import { closest } from "@syncfusion/ej2-base";
 
 @Component({
   selector: "app-accounts-view",
@@ -80,7 +84,6 @@ export class AccountsViewComponent implements OnInit {
 
     this.childGrid = {
       queryString: "ParentAccount",
-      rowSelected: this.rowSelected.bind(this),
       columns: [
         {
           field: "AccountId",
@@ -100,31 +103,49 @@ export class AccountsViewComponent implements OnInit {
     this.toolbarOptions = ["Create Account", "Search"];
     this.commands = [
       {
+        type: "Edit",
+        buttonOption: {
+          cssClass: "e-flat",
+          iconCss: "e-edit e-icons",
+          click: this.editAccount.bind(this)
+        }
+      },
+      {
         type: "Delete",
-        buttonOption: { cssClass: "e-flat", iconCss: "e-delete e-icons" }
+        buttonOption: {
+          cssClass: "e-flat",
+          iconCss: "e-delete e-icons",
+          click: this.deleteAccount.bind(this)
+        }
       }
     ];
     this.pageSettings = { pageSize: 15 }; // initial page row size for the grid
-    this.editSettings = {
-      showDeleteConfirmDialog: true,
-      allowEditing: true,
-      allowAdding: true,
-      allowDeleting: true,
-      mode: "Dialog"
-    };
   }
 
   handleError(error: HttpErrorResponse) {
     console.log(error);
   }
 
-  rowSelected(args: RowSelectEventArgs) {
-    if (args.data["id"]) {
-      this.router.navigate([`${args.data["id"]}/update`], {
+  editAccount(data: Event): void {
+    const rowObj: IRow<Column> = this.grid.getRowObjectFromUID(
+      closest(data.target as Element, ".e-row").getAttribute("data-uid")
+    );
+
+    if (rowObj.data["Id"]) {
+      this.router.navigate([`${rowObj.data["Id"]}/update`], {
         relativeTo: this.activatedRoute
       });
     }
   }
+
+  deleteAccount(data: Event): void {
+    const rowObj: IRow<Column> = this.grid.getRowObjectFromUID(
+      closest(data.target as Element, ".e-row").getAttribute("data-uid")
+    );
+
+    this.accountApi.deleteAccount(rowObj.data["Id"]).subscribe();
+  }
+
   onDataBound() {
     this.grid.detailRowModule.expandAll();
   }

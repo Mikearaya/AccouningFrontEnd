@@ -1,18 +1,21 @@
-import { Component, OnInit, forwardRef } from "@angular/core";
+import { Component, OnInit, forwardRef, OnChanges } from "@angular/core";
 import { AccountCatagoryApiService } from "src/app/core/account-catagory-api.service";
 import { Query } from "@syncfusion/ej2-data";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
+import { AccountsIndexView } from "src/app/features/accounts/accounts";
 
 @Component({
   selector: "app-account-category-selector",
   template: `
     <ejs-autocomplete
       id="accountCatagory"
+      #account
       name="accountCatagory"
       placeholder="find account catagory"
       [width]="400"
+      [text]="text"
       [fields]="fields"
-      [dataSource]="searchData"
+      [dataSource]="accountCategories"
       (change)="categoryChanged($event)"
     ></ejs-autocomplete>
   `,
@@ -26,16 +29,16 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
   ]
 })
 export class AccountCategorySelectorComponent
-  implements OnInit, ControlValueAccessor {
+  implements OnInit, OnChanges, ControlValueAccessor {
   constructor(private accountApi: AccountCatagoryApiService) {}
   public _value: any;
   public disabled: boolean;
 
-  public searchData: any;
+  public accountCategories: AccountsIndexView[] = [];
   query: Query;
   public fields: Object = { value: "Name", text: "Name" };
   // set the placeholder to the AutoComplete input
-  public text = "Find a country";
+  public text = "";
 
   categoryChanged($event: any) {
     if ($event.itemData) {
@@ -49,7 +52,7 @@ export class AccountCategorySelectorComponent
   onChanged: any = () => {};
   onTouched: any = () => {};
 
-  writeValue(obj: any): void {
+  writeValue(obj: number): void {
     this._value = obj;
   }
   registerOnChange(fn: any): void {
@@ -62,9 +65,17 @@ export class AccountCategorySelectorComponent
     this.disabled = isDisabled;
   }
 
+  ngOnChanges() {
+    console.log("changed");
+  }
+
   ngOnInit() {
-    this.accountApi
-      .getAccountCatagoryIndex("")
-      .subscribe((data: any) => (this.searchData = data));
+    this.accountApi.getAccountCatagoryIndex("").subscribe((data: any) => {
+      this.accountCategories = data;
+      if (this._value) {
+        const data = this.accountCategories.filter(a => a.Id === this._value);
+        this.text = data[0].Name;
+      }
+    });
   }
 }

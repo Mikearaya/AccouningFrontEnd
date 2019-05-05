@@ -151,7 +151,7 @@ export class DataViewComponent implements OnInit {
 
   deleteAction(event: Event) {
     const rowObj: IRow<Column> = this.grid.getRowObjectFromUID(
-      closest(<Element>event.target, ".e-row").getAttribute("data-uid")
+      closest(event.target as Element, ".e-row").getAttribute("data-uid")
     );
     this.deleteRecord.emit(rowObj.data);
     this.grid.deleteRecord();
@@ -159,10 +159,10 @@ export class DataViewComponent implements OnInit {
 
   private editAction(event: Event): void {
     const rowObj: IRow<Column> = this.grid.getRowObjectFromUID(
-      closest(<Element>event.target, ".e-row").getAttribute("data-uid")
+      closest(event.target as Element, ".e-row").getAttribute("data-uid")
     );
     const key = this.idKey ? this.idKey : "Id";
-    console.log(rowObj.data);
+
     this.router.navigate([`${rowObj.data[key]}/update`], {
       relativeTo: this.activatedRoute
     });
