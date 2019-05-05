@@ -26,7 +26,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 
 import { HttpErrorResponse } from "@angular/common/http";
 import { ClickEventArgs } from "@syncfusion/ej2-navigations";
-import { Accounts } from "../accounts";
+import { Accounts, AccountViewModel } from "../accounts";
 import {
   QueryString,
   FilterEventModel
@@ -43,7 +43,7 @@ export class AccountsViewComponent implements OnInit {
 
   @ViewChild("grid")
   public grid: GridComponent;
-  public data: Accounts[];
+  public data: AccountViewModel[];
   public excelExportProperties: ExcelExportProperties;
   public filterSettings: FilterSettingsModel;
   public toolbarOptions: Object[];
@@ -71,7 +71,7 @@ export class AccountsViewComponent implements OnInit {
 
   ngOnInit() {
     this.accountApi.getAccountsList().subscribe(
-      (data: Accounts[]) => {
+      (data: AccountViewModel[]) => {
         this.data = data;
         this.childGrid.dataSource = data;
       },

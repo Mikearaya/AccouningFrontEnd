@@ -52,7 +52,7 @@ fdescribe(" Account catagory form component", () => {
 
     it("should check if form have been filled out", () => {
       TestBed.get(ActivatedRoute);
-      expect(component.CatagoryName.valid).toBeFalsy();
+      expect(component.CategoryName.valid).toBeFalsy();
     });
 
     describe("OnSubmit", () => {
@@ -85,7 +85,7 @@ fdescribe(" Account catagory form component", () => {
         expect(component.catagoryForm.valid).toBeFalsy();
       });
       it("Catagory name field validity", () => {
-        const catagoryName = component.CatagoryName;
+        const catagoryName = component.CategoryName;
         expect(catagoryName.valid).toBeFalsy();
         catagoryName.setValue("appdiv");
         expect(catagoryName.valid).toBeTruthy();
@@ -110,7 +110,7 @@ fdescribe(" Account catagory form component", () => {
       });
 
       it("Should be valid when not empty", () => {
-        component.CatagoryName.setValue("Appdiv");
+        component.CategoryName.setValue("Appdiv");
         component.AccountType.setValue("Appdiv");
         expect(component.catagoryForm.valid).toBeTruthy();
       });

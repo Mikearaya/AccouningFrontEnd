@@ -1,18 +1,29 @@
 export class Accounts {
-  Id: string;
-  AccountName: string;
-  AccountCatagory: string;
-  ParentAccount?: string;
-  OrganizationId: number;
-  OpeningBalance: number;
-  PostingType: string;
+  Id?: number;
+  AccountId: string;
+  ParentAccount: number;
+  CatagoryId: number;
+  Name: string;
   Active: boolean;
-  IsReconciliation: boolean;
-  IsPosting: boolean;
-  glType: string;
+  OrganizationId?: number;
+  OpeningBalance?: number;
 }
 
-export class AccountBalanceView {
+export interface AccountsIndexView {
+  Id: number;
+  Name: string;
+}
+
+export interface AccountViewModel {
+  Id: number;
   AccountId: string;
-  balance: number | null;
+  ParentAccount: string;
+  AccountName: string;
+  Active: boolean;
+  Year: string;
+  OpeningBalance: number | null;
+  Category: string;
+  CategoryId: number;
+  DateAdded: Date | string | null;
+  DateUpdated: Date | string | null;
 }

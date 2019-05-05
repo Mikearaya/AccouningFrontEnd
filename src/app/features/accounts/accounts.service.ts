@@ -8,9 +8,9 @@
  */
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
-import { HttpHeaders, HttpClient } from "@angular/common/http";
+import {  HttpClient } from "@angular/common/http";
 import { catchError } from "rxjs/operators";
-import { Accounts, AccountBalanceView } from "./accounts";
+import { Accounts, AccountsIndexView, AccountViewModel } from "./accounts";
 
 @Injectable()
 export class AccountsService {
@@ -18,7 +18,7 @@ export class AccountsService {
 
   constructor(private httpClient: HttpClient) {}
   // Gets a single Account information by Id and returns an observable of Account
-  getAccountById(id: string): Observable<Accounts> {
+  getAccountById(id: number): Observable<Accounts> {
     return this.httpClient.get<Accounts>(`${this.url}/${id}`);
   }
 
@@ -29,14 +29,14 @@ export class AccountsService {
   //   return of(this.accounts);
   // }
 
-  getAccountsList(searchString: string = ""): Observable<Accounts[]> {
-    return this.httpClient.get<Accounts[]>(`${this.url}`);
+  getAccountsList(searchString: string = ""): Observable<AccountViewModel[]> {
+    return this.httpClient.get<AccountViewModel[]>(
+      `${this.url}?${searchString}`
+    );
   }
 
-  getAccountBalance(Id: string): Observable<AccountBalanceView> {
-    return this.httpClient.get<AccountBalanceView>(
-      `${this.url}/${Id}?type=balance`
-    );
+  getAccountIndex(searchString: string = ""): Observable<AccountsIndexView[]> {
+    return this.httpClient.get<AccountsIndexView[]>(`${this.url}/index`);
   }
 
   // Creates a new instance of Account record in the system amd returns an observable
@@ -49,17 +49,17 @@ export class AccountsService {
 
   // Update a single instance of Account record and returns a boolean depending on the success or
   // failure of the operation
-  updateAccount(id: string, updatedAccount: Accounts): Observable<boolean> {
+  updateAccount(id: number, updatedAccount: Accounts): Observable<void> {
     updatedAccount.Id = id;
     return this.httpClient
-      .put<boolean>(`${this.url}/${id}`, updatedAccount)
+      .put<void>(`${this.url}/${id}`, updatedAccount)
       .pipe(catchError(this.handleError));
   }
 
   // deletes a single instance of Account record and returns boolean based on the outcome of the operation
-  deleteAccount(id: string): Observable<boolean> {
+  deleteAccount(id: number): Observable<void> {
     return this.httpClient
-      .delete<boolean>(`${this.url}/${id}`)
+      .delete<void>(`${this.url}/${id}`)
       .pipe(catchError(this.handleError));
   }
 

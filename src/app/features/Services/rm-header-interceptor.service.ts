@@ -27,7 +27,6 @@ export class RmHeaderInterceptorService implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     const requestUrl = request.url;
 
-    if (request.method === "GET") {
       const modifiedRequest = request.clone({
         url: `http://localhost:5000/api/${requestUrl}`,
         setHeaders: {
@@ -36,14 +35,6 @@ export class RmHeaderInterceptorService implements HttpInterceptor {
         }
       });
       return next.handle(modifiedRequest);
-    } else if (request.method === "POST") {
-      const modifiedRequest = request.clone({
-        url: `http://localhost:5000/api/${requestUrl}`,
-        setHeaders: {
-          "Content-Type": "application/json; charset=utf-8"
-        }
-      });
-      return next.handle(modifiedRequest);
-    }
+    
   }
 }

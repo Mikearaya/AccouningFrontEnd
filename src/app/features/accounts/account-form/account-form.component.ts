@@ -19,11 +19,11 @@ import { Query } from "@syncfusion/ej2-data";
 import { Location } from "@angular/common";
 import { ActivatedRoute } from "@angular/router";
 import { HttpErrorResponse } from "@angular/common/http";
-import { Accounts } from "../accounts";
+import { Accounts, AccountsIndexView, AccountViewModel } from "../accounts";
 import { AccountsService } from "../accounts.service";
 import { AccountCatagoryApiService } from "src/app/core/account-catagory-api.service";
-import { AccountCatagories } from "../../account-catagory/account-catagory-domain";
 import { all } from "q";
+import { AccountCategoryIndex } from "../../account-catagory/account-catagory-domain";
 
 @Component({
   selector: "app-account-form",
@@ -32,7 +32,7 @@ import { all } from "q";
 })
 export class AccountFormComponent implements OnInit {
   public accountList: Object; // Holds Accounts for the drop down
-  public organizationList: Object[]; // holds organization for the drop down
+  public organizationList: AccountsIndexView[]; // holds organization for the drop down
   public accountForm: FormGroup; // tmain formgroup
 
   public isUpdate: Boolean = false; // used as a flag to determine current operation
@@ -42,8 +42,8 @@ export class AccountFormComponent implements OnInit {
   public calendarQuery: Query; // used  to filter the fields we want to use for calander period
   public calendarFields: Object; // holds the selected fields to display on the drop down
 
-  public accountId: string; // used to hold the account Id passed in the route
-  public accountCatagories: Object;
+  public accountId: number; // used to hold the account Id passed in the route
+  public accountCatagories: AccountCategoryIndex[] = [];
   public index: string;
   @ViewChild("statusBtn") statusBtn: ButtonComponent;
 
@@ -54,40 +54,21 @@ export class AccountFormComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private accountCatagoryApi: AccountCatagoryApiService
   ) {
-    // intialize the form
     this.createForm();
-    // this.accountCatagories = [
-    //   "ASSET",
-    //   "LIABILITY",
-    //   "REVENUE",
-    //   "EXPENCE",
-    //   "INCOME"
-    // ];
-    /*    this.accountCatagories = [
-      this.accountCatagoryApi
-        .getAccountCatagoryIndex(this.index)
-        .subscribe((data: AccountCatagories) => {
-          console.log(data);
-        })
-    ]; */
-    /*     this.accountCatagories = [
-      this.accountCatagoryApi
-        .getAccountCatagories()
-        .subscribe((data: AccountCatagories[]) => {
-          this.accountCatagories = data[0];
-          let i: number;
-          for (i = 0; i <= 2; i++) {
-            let s: string = data[i].CatagoryName;
-            this.accountCatagories = s;
-            // console.log(s);
-          }
-        })
-    ]; */
   }
 
   ngOnInit() {
     // get the accountId from route parameter if present
-    this.accountId = this.activatedRoute.snapshot.paramMap.get("accountId");
+    this.accountId = +this.activatedRoute.snapshot.paramMap.get("accountId");
+
+    this.accountApi
+      .getAccountIndex("")
+      .subscribe((data: AccountsIndexView[]) => (this.accountList = data));
+    this.accountCatagoryApi
+      .getAccountCatagoryIndex("")
+      .subscribe(
+        (data: AccountCategoryIndex[]) => (this.accountCatagories = data)
+      );
 
     if (this.accountId) {
       // if account id is present get the related account value
@@ -98,7 +79,7 @@ export class AccountFormComponent implements OnInit {
         .subscribe((data: Accounts) => this.initializeFunction(data));
     }
 
-    this.accountFields = { text: "AccountName", value: "AccountId" };
+    this.accountFields = { text: "Name", value: "Id" };
     this.organizationQuery = new Query().select(["Name", "Id"]);
     this.organizationFields = { text: "Name", value: "Id" };
 
@@ -108,12 +89,6 @@ export class AccountFormComponent implements OnInit {
     ); */
 
     // get account list to fill the Accounts drop down from back end
-    this.accountApi
-      .getAccountsList()
-      .subscribe(
-        (data: Accounts[]) => (this.accountList = data),
-        (error: HttpErrorResponse) => alert(error.message)
-      );
   }
 
   deleteAccount(): void {
@@ -169,30 +144,19 @@ export class AccountFormComponent implements OnInit {
       ParentAccount: [""],
       Active: [true],
       OpeningBalance: [0],
-      OrganizationId: [""],
-      PostingType: ["BOTH"],
-      IsReconcilation: [false],
-      IsPosting: [true],
-      GlType: ["", Validators.required]
+      OrganizationId: [""]
     });
   }
 
   initializeFunction(data: Accounts) {
     this.accountForm = this.formBuilder.group({
       AccountId: [data.Id, [Validators.minLength(4), Validators.maxLength(4)]],
-      AccountCatagory: [data.AccountCatagory, Validators.required],
-      AccountName: [
-        data.AccountName,
-        [Validators.required, Validators.minLength(3)]
-      ],
+      AccountCatagory: [data.CatagoryId, Validators.required],
+      AccountName: [data.Name, [Validators.required, Validators.minLength(3)]],
       ParentAccount: [data.ParentAccount],
       Active: [data.Active],
       OpeningBalance: [data.OpeningBalance],
-      OrganizationId: [data.OrganizationId],
-      PostingType: [data.PostingType],
-      IsReconcilation: [data.IsReconciliation],
-      IsPosting: [data.IsPosting],
-      GlType: [data.glType, Validators.required]
+      OrganizationId: [data.OrganizationId]
     });
   }
 
@@ -217,7 +181,7 @@ export class AccountFormComponent implements OnInit {
       this.accountApi
         .updateAccount(this.accountId, this.accountForm.value)
         .subscribe(
-          (success: Object) => {
+          () => {
             this.location.back();
             alert("Account Updated Successfully"); // on success return back to where the user previously was
           },
