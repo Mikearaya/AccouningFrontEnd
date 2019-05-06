@@ -16,7 +16,7 @@ import { ActivatedRoute, convertToParamMap } from "@angular/router";
 import { AccountCatagoryFormComponent } from "./account-catagory-form.component";
 import { AccountCatagoryApiService } from "../../../core/account-catagory-api.service";
 
-fdescribe(" Account catagory form component", () => {
+describe(" Account catagory form component", () => {
   let component: AccountCatagoryFormComponent;
   let fixture: ComponentFixture<AccountCatagoryFormComponent>;
   let debugEl: DebugElement;

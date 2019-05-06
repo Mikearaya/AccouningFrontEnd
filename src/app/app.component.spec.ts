@@ -1,18 +1,15 @@
-import { TestBed, async } from "@angular/core/testing";
-import { RouterTestingModule } from "@angular/router/testing";
 import { AppComponent } from "./app.component";
+import { Router } from "@angular/router";
 
 describe("AppComponent", () => {
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
-      declarations: [AppComponent]
-    }).compileComponents();
-  }));
+  let component: AppComponent;
+  let router: Router;
 
-  it("should create the app", () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
+  beforeAll(() => {
+    router = jasmine.createSpyObj("Router", ["navigate"]);
+    component = new AppComponent(router);
+  });
+  it("Should be defined", () => {
+    expect(component).toBeDefined();
   });
 });

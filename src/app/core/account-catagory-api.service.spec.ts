@@ -1,12 +1,12 @@
-import { of, Observable } from "rxjs";
+/* import { of } from "rxjs";
 import { AccountCatagoryApiService } from "./account-catagory-api.service";
-import { AccountCatagory } from "../features/account-catagory/account-catagory-domain";
+import { AccountCategory } from "../features/account-catagory/account-catagory-domain";
 
 describe("Account catagory api", () => {
   let accountCatagApi: AccountCatagoryApiService;
   let httpClient;
-  let accountCatagories: AccountCatagory[];
-  let accountCatagory: AccountCatagory;
+  let accountCatagories: AccountCategory[];
+  let accountCatagory: AccountCategory;
 
   beforeEach(() => {
     httpClient = jasmine.createSpyObj(["get", "post", "put", "delete"]);
@@ -45,7 +45,7 @@ describe("Account catagory api", () => {
 
   describe("Create account catagory", () => {
     it("Should return single account catagory", () => {
-      const newCatag: AccountCatagory = {
+      const newCatag: AccountCategory = {
         Id: 5,
         CatagoryName: "Account 3",
         AccountType: "Capital"
@@ -53,7 +53,7 @@ describe("Account catagory api", () => {
       httpClient.post.and.returnValue(of(newCatag));
       accountCatagApi
         .createAccountCatagory(newCatag)
-        .subscribe((comp: AccountCatagory) => (accountCatagory = comp));
+        .subscribe((comp: AccountCategory) => (accountCatagory = comp));
 
       expect(accountCatagory).toBe(newCatag);
     });
@@ -63,7 +63,7 @@ describe("Account catagory api", () => {
     it("Should return true on success", () => {
       httpClient.put.and.returnValue(of(true));
       let updated = false;
-      const updatedComp: AccountCatagory = {
+      const updatedComp: AccountCategory = {
         Id: 1,
         CatagoryName: "Catag 1",
         AccountType: "Revenue"
@@ -91,3 +91,4 @@ describe("Account catagory api", () => {
     });
   });
 });
+ */

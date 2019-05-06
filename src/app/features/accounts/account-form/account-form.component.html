@@ -52,21 +52,13 @@
                   id="accountId"
                   name="accountId"
                   class="e-input"
-                  formControlName="AccountId"
+                  formControlName="Id"
                 />
-                <div
-                  class="e-error"
-                  *ngIf="AccountId.errors && AccountId.touched"
-                >
-                  <div *ngIf="AccountId.errors['required']">
+                <div class="e-error" *ngIf="Id.errors && Id.touched">
+                  <div *ngIf="Id.errors['required']">
                     *Account Id is Required
                   </div>
-                  <div
-                    *ngIf="
-                      AccountId.errors['minlength'] ||
-                      AccountId.errors['maxlength']
-                    "
-                  >
+                  <div *ngIf="Id.errors['minlength'] || Id.errors['maxlength']">
                     *Account ID must be 4 chars long
                   </div>
                 </div>

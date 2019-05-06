@@ -41,7 +41,7 @@ export class AccountsService {
 
   getAccountIndex(searchString: string = ""): Observable<AccountsIndexView[]> {
     return this.httpClient.get<AccountsIndexView[]>(
-      `${this.url}/index?searchString=${searchString}`
+      `parent-accounts/${searchString}`
     );
   }
 
@@ -58,7 +58,7 @@ export class AccountsService {
   updateAccount(id: number, updatedAccount: Accounts): Observable<void> {
     updatedAccount.Id = id;
     return this.httpClient
-      .put<void>(`${this.url}/${id}`, updatedAccount)
+      .put<void>(`${this.url}/${updatedAccount.Id}`, updatedAccount)
       .pipe(catchError(this.handleError));
   }
 

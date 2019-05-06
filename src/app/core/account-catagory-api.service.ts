@@ -30,9 +30,10 @@ export class AccountCatagoryApiService {
   getAccountCatagoryIndex(
     searchString: string
   ): Observable<AccountCategoryIndex[]> {
-    return this.httpClient.get<AccountCategoryIndex[]>(
+    /* return this.httpClient.get<AccountCategoryIndex[]>(
       `${this.url}/index?searchString=${searchString}`
-    );
+    ); */
+    return this.httpClient.get<AccountCategoryIndex[]>(`categories-index`);
   }
 
   getAccountCatagories(

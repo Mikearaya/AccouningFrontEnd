@@ -1,18 +1,40 @@
-import { TestBed, inject } from "@angular/core/testing";
+import { TestBed, async } from "@angular/core/testing";
 import { AccountsService } from "../../../core/services/accounts.service";
-import { Accounts } from "../accounts";
-import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { AccountsViewComponent } from "./accounts-view.component";
+import { Router, ActivatedRoute, convertToParamMap } from "@angular/router";
+import { RouterTestingModule } from "@angular/router/testing";
+import { SharedModule } from "src/app/shared/shared.module";
 
-describe("Accounts view", () => {
-  let accountsService;
-  beforeEach(() => {
+describe("Accounts view component", () => {
+  let router: Router;
+  let activatedRoute;
+  let component: AccountsViewComponent;
+  let accountsService: AccountsService;
+
+  beforeEach(async(() => {
+    router = jasmine.createSpyObj("Router", ["navigate"]);
+    activatedRoute = {
+      provide: ActivatedRoute,
+      useValue: {
+        snapshot: {
+          paramMap: convertToParamMap({ id: 1 })
+        }
+      }
+    };
+
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [AccountsService]
-    });
-    accountsService = TestBed.get(AccountsService);
-  });
-  it("should be created", inject([AccountsService], accountsService => {
-    expect(accountsService).toBeTruthy();
+      declarations: [AccountsViewComponent],
+      imports: [RouterTestingModule, SharedModule],
+      providers: [AccountsService, activatedRoute]
+    }).compileComponents();
   }));
+  component = new AccountsViewComponent(
+    router,
+    accountsService,
+    activatedRoute
+  );
+
+  it("should be created", () => {
+    expect(component).toBeTruthy();
+  });
 });

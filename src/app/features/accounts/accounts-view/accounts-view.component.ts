@@ -86,12 +86,12 @@ export class AccountsViewComponent implements OnInit {
       queryString: "ParentAccount",
       columns: [
         {
-          field: "AccountId",
+          field: "Id",
           headerText: "Account Id",
           textAlign: "Right",
           width: 120
         },
-        { field: "AccountName", headerText: "Name", width: 150 },
+        { field: "Name", headerText: "Name", width: 150 },
         { field: "Active", headerText: "Status", width: 150 },
         { field: "ParentAccount", headerText: "Parent", width: 150 }
       ]

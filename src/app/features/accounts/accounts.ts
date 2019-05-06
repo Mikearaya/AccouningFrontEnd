@@ -1,8 +1,7 @@
 export class Accounts {
   Id?: number;
-  AccountId: string;
   ParentAccount: number;
-  CatagoryId: number;
+  CatagoryName: string;
   Name: string;
   Active: boolean;
   OrganizationId?: number;
@@ -16,9 +15,8 @@ export interface AccountsIndexView {
 
 export interface AccountViewModel {
   Id: number;
-  AccountId: string;
   ParentAccount: string;
-  AccountName: string;
+  Name: string;
   Active: boolean;
   Year: string;
   OpeningBalance: number | null;

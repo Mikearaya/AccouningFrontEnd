@@ -49,6 +49,23 @@ export class AppComponent {
           selected: false
         }
       ]
+    },
+    {
+      id: "02",
+      name: "Settings",
+      expanded: true,
+      enabled: true,
+      selected: false,
+      subChild: [
+        {
+          id: "02-01",
+          name: "Lookup",
+          url: "/lookup",
+          expanded: false,
+          enabled: true,
+          selected: false
+        }
+      ]
     }
   ];
 
