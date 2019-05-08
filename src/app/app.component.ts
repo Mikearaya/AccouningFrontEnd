@@ -60,7 +60,7 @@ export class AppComponent {
         {
           id: "02-01",
           name: "Lookup",
-          url: "/lookup",
+          url: "/lookups",
           expanded: false,
           enabled: true,
           selected: false

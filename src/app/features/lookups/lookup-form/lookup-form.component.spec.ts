@@ -12,21 +12,20 @@ import { SharedModule } from "src/app/shared/shared.module";
 import { RouterTestingModule } from "@angular/router/testing";
 
 import { ActivatedRoute, convertToParamMap } from "@angular/router";
+import { LookupFormComponent } from "./lookup-form.component";
+import { LookupService } from "../lookup.service";
 
-import { AccountCatagoryFormComponent } from "./account-catagory-form.component";
-import { AccountCatagoryApiService } from "../../../core/account-catagory-api.service";
-
-describe(" Account catagory form component", () => {
-  let component: AccountCatagoryFormComponent;
-  let fixture: ComponentFixture<AccountCatagoryFormComponent>;
+describe(" Account lookup form component", () => {
+  let component: LookupFormComponent;
+  let fixture: ComponentFixture<LookupFormComponent>;
   let debugEl: DebugElement;
   let activatedRoute;
 
   const makeCompiledTestBed = (provider?: object): void => {
     const moduleDef: TestModuleMetadata = {
       imports: [SharedModule, RouterTestingModule],
-      declarations: [AccountCatagoryFormComponent],
-      providers: [AccountCatagoryApiService]
+      declarations: [LookupFormComponent],
+      providers: [LookupService]
     };
     if (moduleDef.providers && provider) {
       moduleDef.providers.push(provider);
@@ -34,13 +33,13 @@ describe(" Account catagory form component", () => {
     TestBed.configureTestingModule(moduleDef).compileComponents();
   };
   const setupTestVars = (): void => {
-    fixture = TestBed.createComponent(AccountCatagoryFormComponent);
+    fixture = TestBed.createComponent(LookupFormComponent);
     component = fixture.componentInstance;
     debugEl = fixture.debugElement;
     fixture.detectChanges();
   };
 
-  describe("When id is not provided in the url param--(Create account catagory form)", () => {
+  describe("When id is not provided in the url param--(Lookup form)", () => {
     beforeEach(async(makeCompiledTestBed));
     beforeEach(setupTestVars);
     it("Should be created ", () => {
@@ -54,62 +53,62 @@ describe(" Account catagory form component", () => {
         expect(component.onSubmit).toHaveBeenCalled();
       });
     });
-    describe("Account catagory form", () => {
+    describe("Lookup form", () => {
       let err = {};
       const obj1 = {
-        createCatagoryForm: () => null
+        createLookupForm: () => null
       };
       it("Should be created", () => {
-        spyOn(obj1, "createCatagoryForm");
-        obj1.createCatagoryForm();
-        expect(obj1.createCatagoryForm).toBeTruthy();
+        spyOn(obj1, "createLookupForm");
+        obj1.createLookupForm();
+        expect(obj1.createLookupForm).toBeTruthy();
       });
       const obj2 = {
-        initializeCatagory: () => null
+        initializeLookup: () => null
       };
-      it("should be created for initialize catagory", () => {
-        spyOn(obj2, "initializeCatagory");
-        obj2.initializeCatagory();
-        expect(obj2.initializeCatagory).toBeTruthy();
+      it("should be created for initialize lookup", () => {
+        spyOn(obj2, "initializeLookup");
+        obj2.initializeLookup();
+        expect(obj2.initializeLookup).toBeTruthy();
       });
 
       it("Should be invalid when empty", () => {
-        expect(component.catagoryForm.valid).toBeFalsy();
+        expect(component.lookupForm.valid).toBeFalsy();
       });
-      it("Catagory name field validity", () => {
-        const catagoryName = component.CategoryName;
-        expect(catagoryName.valid).toBeFalsy();
-        catagoryName.setValue("appdiv");
-        expect(catagoryName.valid).toBeTruthy();
-        err = catagoryName.errors || {};
+      it("Value field validity", () => {
+        const value = component.Value;
+        expect(value.valid).toBeFalsy();
+        value.setValue("appdiv");
+        expect(value.valid).toBeTruthy();
+        err = value.errors || {};
         expect(err["required"]).toBeFalsy();
-        catagoryName.setValue("");
-        err = catagoryName.errors || {};
+        value.setValue("");
+        err = value.errors || {};
         expect(err["required"]).toBeTruthy();
       });
 
-      it("Account type field validity", () => {
-        const accountType = component.AccountType;
-        expect(accountType.valid).toBeFalsy();
-        accountType.setValue("appdiv");
-        expect(accountType.valid).toBeTruthy();
-        expect(accountType.value).toEqual("appdiv");
-        err = accountType.errors || {};
+      it("Type field validity", () => {
+        const type = component.Type;
+        expect(type.valid).toBeFalsy();
+        type.setValue("appdiv");
+        expect(type.valid).toBeTruthy();
+        expect(type.value).toEqual("appdiv");
+        err = type.errors || {};
         expect(err["required"]).toBeFalsy();
-        accountType.setValue("");
-        err = accountType.errors || {};
+        type.setValue("");
+        err = type.errors || {};
         expect(err["required"]).toBeTruthy();
       });
 
       it("Should be valid when not empty", () => {
-        component.CategoryName.setValue("Appdiv");
-        component.AccountType.setValue("Appdiv");
-        expect(component.catagoryForm.valid).toBeTruthy();
+        component.Value.setValue("Appdiv");
+        component.Type.setValue("Appdiv");
+        expect(component.lookupForm.valid).toBeTruthy();
       });
     });
   });
 
-  describe("When an id is provided in the url param--(Update account catagory form)", () => {
+  describe("When an id is provided in the url param--(Update lookup form)", () => {
     beforeEach(async(() => {
       makeCompiledTestBed({
         provide: ActivatedRoute,
@@ -131,9 +130,9 @@ describe(" Account catagory form component", () => {
     describe("Initialize catagory", () => {
       let data: any;
       it("Should be called", () => {
-        spyOn(component, "initializeCatagory");
-        component.initializeCatagory(data);
-        expect(component.initializeCatagory).toHaveBeenCalled();
+        spyOn(component, "initializeLookup");
+        component.initializeLookup(data);
+        expect(component.initializeLookup).toHaveBeenCalled();
       });
     });
   });

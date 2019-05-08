@@ -1,0 +1,13 @@
+<app-data-view
+  [data]="data"
+  [showAdd]="true"
+  [showDelete]="true"
+  [showUpdate]="true"
+  (deleteRecord)="deleteLookup($event)"
+  [showPdfExport]="true"
+  [columnsList]="columnBluePrint"
+  [enableSearching]="true"
+  [showColumnChooser]="true"
+  (dataQueried)="filterLookup($event)"
+>
+</app-data-view>

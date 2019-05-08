@@ -12,8 +12,8 @@ const routes: Routes = [
       "./features/account-catagory/account-catagory.module#AccountCatagoryModule"
   },
   {
-    path: "lookup",
-    loadChildren: "./features/lookup/lookup.module#LookupModule"
+    path: "lookups",
+    loadChildren: "./features/lookups/lookups.module#LookupsModule"
   }
 ];
 

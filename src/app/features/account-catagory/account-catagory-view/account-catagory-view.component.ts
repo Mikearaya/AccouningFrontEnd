@@ -37,7 +37,11 @@ export class AccountCatagoryViewComponent implements OnInit {
   constructor(private accountCatagApi: AccountCatagoryApiService) {}
 
   ngOnInit() {
-    this.loadCatagories();
+    this.accountCatagApi
+      .getAccountCatagories("")
+      .subscribe((data: AccountCatagoryView[]) => {
+        this.data = data;
+      });
   }
 
   deleteCatagory(data: any) {

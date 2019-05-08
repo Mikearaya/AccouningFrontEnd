@@ -49,10 +49,6 @@ describe(" Account form component", () => {
     beforeEach(async(makeCompiledTestBed));
     beforeEach(setupTestVars);
 
-    it("should check if form have been filled out", () => {
-      TestBed.get(ActivatedRoute);
-      expect(component.Id.valid).toBeFalsy();
-    });
     it("Should be created ", () => {
       expect(component).toBeTruthy();
     });
@@ -102,7 +98,7 @@ describe(" Account form component", () => {
       });
 
       it("Account id field validity", () => {
-        const accountId = component.Id;
+        const accountId = component.AccountId;
         expect(accountId.valid).toBeFalsy();
         accountId.setValue("appd");
         expect(accountId.valid).toBeTruthy();
@@ -120,11 +116,6 @@ describe(" Account form component", () => {
         accountCatagory.setValue("appdiv");
         expect(accountCatagory.valid).toBeTruthy();
         expect(accountCatagory.value).toEqual("appdiv");
-        /*         err = accountCatagory.errors || {};
-        expect(err["required"]).toBeFalsy();
-        accountCatagory.setValue("");
-        err = accountCatagory.errors || {};
-        expect(err["required"]).toBeTruthy(); */
       });
 
       it("Parent account field validity", () => {
@@ -146,10 +137,16 @@ describe(" Account form component", () => {
         openingBalance.setValue("Appdiv");
         expect(openingBalance.value).toEqual("Appdiv");
       });
+      it("Cost center field validity", () => {
+        const constCenter = component.CostCenter;
+        expect(constCenter.valid).toBeTruthy();
+        constCenter.setValue("Appdiv");
+        expect(constCenter.value).toEqual("Appdiv");
+      });
       it("Should be valid when not empty", () => {
         component.Name.setValue("Appdiv");
         component.CatagoryId.setValue("Appdiv");
-        component.Id.setValue("Appd");
+        component.AccountId.setValue("Appd");
         component.ParentAccount.setValue("Appdiv");
         component.Active.setValue(true);
         component.OpeningBalance.setValue(0);

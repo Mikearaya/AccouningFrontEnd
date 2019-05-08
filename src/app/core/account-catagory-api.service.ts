@@ -11,7 +11,7 @@ import {
 
 @Injectable()
 export class AccountCatagoryApiService {
-  private url = "account-categories";
+  private url = "http://localhost:3000/account-categories";
 
   constructor(private httpClient: HttpClient) {}
 

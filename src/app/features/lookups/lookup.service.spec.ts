@@ -3,40 +3,40 @@ import {
   HttpClientTestingModule
 } from "@angular/common/http/testing";
 import { TestBed } from "@angular/core/testing";
-import { AccountCatagoryApiService } from "./account-catagory-api.service";
-import { AccountCategory } from "../features/account-catagory/account-catagory-domain";
-import { Accounts } from "../features/accounts/accounts";
+import { LookupService } from "./lookup.service";
+import { LookupView, Lookup } from "./lookups";
+import { AccountCategory } from "../account-catagory/account-catagory-domain";
 
-describe("Account catagories service", () => {
-  let catagoryApi: AccountCatagoryApiService;
+fdescribe("Lookup service", () => {
+  let lookupApi: LookupService;
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [AccountCatagoryApiService]
+      providers: [LookupService]
     });
 
     // inject the service
-    catagoryApi = TestBed.get(AccountCatagoryApiService);
+    lookupApi = TestBed.get(LookupService);
     httpMock = TestBed.get(HttpTestingController);
   });
   // expecting the correct(but faked) result: propery 'Name' with value 'Account1'
-  it("Should get catagory successfull", () => {
-    const returnedSingleCatagory: AccountCategory = {
+  it("Should get lookup successfull", () => {
+    const returnedSingleLookup: LookupView = {
       Id: 1,
-      AccountType: "Asset",
-      CatagoryName: "Catag1"
+      Type: "type",
+      Value: "value"
     };
 
-    catagoryApi.getAccountCatagoryById(1).subscribe((data: any) => {
+    lookupApi.getLookupId(1).subscribe((data: any) => {
       expect(data.Id).toBe(1);
-      expect(data.AccountType).toBe("Asset");
-      expect(data.CatagoryName).toBe("Catag1");
+      expect(data.Type).toBe("type");
+      expect(data.Value).toBe("value");
     });
     // telling the httmock what kind of request we expect and toward which url
     const req = httpMock.expectOne(
-      "http://localhost:3000/account-categories/1",
+      "http://localhost:3000/lookups/1",
       "call to api"
     );
     expect(req.request.method).toBe("GET");
@@ -45,31 +45,31 @@ describe("Account catagories service", () => {
 
     req.flush({
       Id: 1,
-      AccountType: "Asset",
-      CatagoryName: "Catag1"
+      Type: "type",
+      Value: "value"
     });
 
     httpMock.verify();
   });
-  it("Should get all catagories successfull", () => {
-    const returnedCatagories: AccountCategory[] = [
+  it("Should get all lookups successfull", () => {
+    const returnedLookups: LookupView[] = [
       {
         Id: 1,
-        AccountType: "Asset",
-        CatagoryName: "Catag1"
+        Type: "type",
+        Value: "value"
       },
       {
         Id: 2,
-        AccountType: "Expence",
-        CatagoryName: "Catag2"
+        Type: "type",
+        Value: "value"
       }
     ];
-    catagoryApi.getAccountCatagories().subscribe((data: any) => {
-      expect(data).toEqual(returnedCatagories);
+    lookupApi.getLookups().subscribe((data: any) => {
+      expect(data).toEqual(returnedLookups);
     });
     // telling the httmock what kind of request we expect and toward which url
     const req = httpMock.expectOne(
-      "http://localhost:3000/account-categories?",
+      "http://localhost:3000/lookups?",
       "call to api"
     );
     expect(req.request.method).toBe("GET");
@@ -79,75 +79,75 @@ describe("Account catagories service", () => {
     req.flush([
       {
         Id: 1,
-        AccountType: "Asset",
-        CatagoryName: "Catag1"
+        Type: "type",
+        Value: "value"
       },
       {
         Id: 2,
-        AccountType: "Expence",
-        CatagoryName: "Catag2"
+        Type: "type",
+        Value: "value"
       }
     ]);
 
     httpMock.verify();
   });
-  it("Should create catagory", () => {
-    const newCatagory: AccountCategory = {
-      Id: 2,
-      AccountType: "Expence",
-      CatagoryName: "Catag2"
+  it("Should create lookup", () => {
+    const newLookup: Lookup = {
+      Id: 1,
+      Type: "type",
+      Value: "value"
     };
-    catagoryApi.createAccountCatagory(newCatagory).subscribe((data: any) => {
-      expect(data.Id).toBe(2);
-      expect(data.AccountType).toBe("Expence");
-      expect(data.CatagoryName).toBe("Catag2");
+    lookupApi.createLookup(newLookup).subscribe((data: any) => {
+      expect(data.Id).toBe(1);
+      expect(data.Type).toBe("type");
+      expect(data.Value).toBe("value");
     });
     const req = httpMock.expectOne(
-      "http://localhost:3000/account-categories",
+      "http://localhost:3000/lookups",
       "post to api"
     );
     expect(req.request.method).toBe("POST");
     req.flush({
-      Id: 2,
-      AccountType: "Expence",
-      CatagoryName: "Catag2"
+      Id: 1,
+      Type: "type",
+      Value: "value"
     });
     httpMock.verify();
   });
-  it("Should update catagory", () => {
-    const updatedCatagory: AccountCategory = {
-      Id: 2,
-      AccountType: "Expence",
-      CatagoryName: "Catag2"
+  it("Should update lookup", () => {
+    const updatedLookup: Lookup = {
+      Id: 1,
+      Type: "type",
+      Value: "value"
     };
-    catagoryApi
-      .updateAccountCatagory(updatedCatagory.Id, updatedCatagory)
+    lookupApi
+      .updateLookup(updatedLookup.Id, updatedLookup)
       .subscribe((data: any) => {
-        expect(data.Id).toBe(2);
-        expect(data.AccountType).toBe("Expence");
-        expect(data.CatagoryName).toBe("Catag2");
+        expect(data.Id).toBe(1);
+        expect(data.Type).toBe("type");
+        expect(data.Value).toBe("value");
       });
     const req = httpMock.expectOne(
-      "http://localhost:3000/account-categories/2",
+      "http://localhost:3000/lookups/1",
       "put to api"
     );
     expect(req.request.method).toBe("PUT");
 
     req.flush({
-      Id: 2,
-      AccountType: "Expence",
-      CatagoryName: "Catag2"
+      Id: 1,
+      Type: "type",
+      Value: "value"
     });
 
     httpMock.verify();
   });
-  it("Should delete catagory", () => {
-    catagoryApi.deleteAccountCatagory(2).subscribe((data: any) => {
+  it("Should delete lookups", () => {
+    lookupApi.deleteLookup(2).subscribe((data: any) => {
       expect(data).toBe(2);
     });
 
     const req = httpMock.expectOne(
-      "http://localhost:3000/account-categories/2",
+      "http://localhost:3000/lookups/2",
       "delete to api"
     );
     expect(req.request.method).toBe("DELETE");
@@ -253,3 +253,90 @@ describe("Account catagory service", () => {
     });
   }); 
 }); */
+
+/* import { LookupService } from "./lookup.service";
+import { Lookup } from "./lookups";
+import { of } from "rxjs";
+
+describe("Lookup api", () => {
+  let lookupApi: LookupService;
+  let httpClient;
+  let lookups: Lookup[];
+  let lookup: Lookup;
+
+  beforeEach(() => {
+    httpClient = jasmine.createSpyObj(["get", "post", "put", "delete"]);
+    lookupApi = new LookupService(httpClient);
+    lookups = [
+      {
+        Id: 1,
+        Type: "Appdiv",
+        Value: "123"
+      },
+      {
+        Id: 2,
+        Type: "appdiv",
+        Value: "321"
+      }
+    ];
+  });
+  describe("Check lookup api", () => {
+    it("Should be created", () => {
+      expect(lookupApi).toBeTruthy();
+    });
+  });
+
+  describe("Get lookups", () => {
+    let lookupsValues;
+    it("Should return lookup vlues", () => {
+      spyOn(lookupApi, "getLookups").and.returnValue(of(lookups));
+      lookupApi.getLookups().subscribe(comps => (lookupsValues = comps));
+      expect(lookupsValues).toBe(lookups);
+    });
+  });
+
+  describe("Create lookup", () => {
+    it("Should return single lookup ", () => {
+      const newLookup: Lookup = {
+        Id: 5,
+        Value: "123",
+        Type: "Appdiv"
+      };
+      httpClient.post.and.returnValue(of(newLookup));
+      lookupApi
+        .createLookup(newLookup)
+        .subscribe((comp: Lookup) => (lookup = comp));
+
+      expect(lookup).toBe(newLookup);
+    });
+  });
+
+  describe("Update lookup", () => {
+    it("Should return true on success", () => {
+      httpClient.put.and.returnValue(of(true));
+      let updated;
+      const updatedComp: Lookup = {
+        Id: 1,
+        Type: "Appdiv",
+        Value: "123"
+      };
+      lookupApi
+        .updateLookup(1, updatedComp)
+        .subscribe(result => (updated = result));
+
+      expect(updated).toBe(true);
+    });
+  });
+
+  // Test Lookup Deleteaccount Function
+  describe("Delete lookup", () => {
+    it("Should return true on Success", () => {
+      let deleted;
+      let id: number;
+      spyOn(lookupApi, "deleteLookup").and.returnValue(of(true));
+      lookupApi.deleteLookup(id).subscribe(res => (deleted = res));
+      expect(deleted).toBe(true);
+    });
+  });
+});
+ */

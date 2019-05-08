@@ -29,7 +29,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 
 import { HttpErrorResponse } from "@angular/common/http";
 import { ClickEventArgs } from "@syncfusion/ej2-navigations";
-import { Accounts, AccountViewModel } from "../accounts";
+import { AccountViewModel } from "../accounts";
 import {
   QueryString,
   FilterEventModel
@@ -86,12 +86,12 @@ export class AccountsViewComponent implements OnInit {
       queryString: "ParentAccount",
       columns: [
         {
-          field: "Id",
+          field: "AccountId",
           headerText: "Account Id",
           textAlign: "Right",
           width: 120
         },
-        { field: "Name", headerText: "Name", width: 150 },
+        { field: "Name", headerText: "Account Name", width: 150 },
         { field: "Active", headerText: "Status", width: 150 },
         { field: "ParentAccount", headerText: "Parent", width: 150 }
       ]

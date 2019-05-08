@@ -3,7 +3,7 @@
  * @Author:  Mikael Araya
  * @Contact: MikaelAraya12@gmail.com
  * @Last Modified By: Naol
- * @Last Modified Time: Apr 25, 2019 5:38 PM
+ * @Last Modified Time: May 8, 2019 12:13 PM
  * @Description: Modify Here, Please
  */
 import { Injectable } from "@angular/core";
@@ -18,20 +18,13 @@ import {
 
 @Injectable()
 export class AccountsService {
-  public url = "accounts";
+  public url = "http://localhost:3000/accounts";
 
   constructor(private httpClient: HttpClient) {}
   // Gets a single Account information by Id and returns an observable of Account
   getAccountById(id: number): Observable<AccountViewModel> {
     return this.httpClient.get<AccountViewModel>(`${this.url}/${id}`);
   }
-
-  // Gets all the record of Account and returns and observable of Account object
-  // getAccountsList(
-  //   query: string = "selectedColumns=Id,AccountCode,AccountName,ParentAccount"
-  // ): Observable<Accounts[]> {
-  //   return of(this.accounts);
-  // }
 
   getAccountsList(searchString: string = ""): Observable<AccountViewModel[]> {
     return this.httpClient.get<AccountViewModel[]>(

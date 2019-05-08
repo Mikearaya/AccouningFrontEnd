@@ -17,7 +17,7 @@ import { Query } from "@syncfusion/ej2-data";
 import { Location } from "@angular/common";
 import { ActivatedRoute } from "@angular/router";
 import { HttpErrorResponse } from "@angular/common/http";
-import { Accounts, AccountsIndexView, AccountViewModel } from "../accounts";
+import { AccountsIndexView, AccountViewModel } from "../accounts";
 import { AccountsService } from "../../../core/services/accounts.service";
 import { AccountCategoryIndex } from "../../account-catagory/account-catagory-domain";
 
@@ -80,8 +80,8 @@ export class AccountFormComponent implements OnInit {
   /* Creating value accessors for the reactive form
   for use inside the template
   */
-  get Id(): FormControl {
-    return this.accountForm.get("Id") as FormControl;
+  get AccountId(): FormControl {
+    return this.accountForm.get("AccountId") as FormControl;
   }
 
   get CatagoryId(): FormControl {
@@ -103,13 +103,18 @@ export class AccountFormComponent implements OnInit {
   get OpeningBalance(): FormControl {
     return this.accountForm.get("OpeningBalance") as FormControl;
   }
+
+  get CostCenter(): FormControl {
+    return this.accountForm.get("CostCenter") as FormControl;
+  }
+
   /* initializes the formgroup structure
   if called without a parameter the fields will have a default value
   else they will be be assigned value retrived from the function argument
   */
   createForm() {
     this.accountForm = this.formBuilder.group({
-      Id: [
+      AccountId: [
         "",
         [Validators.required, Validators.minLength(4), Validators.maxLength(4)]
       ],
@@ -117,13 +122,17 @@ export class AccountFormComponent implements OnInit {
       Name: ["", Validators.required],
       ParentAccount: [0],
       Active: [true],
-      OpeningBalance: [0]
+      OpeningBalance: [0],
+      CostCenter: [""]
     });
   }
 
   initializeFunction(data: AccountViewModel) {
     this.accountForm = this.formBuilder.group({
-      Id: [data.Id, [Validators.minLength(4), Validators.maxLength(4)]],
+      AccountId: [
+        data.AccountId,
+        [Validators.minLength(4), Validators.maxLength(4)]
+      ],
       CatagoryId: [
         { value: data.CategoryId, disabled: true },
         Validators.required
@@ -131,7 +140,8 @@ export class AccountFormComponent implements OnInit {
       Name: [data.Name, [Validators.required, Validators.minLength(3)]],
       ParentAccount: [data.ParentAccount],
       Active: [data.Active],
-      OpeningBalance: [data.OpeningBalance]
+      OpeningBalance: [data.OpeningBalance],
+      CostCenter: [data.CostCenter]
     });
 
     this.CatagoryId.disable();

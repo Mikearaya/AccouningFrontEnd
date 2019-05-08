@@ -1,11 +1,12 @@
 export class Accounts {
   Id?: number;
+  AccountId: string;
   ParentAccount: number;
-  CatagoryName: string;
+  CatagoryId: number;
   Name: string;
   Active: boolean;
-  OrganizationId?: number;
   OpeningBalance?: number;
+  CostCenter: string;
 }
 
 export interface AccountsIndexView {
@@ -15,6 +16,7 @@ export interface AccountsIndexView {
 
 export interface AccountViewModel {
   Id: number;
+  AccountId: string;
   ParentAccount: string;
   Name: string;
   Active: boolean;
@@ -22,6 +24,7 @@ export interface AccountViewModel {
   OpeningBalance: number | null;
   Category: string;
   CategoryId: number;
+  CostCenter: string;
   DateAdded: Date | string | null;
   DateUpdated: Date | string | null;
 }

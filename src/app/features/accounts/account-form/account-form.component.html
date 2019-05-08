@@ -52,13 +52,21 @@
                   id="accountId"
                   name="accountId"
                   class="e-input"
-                  formControlName="Id"
+                  formControlName="AccountId"
                 />
-                <div class="e-error" *ngIf="Id.errors && Id.touched">
-                  <div *ngIf="Id.errors['required']">
+                <div
+                  class="e-error"
+                  *ngIf="AccountId.errors && AccountId.touched"
+                >
+                  <div *ngIf="AccountId.errors['required']">
                     *Account Id is Required
                   </div>
-                  <div *ngIf="Id.errors['minlength'] || Id.errors['maxlength']">
+                  <div
+                    *ngIf="
+                      AccountId.errors['minlength'] ||
+                      AccountId.errors['maxlength']
+                    "
+                  >
                     *Account ID must be 4 chars long
                   </div>
                 </div>
@@ -127,6 +135,19 @@
                   name="status"
                 ></ejs-switch>
               </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <label for="costCenter"> Cost center</label>
+              <div>
+                <app-lookup-selector formControlName="CostCenter">
+                </app-lookup-selector>
+                <div
+                  class="e-error"
+                  *ngIf="ParentAccount.errors && ParentAccount.touched"
+                ></div>
+              </div>
             </div>
           </div>
         </div>

@@ -12,6 +12,7 @@ import { ButtonModule } from "@syncfusion/ej2-angular-buttons";
 import { CoreModule } from "./core/core.module";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { RmHeaderInterceptorService } from "./features/Services/rm-header-interceptor.service";
+import { LookupsModule } from "./features/lookups/lookups.module";
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +23,8 @@ import { RmHeaderInterceptorService } from "./features/Services/rm-header-interc
     TreeViewModule,
     ToolbarModule,
     ButtonModule,
-    CoreModule
+    CoreModule,
+    LookupsModule
   ],
   providers: [
     {
