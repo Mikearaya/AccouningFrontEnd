@@ -14,6 +14,10 @@ const routes: Routes = [
   {
     path: "lookups",
     loadChildren: "./features/lookups/lookups.module#LookupsModule"
+  },
+  {
+    path: "ledgers",
+    loadChildren: "./features/ledgers/ledger.module#LedgerModule"
   }
 ];
 

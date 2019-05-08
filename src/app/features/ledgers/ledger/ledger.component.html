@@ -1,0 +1,169 @@
+<form
+  [formGroup]="ledgerForm"
+  novalidate
+  name="ledgerForm"
+  (ngSubmit)="onSubmit()"
+>
+  <section>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-6">
+          <label for="description">Description</label>
+          <input
+            type="text"
+            id="description"
+            name="description"
+            class="e-input"
+            formControlName="description"
+          />
+        </div>
+        <div class="col-6">
+          <ejs-datepicker
+            formControlName="date"
+            id="date"
+            name="date"
+            placeholder="Select Date"
+            [width]="300"
+          >
+          </ejs-datepicker>
+          <div class="e-error" *ngIf="date.errors && date.touched">
+            <div *ngIf="date.errors['required']">
+              Date of Post is required
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <table class="table table-strip">
+            <thead class="text-center">
+              <tr>
+                <th>Account</th>
+                <th class="amount-column">Debit</th>
+                <th class="amount-column">Credit</th>
+                <th>Reference</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="
+                  let account of accounts.controls;
+                  let i = index;
+                  let last = last
+                "
+                [formGroup]="account"
+              >
+                <td>
+                  <div class="form-group">
+                    <app-account-selector
+                      formControlName="AccountId"
+                      [attr.id]="'parentAccount' + i"
+                      [attr.name]="'parentAccount' + i"
+                    ></app-account-selector>
+                  </div>
+                </td>
+                <td>
+                  <div class="form-group text-center">
+                    <ejs-numerictextbox
+                      formControlName="Debit"
+                      [attr.name]="'Debit' + i"
+                      [width]="150"
+                      [attr.id]="'Debit' + i"
+                      placeholder="Debit"
+                    >
+                    </ejs-numerictextbox>
+                    <div
+                      class="e-error"
+                      *ngIf="
+                        account.get('Debit').errors &&
+                        account.get('Debit').touched
+                      "
+                    >
+                      <div *ngIf="account.get('Debit').errors['required']">
+                        Debit is required
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="form-group text-center">
+                    <ejs-numerictextbox
+                      formControlName="Credit"
+                      [attr.name]="'Credit' + i"
+                      [width]="150"
+                      [attr.id]="'Credit' + i"
+                      placeholder="Credit"
+                    >
+                    </ejs-numerictextbox>
+                    <div
+                      class="e-error"
+                      *ngIf="
+                        account.get('Credit').errors &&
+                        account.get('Credit').touched
+                      "
+                    >
+                      <div *ngIf="account.get('Credit').errors['required']">
+                        Credit Is Required
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="form-group">
+                    <input
+                      [attr.name]="'Reference' + i"
+                      class="e-input"
+                      formControlName="Reference"
+                      [attr.id]="'Reference' + i"
+                      placeholder="Reference"
+                    />
+                  </div>
+                </td>
+                <td class="text-center">
+                  <button
+                    type="button"
+                    ejs-button
+                    class="e-round e-danger e-small"
+                    iconCss="e-icons e-delete-icon"
+                    *ngIf="accounts.controls.length > 2"
+                    (click)="removeRow(i)"
+                  ></button>
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td>Total</td>
+                <td>{{ amountSum }}</td>
+                <td>&nbsp;</td>
+                <td colspan="2">
+                  <button
+                    type="button"
+                    ejs-button
+                    class="e-pluse e-info"
+                    iconCss="e-icons e-plus-icon"
+                    (click)="addForm()"
+                  >
+                    Add
+                  </button>
+                </td>
+              </tr>
+              <tr class="e-error">
+                <td colspan="5">
+                  <p *ngIf="!isEqual">
+                    Credit And Debit amount are not Equal
+                  </p>
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+      <app-form-options
+        [submitDisabled]="ledgerForm.invalid || !isEqual"
+      ></app-form-options>
+    </div>
+  </section>
+</form>

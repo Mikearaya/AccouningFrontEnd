@@ -20,6 +20,8 @@ import {
 } from "@syncfusion/ej2-angular-grids";
 import { AccountCatagoryApiService } from "./account-catagory-api.service";
 import { HttpClientModule } from "@angular/common/http";
+import { LedgerService } from "./services/ledger.service";
+import { AccountsService } from "./services/accounts.service";
 
 @NgModule({
   declarations: [],
@@ -41,7 +43,9 @@ import { HttpClientModule } from "@angular/common/http";
     ToolbarService,
     ResizeService,
     PageService,
-    AccountCatagoryApiService
+    AccountsService,
+    AccountCatagoryApiService,
+    LedgerService
   ]
 })
 export class CoreModule {}

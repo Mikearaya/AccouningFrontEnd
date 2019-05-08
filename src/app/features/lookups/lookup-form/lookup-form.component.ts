@@ -19,8 +19,8 @@ import { Location } from "@angular/common";
 export class LookupFormComponent implements OnInit {
   public lookupForm: FormGroup;
   public isUpdate = false;
-  public typeFields: Object;
-  public typeList: Object;
+  public typeFields: object;
+  public typeList: object;
   public LookupId: any;
   constructor(
     private formBuilder: FormBuilder,
