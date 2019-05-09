@@ -29,8 +29,8 @@ export class LedgerService {
     return this.httpClient.get<LedgerEntryViewModel[]>(`${this.url}?${query}`);
   }
 
-  getLedgerEntryById(id: number): Observable<JornalEntryViewModel[]> {
-    return this.httpClient.get<JornalEntryViewModel[]>(`${this.url}/${id}`);
+  getLedgerEntryById(id: number): Observable<JornalEntryViewModel> {
+    return this.httpClient.get<JornalEntryViewModel>(`${this.url}/${id}`);
   }
 
   addLedgerEntry(newLedger: CreateLedgerEntry): Observable<CreateLedgerEntry> {

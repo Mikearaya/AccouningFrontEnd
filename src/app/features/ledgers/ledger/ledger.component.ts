@@ -14,7 +14,8 @@ import { Query } from "@syncfusion/ej2-data";
 import { HttpErrorResponse } from "@angular/common/http";
 import { Accounts, AccountViewModel } from "../../accounts/accounts";
 import { AccountsService } from "src/app/core/services/accounts.service";
-import { CreateLedgerEntry } from "../ledger";
+import { CreateLedgerEntry, JornalEntryViewModel, Jornal } from "../ledger";
+import { ActivatedRoute } from "@angular/router";
 
 function balanceChecker(): ValidatorFn {
   return (c: AbstractControl): { [key: string]: boolean } | null => {
@@ -45,30 +46,36 @@ export class LedgerComponent implements OnInit {
   public debitSum = 0;
   public creditSum = 0;
   public accountFields: object;
+  private ledgerId: number;
+  public isUpdate: boolean;
+  public postText: string = "Post";
+  public postStatus: boolean = false;
+
   constructor(
     private formBuilder: FormBuilder,
-    private accountApi: AccountsService,
     private ledgerService: LedgerService,
+    private activatedRoute: ActivatedRoute,
     private location: Location
   ) {
     this.createForm();
 
-    this.accountQuery = new Query().select(["Name", "AccountId"]);
-    this.accountFields = { text: "Name", value: "AccountId" };
+    this.accountQuery = new Query().select(["AccountName", "AccountId"]);
+    this.accountFields = { text: "AccountName", value: "AccountId" };
   }
 
   ngOnInit() {
-    this.accountQuery = new Query().select(["Name", "AccountId"]);
-    this.accountFields = { text: "Name", value: "AccountId" };
+    this.accountQuery = new Query().select(["AccountName", "AccountId"]);
+    this.accountFields = { text: "AccountName", value: "AccountId" };
+    this.ledgerId = +this.activatedRoute.snapshot.paramMap.get("ledgerId");
 
-    this.accountApi
-      .getAccountsList()
-      .subscribe(
-        (data: AccountViewModel[]) => (this.accountList = data),
-        (error: HttpErrorResponse) => alert(error.message)
-      );
+    if (this.ledgerId) {
+      this.isUpdate = true;
+      this.ledgerService
+        .getLedgerEntryById(this.ledgerId)
+        .subscribe((data: JornalEntryViewModel) => this.initializeForm(data));
+    }
 
-    this.accounts.valueChanges.subscribe(value => {
+    this.Entries.valueChanges.subscribe(value => {
       this.debitSum = 0;
       this.creditSum = 0;
 
@@ -83,45 +90,83 @@ export class LedgerComponent implements OnInit {
       }
     });
   }
-
-  get description(): FormControl {
-    return this.ledgerForm.get("description") as FormControl;
+  postLedger() {
+    this.postStatus = !this.postStatus;
+    if (this.postStatus) {
+      this.disableForm();
+      this.postText = "Unpost";
+    } else {
+      this.enableForm();
+      this.postText = "Post";
+    }
   }
 
-  get date(): FormControl {
-    return this.ledgerForm.get("date") as FormControl;
+  get VoucherId(): FormControl {
+    return this.ledgerForm.get("VoucherId") as FormControl;
   }
 
-  get accounts(): FormArray {
-    return this.ledgerForm.get("accounts") as FormArray;
+  get Description(): FormControl {
+    return this.ledgerForm.get("Description") as FormControl;
   }
 
-  createForm(data: any = "") {
+  get Reference(): FormControl {
+    return this.ledgerForm.get("Reference") as FormControl;
+  }
+
+  get Date(): FormControl {
+    return this.ledgerForm.get("Date") as FormControl;
+  }
+
+  get Posted(): FormControl {
+    return this.ledgerForm.get("Posted") as FormControl;
+  }
+
+  get Entries(): FormArray {
+    return this.ledgerForm.get("Entries") as FormArray;
+  }
+
+  createForm() {
     this.ledgerForm = this.formBuilder.group({
-      description: [""],
-      date: ["", Validators.required],
-      accounts: this.formBuilder.array([
+      VoucherId: ["", Validators.required],
+      Reference: [""],
+      Posted: [this.postStatus],
+      Description: ["", Validators.required],
+      Date: ["", Validators.required],
+      Entries: this.formBuilder.array([
         this.formBuilder.group({
           AccountId: ["", Validators.required],
           Debit: [0],
-          Credit: [0],
-          Reference: [""]
+          Credit: [0]
         }),
         this.formBuilder.group({
           AccountId: ["", Validators.required],
           Debit: [0],
-          Credit: [0],
-          Reference: [""]
+          Credit: [0]
         })
       ])
     });
+  }
+
+  initializeForm(data: JornalEntryViewModel) {
+    this.ledgerForm = this.formBuilder.group({
+      VoucherId: [data.VoucherId, Validators.required],
+      Reference: [data.Reference],
+      Posted: [data.Posted],
+      Description: [data.Description, Validators.required],
+      Date: [data.Date, Validators.required],
+      Entries: this.formBuilder.array([])
+    });
+
+    data.Entries.map(d =>
+      this.Entries.controls.push(this.initializeEntryDetail(d))
+    );
   }
 
   onCancel() {
     this.location.back();
   }
 
-  /*   onSubmit() {
+  onSubmit() {
     const formData = this.prepareData(this.ledgerForm);
     console.log(formData);
     this.ledgerService.addLedgerEntry(formData).subscribe(
@@ -132,37 +177,60 @@ export class LedgerComponent implements OnInit {
       (error: HttpErrorResponse) => console.log(error)
     );
   }
- */
-  removeRow(index: number) {
-    this.accounts.removeAt(index);
+
+  initializeEntryDetail(data: Jornal): FormGroup {
+    return this.formBuilder.group({
+      Credit: [data.Credit],
+      Debit: [data.Debit],
+      AccountId: [data.AccountId]
+    });
   }
-  /*   prepareData(data: FormGroup): CreateLedgerEntry {
+
+  removeRow(index: number) {
+    this.Entries.removeAt(index);
+  }
+  prepareData(data: FormGroup): CreateLedgerEntry {
     const form = data.value;
 
     const ledger = new CreateLedgerEntry();
-    ledger.createdOn = form.date;
-    ledger.description = form.description;
+    ledger.Date = form.Date;
+    ledger.Description = form.Description;
+    ledger.VoucherId = form.VoucherId;
+    ledger.Reference = form.Reference;
+    ledger.Posted = form.Posted;
 
-    this.accounts.controls.forEach(element => {
-      ledger.jornal.push({
-        debit: element.get("Debit").value ? element.get("Debit").value : 0,
-        credit: element.get("Credit").value ? element.get("Credit").value : 0,
-        accountId: element.get("AccountId").value,
-        reference: element.get("Reference").value
-          ? element.get("Reference").value
-          : 0
+    this.Entries.controls.forEach(element => {
+      ledger.Entries.push({
+        Debit: element.get("Debit").value ? element.get("Debit").value : 0,
+        Credit: element.get("Credit").value ? element.get("Credit").value : 0,
+        AccountId: element.get("AccountId").value
       });
     });
     return ledger;
-  } */
+  }
 
   addForm() {
-    this.accounts.push(
+    this.Entries.push(
       this.formBuilder.group({
         AccountId: ["", Validators.required],
-        Amount: [0, Validators.required],
-        Reference: [""]
+        Debit: [0, Validators.required],
+        Credit: [0, Validators.required]
       })
     );
+  }
+
+  disableForm() {
+    this.VoucherId.disable();
+    this.Description.disable();
+    this.Reference.disable();
+    this.Date.disable();
+    this.Entries.disable();
+  }
+  enableForm() {
+    this.VoucherId.enable();
+    this.Description.enable();
+    this.Reference.enable();
+    this.Date.enable();
+    this.Entries.enable();
   }
 }

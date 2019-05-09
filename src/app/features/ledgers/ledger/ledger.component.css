@@ -1,3 +1,53 @@
 .text-center {
   text-align: center;
 }
+
+section {
+  background-color: #eee;
+  padding: 10px;
+}
+
+.section-one {
+  background-color: #fafafa;
+  text-align: center;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.section-two {
+  background-color: #fafafa;
+  text-align: center;
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 5px;
+}
+
+.section-three {
+  background-color: #fafafa;
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 5px;
+}
+
+#post-button {
+
+  display: grid;
+  place-content: center;
+}
+
+#add-button {
+  display: grid;
+}
+
+.total,
+.last-section {
+  text-align: left;
+}
+
+.secone-rowone {
+  padding: 15px;
+}
+
+.secone-colone {
+  background-color: azure;
+}
