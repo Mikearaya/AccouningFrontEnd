@@ -2,12 +2,14 @@ import { Component, OnInit, forwardRef } from "@angular/core";
 import { AccountsService } from "src/app/core/services/accounts.service";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { AccountsIndexView } from "src/app/features/accounts/accounts";
+import { Input } from "@syncfusion/ej2-inputs";
 
 @Component({
   selector: "app-account-selector",
   template: `
     <ejs-autocomplete
       id="account"
+      [enabled]="!disabled"
       #accountElement
       name="account"
       placeholder="search for account"

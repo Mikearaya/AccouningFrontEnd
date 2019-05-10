@@ -40,6 +40,8 @@ export class DataViewComponent implements OnInit {
   @Input()
   public showDelete: Boolean;
   @Input()
+  public showView: Boolean;
+  @Input()
   public showAdd: Boolean = true;
   @Input()
   public showPrint: Boolean;
@@ -71,7 +73,7 @@ export class DataViewComponent implements OnInit {
   @Input()
   public deleteRoute = "";
   @Input()
-  public editRoute = "";
+  public editRoute: string;
   @Input()
   public addRoute = "";
   @Input()
@@ -147,6 +149,15 @@ export class DataViewComponent implements OnInit {
         }
       });
     }
+    if (this.showView) {
+      this.commands.push({
+        buttonOption: {
+          iconCss: "e-icons e-search",
+          cssClass: "e-flat",
+          click: this.viewAction.bind(this)
+        }
+      });
+    }
   }
 
   deleteAction(event: Event) {
@@ -163,11 +174,25 @@ export class DataViewComponent implements OnInit {
     );
     const key = this.idKey ? this.idKey : "Id";
 
-    this.router.navigate([`${rowObj.data[key]}/update`], {
-      relativeTo: this.activatedRoute
-    });
+    if (this.editRoute) {
+      this.router.navigate([this.editRoute]);
+    } else {
+      this.router.navigate([`${rowObj.data[key]}/update`], {
+        relativeTo: this.activatedRoute
+      });
+    }
 
     //  this.editRecord.emit(rowObj.data);
+  }
+
+  viewAction(event: Event): void {
+    const rowObj: IRow<Column> = this.grid.getRowObjectFromUID(
+      closest(event.target as Element, ".e-row").getAttribute("data-uid")
+    );
+    const key = this.idKey ? this.idKey : "Id";
+    this.router.navigate([`${rowObj.data[key]}/view`], {
+      relativeTo: this.activatedRoute
+    });
   }
 
   actionEndHandler(args: ActionEventArgs) {
@@ -285,7 +310,7 @@ export interface CustomGridColumns {
   key: string;
   width?: number;
   format?: string;
-  visible?: Boolean;
+  visible?: boolean;
   type: string;
   textAlign?: string;
   hederAlign?: string;

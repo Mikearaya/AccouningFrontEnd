@@ -7,7 +7,7 @@ import { LookupService } from "./lookup.service";
 import { LookupView, Lookup } from "./lookups";
 import { AccountCategory } from "../account-catagory/account-catagory-domain";
 
-fdescribe("Lookup service", () => {
+describe("Lookup service", () => {
   let lookupApi: LookupService;
   let httpMock: HttpTestingController;
 

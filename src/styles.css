@@ -1,1 +1,8 @@
+.e-search:before {
+  content: '\e993';
+}
 
+body {
+  background-color: #eee !important;
+  padding: 10px;
+}

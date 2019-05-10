@@ -12,10 +12,9 @@ import { LedgerService } from "../../../core/services/ledger.service";
 import { Location } from "@angular/common";
 import { Query } from "@syncfusion/ej2-data";
 import { HttpErrorResponse } from "@angular/common/http";
-import { Accounts, AccountViewModel } from "../../accounts/accounts";
-import { AccountsService } from "src/app/core/services/accounts.service";
 import { CreateLedgerEntry, JornalEntryViewModel, Jornal } from "../ledger";
 import { ActivatedRoute } from "@angular/router";
+import { unwrapResolvedMetadata } from "@angular/compiler";
 
 function balanceChecker(): ValidatorFn {
   return (c: AbstractControl): { [key: string]: boolean } | null => {
@@ -40,16 +39,16 @@ function balanceChecker(): ValidatorFn {
 export class LedgerComponent implements OnInit {
   public ledgerForm: FormGroup;
   public accountList: object[];
-  public isEqual: boolean;
+  public isEqual = false;
   public accountForm: FormGroup;
   public accountQuery: Query;
   public debitSum = 0;
   public creditSum = 0;
   public accountFields: object;
-  private ledgerId: number;
+  public ledgerId: number;
   public isUpdate: boolean;
-  public postText: string = "Post";
-  public postStatus: boolean = false;
+  public postText = "Post";
+  public postStatus: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -64,43 +63,47 @@ export class LedgerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.accountQuery = new Query().select(["AccountName", "AccountId"]);
-    this.accountFields = { text: "AccountName", value: "AccountId" };
     this.ledgerId = +this.activatedRoute.snapshot.paramMap.get("ledgerId");
 
     if (this.ledgerId) {
       this.isUpdate = true;
       this.ledgerService
         .getLedgerEntryById(this.ledgerId)
-        .subscribe((data: JornalEntryViewModel) => this.initializeForm(data));
+        .subscribe((data: JornalEntryViewModel) => {
+          this.initializeForm(data);
+        });
     }
 
-    this.Entries.valueChanges.subscribe(value => {
-      this.debitSum = 0;
-      this.creditSum = 0;
-
-      value.forEach(element => {
-        this.debitSum += element.Debit;
-        this.creditSum += element.Credit;
-      });
-      if (this.creditSum === this.debitSum) {
-        this.isEqual = true;
-      } else {
-        this.isEqual = false;
-      }
-    });
+    this.Entries.valueChanges.subscribe(value => this.calculateBalance(value));
   }
-  postLedger() {
+  public postLedger() {
     this.postStatus = !this.postStatus;
-    if (this.postStatus) {
-      this.disableForm();
+    // if (this.postStatus && (this.Posted.value && this.isUpdate))
+    if (!this.isUpdate && this.postStatus) {
+      // this.disableForm();
       this.postText = "Unpost";
+      this.Posted.setValue(true);
     } else {
-      this.enableForm();
+      // this.enableForm();
       this.postText = "Post";
+      this.Posted.setValue(false);
     }
   }
 
+  calculateBalance(value: any): void {
+    this.debitSum = 0;
+    this.creditSum = 0;
+
+    value.forEach(element => {
+      this.debitSum += element.Debit;
+      this.creditSum += element.Credit;
+    });
+    if (this.creditSum === this.debitSum) {
+      this.isEqual = true;
+    } else {
+      this.isEqual = false;
+    }
+  }
   get VoucherId(): FormControl {
     return this.ledgerForm.get("VoucherId") as FormControl;
   }
@@ -129,7 +132,7 @@ export class LedgerComponent implements OnInit {
     this.ledgerForm = this.formBuilder.group({
       VoucherId: ["", Validators.required],
       Reference: [""],
-      Posted: [this.postStatus],
+      Posted: [false],
       Description: ["", Validators.required],
       Date: ["", Validators.required],
       Entries: this.formBuilder.array([
@@ -156,26 +159,41 @@ export class LedgerComponent implements OnInit {
       Date: [data.Date, Validators.required],
       Entries: this.formBuilder.array([])
     });
+    this.Entries.valueChanges.subscribe(value => this.calculateBalance(value));
+    data.Entries.map(d => this.Entries.push(this.initializeEntryDetail(d)));
 
-    data.Entries.map(d =>
-      this.Entries.controls.push(this.initializeEntryDetail(d))
-    );
-  }
-
-  onCancel() {
-    this.location.back();
+    if (this.Posted.value) {
+      this.postText = "Unpost";
+      this.disableForm();
+    } else {
+      this.postText = "Post";
+    }
   }
 
   onSubmit() {
-    const formData = this.prepareData(this.ledgerForm);
-    console.log(formData);
-    this.ledgerService.addLedgerEntry(formData).subscribe(
-      (data: CreateLedgerEntry) => {
-        alert("Ledger entry made successfully");
-        this.createForm();
-      },
-      (error: HttpErrorResponse) => console.log(error)
-    );
+    if (!this.isUpdate) {
+      const formData = this.prepareData(this.ledgerForm);
+      this.ledgerService.addLedgerEntry(formData).subscribe(
+        (data: CreateLedgerEntry) => {
+          alert("Ledger entry made successfully");
+          this.isUpdate = true;
+          this.createForm();
+        },
+        (error: HttpErrorResponse) => console.log(error)
+      );
+    } else {
+      this.ledgerService
+        .updateLedgerEntry(this.ledgerId, this.ledgerForm.value)
+        .subscribe(
+          () => {
+            this.location.back();
+            alert("Ledger entry Updated Successfully"); // on success return back to where the user previously was
+          },
+          (error: HttpErrorResponse) => {
+            alert(error.message); // on error show the error message
+          }
+        );
+    }
   }
 
   initializeEntryDetail(data: Jornal): FormGroup {
@@ -232,5 +250,8 @@ export class LedgerComponent implements OnInit {
     this.Reference.enable();
     this.Date.enable();
     this.Entries.enable();
+  }
+  cancel() {
+    this.location.back();
   }
 }

@@ -15,7 +15,7 @@ import {
   PostingTypesView,
   LedgerEntryViewModel,
   CreateLedgerEntry,
-  UpdateLedgerEntry
+  UpdateLedgerEntryModel
 } from "../../features/ledgers/ledger";
 
 @Injectable()
@@ -37,8 +37,15 @@ export class LedgerService {
     return this.httpClient.post<CreateLedgerEntry>(`${this.url}`, newLedger);
   }
 
-  updateLedgerEntry(updatedLedger: UpdateLedgerEntry): Observable<boolean> {
-    return this.httpClient.put<boolean>(`${this.url}`, updatedLedger);
+  updateLedgerEntry(
+    id: number,
+    updatedLedger: UpdateLedgerEntryModel
+  ): Observable<boolean> {
+    updatedLedger.Id = id;
+    return this.httpClient.put<boolean>(
+      `${this.url}/${updatedLedger.Id}`,
+      updatedLedger
+    );
   }
 
   deleteLedgerEntry(deletedLedgerId: number): Observable<boolean> {

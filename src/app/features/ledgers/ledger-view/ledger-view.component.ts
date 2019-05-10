@@ -69,12 +69,20 @@ export class LedgerViewComponent implements OnInit {
 
   constructor(private ledgerService: LedgerService) {}
   ngOnInit() {
+    this.loadLedgerEntries();
+  }
+  loadLedgerEntries() {
     this.ledgerService
       .getAllLedgerEntries()
       .subscribe(
         (data: any) => (this.data = data),
         (error: HttpErrorResponse) => console.error(error)
       );
+  }
+  deleteLedgerEntry(data: any) {
+    this.ledgerService
+      .deleteLedgerEntry(data["Id"])
+      .subscribe(() => alert("deleted"));
   }
 
   dataQuiredHandler(event: string): void {

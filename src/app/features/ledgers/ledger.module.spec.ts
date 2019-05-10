@@ -1,13 +1,13 @@
-import { LedgerModule } from './ledger.module';
+import { LedgerModule } from "./ledger.module";
 
-describe('LedgerModule', () => {
+describe("LedgerModule", () => {
   let ledgerModule: LedgerModule;
 
   beforeEach(() => {
     ledgerModule = new LedgerModule();
   });
 
-  it('should create an instance', () => {
+  it("should create an instance", () => {
     expect(ledgerModule).toBeTruthy();
   });
 });

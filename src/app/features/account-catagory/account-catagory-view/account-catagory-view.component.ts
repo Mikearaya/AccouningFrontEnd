@@ -47,7 +47,7 @@ export class AccountCatagoryViewComponent implements OnInit {
   deleteCatagory(data: any) {
     this.accountCatagApi
       .deleteAccountCatagory(data["Id"])
-      .subscribe(() => alert("called"));
+      .subscribe(() => alert("deleted"));
   }
   loadCatagories(search: string = "") {
     this.accountCatagApi

@@ -28,19 +28,27 @@ export class CreateLedgerEntry {
   Entries: Jornal[] = [];
 }
 
-export class UpdateLedgerEntry {
+export class Jornal {
+  Debit: number;
+  Credit: number;
+  AccountId: string;
+}
+
+export class UpdateLedgerEntryModel {
   Id: number;
   Description: string;
   Date: Date;
   Reference: string;
   VoucherId: string;
   Posted: boolean;
+  Entries: UpdateJornal[] = [];
 }
 
-export class Jornal {
+export class UpdateJornal {
+  Id: number;
+  AccountId: string;
   Debit: number;
   Credit: number;
-  AccountId: number;
 }
 
 export class LedgerEntryView {
@@ -58,7 +66,7 @@ export class JornalEntryViewModel {
   Description: string;
   Date: Date;
   Reference: string;
-  VoucherId: number;
+  VoucherId: string;
   Posted: boolean;
   DateAdded: Date;
   DateUpdated: Date;

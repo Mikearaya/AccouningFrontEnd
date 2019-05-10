@@ -5,6 +5,7 @@
   (ngSubmit)="onSubmit()"
 >
   <section>
+    {{ ledgerForm.value | json }}
     <div class="container-fluid">
       <div class="section-one">
         <div class="row">
@@ -22,12 +23,14 @@
                 *Voucher Id is required
               </div>
             </div>
+            <label for="voucherId">Date</label>
+
             <ejs-datepicker
               formControlName="Date"
               id="date"
               name="date"
               placeholder="Select Date"
-              [width]="450"
+              [width]="400"
             >
             </ejs-datepicker>
             <div class="e-error" *ngIf="Date.errors && Date.touched">
@@ -36,6 +39,7 @@
               </div>
             </div>
           </div>
+
           <div class="col-5">
             <label for="description">Description</label>
             <input
@@ -67,7 +71,7 @@
             <button
               [disabled]="!ledgerForm.valid"
               id="add-button"
-              [ngClass]="postStatus ? 'bg-danger' : ' text-white'"
+              [ngClass]="postStatus ? 'bg-danger' : 'e-info'"
               type="button"
               ejs-button
               class="e-pluse e-info"
@@ -194,7 +198,7 @@
                   <div class="col-6">
                     <p>{{ debitSum }}</p>
                   </div>
-                  <div class="col-6 total">
+                  <div class="col-6">
                     <p>{{ creditSum }}</p>
                   </div>
                 </div>
@@ -226,23 +230,10 @@
           </div>
         </div>
       </div>
-      <div class="section-three">
-        <div class="row">
-          <div class="col-5">
-            <div class="row">
-              <div class="col"></div>
-            </div>
-          </div>
-          <div class="col-6"></div>
-          <div class="col-1"></div>
-        </div>
-      </div>
     </div>
   </section>
   <app-form-options
-    [submitDisabled]="ledgerForm.invalid || !isEqual || !postStatus"
+    [isUpdate]="isUpdate"
+    [submitDisabled]="ledgerForm.invalid || !isEqual"
   ></app-form-options>
-  <!--   <app-form-options
-    [submitDisabled]="ledgerForm.invalid || !isEqual || postStatus"
-  ></app-form-options> -->
 </form>

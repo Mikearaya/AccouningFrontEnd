@@ -7,6 +7,10 @@ section {
   padding: 10px;
 }
 
+label {
+  display: block;
+}
+
 .section-one {
   background-color: #fafafa;
   text-align: center;
