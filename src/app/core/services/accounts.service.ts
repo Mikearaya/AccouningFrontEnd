@@ -18,7 +18,7 @@ import {
 
 @Injectable()
 export class AccountsService {
-  public url = "http://localhost:3000/accounts";
+  public url = "accounts";
 
   constructor(private httpClient: HttpClient) {}
   // Gets a single Account information by Id and returns an observable of Account
@@ -34,7 +34,7 @@ export class AccountsService {
 
   getAccountIndex(searchString: string = ""): Observable<AccountsIndexView[]> {
     return this.httpClient.get<AccountsIndexView[]>(
-      `parent-accounts/${searchString}`
+      `${this.url}/index?${searchString}`
     );
   }
 

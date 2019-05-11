@@ -8,7 +8,7 @@ import { AccountsIndexView } from "../accounts/accounts";
 
 @Injectable()
 export class LookupService {
-  private url = "http://localhost:3000/lookups";
+  private url = "system-lookups";
 
   constructor(private httpClient: HttpClient) {}
 
@@ -24,7 +24,7 @@ export class LookupService {
 
   getLookupIndex(searchString: string = ""): Observable<LookupsIndexView[]> {
     return this.httpClient.get<LookupsIndexView[]>(
-      `cost-center/${searchString}`
+      `${this.url}?type=cost center${searchString}`
     );
   }
 
@@ -39,7 +39,6 @@ export class LookupService {
   }
 
   deleteLookup(id: number): Observable<void> {
-    alert("in");
     return this.httpClient.delete<void>(`${this.url}/${id}`);
   }
 

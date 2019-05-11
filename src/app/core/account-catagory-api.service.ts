@@ -11,7 +11,7 @@ import {
 
 @Injectable()
 export class AccountCatagoryApiService {
-  private url = "http://localhost:3000/account-categories";
+  private url = "account-categories";
 
   constructor(private httpClient: HttpClient) {}
 
@@ -33,7 +33,9 @@ export class AccountCatagoryApiService {
     /* return this.httpClient.get<AccountCategoryIndex[]>(
       `${this.url}/index?searchString=${searchString}`
     ); */
-    return this.httpClient.get<AccountCategoryIndex[]>(`categories-index`);
+    return this.httpClient.get<AccountCategoryIndex[]>(
+      `account-categories/index`
+    );
   }
 
   getAccountCatagories(

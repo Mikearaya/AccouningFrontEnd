@@ -20,11 +20,11 @@ import {
 
 @Injectable()
 export class LedgerService {
-  private url = "http://localhost:3000/ledgers";
+  private url = "ledgers";
   constructor(private httpClient: HttpClient) {}
 
   getAllLedgerEntries(
-    query: string = "selectedColumns=Discription"
+    query: string = "selectedColumns=Description"
   ): Observable<LedgerEntryViewModel[]> {
     return this.httpClient.get<LedgerEntryViewModel[]>(`${this.url}?${query}`);
   }

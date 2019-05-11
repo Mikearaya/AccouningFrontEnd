@@ -7,18 +7,11 @@ import { LookupViewComponent } from "./lookup-view/lookup-view.component";
 import { SharedModule } from "src/app/shared/shared.module";
 import { LookupService } from "./lookup.service";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
-import { RmHeaderInterceptorService } from "../Services/rm-header-interceptor.service";
+import { RmHeaderInterceptorService } from "../../Services/rm-header-interceptor.service";
 
 @NgModule({
   declarations: [LookupFormComponent, LookupViewComponent],
   imports: [CommonModule, LookupsRoutingModule, SharedModule],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: RmHeaderInterceptorService,
-      multi: true
-    },
-    LookupService
-  ]
+  providers: []
 })
 export class LookupsModule {}

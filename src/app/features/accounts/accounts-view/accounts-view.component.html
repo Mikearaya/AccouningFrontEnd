@@ -16,6 +16,7 @@
   [pageSettings]="initialPage"
   [filterSettings]="filterOptions"
   [childGrid]="childGrid"
+  [showColumnChooser]="true"
   (actionComplete)="actionEndHandler($event)"
 >
   <e-columns>
@@ -29,7 +30,7 @@
       editable="false"
       filterable="false"
       groupable="false"
-      [visible]="false"
+      [visible]="true"
     >
     </e-column>
     <e-column
@@ -57,9 +58,20 @@
       width="50"
     ></e-column>
     <e-column
-      field="Name"
+      field="AccountName"
       textAlign="left"
       headerText="Name"
+      isPrimaryKey="false"
+      type="string"
+      editType="textbox"
+      filterable="true"
+      editable="true"
+      groupable="false"
+    ></e-column>
+    <e-column
+      field="Category"
+      textAlign="left"
+      headerText="Category"
       isPrimaryKey="false"
       type="string"
       editType="textbox"
@@ -81,7 +93,31 @@
       groupable="true"
       width="30"
     ></e-column>
-    <e-column [commands]="commands" textAlign="center" width="25"></e-column>
+    <e-column
+      field="DateAdded"
+      textAlign="left"
+      headerText="Added"
+      isPrimaryKey="false"
+      type="datetime"
+      [format]="'yMd'"
+      editType="textbox"
+      filterable="true"
+      editable="true"
+      groupable="false"
+    ></e-column>
+    <e-column
+      field="DateUpdated"
+      textAlign="left"
+      headerText="Updated"
+      isPrimaryKey="false"
+      type="date"
+      [format]="'yMd'"
+      editType="textbox"
+      filterable="true"
+      editable="true"
+      groupable="false"
+    ></e-column>
+    <e-column [commands]="commands" textAlign="center"></e-column>
   </e-columns>
   <e-aggregates>
     <e-aggregate>

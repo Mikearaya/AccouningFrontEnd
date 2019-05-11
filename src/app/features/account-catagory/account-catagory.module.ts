@@ -8,7 +8,7 @@ import { AccountCatagoryViewComponent } from "./account-catagory-view/account-ca
 import { SharedModule } from "src/app/shared/shared.module";
 import { CoreModule } from "src/app/core/core.module";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
-import { RmHeaderInterceptorService } from "../Services/rm-header-interceptor.service";
+import { RmHeaderInterceptorService } from "../../Services/rm-header-interceptor.service";
 
 @NgModule({
   declarations: [AccountCatagoryFormComponent, AccountCatagoryViewComponent],
@@ -18,12 +18,6 @@ import { RmHeaderInterceptorService } from "../Services/rm-header-interceptor.se
     AccountCatagoryRoutingModule,
     CoreModule
   ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: RmHeaderInterceptorService,
-      multi: true
-    }
-  ]
+  providers: []
 })
 export class AccountCatagoryModule {}

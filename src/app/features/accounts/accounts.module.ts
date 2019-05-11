@@ -14,7 +14,7 @@ import {
   AutoCompleteModule
 } from "@syncfusion/ej2-angular-dropdowns";
 import { NumericTextBoxModule } from "@syncfusion/ej2-angular-inputs";
-import { RmHeaderInterceptorService } from "../Services/rm-header-interceptor.service";
+import { RmHeaderInterceptorService } from "../../Services/rm-header-interceptor.service";
 
 @NgModule({
   imports: [
@@ -32,13 +32,6 @@ import { RmHeaderInterceptorService } from "../Services/rm-header-interceptor.se
   ],
   declarations: [AccountFormComponent, AccountsViewComponent],
   providers: [
-    AccountsService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: RmHeaderInterceptorService,
-      multi: true
-    }
-
     // syncfusion service
   ]
 })

@@ -19,9 +19,11 @@ import {
   PageService
 } from "@syncfusion/ej2-angular-grids";
 import { AccountCatagoryApiService } from "./account-catagory-api.service";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { LedgerService } from "./services/ledger.service";
 import { AccountsService } from "./services/accounts.service";
+import { RmHeaderInterceptorService } from "../Services/rm-header-interceptor.service";
+import { LookupService } from "../features/lookups/lookup.service";
 
 @NgModule({
   declarations: [],
@@ -44,8 +46,14 @@ import { AccountsService } from "./services/accounts.service";
     ResizeService,
     PageService,
     AccountsService,
+    LookupService,
     AccountCatagoryApiService,
-    LedgerService
+    LedgerService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: RmHeaderInterceptorService,
+      multi: true
+    }
   ]
 })
 export class CoreModule {}

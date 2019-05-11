@@ -11,7 +11,7 @@ import {
 import { ButtonModule } from "@syncfusion/ej2-angular-buttons";
 import { CoreModule } from "./core/core.module";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
-import { RmHeaderInterceptorService } from "./features/Services/rm-header-interceptor.service";
+import { RmHeaderInterceptorService } from "./Services/rm-header-interceptor.service";
 import { LookupsModule } from "./features/lookups/lookups.module";
 
 @NgModule({
@@ -26,13 +26,7 @@ import { LookupsModule } from "./features/lookups/lookups.module";
     CoreModule,
     LookupsModule
   ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: RmHeaderInterceptorService,
-      multi: true
-    }
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
