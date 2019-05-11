@@ -1,19 +1,25 @@
-import { TestBed } from "@angular/core/testing";
-import { RouterTestingModule } from "@angular/router/testing";
-import { ActivatedRoute } from "@angular/router";
 import { BreadCrumbComponent } from "./bread-crumb.component";
 
-describe("Breadcrumb", () => {
+import { Router, ActivatedRoute, convertToParamMap } from "@angular/router";
+
+describe("Bread crumb component", () => {
+  let component: BreadCrumbComponent;
+  let router: Router;
+  let activatedRoute;
+
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
-      providers: [ActivatedRoute],
-      declarations: [BreadCrumbComponent]
-    });
+    router = jasmine.createSpyObj("Router", ["Navigate"]);
+    activatedRoute = {
+      provide: ActivatedRoute,
+      useValue: {
+        snapshot: {
+          paramMap: convertToParamMap({ id: 1 })
+        }
+      }
+    };
   });
-  const fixture = TestBed.createComponent(BreadCrumbComponent);
-  const breadcrump = fixture.debugElement.componentInstance;
-  it("Should create", () => {
-    expect(breadcrump).toBeTruthy();
+  component = new BreadCrumbComponent(router, activatedRoute);
+  it("should be created", () => {
+    expect(component).toBeTruthy();
   });
 });

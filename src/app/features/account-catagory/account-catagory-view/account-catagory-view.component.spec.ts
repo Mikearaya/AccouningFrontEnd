@@ -4,7 +4,7 @@ import { AccountCatagoryViewComponent } from "./account-catagory-view.component"
 import { AccountCatagoryApiService } from "../../../core/account-catagory-api.service";
 import { SharedModule } from "src/app/shared/shared.module";
 import { RouterTestingModule } from "@angular/router/testing";
-import { AccountCatagory } from "../account-catagory-domain";
+import { AccountCategory } from "../account-catagory-domain";
 import { of } from "rxjs";
 
 describe("AccountCatagoryViewComponent", () => {
@@ -37,7 +37,7 @@ describe("AccountCatagoryViewComponent", () => {
   });
   describe("ngOnInit", () => {
     it("Should be called and list all catagories", () => {
-      const response: AccountCatagory[] = [
+      const response: AccountCategory[] = [
         {
           Id: 1,
           CatagoryName: "catagory 2",

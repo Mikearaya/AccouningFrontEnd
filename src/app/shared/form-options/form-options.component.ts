@@ -19,6 +19,8 @@ export class FormOptionsComponent implements OnInit {
   @Input() submitDisabled: Boolean;
   @Input() cancelDisabled: Boolean;
   @Input() showDelete: Boolean;
+  @Input() isUpdate: boolean;
+  buttonText: string;
 
   constructor(private location: Location) {
     // setting default valeue
@@ -27,7 +29,13 @@ export class FormOptionsComponent implements OnInit {
     this.isSelfContained = true;
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.isUpdate) {
+      this.buttonText = "Update";
+    } else {
+      this.buttonText = "Submit";
+    }
+  }
 
   // on cancel button click return the user back
   cancel() {

@@ -20,6 +20,19 @@
 >
   <e-columns>
     <e-column
+      field="Id"
+      textAlign="left"
+      headerText="ID"
+      isPrimaryKey="true"
+      type="number"
+      width="30"
+      editable="false"
+      filterable="false"
+      groupable="false"
+      [visible]="false"
+    >
+    </e-column>
+    <e-column
       field="AccountId"
       textAlign="left"
       headerText="ID"
@@ -32,7 +45,7 @@
     >
     </e-column>
     <e-column
-      field="AccountCode"
+      field="ParentAccount"
       textAlign="left"
       headerText="Parent"
       isPrimaryKey="false"
@@ -44,7 +57,7 @@
       width="50"
     ></e-column>
     <e-column
-      field="AccountName"
+      field="Name"
       textAlign="left"
       headerText="Name"
       isPrimaryKey="false"

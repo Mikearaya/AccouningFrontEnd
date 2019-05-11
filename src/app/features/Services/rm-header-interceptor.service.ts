@@ -2,8 +2,8 @@
  * @CreateTime: Sep 6, 2018 4:45 PM
  * @Author:  Mikael Araya
  * @Contact: MikaelAraya12@gmail.com
- * @Last Modified By:  Mikael Araya
- * @Last Modified Time: Dec 12, 2018 3:09 PM
+ * @Last Modified By: Naol
+ * @Last Modified Time: May 6, 2019 12:16 PM
  * @Description: Http Intercepter to modify passing http request
  */
 import { Injectable } from "@angular/core";
@@ -31,7 +31,7 @@ export class RmHeaderInterceptorService implements HttpInterceptor {
     const requestUrl = request.url;
     const started = Date.now();
     const modifiedRequest = request.clone({
-      url: `http://localhost:5000/api/${requestUrl}`,
+      url: `http://localhost:3000/${requestUrl}`,
       setHeaders: {
         "Content-Type": "application/json; charset=utf-8",
         Accept: "application/json"

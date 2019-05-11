@@ -1,0 +1,49 @@
+<form [formGroup]="lookupForm" (ngSubmit)="onSubmit()" name="lookupForm">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-6 col-xs-12">
+        <label for="type"> Type</label>
+        <div>
+          <ejs-dropdownlist
+            id="Type"
+            name="Type"
+            [width]="550"
+            formControlName="Type"
+            [dataSource]="typeList"
+          ></ejs-dropdownlist>
+          <div class="e-error" *ngIf="Type.errors && Type.touched">
+            <div *ngIf="Type.errors['required']">
+              *Type is Required
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-xs-12">
+        <label for="value">Value</label>
+        <div>
+          <input
+            type="text"
+            id="Value"
+            name="Value"
+            class="e-input"
+            formControlName="Value"
+          />
+          <div class="e-error" *ngIf="Value.errors && Value.touched">
+            <div *ngIf="Value.errors['required']">
+              *Value is Required
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-4"></div>
+      <div class="col-4">
+        <app-form-options
+          [submitDisabled]="lookupForm.invalid"
+        ></app-form-options>
+      </div>
+      <div class="col-4"></div>
+    </div>
+  </div>
+</form>

@@ -1,16 +1,23 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  async,
+  ComponentFixture,
+  TestBed,
+  inject
+} from "@angular/core/testing";
 
-import { AccountCategorySelectorComponent } from './account-category-selector.component';
+import { AccountCategorySelectorComponent } from "./account-category-selector.component";
+import { AccountCatagoryApiService } from "src/app/core/account-catagory-api.service";
+import { SharedModule } from "../shared.module";
 
-describe('AccountCategorySelectorComponent', () => {
+describe("AccountCategorySelectorComponent", () => {
   let component: AccountCategorySelectorComponent;
   let fixture: ComponentFixture<AccountCategorySelectorComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AccountCategorySelectorComponent ]
-    })
-    .compileComponents();
+      imports: [SharedModule],
+      providers: [AccountCatagoryApiService]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +26,7 @@ describe('AccountCategorySelectorComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", inject([AccountCatagoryApiService], () => {
     expect(component).toBeTruthy();
-  });
+  }));
 });

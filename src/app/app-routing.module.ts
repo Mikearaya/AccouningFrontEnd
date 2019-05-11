@@ -10,6 +10,14 @@ const routes: Routes = [
     path: "account-catagories",
     loadChildren:
       "./features/account-catagory/account-catagory.module#AccountCatagoryModule"
+  },
+  {
+    path: "lookups",
+    loadChildren: "./features/lookups/lookups.module#LookupsModule"
+  },
+  {
+    path: "ledgers",
+    loadChildren: "./features/ledgers/ledger.module#LedgerModule"
   }
 ];
 

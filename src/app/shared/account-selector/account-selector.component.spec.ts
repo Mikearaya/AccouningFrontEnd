@@ -1,16 +1,24 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  async,
+  ComponentFixture,
+  TestBed,
+  inject
+} from "@angular/core/testing";
 
-import { AccountSelectorComponent } from './account-selector.component';
+import { AccountSelectorComponent } from "./account-selector.component";
+import { AccountsService } from "src/app/core/services/accounts.service";
+import { RouterTestingModule } from "@angular/router/testing";
+import { SharedModule } from "../shared.module";
 
-describe('AccountSelectorComponent', () => {
+describe("AccountSelectorComponent", () => {
   let component: AccountSelectorComponent;
   let fixture: ComponentFixture<AccountSelectorComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AccountSelectorComponent ]
-    })
-    .compileComponents();
+      imports: [SharedModule],
+      providers: [AccountsService]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +27,7 @@ describe('AccountSelectorComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", inject([AccountsService], () => {
     expect(component).toBeTruthy();
-  });
+  }));
 });

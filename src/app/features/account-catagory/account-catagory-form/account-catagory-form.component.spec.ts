@@ -16,7 +16,7 @@ import { ActivatedRoute, convertToParamMap } from "@angular/router";
 import { AccountCatagoryFormComponent } from "./account-catagory-form.component";
 import { AccountCatagoryApiService } from "../../../core/account-catagory-api.service";
 
-fdescribe(" Account catagory form component", () => {
+describe(" Account catagory form component", () => {
   let component: AccountCatagoryFormComponent;
   let fixture: ComponentFixture<AccountCatagoryFormComponent>;
   let debugEl: DebugElement;
@@ -38,9 +38,6 @@ fdescribe(" Account catagory form component", () => {
     component = fixture.componentInstance;
     debugEl = fixture.debugElement;
     fixture.detectChanges();
-    activatedRoute = fixture.debugElement.injector.get(ActivatedRoute) as any;
-    activatedRoute.testParamMap = { category: "api-02" };
-    activatedRoute.testQueryParamMap = { period: "2018", size: "14" };
   };
 
   describe("When id is not provided in the url param--(Create account catagory form)", () => {
@@ -48,11 +45,6 @@ fdescribe(" Account catagory form component", () => {
     beforeEach(setupTestVars);
     it("Should be created ", () => {
       expect(component).toBeTruthy();
-    });
-
-    it("should check if form have been filled out", () => {
-      TestBed.get(ActivatedRoute);
-      expect(component.CategoryName.valid).toBeFalsy();
     });
 
     describe("OnSubmit", () => {

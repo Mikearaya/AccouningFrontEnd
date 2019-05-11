@@ -30,10 +30,11 @@ import { FormOptionsComponent } from "./form-options/form-options.component";
 import { DataViewComponent } from "./data-view/data-view.component";
 import { PageTitleComponent } from "./page-title/page-title.component";
 import { BreadCrumbComponent } from "./bread-crumb/bread-crumb.component";
-import { PageIdentityComponent } from "./page-itentity/page-identity.component";
+import { PageIdentityComponent } from "./page-identity/page-identity.component";
 import { RouterModule } from "@angular/router";
 import { AccountSelectorComponent } from "./account-selector/account-selector.component";
 import { AccountCategorySelectorComponent } from "./account-category-selector/account-category-selector.component";
+import { LookupSelectorComponent } from "./lookup-selector/lookup-selector.component";
 
 @NgModule({
   imports: [
@@ -78,7 +79,8 @@ import { AccountCategorySelectorComponent } from "./account-category-selector/ac
     FormOptionsComponent,
     DataViewComponent,
     AccountSelectorComponent,
-    AccountCategorySelectorComponent
+    AccountCategorySelectorComponent,
+    LookupSelectorComponent
   ],
   declarations: [
     FormOptionsComponent,
@@ -87,7 +89,8 @@ import { AccountCategorySelectorComponent } from "./account-category-selector/ac
     BreadCrumbComponent,
     PageTitleComponent,
     AccountSelectorComponent,
-    AccountCategorySelectorComponent
+    AccountCategorySelectorComponent,
+    LookupSelectorComponent
   ],
   providers: []
 })

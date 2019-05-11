@@ -1,15 +1,27 @@
 import { TestBed } from "@angular/core/testing";
 import { PageTitleComponent } from "./page-title.component";
+import { Router, ActivatedRoute, convertToParamMap } from "@angular/router";
+import { componentFactoryName } from "@angular/compiler";
 
-describe("Page identity", () => {
+describe("Page title", () => {
+  let router: Router;
+  let activatedRoute;
+  let component: PageTitleComponent;
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [PageTitleComponent]
-    });
+    router = jasmine.createSpyObj("Router", ["navigate"]);
+    activatedRoute = {
+      provide: ActivatedRoute,
+      useValue: {
+        snapshot: {
+          paramMap: convertToParamMap({ id: 1 })
+        }
+      }
+    };
+
+    component = new PageTitleComponent(router, activatedRoute);
   });
-  const fixture = TestBed.createComponent(PageTitleComponent);
-  const pagetitle = fixture.debugElement.componentInstance;
+
   it("Should create", () => {
-    expect(pagetitle).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 });

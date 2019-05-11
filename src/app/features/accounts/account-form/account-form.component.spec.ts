@@ -3,7 +3,7 @@
  * @Author: Naol
  * @Contact: nnale8899@gmail.com
  * @Last Modified By: Naol
- * @Last Modified Time: Apr 24, 2019 6:16 PM
+ * @Last Modified Time: May 6, 2019 4:50 PM
  * @Description: Modify Here, Please
  */
 
@@ -20,6 +20,8 @@ import { SharedModule } from "src/app/shared/shared.module";
 import { Accounts } from "../accounts";
 import { ActivatedRoute, convertToParamMap } from "@angular/router";
 import { DebugElement } from "@angular/core";
+import { AccountCatagoryApiService } from "src/app/core/account-catagory-api.service";
+import { FormBuilder } from "@angular/forms";
 
 describe(" Account form component", () => {
   let component: AccountFormComponent;
@@ -30,7 +32,7 @@ describe(" Account form component", () => {
     const moduleDef: TestModuleMetadata = {
       imports: [SharedModule, RouterTestingModule],
       declarations: [AccountFormComponent],
-      providers: [AccountsService]
+      providers: [AccountsService, AccountCatagoryApiService]
     };
     if (moduleDef.providers && provider) {
       moduleDef.providers.push(provider);
@@ -47,10 +49,6 @@ describe(" Account form component", () => {
     beforeEach(async(makeCompiledTestBed));
     beforeEach(setupTestVars);
 
-    it("should check if form have been filled out", () => {
-      TestBed.get(ActivatedRoute);
-      expect(component.AccountId.valid).toBeFalsy();
-    });
     it("Should be created ", () => {
       expect(component).toBeTruthy();
     });
@@ -112,17 +110,12 @@ describe(" Account form component", () => {
         expect(err["required"]).toBeTruthy();
       });
 
-      it("Account type field validity", () => {
-        const accountType = component.AccountCatagory;
-        expect(accountType.valid).toBeFalsy();
-        accountType.setValue("appdiv");
-        expect(accountType.valid).toBeTruthy();
-        expect(accountType.value).toEqual("appdiv");
-        err = accountType.errors || {};
-        expect(err["required"]).toBeFalsy();
-        accountType.setValue("");
-        err = accountType.errors || {};
-        expect(err["required"]).toBeTruthy();
+      it("Account catagory field validity", () => {
+        const accountCatagory = component.CatagoryId;
+        expect(accountCatagory.valid).toBeTruthy();
+        accountCatagory.setValue("appdiv");
+        expect(accountCatagory.valid).toBeTruthy();
+        expect(accountCatagory.value).toEqual("appdiv");
       });
 
       it("Parent account field validity", () => {
@@ -144,9 +137,15 @@ describe(" Account form component", () => {
         openingBalance.setValue("Appdiv");
         expect(openingBalance.value).toEqual("Appdiv");
       });
+      it("Cost center field validity", () => {
+        const constCenter = component.CostCenter;
+        expect(constCenter.valid).toBeTruthy();
+        constCenter.setValue("Appdiv");
+        expect(constCenter.value).toEqual("Appdiv");
+      });
       it("Should be valid when not empty", () => {
         component.Name.setValue("Appdiv");
-        component.AccountCatagory.setValue("Appdiv");
+        component.CatagoryId.setValue("Appdiv");
         component.AccountId.setValue("Appd");
         component.ParentAccount.setValue("Appdiv");
         component.Active.setValue(true);
@@ -155,7 +154,7 @@ describe(" Account form component", () => {
       });
     });
   });
-  describe("When an id is not provided in the url param", () => {
+  describe("When an id is provided in the url param", () => {
     beforeEach(async(() => {
       makeCompiledTestBed({
         provide: ActivatedRoute,
@@ -166,6 +165,7 @@ describe(" Account form component", () => {
         }
       });
     }));
+
     beforeEach(setupTestVars);
     /*   describe("Initialize function", () => {
       it("Should be called", () => {

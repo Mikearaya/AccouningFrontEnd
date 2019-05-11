@@ -3,7 +3,7 @@
  * @Author:  Mikael Araya
  * @Contact: MikaelAraya12@gmail.com
  * @Last Modified By: Naol
- * @Last Modified Time: Apr 25, 2019 2:25 PM
+ * @Last Modified Time: May 6, 2019 4:33 PM
  * @Description: Modify Here, Please
  */
 import { Component, OnInit, ViewChild } from "@angular/core";
@@ -17,9 +17,8 @@ import { Query } from "@syncfusion/ej2-data";
 import { Location } from "@angular/common";
 import { ActivatedRoute } from "@angular/router";
 import { HttpErrorResponse } from "@angular/common/http";
-import { Accounts, AccountsIndexView, AccountViewModel } from "../accounts";
+import { AccountsIndexView, AccountViewModel } from "../accounts";
 import { AccountsService } from "../../../core/services/accounts.service";
-import { AccountCatagoryApiService } from "src/app/core/account-catagory-api.service";
 import { AccountCategoryIndex } from "../../account-catagory/account-catagory-domain";
 
 @Component({
@@ -45,8 +44,7 @@ export class AccountFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private accountApi: AccountsService,
     private location: Location,
-    private activatedRoute: ActivatedRoute,
-    private accountCatagoryApi: AccountCatagoryApiService
+    private activatedRoute: ActivatedRoute
   ) {
     this.createForm();
   }
@@ -54,15 +52,6 @@ export class AccountFormComponent implements OnInit {
   ngOnInit() {
     // get the accountId from route parameter if present
     this.accountId = +this.activatedRoute.snapshot.paramMap.get("accountId");
-
-    /*  this.accountApi
-      .getAccountIndex("")
-      .subscribe((data: AccountsIndexView[]) => (this.accountList = data)); */
-    this.accountCatagoryApi
-      .getAccountCatagoryIndex("")
-      .subscribe(
-        (data: AccountCategoryIndex[]) => (this.accountCatagories = data)
-      );
 
     if (this.accountId) {
       // if account id is present get the related account value
@@ -114,6 +103,11 @@ export class AccountFormComponent implements OnInit {
   get OpeningBalance(): FormControl {
     return this.accountForm.get("OpeningBalance") as FormControl;
   }
+
+  get CostCenter(): FormControl {
+    return this.accountForm.get("CostCenter") as FormControl;
+  }
+
   /* initializes the formgroup structure
   if called without a parameter the fields will have a default value
   else they will be be assigned value retrived from the function argument
@@ -128,7 +122,8 @@ export class AccountFormComponent implements OnInit {
       Name: ["", Validators.required],
       ParentAccount: [0],
       Active: [true],
-      OpeningBalance: [0]
+      OpeningBalance: [0],
+      CostCenter: [""]
     });
   }
 
@@ -142,10 +137,11 @@ export class AccountFormComponent implements OnInit {
         { value: data.CategoryId, disabled: true },
         Validators.required
       ],
-      Name: [data.AccountName, [Validators.required, Validators.minLength(3)]],
+      Name: [data.Name, [Validators.required, Validators.minLength(3)]],
       ParentAccount: [data.ParentAccount],
       Active: [data.Active],
-      OpeningBalance: [data.OpeningBalance]
+      OpeningBalance: [data.OpeningBalance],
+      CostCenter: [data.CostCenter]
     });
 
     this.CatagoryId.disable();

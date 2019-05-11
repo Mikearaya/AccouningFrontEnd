@@ -49,6 +49,40 @@ export class AppComponent {
           selected: false
         }
       ]
+    },
+    {
+      id: "02",
+      name: "Ledger Entries",
+      expanded: true,
+      enabled: true,
+      selected: false,
+      subChild: [
+        {
+          id: "02-01",
+          name: "Ledger Entry View",
+          url: "/ledgers",
+          expanded: false,
+          enabled: true,
+          selected: false
+        }
+      ]
+    },
+    {
+      id: "03",
+      name: "Settings",
+      expanded: true,
+      enabled: true,
+      selected: false,
+      subChild: [
+        {
+          id: "03-01",
+          name: "Lookup",
+          url: "/lookups",
+          expanded: false,
+          enabled: true,
+          selected: false
+        }
+      ]
     }
   ];
 
