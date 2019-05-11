@@ -71,14 +71,13 @@
             <button
               [disabled]="!ledgerForm.valid"
               id="add-button"
-              [ngClass]="postStatus ? 'bg-danger' : 'e-info'"
+              [ngClass]="this.Posted.value ? 'bg-danger' : 'e-info'"
               type="button"
               ejs-button
               class="e-pluse e-info"
-              iconCss="e-icons e-plus-icon"
-              (click)="postLedger()"
+              (click)="setPostStatus()"
             >
-              {{ postText }}
+              {{ Posted.value ? "Unpost" : "Post" }}
             </button>
           </div>
         </div>
@@ -182,10 +181,11 @@
               <div class="col-1"></div>
               <div class="col-1">
                 <button
+                  id="remove-button"
                   type="button"
                   ejs-button
-                  class="e-round e-danger e-small"
-                  iconCss="e-icons e-delete-icon"
+                  cssClass="e-round e-danger e-small"
+                  iconCss="e-icons e-close"
                   *ngIf="Entries.controls.length > 2"
                   (click)="removeRow(i)"
                 ></button>
@@ -211,11 +211,10 @@
                   type="button"
                   ejs-button
                   class="e-pluse e-info"
+                  cssClass="e-round e-primary e-small"
                   iconCss="e-icons e-plus-icon"
                   (click)="addForm()"
-                >
-                  Add
-                </button>
+                ></button>
               </div>
             </div>
             <div class="row">
@@ -233,6 +232,7 @@
     </div>
   </section>
   <app-form-options
+    *ngIf="!hideSubmit()"
     [isUpdate]="isUpdate"
     [submitDisabled]="ledgerForm.invalid || !isEqual"
   ></app-form-options>

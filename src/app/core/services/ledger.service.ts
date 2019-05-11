@@ -11,11 +11,10 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import {
   JornalEntryViewModel,
-  ReconciliationModel,
-  PostingTypesView,
   LedgerEntryViewModel,
   CreateLedgerEntry,
-  UpdateLedgerEntryModel
+  UpdateLedgerEntryModel,
+  UpdateLedgerStatus
 } from "../../features/ledgers/ledger";
 
 @Injectable()
@@ -48,21 +47,18 @@ export class LedgerService {
     );
   }
 
-  deleteLedgerEntry(deletedLedgerId: number): Observable<boolean> {
-    return this.httpClient.delete<boolean>(`${this.url}/${deletedLedgerId}`);
-  }
-
-  reconcileLedgerEntry(
-    entryId: number,
-    reconcieled: ReconciliationModel
+  updateLedgerStatus(
+    id: number,
+    updatedLedgerStatus: UpdateLedgerStatus
   ): Observable<boolean> {
+    updatedLedgerStatus.Id = id;
     return this.httpClient.put<boolean>(
-      `${this.url}/reconcilations/${entryId}`,
-      reconcieled
+      `${this.url}/${updatedLedgerStatus.Id}`,
+      updatedLedgerStatus
     );
   }
 
-  getPostingTypes(): Observable<PostingTypesView[]> {
-    return this.httpClient.get<PostingTypesView[]>(`${this.url}/postingtypes`);
+  deleteLedgerEntry(deletedLedgerId: number): Observable<boolean> {
+    return this.httpClient.delete<boolean>(`${this.url}/${deletedLedgerId}`);
   }
 }

@@ -1,7 +1,4 @@
-export class PostingTypesView {
-  id: number;
-  type: string;
-}
+import { updateData } from "@syncfusion/ej2-grids";
 
 export class LedgerEntryViewModel {
   Id: number;
@@ -14,11 +11,6 @@ export class LedgerEntryViewModel {
   DateUpdated: Date;
 }
 
-export class ReconciliationModel {
-  id: number;
-  reconciled: boolean;
-}
-
 export class CreateLedgerEntry {
   Description: string;
   Date: Date;
@@ -29,8 +21,8 @@ export class CreateLedgerEntry {
 }
 
 export class Jornal {
-  Debit: number;
-  Credit: number;
+  Debit?: number;
+  Credit?: number;
   AccountId: string;
 }
 
@@ -40,7 +32,7 @@ export class UpdateLedgerEntryModel {
   Date: Date;
   Reference: string;
   VoucherId: string;
-  Posted: boolean;
+  Posted?: boolean;
   Entries: UpdateJornal[] = [];
 }
 
@@ -49,6 +41,10 @@ export class UpdateJornal {
   AccountId: string;
   Debit: number;
   Credit: number;
+}
+export class UpdateLedgerStatus {
+  Id: number;
+  Posted: boolean;
 }
 
 export class LedgerEntryView {
