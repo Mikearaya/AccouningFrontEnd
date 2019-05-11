@@ -12,7 +12,12 @@ import { LedgerService } from "../../../core/services/ledger.service";
 import { Location } from "@angular/common";
 import { Query } from "@syncfusion/ej2-data";
 import { HttpErrorResponse } from "@angular/common/http";
-import { CreateLedgerEntry, JornalEntryViewModel, Jornal } from "../ledger";
+import {
+  CreateLedgerEntry,
+  JornalEntryViewModel,
+  Jornal,
+  UpdateLedgerStatus
+} from "../ledger";
 import { ActivatedRoute } from "@angular/router";
 import { unwrapResolvedMetadata } from "@angular/compiler";
 
@@ -49,6 +54,7 @@ export class LedgerComponent implements OnInit {
   public isUpdate: boolean;
   public postText = "Post";
   public postStatus: boolean;
+  public data: JornalEntryViewModel;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -76,22 +82,58 @@ export class LedgerComponent implements OnInit {
 
     this.Entries.valueChanges.subscribe(value => this.calculateBalance(value));
   }
-  public postLedger() {
-    this.postStatus = !this.postStatus;
-    // if (this.postStatus && (this.Posted.value && this.isUpdate))
-    if (!this.isUpdate && this.postStatus) {
-      // this.disableForm();
-      this.postText = "Unpost";
-      this.Posted.setValue(true);
+  public setPostStatus() {
+    if (this.Posted.value) {
+      if (this.isUpdate) {
+        this.enableForm();
+        /*     this.ledgerService
+          .updateLedgerStatus(this.ledgerId, this.Posted.value)
+          .subscribe((data: any) => {
+            this.Posted.setValue(data);
+            this.disableForm();
+          }); */
+        this.Posted.setValue(false);
+        /* this.ledgerService.updateLedgerStatus({this.ledgerId , this.Posted.value}).subrible(() => {
+          // enable or disable form
+        }) */
+      }
     } else {
-      // this.enableForm();
-      this.postText = "Post";
-      this.Posted.setValue(false);
+      this.Posted.setValue(true);
+      if (this.isUpdate) {
+        this.disableForm();
+      }
     }
+
+    // if (this.isUpdate) {
+    //   if (this.Posted.value) {
+    //     alert(this.ledgerId);
+    //     this.ledgerService
+    //       .updateLedgerStatus(this.ledgerId, this.Posted.value)
+    //       .subscribe((data: any) => {
+    //         console.log(data.Posted.value);
+    //         // this.Posted.setValue(data.Posted);
+    //       });
+    //   } else {
+    //     /* this.ledgerService
+    //       .updateLedgerStatus(this.ledgerId, this.Posted.value)
+    //       .subscribe((data: any) => {
+    //         console.log(data.Posted.value);
+    //         // this.Posted.setValue(data.Posted);
+    //       }); */
+    //     alert("else");
+    //   }
+    // } else {
+    //   if (this.Posted.value) {
+    //     this.Posted.setValue(false);
+    //   } else {
+    //     this.Posted.setValue(true);
+    //   }
+    // }
   }
 
   calculateBalance(value: any): void {
     this.debitSum = 0;
+
     this.creditSum = 0;
 
     value.forEach(element => {
@@ -161,12 +203,10 @@ export class LedgerComponent implements OnInit {
     });
     this.Entries.valueChanges.subscribe(value => this.calculateBalance(value));
     data.Entries.map(d => this.Entries.push(this.initializeEntryDetail(d)));
-
-    if (this.Posted.value) {
-      this.postText = "Unpost";
+    this.postStatus = data.Posted;
+    this.Posted.setValue(data.Posted);
+    if (this.postStatus) {
       this.disableForm();
-    } else {
-      this.postText = "Post";
     }
   }
 
@@ -236,7 +276,9 @@ export class LedgerComponent implements OnInit {
       })
     );
   }
-
+  hideSubmit(): boolean {
+    return this.Posted.value && this.isUpdate;
+  }
   disableForm() {
     this.VoucherId.disable();
     this.Description.disable();

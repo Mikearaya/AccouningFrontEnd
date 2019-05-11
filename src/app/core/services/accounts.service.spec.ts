@@ -14,7 +14,7 @@ import { AccountsService } from "./accounts.service";
 import { Accounts, AccountViewModel } from "../../features/accounts/accounts";
 import { TestBed } from "@angular/core/testing";
 
-fdescribe("Accounts service", () => {
+describe("Accounts service", () => {
   let accountService: AccountsService;
   let httpMock: HttpTestingController;
 
@@ -146,7 +146,7 @@ fdescribe("Accounts service", () => {
       expect(data.Id).toBe(2);
     });
     const req = httpMock.expectOne(
-      "http://localhost:3000/accounts",
+      "http://localhost:3000/accounts/",
       "post to api"
     );
     expect(req.request.method).toBe("POST");

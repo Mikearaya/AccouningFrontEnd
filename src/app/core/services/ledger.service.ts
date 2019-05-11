@@ -11,11 +11,10 @@ import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import {
   JornalEntryViewModel,
-  ReconciliationModel,
-  PostingTypesView,
   LedgerEntryViewModel,
   CreateLedgerEntry,
-  UpdateLedgerEntryModel
+  UpdateLedgerEntryModel,
+  UpdateLedgerStatus
 } from "../../features/ledgers/ledger";
 
 @Injectable()
@@ -23,9 +22,7 @@ export class LedgerService {
   private url = "http://localhost:3000/ledgers";
   constructor(private httpClient: HttpClient) {}
 
-  getAllLedgerEntries(
-    query: string = "selectedColumns=Discription"
-  ): Observable<LedgerEntryViewModel[]> {
+  getAllLedgerEntries(query: string = ""): Observable<LedgerEntryViewModel[]> {
     return this.httpClient.get<LedgerEntryViewModel[]>(`${this.url}?${query}`);
   }
 
@@ -48,11 +45,22 @@ export class LedgerService {
     );
   }
 
+  updateLedgerStatus(
+    id: number,
+    updatedLedgerStatus: UpdateLedgerStatus
+  ): Observable<boolean> {
+    updatedLedgerStatus.Id = id;
+    return this.httpClient.put<boolean>(
+      `${this.url}/${updatedLedgerStatus.Id}`,
+      updatedLedgerStatus
+    );
+  }
+
   deleteLedgerEntry(deletedLedgerId: number): Observable<boolean> {
     return this.httpClient.delete<boolean>(`${this.url}/${deletedLedgerId}`);
   }
 
-  reconcileLedgerEntry(
+  /*   reconcileLedgerEntry(
     entryId: number,
     reconcieled: ReconciliationModel
   ): Observable<boolean> {
@@ -60,9 +68,9 @@ export class LedgerService {
       `${this.url}/reconcilations/${entryId}`,
       reconcieled
     );
-  }
+  } */
 
-  getPostingTypes(): Observable<PostingTypesView[]> {
+  /*   getPostingTypes(): Observable<PostingTypesView[]> {
     return this.httpClient.get<PostingTypesView[]>(`${this.url}/postingtypes`);
-  }
+  } */
 }

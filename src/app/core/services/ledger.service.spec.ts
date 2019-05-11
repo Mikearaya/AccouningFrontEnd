@@ -116,7 +116,7 @@ fdescribe("Ledger service", () => {
     });
     // telling the httmock what kind of request we expect and toward which url
     const req = httpMock.expectOne(
-      "http://localhost:3000/ledgers",
+      "http://localhost:3000/ledgers?",
       "call to api"
     );
     expect(req.request.method).toBe("GET");
