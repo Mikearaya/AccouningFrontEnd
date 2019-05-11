@@ -13,6 +13,7 @@ import { AccountsIndexView } from "src/app/features/accounts/accounts";
       placeholder="search for account"
       [width]="400"
       [text]="text"
+      [enabled]="!diabled"
       [fields]="fields"
       [dataSource]="accounts"
       (change)="categoryChanged($event)"

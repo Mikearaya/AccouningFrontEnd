@@ -17,8 +17,8 @@ export class AppComponent {
   title = "";
   @ViewChild("sidebar")
   public sidebar: SidebarComponent;
-  public type: string = "Auto";
-  public target: string = ".content";
+  public type = "Auto";
+  public target = ".content";
   @ViewChild("tree")
   public tree: TreeViewComponent;
   @ViewChild("togglebtn")
@@ -65,8 +65,8 @@ export class AppComponent {
   }
 
   public loadRoutingContent(args: NodeSelectEventArgs): void {
-    let data: any = this.tree.getTreeData(args.node);
-    let routerLink: string = data[0].url;
+    const data: any = this.tree.getTreeData(args.node);
+    const routerLink: string = data[0].url;
 
     if (routerLink) {
       this.router.navigate([routerLink]);
@@ -75,10 +75,10 @@ export class AppComponent {
 
   btnClick() {
     if (this.togglebtn.element.classList.contains("e-active")) {
-      this.togglebtn.content = "Close";
+      this.togglebtn.content = "";
       this.sidebar.show();
     } else {
-      this.togglebtn.content = "Open";
+      this.togglebtn.content = "";
       this.sidebar.hide();
     }
   }
