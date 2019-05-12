@@ -119,17 +119,15 @@ export class LookupFormComponent implements OnInit {
         }
       );
     } else {
-      this.lookupApi
-        .updateLookup(this.LookupId, this.lookupForm.value)
-        .subscribe(
-          () => {
-            alert("Account catagory Updated Successfully"); // on success return back to where the user previously was
-            this.location.back();
-          },
-          (error: HttpErrorResponse) => {
-            alert(error.message); // on error show the error message
-          }
-        );
+      this.lookupApi.updateLookup(this.lookupForm.value).subscribe(
+        () => {
+          alert("Account catagory Updated Successfully"); // on success return back to where the user previously was
+          this.location.back();
+        },
+        (error: HttpErrorResponse) => {
+          alert(error.message); // on error show the error message
+        }
+      );
     }
   }
 

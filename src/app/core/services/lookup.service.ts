@@ -47,10 +47,8 @@ export class LookupService {
     );
   }
 
-  updateLookup(id: number, updatedLookup: Lookup): Observable<void> {
-    updatedLookup.Id = id;
-
-    return this.httpClient.put<void>(`${this.url}/${id}`, updatedLookup);
+  updateLookup(updatedLookup: Lookup): Observable<void> {
+    return this.httpClient.put<void>(`${this.url}`, updatedLookup);
   }
 
   deleteLookup(id: number): Observable<void> {
