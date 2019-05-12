@@ -56,10 +56,3 @@ label {
   background-color: azure;
 }
 
-.e-plus-icon::before {
-  content: '\e823';
-}
-
-.e-close::before {
-  content: '\e7fc';
-}

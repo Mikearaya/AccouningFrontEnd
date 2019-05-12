@@ -12,3 +12,8 @@ export interface LookupsIndexView {
   Id: number;
   Name: string;
 }
+
+export interface SystemLookupCategoriesView {
+  Id: string;
+  Name: string;
+}

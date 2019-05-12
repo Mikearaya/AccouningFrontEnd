@@ -1,12 +1,12 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable, of } from "rxjs";
-
 import { catchError } from "rxjs/operators";
 import {
   Lookup,
   LookupView,
-  LookupsIndexView
+  LookupsIndexView,
+  SystemLookupCategoriesView
 } from "../../features/lookups/lookups";
 
 @Injectable()
@@ -38,6 +38,12 @@ export class LookupService {
   getLookUpType(type: string): Observable<LookupsIndexView[]> {
     return this.httpClient.get<LookupsIndexView[]>(
       `${this.url}/type?type=${type}`
+    );
+  }
+
+  getSystemLookupCategories(): Observable<SystemLookupCategoriesView[]> {
+    return this.httpClient.get<SystemLookupCategoriesView[]>(
+      `${this.url}/categories`
     );
   }
 

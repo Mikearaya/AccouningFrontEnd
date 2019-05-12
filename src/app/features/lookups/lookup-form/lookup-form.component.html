@@ -1,25 +1,41 @@
 <form [formGroup]="lookupForm" (ngSubmit)="onSubmit()" name="lookupForm">
-  <div class="container-fluid">
+  <div class="container-fluid card m-2" formArrayName="Lookups">
     <div class="row">
-      <div class="col-sm-6 col-xs-12">
+      <div class="col-sm-5 col-xs-12">
         <label for="type"> Type</label>
+      </div>
+      <div class="col-sm-5 col-xs-12">
+        <label for="value">Value</label>
+      </div>
+      <div class="col-sm-2 col-xs-12">
+        <label for="action">Action</label>
+      </div>
+    </div>
+    <div
+      class="row"
+      *ngFor="let lookup of Lookups.controls; let i = index; let last = last"
+      [formGroup]="lookup"
+    >
+      <div class="col-sm-5 col-xs-12">
         <div>
           <ejs-dropdownlist
             id="Type"
             name="Type"
-            [width]="550"
             formControlName="Type"
-            [dataSource]="typeList"
+            [fields]="lookupFields"
+            [dataSource]="lookupsList"
           ></ejs-dropdownlist>
-          <div class="e-error" *ngIf="Type.errors && Type.touched">
-            <div *ngIf="Type.errors['required']">
+          <div
+            class="e-error"
+            *ngIf="lookup.get('Type').errors && lookup.get('Type').touched"
+          >
+            <div *ngIf="lookup.get('Type').errors['required']">
               *Type is Required
             </div>
           </div>
         </div>
       </div>
-      <div class="col-sm-6 col-xs-12">
-        <label for="value">Value</label>
+      <div class="col-sm-5 col-xs-12">
         <div>
           <input
             type="text"
@@ -28,12 +44,34 @@
             class="e-input"
             formControlName="Value"
           />
-          <div class="e-error" *ngIf="Value.errors && Value.touched">
-            <div *ngIf="Value.errors['required']">
+          <div
+            class="e-error"
+            *ngIf="lookup.get('Value').errors && lookup.get('Value').touched"
+          >
+            <div *ngIf="lookup.get('Value').errors['required']">
               *Value is Required
             </div>
           </div>
         </div>
+      </div>
+      <div class="col-sm-2">
+        <button
+          *ngIf="last"
+          [disabled]="Lookups.invalid"
+          type="button"
+          ejs-button
+          cssClass="e-round e-info e-small"
+          iconCss="e-icons e-plus-icon"
+          (click)="addRow()"
+        ></button>
+        <button
+          id="remove-button"
+          type="button"
+          ejs-button
+          cssClass="e-round e-danger e-small"
+          iconCss="e-icons e-close"
+          (click)="removeRow(i)"
+        ></button>
       </div>
     </div>
     <div class="row">

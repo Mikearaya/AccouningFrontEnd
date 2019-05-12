@@ -2,7 +2,7 @@ import { Component, OnInit, forwardRef, OnChanges, Input } from "@angular/core";
 import { Query } from "@syncfusion/ej2-data";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { LookupService } from "src/app/core/services/lookup.service";
-import { LookupsIndexView, LookupView } from "src/app/features/lookups/lookups";
+import { LookupsIndexView } from "src/app/features/lookups/lookups";
 
 @Component({
   selector: "app-lookup-selector",
@@ -39,7 +39,7 @@ export class LookupSelectorComponent
 
   public lookups: LookupsIndexView[] = [];
   query: Query;
-  public fields: Object = { value: "Id", text: "Name" };
+  public fields: object = { value: "Id", text: "Name" };
   // set the placeholder to the AutoComplete input
   public text = "";
 

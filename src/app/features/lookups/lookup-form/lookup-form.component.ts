@@ -3,9 +3,10 @@ import {
   FormBuilder,
   FormControl,
   Validators,
-  FormGroup
+  FormGroup,
+  FormArray
 } from "@angular/forms";
-import { LookupView } from "../lookups";
+import { LookupView, SystemLookupCategoriesView } from "../lookups";
 import { LookupService } from "../../../core/services/lookup.service";
 import { HttpErrorResponse } from "@angular/common/http";
 import { ActivatedRoute } from "@angular/router";
@@ -22,6 +23,10 @@ export class LookupFormComponent implements OnInit {
   public typeFields: object;
   public typeList: object;
   public LookupId: any;
+  public lookupFields: { value: string; text: string };
+
+  public lookupsList: SystemLookupCategoriesView[] = [];
+
   constructor(
     private formBuilder: FormBuilder,
     private location: Location,
@@ -30,11 +35,15 @@ export class LookupFormComponent implements OnInit {
   ) {
     this.createLookupForm();
     this.typeList = ["Appdiv", "Appdiv", "appdiv"];
+    this.lookupFields = { value: "Id", text: "Name" };
   }
 
   ngOnInit() {
     // get the look Id from route parameter if present
     this.LookupId = this.activatedRoute.snapshot.paramMap.get("lookupId");
+    this.lookupApi
+      .getSystemLookupCategories()
+      .subscribe((e: SystemLookupCategoriesView[]) => (this.lookupsList = e));
 
     if (this.LookupId) {
       // if lookup id is present get the related account value
@@ -61,17 +70,42 @@ export class LookupFormComponent implements OnInit {
 
   createLookupForm() {
     this.lookupForm = this.formBuilder.group({
-      Type: ["", Validators.required],
-      Value: ["", Validators.required]
+      Lookups: this.formBuilder.array([
+        this.formBuilder.group({
+          Type: ["", Validators.required],
+          Value: ["", Validators.required]
+        })
+      ])
     });
   }
 
   initializeLookup(data: LookupView) {
     this.lookupForm = this.formBuilder.group({
-      Type: [data.Type, Validators.required],
-      Value: [data.Value, Validators.required]
+      Lookups: this.formBuilder.array([
+        this.formBuilder.group({
+          Id: [data.Id, Validators.required],
+          Type: [data.Type, Validators.required],
+          Value: [data.Value, Validators.required]
+        })
+      ])
     });
   }
+
+  get Lookups(): FormArray {
+    return this.lookupForm.get("Lookups") as FormArray;
+  }
+
+  removeRow(index: number): void {
+    if (this.Lookups.controls[index].get("Id")) {
+      const confirmation = confirm("Are you sure you want to delete this item");
+
+      if (confirmation) {
+      }
+    } else {
+      this.Lookups.removeAt(index);
+    }
+  }
+
   onSubmit() {
     // check if  current operation is update
     if (!this.isUpdate) {
@@ -97,5 +131,14 @@ export class LookupFormComponent implements OnInit {
           }
         );
     }
+  }
+
+  addRow(): void {
+    this.Lookups.push(
+      this.formBuilder.group({
+        Type: ["", Validators.required],
+        Value: ["", Validators.required]
+      })
+    );
   }
 }
