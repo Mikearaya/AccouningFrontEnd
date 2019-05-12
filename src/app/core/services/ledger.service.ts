@@ -12,9 +12,8 @@ import { Observable } from "rxjs";
 import {
   JornalEntryViewModel,
   LedgerEntryViewModel,
-  CreateLedgerEntry,
-  UpdateLedgerEntryModel,
-  UpdateLedgerStatus
+  UpdateLedgerStatus,
+  LedgerEntry
 } from "../../features/ledgers/ledger";
 
 @Injectable()
@@ -30,13 +29,13 @@ export class LedgerService {
     return this.httpClient.get<JornalEntryViewModel>(`${this.url}/${id}`);
   }
 
-  addLedgerEntry(newLedger: CreateLedgerEntry): Observable<CreateLedgerEntry> {
-    return this.httpClient.post<CreateLedgerEntry>(`${this.url}`, newLedger);
+  addLedgerEntry(newLedger: LedgerEntry): Observable<LedgerEntryViewModel> {
+    return this.httpClient.post<LedgerEntryViewModel>(`${this.url}`, newLedger);
   }
 
   updateLedgerEntry(
     id: number,
-    updatedLedger: UpdateLedgerEntryModel
+    updatedLedger: LedgerEntry
   ): Observable<boolean> {
     updatedLedger.Id = id;
     return this.httpClient.put<boolean>(

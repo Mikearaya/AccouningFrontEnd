@@ -22,7 +22,8 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import {
   DatePickerAllModule,
-  DateRangePickerAllModule
+  DateRangePickerAllModule,
+  DateTimePickerModule
 } from "@syncfusion/ej2-angular-calendars";
 
 import { NumericTextBoxModule } from "@syncfusion/ej2-angular-inputs";
@@ -55,7 +56,8 @@ import { LookupSelectorComponent } from "./lookup-selector/lookup-selector.compo
     RadioButtonModule,
     RouterModule,
     AutoCompleteModule,
-    MultiSelectModule
+    MultiSelectModule,
+    DateTimePickerModule
   ],
   exports: [
     CommonModule,

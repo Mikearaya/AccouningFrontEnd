@@ -36,7 +36,7 @@ export class AccountSelectorComponent implements OnInit, ControlValueAccessor {
   public disabled: boolean;
 
   public accounts: any;
-  public fields: Object = { value: "Id", text: "Name" };
+  public fields: object = { value: "Id", text: "Name" };
   // set the placeholder to the AutoComplete input
   public text = "";
 
