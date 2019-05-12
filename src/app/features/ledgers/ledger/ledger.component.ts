@@ -176,7 +176,6 @@ export class LedgerComponent implements OnInit {
   }
 
   onSubmit() {
-    alert("inside submit");
     const formData = this.prepareData(this.ledgerForm);
     if (!this.isUpdate) {
       this.ledgerService.addLedgerEntry(formData).subscribe(
@@ -188,7 +187,6 @@ export class LedgerComponent implements OnInit {
         (error: HttpErrorResponse) => console.log(error)
       );
     } else {
-      alert("inside else");
       this.ledgerService.updateLedgerEntry(this.ledgerId, formData).subscribe(
         () => {
           this.location.back();
