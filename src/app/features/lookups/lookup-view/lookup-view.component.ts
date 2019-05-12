@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { LookupService } from "../lookup.service";
+import { LookupService } from "../../../core/services/lookup.service";
 import { LookupView } from "../lookups";
 
 @Component({

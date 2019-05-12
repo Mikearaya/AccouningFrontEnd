@@ -43,6 +43,7 @@
       editable="false"
       filterable="false"
       groupable="false"
+      [width]="70"
     >
     </e-column>
     <e-column
@@ -55,7 +56,7 @@
       filterable="true"
       editable="true"
       groupable="false"
-      width="50"
+      width="70"
     ></e-column>
     <e-column
       field="AccountName"
@@ -67,6 +68,7 @@
       filterable="true"
       editable="true"
       groupable="false"
+      [width]="200"
     ></e-column>
     <e-column
       field="Category"
@@ -78,6 +80,7 @@
       filterable="true"
       editable="true"
       groupable="false"
+      [width]="100"
     ></e-column>
     <!--     <e-column field="TotalAmount" textAlign="left" headerText="Amount" isPrimaryKey="false" type="string" editType="textbox"
       filterable="true" editable="true" groupable="true" width='50'></e-column> -->
@@ -91,7 +94,7 @@
       filterable="true"
       editable="true"
       groupable="true"
-      width="30"
+      width="60"
     ></e-column>
     <e-column
       field="DateAdded"
@@ -104,6 +107,8 @@
       filterable="true"
       editable="true"
       groupable="false"
+      [width]="100"
+      [visible]="false"
     ></e-column>
     <e-column
       field="DateUpdated"
@@ -115,9 +120,11 @@
       editType="textbox"
       filterable="true"
       editable="true"
+      [visible]="false"
       groupable="false"
+      [width]="100"
     ></e-column>
-    <e-column [commands]="commands" textAlign="center"></e-column>
+    <e-column [commands]="commands" [width]="50" textAlign="center"></e-column>
   </e-columns>
   <e-aggregates>
     <e-aggregate>

@@ -130,8 +130,6 @@ export class AccountsViewComponent implements OnInit {
     const rowObj: IRow<Column> = this.grid.getRowObjectFromUID(
       closest(data.target as Element, ".e-row").getAttribute("data-uid")
     );
-
-    alert(JSON.stringify(rowObj));
     if (rowObj.data["Id"]) {
       this.router.navigate([`${rowObj.data["Id"]}/update`], {
         relativeTo: this.activatedRoute

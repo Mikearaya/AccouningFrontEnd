@@ -3,7 +3,7 @@ import { SharedModule } from "src/app/shared/shared.module";
 import { RouterTestingModule } from "@angular/router/testing";
 import { of } from "rxjs";
 import { LookupViewComponent } from "./lookup-view.component";
-import { LookupService } from "../lookup.service";
+import { LookupService } from "../../../core/services/lookup.service";
 import { Lookup } from "../lookups";
 
 describe("LookupViewComponent", () => {

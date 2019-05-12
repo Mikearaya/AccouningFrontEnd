@@ -22,9 +22,11 @@ export interface AccountViewModel {
   Active: boolean;
   Year: string;
   OpeningBalance: number | null;
+  ParentAccountId: number;
   Category: string;
   CategoryId: number;
   CostCenter: string;
   DateAdded: Date | string | null;
   DateUpdated: Date | string | null;
+  CostCenterId: number;
 }

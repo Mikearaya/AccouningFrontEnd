@@ -18,7 +18,7 @@ import { Input } from "@syncfusion/ej2-inputs";
       [enabled]="!diabled"
       [fields]="fields"
       [dataSource]="accounts"
-      (change)="categoryChanged($event)"
+      (change)="accountChanged($event)"
     ></ejs-autocomplete>
   `,
   styleUrls: ["./account-selector.component.css"],
@@ -40,7 +40,7 @@ export class AccountSelectorComponent implements OnInit, ControlValueAccessor {
   // set the placeholder to the AutoComplete input
   public text = "";
 
-  categoryChanged($event: any) {
+  accountChanged($event: any) {
     if ($event.itemData) {
       this.onChanged($event.itemData["Id"]);
     } else {

@@ -1,19 +1,4 @@
 <section>
-  <h3 class="text-left text-info">
-    <span class="delete">
-      <button
-        ejs-button
-        type="button"
-        class="e-warning"
-        *ngIf="isUpdate"
-        iconCss="e-icons e-delete-icon"
-        (click)="deleteAccount()"
-      >
-        Delete
-      </button>
-    </span>
-  </h3>
-
   <form
     [formGroup]="accountForm"
     novalidate
@@ -141,7 +126,10 @@
             <div class="col-12">
               <label for="costCenter"> Cost center</label>
               <div>
-                <app-lookup-selector formControlName="CostCenterId">
+                <app-lookup-selector
+                  [type]="'Cost Center'"
+                  formControlName="CostCenterId"
+                >
                 </app-lookup-selector>
                 <div
                   class="e-error"

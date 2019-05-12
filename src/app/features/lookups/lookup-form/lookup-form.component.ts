@@ -6,7 +6,7 @@ import {
   FormGroup
 } from "@angular/forms";
 import { LookupView } from "../lookups";
-import { LookupService } from "../lookup.service";
+import { LookupService } from "../../../core/services/lookup.service";
 import { HttpErrorResponse } from "@angular/common/http";
 import { ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";

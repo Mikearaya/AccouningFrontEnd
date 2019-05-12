@@ -138,14 +138,13 @@ export class AccountFormComponent implements OnInit {
         Validators.required
       ],
       Name: [data.AccountName, [Validators.required, Validators.minLength(3)]],
-      ParentAccount: [data.ParentAccount],
+      ParentAccount: [data.ParentAccountId],
       Active: [data.Active],
       OpeningBalance: [data.OpeningBalance],
-      CostCenterId: [data.CostCenter]
+      CostCenterId: [data.CostCenterId]
     });
 
     this.CatagoryId.disable();
-    this.ParentAccount.disable();
   }
 
   /*

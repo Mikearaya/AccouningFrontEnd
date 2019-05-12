@@ -13,7 +13,7 @@ import { RouterTestingModule } from "@angular/router/testing";
 
 import { ActivatedRoute, convertToParamMap } from "@angular/router";
 import { LookupFormComponent } from "./lookup-form.component";
-import { LookupService } from "../lookup.service";
+import { LookupService } from "../../../core/services/lookup.service";
 
 describe(" Account lookup form component", () => {
   let component: LookupFormComponent;

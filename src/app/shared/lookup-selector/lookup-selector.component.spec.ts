@@ -7,7 +7,7 @@ import {
 
 import { LookupSelectorComponent } from "./lookup-selector.component";
 import { SharedModule } from "../shared.module";
-import { LookupService } from "src/app/features/lookups/lookup.service";
+import { LookupService } from "src/app/core/services/lookup.service";
 
 describe("LookupSelectorComponent", () => {
   let component: LookupSelectorComponent;

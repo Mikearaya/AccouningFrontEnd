@@ -3,8 +3,11 @@ import { HttpClient } from "@angular/common/http";
 import { Observable, of } from "rxjs";
 
 import { catchError } from "rxjs/operators";
-import { Lookup, LookupView, LookupsIndexView } from "./lookups";
-import { AccountsIndexView } from "../accounts/accounts";
+import {
+  Lookup,
+  LookupView,
+  LookupsIndexView
+} from "../../features/lookups/lookups";
 
 @Injectable()
 export class LookupService {
@@ -30,6 +33,12 @@ export class LookupService {
 
   getLookups(searchString: string = ""): Observable<LookupView[]> {
     return this.httpClient.get<LookupView[]>(`${this.url}?${searchString}`);
+  }
+
+  getLookUpType(type: string): Observable<LookupsIndexView[]> {
+    return this.httpClient.get<LookupsIndexView[]>(
+      `${this.url}/type?type=${type}`
+    );
   }
 
   updateLookup(id: number, updatedLookup: Lookup): Observable<void> {

@@ -4,8 +4,8 @@ import {
 } from "@angular/common/http/testing";
 import { TestBed } from "@angular/core/testing";
 import { LookupService } from "./lookup.service";
-import { LookupView, Lookup } from "./lookups";
-import { AccountCategory } from "../account-catagory/account-catagory-domain";
+import { LookupView, Lookup } from "../../features/lookups/lookups";
+import { AccountCategory } from "../../features/account-catagory/account-catagory-domain";
 
 describe("Lookup service", () => {
   let lookupApi: LookupService;
@@ -251,7 +251,7 @@ describe("Account catagory service", () => {
 
       expect(deleted).toBe(true);
     });
-  }); 
+  });
 }); */
 
 /* import { LookupService } from "./lookup.service";

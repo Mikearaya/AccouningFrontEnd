@@ -1,8 +1,8 @@
-import { Component, OnInit, forwardRef, OnChanges } from "@angular/core";
+import { Component, OnInit, forwardRef, OnChanges, Input } from "@angular/core";
 import { Query } from "@syncfusion/ej2-data";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
-import { LookupService } from "src/app/features/lookups/lookup.service";
-import { LookupsIndexView } from "src/app/features/lookups/lookups";
+import { LookupService } from "src/app/core/services/lookup.service";
+import { LookupsIndexView, LookupView } from "src/app/features/lookups/lookups";
 
 @Component({
   selector: "app-lookup-selector",
@@ -14,6 +14,7 @@ import { LookupsIndexView } from "src/app/features/lookups/lookups";
       placeholder="find lookup"
       [width]="400"
       [text]="text"
+      [enabled]="!disabled"
       [fields]="fields"
       [dataSource]="lookups"
       (change)="lookupChanged($event)"
@@ -33,10 +34,12 @@ export class LookupSelectorComponent
   constructor(private lookupApi: LookupService) {}
   public _value: any;
   public disabled: boolean;
+  @Input()
+  public type: string;
 
   public lookups: LookupsIndexView[] = [];
   query: Query;
-  public fields: Object = { value: "Name", text: "Name" };
+  public fields: Object = { value: "Id", text: "Name" };
   // set the placeholder to the AutoComplete input
   public text = "";
 
@@ -65,17 +68,17 @@ export class LookupSelectorComponent
     this.disabled = isDisabled;
   }
 
-  ngOnChanges() {
-    console.log("changed");
-  }
+  ngOnChanges() {}
 
   ngOnInit() {
-    this.lookupApi.getLookupIndex("").subscribe((data: any) => {
-      this.lookups = data;
-      if (this._value) {
-        const data = this.lookups.filter(a => a.Id === this._value);
-        this.text = data[0].Name;
-      }
-    });
+    this.lookupApi
+      .getLookUpType(this.type)
+      .subscribe((responseData: LookupsIndexView[]) => {
+        this.lookups = responseData;
+        if (this._value) {
+          const data = this.lookups.filter(a => a.Id === this._value);
+          this.text = data[0].Name;
+        }
+      });
   }
 }

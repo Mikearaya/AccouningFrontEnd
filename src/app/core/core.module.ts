@@ -23,7 +23,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { LedgerService } from "./services/ledger.service";
 import { AccountsService } from "./services/accounts.service";
 import { RmHeaderInterceptorService } from "../Services/rm-header-interceptor.service";
-import { LookupService } from "../features/lookups/lookup.service";
+import { LookupService } from "./services/lookup.service";
 
 @NgModule({
   declarations: [],
