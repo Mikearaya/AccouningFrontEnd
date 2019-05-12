@@ -22,9 +22,7 @@ export class LedgerService {
   private url = "ledgers";
   constructor(private httpClient: HttpClient) {}
 
-  getAllLedgerEntries(
-    query: string = "selectedColumns=Description"
-  ): Observable<LedgerEntryViewModel[]> {
+  getAllLedgerEntries(query: string = ""): Observable<LedgerEntryViewModel[]> {
     return this.httpClient.get<LedgerEntryViewModel[]>(`${this.url}?${query}`);
   }
 

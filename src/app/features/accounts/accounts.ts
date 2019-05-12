@@ -6,7 +6,7 @@ export class Accounts {
   Name: string;
   Active: boolean;
   OpeningBalance?: number;
-  CostCenter: string;
+  CostCenterId: string;
 }
 
 export interface AccountsIndexView {
@@ -18,7 +18,7 @@ export interface AccountViewModel {
   Id: number;
   AccountId: string;
   ParentAccount: string;
-  Name: string;
+  AccountName: string;
   Active: boolean;
   Year: string;
   OpeningBalance: number | null;

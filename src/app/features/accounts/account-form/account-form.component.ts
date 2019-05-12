@@ -104,8 +104,8 @@ export class AccountFormComponent implements OnInit {
     return this.accountForm.get("OpeningBalance") as FormControl;
   }
 
-  get CostCenter(): FormControl {
-    return this.accountForm.get("CostCenter") as FormControl;
+  get CostCenterId(): FormControl {
+    return this.accountForm.get("CostCenterId") as FormControl;
   }
 
   /* initializes the formgroup structure
@@ -123,7 +123,7 @@ export class AccountFormComponent implements OnInit {
       ParentAccount: [0],
       Active: [true],
       OpeningBalance: [0],
-      CostCenter: [""]
+      CostCenterId: [0]
     });
   }
 
@@ -137,11 +137,11 @@ export class AccountFormComponent implements OnInit {
         { value: data.CategoryId, disabled: true },
         Validators.required
       ],
-      Name: [data.Name, [Validators.required, Validators.minLength(3)]],
+      Name: [data.AccountName, [Validators.required, Validators.minLength(3)]],
       ParentAccount: [data.ParentAccount],
       Active: [data.Active],
       OpeningBalance: [data.OpeningBalance],
-      CostCenter: [data.CostCenter]
+      CostCenterId: [data.CostCenter]
     });
 
     this.CatagoryId.disable();

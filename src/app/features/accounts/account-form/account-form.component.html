@@ -141,11 +141,11 @@
             <div class="col-12">
               <label for="costCenter"> Cost center</label>
               <div>
-                <app-lookup-selector formControlName="CostCenter">
+                <app-lookup-selector formControlName="CostCenterId">
                 </app-lookup-selector>
                 <div
                   class="e-error"
-                  *ngIf="ParentAccount.errors && ParentAccount.touched"
+                  *ngIf="CostCenterId.errors && CostCenterId.touched"
                 ></div>
               </div>
             </div>
