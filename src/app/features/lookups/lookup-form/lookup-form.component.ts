@@ -96,10 +96,21 @@ export class LookupFormComponent implements OnInit {
   }
 
   removeRow(index: number): void {
-    if (this.Lookups.controls[index].get("Id")) {
+    const id = this.Lookups.controls[index].get("Id");
+    if (id) {
       const confirmation = confirm("Are you sure you want to delete this item");
 
       if (confirmation) {
+        this.lookupApi.deleteLookup(id.value).subscribe(
+          () => {
+            this.location.back();
+            alert("lookup deleted successfuly");
+          },
+          () =>
+            alert(
+              "Unknown error occured while attempting to delete system lookup"
+            )
+        );
       }
     } else {
       this.Lookups.removeAt(index);
