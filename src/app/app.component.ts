@@ -24,7 +24,7 @@ export class AppComponent {
   @ViewChild("togglebtn")
   public togglebtn: ButtonComponent;
 
-  public smartAccountingLinks: Object[] = [
+  public smartAccountingLinks: object[] = [
     {
       id: "01",
       name: "Account Managment",
@@ -78,6 +78,87 @@ export class AppComponent {
           id: "03-01",
           name: "Lookup",
           url: "/lookups",
+          expanded: false,
+          enabled: true,
+          selected: false
+        }
+      ]
+    },
+    {
+      id: "04",
+      name: "Reports",
+      expanded: true,
+      enabled: true,
+      selected: false,
+      subChild: [
+        {
+          id: "04-01",
+          name: "Checklist",
+          url: "/reports",
+          expanded: false,
+          enabled: true,
+          selected: false
+        },
+        {
+          id: "04-02",
+          name: "Balance Sheet",
+          url: "/balance-sheet",
+          expanded: false,
+          enabled: true,
+          selected: false
+        },
+        {
+          id: "04-03",
+          name: "Profit & Loss",
+          url: "/profit-and-loss",
+          expanded: false,
+          enabled: true,
+          selected: false
+        },
+        {
+          id: "04-04",
+          name: "COGS Schedule",
+          url: "/cogs-schedule",
+          expanded: false,
+          enabled: true,
+          selected: false
+        },
+        {
+          id: "04-05",
+          name: "Subsidiary Ledger",
+          url: "/subsidiary-ledger",
+          expanded: false,
+          enabled: true,
+          selected: false
+        },
+        {
+          id: "04-06",
+          name: "OE Cost Center",
+          url: "/oe-cost-center",
+          expanded: false,
+          enabled: true,
+          selected: false
+        },
+        {
+          id: "04-07",
+          name: "OE Detail",
+          url: "/oe-detail",
+          expanded: false,
+          enabled: true,
+          selected: false
+        },
+        {
+          id: "04-08",
+          name: "Trial Balance Consolidated",
+          url: "/trial-balance-consolidated",
+          expanded: false,
+          enabled: true,
+          selected: false
+        },
+        {
+          id: "04-09",
+          name: "Trial Balance Detail",
+          url: "/trial-balce-detail",
           expanded: false,
           enabled: true,
           selected: false

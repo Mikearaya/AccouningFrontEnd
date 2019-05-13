@@ -18,6 +18,10 @@ const routes: Routes = [
   {
     path: "ledgers",
     loadChildren: "../features/ledgers/ledger.module#LedgerModule"
+  },
+  {
+    path: "reports",
+    loadChildren: "../features/reports/reports.module#ReportsModule"
   }
 ];
 

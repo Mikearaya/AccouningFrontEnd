@@ -1,0 +1,33 @@
+<div class="checklist-content">
+  <button (click)="printPage()" class="d-print-none">Print</button>
+  <div class="table-content">
+    <table
+      class="table table-striped printable-area"
+      *ngFor="let Entries of data; let i = index"
+    >
+      <thead>
+        <tr>
+          <th scope="col">Voucher : {{ Entries.ReferenceNumber }}</th>
+          <th scope="col">Date : {{ Entries.Date }}</th>
+          <th scope="col">Description : {{ Entries.Description }}</th>
+        </tr>
+        <tr>
+          <th scope="col">General</th>
+          <th scope="col">Subsidary</th>
+          <th scope="col">Account name</th>
+          <th scope="col">Debit</th>
+          <th scope="col">Credit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of Entries.Entries; let i = index">
+          <td>{{ data.ControlAccountId }}</td>
+          <td>{{ data.SubAccountId }}</td>
+          <td>{{ data.AccountName }}</td>
+          <td>{{ data.Debit }}</td>
+          <td>{{ data.Credit }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+.checklist-content {
+  position: relative;
+}
+
+@media print {
+  table {
+    width: 100% !important;
+    background-color: blue;
+  }
+}

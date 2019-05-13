@@ -1,32 +1,42 @@
-<ejs-sidebar id="default-sidebar" #sidebar [type]="type" [target]="target">
-  <div class="center-align">
-    <ejs-treeview
-      #tree
-      (nodeClicked)="loadRoutingContent($event)"
-      id="treeelement"
-      [fields]="field"
-    ></ejs-treeview>
+<div class="main">
+  <div class="sidebar-content">
+    <ejs-sidebar
+      class="d-print-none"
+      id="default-sidebar"
+      #sidebar
+      [type]="type"
+      [target]="target"
+    >
+      <div class="center-align">
+        <ejs-treeview
+          #tree
+          (nodeClicked)="loadRoutingContent($event)"
+          id="treeelement"
+          [fields]="field"
+        ></ejs-treeview>
+      </div>
+    </ejs-sidebar>
   </div>
-</ejs-sidebar>
+  <div class="content">
+    <div>
+      <div id="head" class="d-print-none">
+        <button
+          ejs-button
+          id="toggle"
+          #togglebtn
+          cssClass="e-flat"
+          iconCss="e-icons burg-icon"
+          isToggle="true"
+          (click)="btnClick()"
+        ></button>
+      </div>
+      <ejs-toolbar>
+        <e-items> </e-items>
+      </ejs-toolbar>
 
-<div class="content">
-  <div>
-    <div id="head">
-      <button
-        ejs-button
-        id="toggle"
-        #togglebtn
-        cssClass="e-flat"
-        iconCss="e-icons burg-icon"
-        isToggle="true"
-        (click)="btnClick()"
-      ></button>
-    </div>
-    <ejs-toolbar>
-      <e-items> </e-items>
-    </ejs-toolbar>
-    <div id="maincontent">
-      <router-outlet></router-outlet>
+      <div id="targetcontent">
+        <router-outlet></router-outlet>
+      </div>
     </div>
   </div>
 </div>
