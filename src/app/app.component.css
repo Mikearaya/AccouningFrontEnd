@@ -79,3 +79,10 @@
 .main {
   height: 800px;
 }
+
+@media print {
+  #targetContent {
+    width: 100% !important;
+    background-color: blue;
+  }
+}

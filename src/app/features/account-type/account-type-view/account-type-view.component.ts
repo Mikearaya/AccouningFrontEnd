@@ -1,56 +1,46 @@
-/*
- * @CreateTime: Dec 14, 2018 10:22 AM
- * @Author:  Mikael Araya
- * @Contact: MikaelAraya12@gmail.com
- * @Last Modified By: Naol
- * @Last Modified Time: Apr 25, 2019 2:21 PM
- * @Description: Modify Here, Please
- */
 import { Component, OnInit, ViewChild } from "@angular/core";
+import { GridComponent } from "@syncfusion/ej2-angular-grids";
 import {
-  GridComponent,
   ExcelExportProperties,
-  GroupSettingsModel,
   FilterSettingsModel,
-  ToolbarItems,
   TextWrapSettingsModel,
+  ToolbarItems,
   EditSettingsModel,
   SelectionSettingsModel,
   PageSettingsModel,
   CommandModel,
-  RowSelectEventArgs,
+  GroupSettingsModel,
   GridModel,
-  ActionEventArgs,
-  DeleteEventArgs,
+  IRow,
   Column,
-  IRow
-} from "@syncfusion/ej2-angular-grids";
-import { Router, ActivatedRoute } from "@angular/router";
-
-import { HttpErrorResponse } from "@angular/common/http";
-import { ClickEventArgs } from "@syncfusion/ej2-navigations";
-import { AccountViewModel } from "../accounts";
+  ActionEventArgs
+} from "@syncfusion/ej2-grids";
 import {
   QueryString,
   FilterEventModel
 } from "src/app/shared/data-view/data-view.model";
-import { AccountsService } from "../../../core/services/accounts.service";
+import { Router, ActivatedRoute } from "@angular/router";
+import { AccountsService } from "src/app/core/services/accounts.service";
+import { HttpErrorResponse } from "@angular/common/http";
 import { closest } from "@syncfusion/ej2-base";
+import { ClickEventArgs } from "@syncfusion/ej2-angular-navigations";
+import { AccountTypeViewModel } from "../account-type";
+import { AccountTypeService } from "../account-type.service";
 
 @Component({
-  selector: "app-accounts-view",
-  templateUrl: "./accounts-view.component.html",
-  styleUrls: ["./accounts-view.component.css"]
+  selector: "app-account-type-view",
+  templateUrl: "./account-type-view.component.html",
+  styleUrls: ["./account-type-view.component.css"]
 })
-export class AccountsViewComponent implements OnInit {
+export class AccountTypeViewComponent implements OnInit {
   title = "Fiscal Calander Period";
 
   @ViewChild("grid")
   public grid: GridComponent;
-  public data: AccountViewModel[];
+  public data: AccountTypeViewModel[];
   public excelExportProperties: ExcelExportProperties;
   public filterSettings: FilterSettingsModel;
-  public toolbarOptions: Object[];
+  public toolbarOptions: object;
   public wrapSettings: TextWrapSettingsModel;
   public toolbar: ToolbarItems[];
   public editSettings: EditSettingsModel;
@@ -58,7 +48,7 @@ export class AccountsViewComponent implements OnInit {
   public pageSettings: PageSettingsModel;
   public filterOptions: FilterSettingsModel;
   public commands: CommandModel[];
-  public groupOptions: GroupSettingsModel = { showDropArea: false };
+  public groupOptions: GroupSettingsModel = { showDropArea: true };
 
   public childGrid: GridModel;
   query: QueryString;
@@ -66,7 +56,7 @@ export class AccountsViewComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private accountApi: AccountsService,
+    private accountTypeApi: AccountTypeService,
     private activatedRoute: ActivatedRoute
   ) {
     this.initialPage = { pageSize: 10, pageSizes: true };
@@ -74,45 +64,48 @@ export class AccountsViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.accountApi.getAccountsList().subscribe(
-      (data: AccountViewModel[]) => {
+    this.accountTypeApi.getAccountTypes().subscribe(
+      (data: AccountTypeViewModel[]) => {
         this.data = data;
-        this.childGrid.dataSource = data;
       },
       (error: HttpErrorResponse) => alert(error.message)
     );
-
+    this.groupOptions = { columns: ["AccountType"], showDropArea: false };
     this.childGrid = {
       queryString: "ParentAccount",
       columns: [
         {
           field: "Id",
-          headerText: "Id",
+          headerText: "ID",
           textAlign: "Right",
           width: 100
         },
         {
-          field: "AccountId",
-          headerText: "Account Id",
+          field: "Type",
+          headerText: "Account Type",
           textAlign: "Right",
           width: 120
         },
-        { field: "Name", headerText: "Account Name", width: 150 },
-        { field: "Active", headerText: "Status", width: 150 }
+        {
+          field: "AccountType",
+          headerText: "Account Type",
+          textAlign: "Right",
+          width: 120
+        }
       ]
     };
 
     this.filterOptions = { type: "Menu" }; // put unique filter menue for each column based on the column type
     this.selectionOptions = { type: "Single" }; // allow only single row to be selected at a time for edit or delete
 
-    this.toolbarOptions = ["Create Account", "Search"];
+    this.toolbarOptions = ["Create", "Search"];
     this.commands = [
       {
         type: "Edit",
         buttonOption: {
           cssClass: "e-flat",
           iconCss: "e-edit e-icons",
-          click: this.editAccount.bind(this)
+          click: this.editAccountType.bind(this)
         }
       },
       {
@@ -120,7 +113,7 @@ export class AccountsViewComponent implements OnInit {
         buttonOption: {
           cssClass: "e-flat",
           iconCss: "e-delete e-icons",
-          click: this.deleteAccount.bind(this)
+          click: this.deleteAccountType.bind(this)
         }
       }
     ];
@@ -131,7 +124,7 @@ export class AccountsViewComponent implements OnInit {
     console.log(error);
   }
 
-  editAccount(data: Event): void {
+  editAccountType(data: Event): void {
     const rowObj: IRow<Column> = this.grid.getRowObjectFromUID(
       closest(data.target as Element, ".e-row").getAttribute("data-uid")
     );
@@ -142,12 +135,12 @@ export class AccountsViewComponent implements OnInit {
     }
   }
 
-  deleteAccount(data: Event): void {
+  deleteAccountType(data: Event): void {
     const rowObj: IRow<Column> = this.grid.getRowObjectFromUID(
       closest(data.target as Element, ".e-row").getAttribute("data-uid")
     );
 
-    this.accountApi.deleteAccount(rowObj.data["Id"]).subscribe();
+    this.accountTypeApi.deleteAccountType(rowObj.data["Id"]).subscribe();
   }
 
   onDataBound() {
@@ -156,8 +149,8 @@ export class AccountsViewComponent implements OnInit {
   // Click handler for when the toolbar is cliked
   toolbarClick(args: ClickEventArgs): void {
     console.log(args.item.id);
-    if (args.item.id.toUpperCase() === "ACCOUNTS_CREATE ACCOUNT") {
-      this.router.navigate(["accounts/new"]); // when user click add route to the accounts form
+    if (args.item.id.toUpperCase() === "ACCOUNTS_CREATE") {
+      this.router.navigate(["account-types/add"]); // when user click add route to the accounts form
     }
   }
 
@@ -213,8 +206,8 @@ export class AccountsViewComponent implements OnInit {
     searchString += `pageSize=${this.query.pageSize}&pageNumber=${
       this.query.pageNumber
     }`;
-    this.accountApi
-      .getAccountsList(searchString)
+    this.accountTypeApi
+      .getAccountTypes(searchString)
       .subscribe(data => (this.data = data));
   }
 }

@@ -47,6 +47,14 @@ export class AppComponent {
           expanded: false,
           enabled: true,
           selected: false
+        },
+        {
+          id: "01-03",
+          name: "Account Type",
+          url: "/account-types",
+          expanded: false,
+          enabled: true,
+          selected: false
         }
       ]
     },

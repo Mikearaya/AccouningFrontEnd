@@ -16,7 +16,7 @@ import { LedgerComponent } from "./ledger.component";
 import { LedgerService } from "src/app/core/services/ledger.service";
 import { AccountsService } from "src/app/core/services/accounts.service";
 
-fdescribe(" ledger form component", () => {
+describe(" ledger form component", () => {
   let component: LedgerComponent;
   let fixture: ComponentFixture<LedgerComponent>;
   let debugEl: DebugElement;
