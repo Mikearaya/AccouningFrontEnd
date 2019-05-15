@@ -3,8 +3,16 @@
 }
 
 @media print {
+  ejs-grid {
+    display: grid;
+  }
+
   table {
     width: 100% !important;
     background-color: blue;
+  }
+
+  td.e-emptyrow {
+    display: none
   }
 }

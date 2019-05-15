@@ -14,6 +14,8 @@
   height: 100vh;
 }
 
+@media print {}
+
 #head {
   border: none;
   border-bottom-color: transparent;
@@ -24,7 +26,6 @@
 #container .e-btn.e-info:hover,
 #toggle:focus {
   /* csslint allow: adjoining-classes*/
-  background: #4d841d96;
   box-shadow: none;
   border-radius: 0;
   height: 39px;
@@ -80,9 +81,12 @@
   height: 800px;
 }
 
+.e-content-animation {
+  margin-left: 250px;
+}
+
 @media print {
   #targetContent {
     width: 100% !important;
-    background-color: blue;
   }
 }

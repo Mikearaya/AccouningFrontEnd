@@ -7,7 +7,7 @@ import { AccountTypeViewComponent } from "./account-type-view.component";
 import { AccountsViewComponent } from "../../accounts/accounts-view/accounts-view.component";
 import { AccountTypeService } from "../account-type.service";
 
-fdescribe("Accounts type view component", () => {
+describe("Accounts type view component", () => {
   let router: Router;
   let activatedRoute;
   let component: AccountTypeViewComponent;

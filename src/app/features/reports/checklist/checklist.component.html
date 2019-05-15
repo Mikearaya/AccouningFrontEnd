@@ -1,4 +1,4 @@
-<div class="checklist-content">
+<!-- <div class="checklist-content">
   <button (click)="printPage()" class="d-print-none">Print</button>
   <div class="table-content">
     <table
@@ -30,4 +30,57 @@
       </tbody>
     </table>
   </div>
+</div> -->
+
+<!-- <ejs-treegrid [dataSource]="TData" [treeColumnIndex]="1" childMapping="Entries">
+  <e-columns>
+    <e-column
+      field="ReferenceNumber"
+      headerText="Voucher"
+      textAlign="Right"
+      width="70"
+    ></e-column>
+    <e-column
+      field="Date"
+      headerText="Date"
+      textAlign="Right"
+      format="yMd"
+      width="90"
+    ></e-column>
+    <e-column
+      field="Description"
+      headerText="Description"
+      textAlign="Right"
+      width="80"
+    ></e-column>
+  </e-columns>
+</ejs-treegrid> -->
+
+<button ej-button (click)="expand()">Expand All</button>
+<button ej-button (click)="collapse()">Collapse All</button>
+<button (click)="printPage()" class="d-print-none">Print</button>
+<div class="print-area">
+  <ejs-grid
+    #grid
+    [dataSource]="gridData"
+    foreign-key-field="LedgerId"
+    [childGrid]="childGrid"
+    query-string="Id"
+  >
+    <e-columns>
+      <e-column
+        field="ReferenceNumber"
+        headerText="Voucher number"
+        textAlign="Left"
+        width="120"
+      ></e-column>
+      <e-column field="Date" headerText="Date" width="150"></e-column>
+      <e-column
+        field="Description"
+        headerText="Description"
+        width="150"
+        [visible]="true"
+      ></e-column>
+    </e-columns>
+  </ejs-grid>
 </div>

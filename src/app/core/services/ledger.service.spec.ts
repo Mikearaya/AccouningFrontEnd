@@ -35,24 +35,24 @@ describe("Ledger service", () => {
   });
   // expecting the correct(but faked) result: propery with values
   it("Should get ledger successfull", () => {
-    const returnedLedger: JornalEntryViewModel[] = [
-      {
-        Id: 1,
-        VoucherId: "1212",
-        Date: new Date(),
-        Description: "description",
-        Reference: "refernce",
-        Posted: true,
-        DateAdded: new Date(),
-        DateUpdated: new Date(),
-        Entries: [
-          { AccountId: "0001", Credit: 0, Debit: 0 },
-          { AccountId: "0002", Credit: 1, Debit: 1 }
-        ]
-      }
-    ];
+    const returnedLedger: JornalEntryViewModel = {
+      Id: 1,
+      VoucherId: "1212",
+      Date: new Date(),
+      Description: "description",
+      Reference: "refernce",
+      Posted: true,
+      DateAdded: new Date(),
+      DateUpdated: new Date(),
+      Entries: [
+        { AccountId: "0001", Credit: 0, Debit: 0 },
+        { AccountId: "0002", Credit: 1, Debit: 1 }
+      ]
+    };
+
     ledgerService.getLedgerEntryById(1).subscribe((data: any) => {
       expect(data.Id).toBe(1);
+      console.log(data);
     });
     // telling the httmock what kind of request we expect and toward which url
     const req = httpMock.expectOne(
@@ -100,7 +100,6 @@ describe("Ledger service", () => {
     ];
     ledgerService.getAllLedgerEntries().subscribe((data: any) => {
       expect(data).toEqual(returnedLedgerEntries);
-      console.log(data);
     });
     // telling the httmock what kind of request we expect and toward which url
     const req = httpMock.expectOne(

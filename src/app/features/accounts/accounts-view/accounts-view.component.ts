@@ -18,10 +18,8 @@ import {
   SelectionSettingsModel,
   PageSettingsModel,
   CommandModel,
-  RowSelectEventArgs,
   GridModel,
   ActionEventArgs,
-  DeleteEventArgs,
   Column,
   IRow
 } from "@syncfusion/ej2-angular-grids";
