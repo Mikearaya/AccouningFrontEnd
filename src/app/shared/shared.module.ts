@@ -62,9 +62,8 @@ import { TreeGridModule } from "@syncfusion/ej2-angular-treegrid";
     AutoCompleteModule,
     MultiSelectModule,
     DateTimePickerModule,
-    MaskedTextBoxModule
+    MaskedTextBoxModule,
     TreeGridModule
-
   ],
   exports: [
     CommonModule,
@@ -90,7 +89,7 @@ import { TreeGridModule } from "@syncfusion/ej2-angular-treegrid";
     AccountSelectorComponent,
     AccountCategorySelectorComponent,
     LookupSelectorComponent,
-    MaskedTextBoxModule
+    MaskedTextBoxModule,
     TreeGridModule
   ],
   declarations: [
