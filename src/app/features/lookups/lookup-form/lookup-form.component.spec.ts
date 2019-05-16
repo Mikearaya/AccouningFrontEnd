@@ -19,7 +19,6 @@ describe(" Account lookup form component", () => {
   let component: LookupFormComponent;
   let fixture: ComponentFixture<LookupFormComponent>;
   let debugEl: DebugElement;
-  let activatedRoute;
 
   const makeCompiledTestBed = (provider?: object): void => {
     const moduleDef: TestModuleMetadata = {
@@ -75,34 +74,22 @@ describe(" Account lookup form component", () => {
       it("Should be invalid when empty", () => {
         expect(component.lookupForm.valid).toBeFalsy();
       });
-      it("Value field validity", () => {
-        const value = component.Value;
-        expect(value.valid).toBeFalsy();
-        value.setValue("appdiv");
-        expect(value.valid).toBeTruthy();
-        err = value.errors || {};
-        expect(err["required"]).toBeFalsy();
-        value.setValue("");
-        err = value.errors || {};
-        expect(err["required"]).toBeTruthy();
-      });
-
-      it("Type field validity", () => {
-        const type = component.Type;
-        expect(type.valid).toBeFalsy();
-        type.setValue("appdiv");
-        expect(type.valid).toBeTruthy();
-        expect(type.value).toEqual("appdiv");
-        err = type.errors || {};
-        expect(err["required"]).toBeFalsy();
-        type.setValue("");
-        err = type.errors || {};
-        expect(err["required"]).toBeTruthy();
+      it("Lookups array validity", () => {
+        const lookups = component.Lookups;
+        expect(lookups.valid).toBeFalsy();
+        lookups.setValue([
+          { Type: "type1", Value: "val2" },
+          { Type: "type2", Value: "val1" }
+        ]);
+        expect(lookups.valid).toBeTruthy();
+        expect(lookups.length).toEqual(2);
       });
 
       it("Should be valid when not empty", () => {
-        component.Value.setValue("Appdiv");
-        component.Type.setValue("Appdiv");
+        component.Lookups.setValue([
+          { Type: "01", Value: "val1" },
+          { Type: "02", Value: "val2" }
+        ]);
         expect(component.lookupForm.valid).toBeTruthy();
       });
     });

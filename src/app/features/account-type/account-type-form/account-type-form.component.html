@@ -1,0 +1,64 @@
+<form [formGroup]="typeForm" (ngSubmit)="onSubmit()" name="accountForm">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-6 col-xs-12">
+        <label for="Catagory"> Catagory</label>
+        <div>
+          <ejs-dropdownlist
+            id="AccountType"
+            name="AccounType"
+            [fields]="accountTypeFields"
+            formControlName="AccountType"
+            [dataSource]="Catagories"
+          ></ejs-dropdownlist>
+          <div
+            class="e-error"
+            *ngIf="AccountType.errors && AccountType.touched"
+          >
+            <div *ngIf="AccountType.errors['required']">
+              *Catagory is Required
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-xs-12">
+        <label for="Account type">Account type</label>
+        <div>
+          <input
+            type="text"
+            id="Type"
+            name="Type"
+            class="e-input"
+            formControlName="Type"
+          />
+          <div class="e-error" *ngIf="Type.errors && Type.touched">
+            <div *ngIf="Type.errors['required']">
+              *Account type is Required
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <label for="status"
+          >Summerize report
+          <ejs-switch
+            formControlName="IsSummary"
+            id="IsSummerize"
+            name="IsSummerize"
+          ></ejs-switch>
+        </label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-4"></div>
+      <div class="col-4">
+        <app-form-options
+          [submitDisabled]="typeForm.invalid"
+        ></app-form-options>
+      </div>
+      <div class="col-4"></div>
+    </div>
+  </div>
+</form>

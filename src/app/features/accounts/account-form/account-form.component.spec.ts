@@ -22,6 +22,7 @@ import { ActivatedRoute, convertToParamMap } from "@angular/router";
 import { DebugElement } from "@angular/core";
 import { AccountCatagoryApiService } from "src/app/core/account-catagory-api.service";
 import { FormBuilder } from "@angular/forms";
+import { LookupService } from "src/app/core/services/lookup.service";
 
 describe(" Account form component", () => {
   let component: AccountFormComponent;
@@ -32,7 +33,7 @@ describe(" Account form component", () => {
     const moduleDef: TestModuleMetadata = {
       imports: [SharedModule, RouterTestingModule],
       declarations: [AccountFormComponent],
-      providers: [AccountsService, AccountCatagoryApiService]
+      providers: [AccountsService, AccountCatagoryApiService, LookupService]
     };
     if (moduleDef.providers && provider) {
       moduleDef.providers.push(provider);
@@ -138,7 +139,7 @@ describe(" Account form component", () => {
         expect(openingBalance.value).toEqual("Appdiv");
       });
       it("Cost center field validity", () => {
-        const constCenter = component.CostCenter;
+        const constCenter = component.CostCenterId;
         expect(constCenter.valid).toBeTruthy();
         constCenter.setValue("Appdiv");
         expect(constCenter.value).toEqual("Appdiv");

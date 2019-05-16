@@ -13,6 +13,8 @@ import {
 import { AccountsService } from "./accounts.service";
 import { Accounts, AccountViewModel } from "../../features/accounts/accounts";
 import { TestBed } from "@angular/core/testing";
+import { RouterTestingModule } from "@angular/router/testing";
+import { CoreModule } from "../core.module";
 
 describe("Accounts service", () => {
   let accountService: AccountsService;
@@ -20,7 +22,7 @@ describe("Accounts service", () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+      imports: [HttpClientTestingModule, CoreModule, RouterTestingModule],
       providers: [AccountsService]
     });
 
@@ -30,43 +32,36 @@ describe("Accounts service", () => {
   });
   // expecting the correct(but faked) result: propery with value
   it("Should get account successfull", () => {
-    const returnedAccounts: AccountViewModel = {
+    const returnedAccount: AccountViewModel = {
       Id: 1,
       AccountId: "2222",
-      Name: "Account 2",
-      OpeningBalance: 1,
-      Active: false,
-      CostCenter: "lookup",
       ParentAccount: "parent account",
+      AccountName: "account name",
+      Active: false,
       Year: "2019",
+      OpeningBalance: 1,
+      ParentAccountId: 1,
       Category: "catag1",
       CategoryId: 1,
+      CostCenter: "lookup",
       DateAdded: "1212",
-      DateUpdated: "12121"
+      DateUpdated: "12121",
+      CostCenterId: 11
     };
     accountService.getAccountById(1).subscribe((data: any) => {
       this.returnedAccounts = data;
-      expect(data.Name).toBe("Account 2");
+      expect(data.AccountId).toBe("2222");
     });
     // telling the httmock what kind of request we expect and toward which url
     const req = httpMock.expectOne(
-      "http://localhost:3000/accounts/1",
+      "http://localhost:5000/accounts/1",
       "call to api"
     );
     expect(req.request.method).toBe("GET");
 
     // fire the request with its data we really expect
 
-    req.flush({
-      Id: 1,
-      AccountId: "2222",
-      Name: "Account 2",
-      OpeningBalance: 1,
-      Active: false,
-      CatagoryId: 1,
-      ParentAccount: 3,
-      CostCenter: "lookup"
-    });
+    req.flush(returnedAccount);
 
     httpMock.verify();
   });
@@ -80,7 +75,7 @@ describe("Accounts service", () => {
         Active: false,
         CatagoryId: 1,
         ParentAccount: 3,
-        CostCenter: "lookup"
+        CostCenterId: "12"
       },
       {
         Id: 2,
@@ -90,7 +85,7 @@ describe("Accounts service", () => {
         Active: false,
         CatagoryId: 1,
         ParentAccount: 3,
-        CostCenter: "lookup"
+        CostCenterId: "12"
       }
     ];
     accountService.getAccountsList().subscribe((data: any) => {
@@ -99,67 +94,37 @@ describe("Accounts service", () => {
     });
     // telling the httmock what kind of request we expect and toward which url
     const req = httpMock.expectOne(
-      "http://localhost:3000/accounts?",
+      "http://localhost:5000/accounts?",
       "call to api"
     );
     expect(req.request.method).toBe("GET");
 
     // fire the request with its data we really expect
 
-    req.flush([
-      {
-        Id: 1,
-        AccountId: "1111",
-        Name: "Account 1",
-        OpeningBalance: 1,
-        Active: false,
-        CatagoryId: 1,
-        ParentAccount: 3,
-        CostCenter: "lookup"
-      },
-      {
-        Id: 2,
-        AccountId: "2222",
-        Name: "Account 2",
-        OpeningBalance: 1,
-        Active: false,
-        CatagoryId: 1,
-        ParentAccount: 3,
-        CostCenter: "lookup"
-      }
-    ]);
+    req.flush(returnedAccounts);
 
     httpMock.verify();
   });
   it("Should create account", () => {
     const newAccount: Accounts = {
-      Id: 2,
-      AccountId: "2222",
-      Name: "Account 2",
+      Id: 3,
+      AccountId: "3333",
+      Name: "Account 3",
       OpeningBalance: 1,
       Active: false,
       CatagoryId: 1,
       ParentAccount: 3,
-      CostCenter: "lookup"
+      CostCenterId: "12"
     };
     accountService.createAccount(newAccount).subscribe((data: any) => {
-      expect(data.Id).toBe(2);
+      expect(data.Id).toBe(3);
     });
     const req = httpMock.expectOne(
-      "http://localhost:3000/accounts/",
+      "http://localhost:5000/accounts",
       "post to api"
     );
     expect(req.request.method).toBe("POST");
-    req.flush({
-      Id: 2,
-      AccountId: "2222",
-      Name: "Account 2",
-      OpeningBalance: 1,
-      Active: false,
-      CatagoryId: 1,
-      ParentAccount: 3,
-      CostCenter: "lookup"
-    });
+    req.flush(newAccount);
     httpMock.verify();
   });
   it("Should update account", () => {
@@ -171,7 +136,7 @@ describe("Accounts service", () => {
       Active: false,
       CatagoryId: 1,
       ParentAccount: 3,
-      CostCenter: "lookup"
+      CostCenterId: "12"
     };
     accountService
       .updateAccount(updatedAccount.Id, updatedAccount)
@@ -179,21 +144,12 @@ describe("Accounts service", () => {
         expect(data.AccountId).toBe("2222");
       });
     const req = httpMock.expectOne(
-      "http://localhost:3000/accounts/2",
+      "http://localhost:5000/accounts/2",
       "put to api"
     );
     expect(req.request.method).toBe("PUT");
 
-    req.flush({
-      Id: 2,
-      AccountId: "2222",
-      Name: "Account 2",
-      OpeningBalance: 1,
-      Active: false,
-      CatagoryId: 1,
-      ParentAccount: 3,
-      CostCenter: "lookup"
-    });
+    req.flush(updatedAccount);
 
     httpMock.verify();
   });
@@ -203,7 +159,7 @@ describe("Accounts service", () => {
     });
 
     const req = httpMock.expectOne(
-      "http://localhost:3000/accounts/2",
+      "http://localhost:5000/accounts/2",
       "delete to api"
     );
     expect(req.request.method).toBe("DELETE");

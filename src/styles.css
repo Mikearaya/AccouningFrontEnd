@@ -4,10 +4,8 @@
 
 body {
   background-color: #eee !important;
-  padding: 10px;
+  padding: 0px;
 }
-
-
 
 .e-plus-icon::before {
   content: '\e823';

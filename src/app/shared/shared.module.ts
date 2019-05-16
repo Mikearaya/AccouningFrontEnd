@@ -39,6 +39,7 @@ import { RouterModule } from "@angular/router";
 import { AccountSelectorComponent } from "./account-selector/account-selector.component";
 import { AccountCategorySelectorComponent } from "./account-category-selector/account-category-selector.component";
 import { LookupSelectorComponent } from "./lookup-selector/lookup-selector.component";
+import { TreeGridModule } from "@syncfusion/ej2-angular-treegrid";
 
 @NgModule({
   imports: [
@@ -62,6 +63,8 @@ import { LookupSelectorComponent } from "./lookup-selector/lookup-selector.compo
     MultiSelectModule,
     DateTimePickerModule,
     MaskedTextBoxModule
+    TreeGridModule
+
   ],
   exports: [
     CommonModule,
@@ -88,6 +91,7 @@ import { LookupSelectorComponent } from "./lookup-selector/lookup-selector.compo
     AccountCategorySelectorComponent,
     LookupSelectorComponent,
     MaskedTextBoxModule
+    TreeGridModule
   ],
   declarations: [
     FormOptionsComponent,

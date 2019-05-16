@@ -12,11 +12,13 @@
   [showColumnChooser]="true"
   [selectionSettings]="selectionOptions"
   [allowPdfExport]="true"
+  [allowGrouping]="true"
   (toolbarClick)="toolbarClick($event)"
   [pageSettings]="initialPage"
   [filterSettings]="filterOptions"
   [childGrid]="childGrid"
   [showColumnChooser]="true"
+  [groupSettings]="groupOptions"
   (actionComplete)="actionEndHandler($event)"
 >
   <e-columns>
@@ -33,23 +35,11 @@
       [visible]="true"
     >
     </e-column>
-    <e-column
-      field="AccountId"
-      textAlign="left"
-      headerText="ID"
-      type="number"
-      width="30"
-      editable="false"
-      filterable="false"
-      groupable="false"
-      [width]="70"
-    >
-    </e-column>
 
     <e-column
-      field="AccountName"
+      field="Type"
       textAlign="left"
-      headerText="Name"
+      headerText="Account type"
       isPrimaryKey="false"
       type="string"
       editType="textbox"
@@ -59,9 +49,9 @@
       [width]="200"
     ></e-column>
     <e-column
-      field="Category"
+      field="AccountType"
       textAlign="left"
-      headerText="Category"
+      headerText="AccountType"
       isPrimaryKey="false"
       type="string"
       editType="textbox"
@@ -73,16 +63,16 @@
     <!--     <e-column field="TotalAmount" textAlign="left" headerText="Amount" isPrimaryKey="false" type="string" editType="textbox"
       filterable="true" editable="true" groupable="true" width='50'></e-column> -->
     <e-column
-      field="Active"
+      field="IsSummary"
       textAlign="left"
-      headerText="Active"
+      headerText="Summarize report"
       isPrimaryKey="false"
       type="bool"
       editType="booleanedit"
       filterable="true"
       editable="true"
       groupable="true"
-      width="60"
+      width="100"
     ></e-column>
     <e-column
       field="DateAdded"
