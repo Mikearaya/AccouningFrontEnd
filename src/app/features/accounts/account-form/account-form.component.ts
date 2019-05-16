@@ -38,6 +38,7 @@ export class AccountFormComponent implements OnInit {
   public calendarFields: Object; // holds the selected fields to display on the drop down
 
   public accountId: number; // used to hold the account Id passed in the route
+  public textString = "9099 00";
   public accountCatagories: AccountCategoryIndex[] = [];
 
   constructor(
@@ -177,6 +178,12 @@ export class AccountFormComponent implements OnInit {
           }
         );
     }
+  }
+
+  public onSpecificfocus(args): void {
+    // sets cursor at specified position
+    args.selectionStart = 4;
+    args.selectionEnd = 4;
   }
 
   /*

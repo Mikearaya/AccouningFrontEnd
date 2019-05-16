@@ -26,7 +26,10 @@ import {
   DateTimePickerModule
 } from "@syncfusion/ej2-angular-calendars";
 
-import { NumericTextBoxModule } from "@syncfusion/ej2-angular-inputs";
+import {
+  NumericTextBoxModule,
+  MaskedTextBoxModule
+} from "@syncfusion/ej2-angular-inputs";
 import { FormOptionsComponent } from "./form-options/form-options.component";
 import { DataViewComponent } from "./data-view/data-view.component";
 import { PageTitleComponent } from "./page-title/page-title.component";
@@ -61,8 +64,8 @@ import { DialogBoxComponent } from "./dialog-box/dialog-box.component";
     AutoCompleteModule,
     MultiSelectModule,
     DateTimePickerModule,
-    TreeGridModule,
-    DialogModule
+    MaskedTextBoxModule,
+    TreeGridModule
   ],
   exports: [
     CommonModule,
@@ -88,8 +91,8 @@ import { DialogBoxComponent } from "./dialog-box/dialog-box.component";
     AccountSelectorComponent,
     AccountCategorySelectorComponent,
     LookupSelectorComponent,
-    TreeGridModule,
-    DialogModule
+    MaskedTextBoxModule,
+    TreeGridModule
   ],
   declarations: [
     FormOptionsComponent,

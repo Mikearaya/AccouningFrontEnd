@@ -67,7 +67,7 @@ export class AccountsViewComponent implements OnInit {
     private accountApi: AccountsService,
     private activatedRoute: ActivatedRoute
   ) {
-    this.initialPage = { pageSize: 10, pageSizes: true };
+    this.initialPage = { pageSize: 200, pageSizes: true };
     this.query = new QueryString();
   }
 
@@ -81,7 +81,7 @@ export class AccountsViewComponent implements OnInit {
     );
 
     this.childGrid = {
-      queryString: "ParentAccount",
+      queryString: "Id",
       columns: [
         {
           field: "Id",
@@ -95,8 +95,10 @@ export class AccountsViewComponent implements OnInit {
           textAlign: "Right",
           width: 120
         },
-        { field: "Name", headerText: "Account Name", width: 150 },
-        { field: "Active", headerText: "Status", width: 150 }
+        { field: "AccountName", headerText: "Account Name", width: 150 },
+        { field: "Active", headerText: "Status", width: 150 },
+        { field: "ParentAccount", headerText: "Parent", width: 150 }
+
       ]
     };
 
@@ -122,7 +124,7 @@ export class AccountsViewComponent implements OnInit {
         }
       }
     ];
-    this.pageSettings = { pageSize: 15 }; // initial page row size for the grid
+    this.pageSettings = { pageSize: 200 }; // initial page row size for the grid
   }
 
   handleError(error: HttpErrorResponse) {
