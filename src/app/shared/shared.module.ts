@@ -40,6 +40,8 @@ import { AccountSelectorComponent } from "./account-selector/account-selector.co
 import { AccountCategorySelectorComponent } from "./account-category-selector/account-category-selector.component";
 import { LookupSelectorComponent } from "./lookup-selector/lookup-selector.component";
 import { TreeGridModule } from "@syncfusion/ej2-angular-treegrid";
+import { DialogModule } from "@syncfusion/ej2-angular-popups";
+import { DialogBoxComponent } from "./dialog-box/dialog-box.component";
 
 @NgModule({
   imports: [
@@ -100,7 +102,8 @@ import { TreeGridModule } from "@syncfusion/ej2-angular-treegrid";
     PageTitleComponent,
     AccountSelectorComponent,
     AccountCategorySelectorComponent,
-    LookupSelectorComponent
+    LookupSelectorComponent,
+    DialogBoxComponent
   ],
   providers: []
 })

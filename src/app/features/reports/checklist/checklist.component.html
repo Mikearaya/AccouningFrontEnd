@@ -1,86 +1,40 @@
-<!-- <div class="checklist-content">
-  <button (click)="printPage()" class="d-print-none">Print</button>
-  <div class="table-content">
-    <table
-      class="table table-striped printable-area"
-      *ngFor="let Entries of data; let i = index"
+<div class="checklist-area">
+  <div class="print-area">
+    <ejs-grid
+      #grid
+      [dataSource]="gridData"
+      foreign-key-field="LedgerId"
+      [childGrid]="childGrid"
+      query-string="Id"
+      [toolbar]="toolbar"
+      (toolbarClick)="clickHandler($event)"
     >
-      <thead>
-        <tr>
-          <th scope="col">Voucher : {{ Entries.ReferenceNumber }}</th>
-          <th scope="col">Date : {{ Entries.Date }}</th>
-          <th scope="col">Description : {{ Entries.Description }}</th>
-        </tr>
-        <tr>
-          <th scope="col">General</th>
-          <th scope="col">Subsidary</th>
-          <th scope="col">Account name</th>
-          <th scope="col">Debit</th>
-          <th scope="col">Credit</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let data of Entries.Entries; let i = index">
-          <td>{{ data.ControlAccountId }}</td>
-          <td>{{ data.SubAccountId }}</td>
-          <td>{{ data.AccountName }}</td>
-          <td>{{ data.Debit }}</td>
-          <td>{{ data.Credit }}</td>
-        </tr>
-      </tbody>
-    </table>
+      <e-columns>
+        <e-column
+          field="ReferenceNumber"
+          headerText="Voucher number"
+          textAlign="Left"
+          width="120"
+        ></e-column>
+        <e-column field="Date" headerText="Date" width="150"></e-column>
+        <e-column
+          field="Description"
+          headerText="Description"
+          width="150"
+          [visible]="true"
+        ></e-column>
+      </e-columns>
+      <e-aggregates>
+        <e-aggregate>
+          <e-columns>
+            <e-column field="Debit" type="sum">
+              <ng-template #footerTemplate let-data
+                >Sum: {{ data.sum }}</ng-template
+              >
+            </e-column>
+          </e-columns>
+        </e-aggregate>
+      </e-aggregates>
+    </ejs-grid>
   </div>
-</div> -->
-
-<!-- <ejs-treegrid [dataSource]="TData" [treeColumnIndex]="1" childMapping="Entries">
-  <e-columns>
-    <e-column
-      field="ReferenceNumber"
-      headerText="Voucher"
-      textAlign="Right"
-      width="70"
-    ></e-column>
-    <e-column
-      field="Date"
-      headerText="Date"
-      textAlign="Right"
-      format="yMd"
-      width="90"
-    ></e-column>
-    <e-column
-      field="Description"
-      headerText="Description"
-      textAlign="Right"
-      width="80"
-    ></e-column>
-  </e-columns>
-</ejs-treegrid> -->
-
-<button ej-button (click)="expand()">Expand All</button>
-<button ej-button (click)="collapse()">Collapse All</button>
-<button (click)="printPage()" class="d-print-none">Print</button>
-<div class="print-area">
-  <ejs-grid
-    #grid
-    [dataSource]="gridData"
-    foreign-key-field="LedgerId"
-    [childGrid]="childGrid"
-    query-string="Id"
-  >
-    <e-columns>
-      <e-column
-        field="ReferenceNumber"
-        headerText="Voucher number"
-        textAlign="Left"
-        width="120"
-      ></e-column>
-      <e-column field="Date" headerText="Date" width="150"></e-column>
-      <e-column
-        field="Description"
-        headerText="Description"
-        width="150"
-        [visible]="true"
-      ></e-column>
-    </e-columns>
-  </ejs-grid>
 </div>

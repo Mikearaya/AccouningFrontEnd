@@ -2,17 +2,33 @@
   position: relative;
 }
 
+/* 
 @media print {
-  ejs-grid {
-    display: grid;
+  @page {
+    size: A4 landscape;
+    max-height: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    display: none;
+  }
+} */
+
+td.e-emptyrow {
+  display: none !important;
+}
+
+@media print {
+  #grid_280002247_0_toolbarItems {
+    display: none;
   }
 
-  table {
-    width: 100% !important;
-    background-color: blue;
+  .e-icons.e-dtdiagonaldown.e-icon-gdownarrow,
+  .e-icons.e-dtdiagonalright.e-icon-grightarrow {
+    display: none;
   }
 
-  td.e-emptyrow {
-    display: none
+  .e-emptyrow {
+    display: none !important;
   }
 }
