@@ -34,7 +34,7 @@ export class AccountsService {
 
   getAccountIndex(searchString: string = ""): Observable<AccountsIndexView[]> {
     return this.httpClient.get<AccountsIndexView[]>(
-      `${this.url}/index?${searchString}`
+      `${this.url}/index?searchString=${searchString}`
     );
   }
 

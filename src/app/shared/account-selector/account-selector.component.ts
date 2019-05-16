@@ -3,6 +3,7 @@ import { AccountsService } from "src/app/core/services/accounts.service";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { AccountsIndexView } from "src/app/features/accounts/accounts";
 import { Input } from "@syncfusion/ej2-inputs";
+import { Predicate, Query } from "@syncfusion/ej2-data/src";
 
 @Component({
   selector: "app-account-selector",
@@ -17,6 +18,7 @@ import { Input } from "@syncfusion/ej2-inputs";
       [text]="text"
       [enabled]="!diabled"
       [fields]="fields"
+      (filtering)="onFiltering($event)"
       [dataSource]="accounts"
       (change)="accountChanged($event)"
     ></ejs-autocomplete>
@@ -34,6 +36,7 @@ export class AccountSelectorComponent implements OnInit, ControlValueAccessor {
   constructor(private accountApi: AccountsService) {}
   public _value: any;
   public disabled: boolean;
+  public data;
 
   public accounts: any;
   public fields: object = { value: "Id", text: "Name" };
@@ -48,6 +51,20 @@ export class AccountSelectorComponent implements OnInit, ControlValueAccessor {
     }
 
     this.onTouched();
+  }
+
+  public onFiltering(e) {
+    e.preventDefaultAction = true;
+    const predicate = new Predicate("Name", "Contains", e.text);
+
+    let query = new Query();
+    // frame the query based on search string with filter type.
+    query = e.text != "" ? query.where(predicate) : query;
+    // pass the filter data source, filter query to updateData method.
+
+    this.accountApi
+      .getAccountIndex(e.text)
+      .subscribe(data => e.updateData(data));
   }
 
   onChanged: any = () => {};
@@ -71,6 +88,7 @@ export class AccountSelectorComponent implements OnInit, ControlValueAccessor {
       .getAccountIndex("")
       .subscribe((result: AccountsIndexView[]) => {
         this.accounts = result;
+        this.data = result;
         if (this._value) {
           const data = this.accounts.filter(a => a.Id === this._value);
           this.text = data[0].Name;
