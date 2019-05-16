@@ -1,12 +1,6 @@
 <div class="main">
   <div class="sidebar-content">
-    <ejs-sidebar
-      class="d-print-none"
-      id="default-sidebar"
-      #sidebar
-      [type]="type"
-      [target]="target"
-    >
+    <ejs-sidebar id="default-sidebar" #sidebar [type]="type" [target]="target">
       <div class="center-align">
         <ejs-treeview
           #tree
@@ -30,9 +24,10 @@
           (click)="btnClick()"
         ></button>
       </div>
-      <ejs-toolbar>
+
+      <!--  <ejs-toolbar>
         <e-items> </e-items>
-      </ejs-toolbar>
+      </ejs-toolbar> -->
 
       <div id="targetcontent">
         <router-outlet></router-outlet>

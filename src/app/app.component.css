@@ -14,12 +14,11 @@
   height: 100vh;
 }
 
-@media print {}
-
 #head {
   border: none;
   border-bottom-color: transparent;
   background: #4d841d21;
+  margin-left: 0px !important;
 }
 
 #toggle,
@@ -68,8 +67,8 @@
   font-style: normal;
 }
 
-#targetContent {
-  padding: 0Px;
+#targetcontent {
+  padding: 10Px;
 }
 
 #default-sidebar {
@@ -86,7 +85,12 @@
 }
 
 @media print {
-  #targetContent {
-    width: 100% !important;
+
+  #default-sidebar {
+    display: none;
+  }
+
+  .e-content-animation {
+    margin-left: 0 !important;
   }
 }
