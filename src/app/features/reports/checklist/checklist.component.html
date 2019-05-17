@@ -1,3 +1,4 @@
+<app-filter-option></app-filter-option>
 <div class="checklist-area">
   <div class="print-area">
     <ejs-grid
@@ -6,6 +7,9 @@
       foreign-key-field="LedgerId"
       [childGrid]="childGrid"
       query-string="Id"
+      [allowExcelExport]="true"
+      [allowPaging]="true"
+      [pageSettings]="initialPage"
       [toolbar]="toolbar"
       (toolbarClick)="clickHandler($event)"
     >
@@ -24,17 +28,6 @@
           [visible]="true"
         ></e-column>
       </e-columns>
-      <e-aggregates>
-        <e-aggregate>
-          <e-columns>
-            <e-column field="Debit" type="sum">
-              <ng-template #footerTemplate let-data
-                >Sum: {{ data.sum }}</ng-template
-              >
-            </e-column>
-          </e-columns>
-        </e-aggregate>
-      </e-aggregates>
     </ejs-grid>
   </div>
 </div>

@@ -1,31 +1,26 @@
 import { SharedModule } from "src/app/shared/shared.module";
 import { RouterTestingModule } from "@angular/router/testing";
-import { ChecklistComponent } from "./checklist.component";
-import { ChecklistService } from "./checklist.service";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
-import {
-  ComponentFixture,
-  TestBed,
-  async,
-  inject
-} from "@angular/core/testing";
+import { ComponentFixture, TestBed, async } from "@angular/core/testing";
 import { ClickEventArgs } from "@syncfusion/ej2-navigations";
+import { SubsidaryLedgerReportComponent } from "./subsidary-ledger-report.component";
+import { SubsidaryService } from "./subsidary.service";
 
-describe("ChecklistComponent", () => {
-  let component: ChecklistComponent;
-  let fixture: ComponentFixture<ChecklistComponent>;
+describe("SubsidaryLedgerReportComponent", () => {
+  let component: SubsidaryLedgerReportComponent;
+  let fixture: ComponentFixture<SubsidaryLedgerReportComponent>;
   let args: ClickEventArgs;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [SharedModule, RouterTestingModule, HttpClientTestingModule],
-      declarations: [ChecklistComponent],
-      providers: [ChecklistService]
+      declarations: [SubsidaryLedgerReportComponent],
+      providers: [SubsidaryService]
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ChecklistComponent);
+    fixture = TestBed.createComponent(SubsidaryLedgerReportComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

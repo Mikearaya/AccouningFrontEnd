@@ -102,7 +102,7 @@ export class AppComponent {
         {
           id: "04-01",
           name: "Checklist",
-          url: "/reports",
+          url: "/reports/checklist",
           expanded: false,
           enabled: true,
           selected: false
@@ -110,7 +110,7 @@ export class AppComponent {
         {
           id: "04-02",
           name: "Balance Sheet",
-          url: "/balance-sheet",
+          url: "/reports/filter",
           expanded: false,
           enabled: true,
           selected: false
@@ -134,7 +134,7 @@ export class AppComponent {
         {
           id: "04-05",
           name: "Subsidiary Ledger",
-          url: "/subsidiary-ledger",
+          url: "reports/subsidaries",
           expanded: false,
           enabled: true,
           selected: false

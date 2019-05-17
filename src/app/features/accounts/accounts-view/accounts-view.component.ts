@@ -57,17 +57,20 @@ export class AccountsViewComponent implements OnInit {
   public filterOptions: FilterSettingsModel;
   public commands: CommandModel[];
   public groupOptions: GroupSettingsModel = { showDropArea: false };
+  public initialPage: object;
 
   public childGrid: GridModel;
   query: QueryString;
-  initialPage: { pageSize: any; pageSizes: boolean };
 
   constructor(
     private router: Router,
     private accountApi: AccountsService,
     private activatedRoute: ActivatedRoute
   ) {
-    this.initialPage = { pageSize: 200, pageSizes: true };
+    this.initialPage = {
+      pageSizes: ["20", "50", "100", "200", "500", "1000", "All"],
+      pageSize: 20
+    };
     this.query = new QueryString();
   }
 
@@ -98,7 +101,6 @@ export class AccountsViewComponent implements OnInit {
         { field: "AccountName", headerText: "Account Name", width: 150 },
         { field: "Active", headerText: "Status", width: 150 },
         { field: "ParentAccount", headerText: "Parent", width: 150 }
-
       ]
     };
 

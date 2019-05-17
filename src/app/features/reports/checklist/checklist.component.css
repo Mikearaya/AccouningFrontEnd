@@ -19,7 +19,11 @@ td.e-emptyrow {
 }
 
 @media print {
-  #grid_280002247_0_toolbarItems {
+  #grid_867862622_0_toolbarItems {
+    display: none;
+  }
+
+  .e-gridpager.e-control.e-pager.e-lib {
     display: none;
   }
 

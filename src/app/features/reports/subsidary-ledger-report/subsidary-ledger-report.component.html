@@ -1,0 +1,49 @@
+<div class="subsidary-area">
+  <div class="print-area">
+    <ejs-grid
+      #grid
+      [dataSource]="gridData"
+      foreign-key-field="LedgerId"
+      [childGrid]="childGrid"
+      query-string="Id"
+      [allowExcelExport]="true"
+      [allowPaging]="true"
+      [pageSettings]="initialPage"
+      [toolbar]="toolbar"
+      (toolbarClick)="clickHandler($event)"
+    >
+      <e-columns>
+        <e-column
+          field="AccountId"
+          headerText="Account Id"
+          textAlign="Left"
+          width="120"
+        ></e-column>
+        <e-column
+          field="AccountType"
+          headerText="Account Type"
+          textAlign="Left"
+          width="120"
+        ></e-column>
+        <e-column
+          field="SubAccountId"
+          headerText="Subsidary Id"
+          textAlign="Left"
+          width="120"
+        ></e-column>
+        <e-column
+          field="AccountName"
+          headerText="Account Name"
+          textAlign="Left"
+          width="120"
+        ></e-column>
+        <e-column
+          field="BBF"
+          headerText="Starting Balance"
+          width="150"
+          [visible]="true"
+        ></e-column>
+      </e-columns>
+    </ejs-grid>
+  </div>
+</div>

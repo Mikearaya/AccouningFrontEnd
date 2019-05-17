@@ -1,3 +1,4 @@
+// checklist model
 export class Checklist {
   ReferenceNumber: string;
   Date: Date;
@@ -11,4 +12,23 @@ export class Jornal {
   Credit?: number;
   Debit?: number;
   AccountId: string;
+}
+
+// subsidaryLedgerReport model
+export class SubsidaryLedgerViewMdel {
+  AccountId: string;
+  AccountType: string;
+  SubAccountId: string;
+  AccountName: string;
+  BBF: number;
+  Entries: SubsidaryLedgerDetailViewModel[] = [];
+}
+
+export class SubsidaryLedgerDetailViewModel {
+  ReferenceNumber: string;
+  Date: Date;
+  VoucherId: string;
+  Debit: number;
+  Credit: number;
+  Balance: number;
 }

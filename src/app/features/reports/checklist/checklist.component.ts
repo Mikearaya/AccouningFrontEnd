@@ -4,7 +4,6 @@ import { GridComponent } from "@syncfusion/ej2-angular-grids";
 import { Checklist } from "../report";
 import { ChecklistService } from "./checklist.service";
 import { ClickEventArgs } from "@syncfusion/ej2-angular-navigations";
-import { DialogUtility } from "@syncfusion/ej2-popups";
 @Component({
   selector: "app-checklist",
   templateUrl: "./checklist.component.html",
@@ -15,6 +14,7 @@ export class ChecklistComponent implements OnInit {
   public data: Checklist[];
   public toolbar: object;
   public Dialog: any;
+  public initialPage: object;
   constructor(private checklistService: ChecklistService) {}
   public childGrid: GridModel = {
     dataSource: this.data,
@@ -26,7 +26,6 @@ export class ChecklistComponent implements OnInit {
         textAlign: "Left",
         width: 120
       },
-      // { field: "LedgerId", headerText: "Ledgeddddr", width: 150 },
       { field: "AccountName", headerText: "Account name", width: 150 },
       { field: "Debit", headerText: "Debit", width: 150 },
       { field: "Credit", headerText: "Credit", width: 150 }
@@ -36,6 +35,10 @@ export class ChecklistComponent implements OnInit {
   public grid: GridComponent;
 
   ngOnInit(): void {
+    this.initialPage = {
+      pageSizes: ["20", "50", "100", "200", "500", "1000", "All"],
+      pageSize: 20
+    };
     this.checklistService
       .getChecklistReport()
       .subscribe((data: Checklist[]) => {
@@ -54,7 +57,12 @@ export class ChecklistComponent implements OnInit {
     this.toolbar = [
       { text: "Expand All", prefixIcon: "e-expand", id: "expandall" },
       { text: "Collapse All", prefixIcon: "e-collapse", id: "collapseall" },
-      { text: "Print", prefixIcon: "e-print", id: "print" }
+      { text: "Print", prefixIcon: "e-print", id: "print" },
+      {
+        text: "ExcelExport",
+        prefixIcon: "e-ExcelExport",
+        id: "Grid_excelexport"
+      }
     ];
   }
   clickHandler(args: ClickEventArgs): void {
@@ -67,7 +75,11 @@ export class ChecklistComponent implements OnInit {
       this.grid.detailRowModule.collapseAll();
     }
     if (args.item.id === "print") {
-      this.Dialog = DialogUtility.confirm({
+      this.grid.detailRowModule.expandAll();
+      setTimeout(() => {
+        window.print();
+      }, 400);
+      /*    this.Dialog = DialogUtility.confirm({
         title: " Confirmation Dialog",
         content: "Do you want to print as it is!",
         okButton: { text: "Yes", click: this.okClick.bind(this) },
@@ -78,7 +90,13 @@ export class ChecklistComponent implements OnInit {
         showCloseIcon: true,
         closeOnEscape: true,
         animationSettings: { effect: "Zoom" }
-      });
+      }); */
+    }
+    if (args.item.id === "Grid_excelexport") {
+      this.grid.detailRowModule.expandAll();
+      setTimeout(() => {
+        this.grid.excelExport();
+      }, 400);
     }
   }
   expand(): void {
@@ -97,7 +115,7 @@ export class ChecklistComponent implements OnInit {
     }, 100);
   }
 
-  private okClick(): void {
+  /*   private okClick(): void {
     this.Dialog.hide();
     setTimeout(() => {
       window.print();
@@ -109,5 +127,5 @@ export class ChecklistComponent implements OnInit {
     setTimeout(() => {
       window.print();
     }, 400);
-  }
+  } */
 }

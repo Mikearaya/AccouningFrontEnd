@@ -1,0 +1,123 @@
+<ejs-accordion>
+  <div>
+    <div>
+      <div>Filter</div>
+    </div>
+    <div>
+      <div>
+        <form [formGroup]="filterForm" name="filterForm">
+          <div class="filter-options">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-4">
+                  <label for="year">Year</label>
+                  <ejs-dropdownlist
+                    id="year"
+                    name="year"
+                    formControlName="Year"
+                    placeholder="Year"
+                    [fields]="yearTypeFields"
+                    [dataSource]="yearList"
+                  ></ejs-dropdownlist>
+                </div>
+                <div class="col-4">
+                  <label for="start date">Start date</label>
+                  <ejs-datepicker
+                    formControlName="StartDate"
+                    id="start-date"
+                    name="start-date"
+                    placeholder="Start date"
+                  >
+                  </ejs-datepicker>
+                </div>
+                <div class="col-4">
+                  <label for="end date">End date</label>
+                  <ejs-datepicker
+                    formControlName="EndDate"
+                    id="end-date"
+                    name="end-date"
+                    placeholder="End date"
+                  >
+                  </ejs-datepicker>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-4">
+                  <label for="voucher start">Voucher start</label>
+                  <input
+                    type="text"
+                    id="voucher-start"
+                    name="voucher-start"
+                    class="e-input"
+                    placeholder="Voucher start"
+                    formControlName="VoucherStartId"
+                  />
+                </div>
+                <div class="col-4">
+                  <label for="voucher end">Voucher end</label>
+                  <input
+                    type="text"
+                    id="voucher-end"
+                    name="voucher-end"
+                    class="e-input"
+                    placeholder="Voucher end"
+                    formControlName="VoucherEndId"
+                  />
+                </div>
+                <div class="col-4">
+                  <label for="cost center">Cost center</label>
+                  <ejs-dropdownlist
+                    id="cost-center"
+                    name="cost-center"
+                    formControlName="CostCenter"
+                    [fields]="lookupTypeFields"
+                    [dataSource]="lookupsList"
+                  ></ejs-dropdownlist>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-4">
+                  <label for="control account">Control account</label>
+                  <input
+                    type="text"
+                    id="control-account"
+                    name="control-account"
+                    class="e-input"
+                    placeholder="Control account"
+                    formControlName="ControlAccount"
+                  />
+                </div>
+                <div class="col-4">
+                  <label for="subsidary">Subsidary</label>
+                  <input
+                    type="text"
+                    id="subsidary"
+                    name="subsidary"
+                    class="e-input"
+                    placeholder="Subsidary"
+                    formControlName="Subsidary"
+                  />
+                </div>
+                <div class="col-4">
+                  <div class="row">
+                    <div class="col-6">
+                      <button
+                        id="search-button"
+                        type="button"
+                        ejs-button
+                        class="e-pluse e-info"
+                        (click)="filter()"
+                      >
+                        Search
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</ejs-accordion>

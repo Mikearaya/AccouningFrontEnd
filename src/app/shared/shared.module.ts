@@ -11,7 +11,8 @@ import {
   ToolbarModule,
   SidebarModule,
   TabAllModule,
-  TreeViewAllModule
+  TreeViewAllModule,
+  AccordionModule
 } from "@syncfusion/ej2-angular-navigations";
 import {
   DropDownListModule,
@@ -42,6 +43,8 @@ import { LookupSelectorComponent } from "./lookup-selector/lookup-selector.compo
 import { TreeGridModule } from "@syncfusion/ej2-angular-treegrid";
 import { DialogModule } from "@syncfusion/ej2-angular-popups";
 import { DialogBoxComponent } from "./dialog-box/dialog-box.component";
+import { FilterOptionComponent } from "./filter-option/filter-option.component";
+import { CoreModule } from "../core/core.module";
 
 @NgModule({
   imports: [
@@ -65,7 +68,9 @@ import { DialogBoxComponent } from "./dialog-box/dialog-box.component";
     MultiSelectModule,
     DateTimePickerModule,
     MaskedTextBoxModule,
-    TreeGridModule
+    TreeGridModule,
+    AccordionModule,
+    CoreModule
   ],
   exports: [
     CommonModule,
@@ -92,7 +97,10 @@ import { DialogBoxComponent } from "./dialog-box/dialog-box.component";
     AccountCategorySelectorComponent,
     LookupSelectorComponent,
     MaskedTextBoxModule,
-    TreeGridModule
+    TreeGridModule,
+    AccordionModule,
+    CoreModule,
+    FilterOptionComponent
   ],
   declarations: [
     FormOptionsComponent,
@@ -103,7 +111,8 @@ import { DialogBoxComponent } from "./dialog-box/dialog-box.component";
     AccountSelectorComponent,
     AccountCategorySelectorComponent,
     LookupSelectorComponent,
-    DialogBoxComponent
+    DialogBoxComponent,
+    FilterOptionComponent
   ],
   providers: []
 })

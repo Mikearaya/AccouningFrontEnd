@@ -17,7 +17,7 @@ import { RouterTestingModule } from "@angular/router/testing";
 import { JornalEntryViewModel, LedgerEntry } from "../../ledgers/ledger";
 import { Checklist } from "../report";
 
-describe("Ledger service", () => {
+describe("Checklist service", () => {
   let checklistService: ChecklistService;
   let httpMock: HttpTestingController;
 
