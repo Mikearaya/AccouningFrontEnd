@@ -6,7 +6,7 @@
  * @Last Modified Time: May 15, 2019 10:21 AM
  * @Description: Modify Here, Please
  */
-import { ChecklistService } from "./checklist.service";
+
 import {
   HttpTestingController,
   HttpClientTestingModule
@@ -14,21 +14,21 @@ import {
 import { TestBed } from "@angular/core/testing";
 import { CoreModule } from "src/app/core/core.module";
 import { RouterTestingModule } from "@angular/router/testing";
-import { JornalEntryViewModel, LedgerEntry } from "../../ledgers/ledger";
 import { Checklist } from "../report";
+import { ReportApiService } from "../report-api.service";
 
 describe("Checklist service", () => {
-  let checklistService: ChecklistService;
+  let checklistService: ReportApiService;
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, CoreModule, RouterTestingModule],
-      providers: [ChecklistService]
+      providers: [ReportApiService]
     });
 
     // inject the service
-    checklistService = TestBed.get(ChecklistService);
+    checklistService = TestBed.get(ReportApiService);
     httpMock = TestBed.get(HttpTestingController);
   });
 

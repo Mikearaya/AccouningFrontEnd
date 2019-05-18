@@ -7,9 +7,10 @@ import {
 } from "@syncfusion/ej2-grids";
 import { GridComponent } from "@syncfusion/ej2-angular-grids";
 import { Checklist } from "../report";
-import { ChecklistService } from "./checklist.service";
+
 import { ClickEventArgs } from "@syncfusion/ej2-angular-navigations";
 import { getValue } from "@syncfusion/ej2-base";
+import { ReportApiService } from "../report-api.service";
 @Component({
   selector: "app-checklist",
   templateUrl: "./checklist.component.html",
@@ -22,7 +23,7 @@ export class ChecklistComponent implements OnInit {
   public Dialog: any;
   public initialPage: object;
   public summaryRows;
-  constructor(private checklistService: ChecklistService) {}
+  constructor(private checklistService: ReportApiService) {}
   public childGrid: GridModel = {
     dataSource: this.data,
     queryString: "LedgerId",

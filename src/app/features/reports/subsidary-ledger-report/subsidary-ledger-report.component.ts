@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { SubsidaryLedgerViewMdel } from "../report";
-import { SubsidaryService } from "./subsidary.service";
 import { GridModel } from "@syncfusion/ej2-grids";
 import { GridComponent } from "@syncfusion/ej2-angular-grids";
 import { ClickEventArgs } from "@syncfusion/ej2-angular-navigations";
+import { ReportApiService } from "../report-api.service";
 
 @Component({
   selector: "app-subsidary-ledger-report",
@@ -16,7 +16,7 @@ export class SubsidaryLedgerReportComponent implements OnInit {
   public toolbar: object;
   public initialPage: object;
 
-  constructor(private subsidaryService: SubsidaryService) {
+  constructor(private subsidaryService: ReportApiService) {
     this.initialPage = {
       pageSizes: ["20", "50", "100", "200", "500", "1000", "All"],
       pageSize: 20

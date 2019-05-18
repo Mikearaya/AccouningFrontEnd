@@ -1,5 +1,4 @@
 import { TestBed } from "@angular/core/testing";
-import { SubsidaryService } from "./subsidary.service";
 import {
   HttpTestingController,
   HttpClientTestingModule
@@ -7,19 +6,20 @@ import {
 import { CoreModule } from "src/app/core/core.module";
 import { RouterTestingModule } from "@angular/router/testing";
 import { Checklist, SubsidaryLedgerViewMdel } from "../report";
+import { ReportApiService } from "../report-api.service";
 
 describe("Subsidary service", () => {
-  let subsidaryService: SubsidaryService;
+  let subsidaryService: ReportApiService;
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, CoreModule, RouterTestingModule],
-      providers: [SubsidaryService]
+      providers: [ReportApiService]
     });
 
     // inject the service
-    subsidaryService = TestBed.get(SubsidaryService);
+    subsidaryService = TestBed.get(ReportApiService);
     httpMock = TestBed.get(HttpTestingController);
   });
 

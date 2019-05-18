@@ -26,7 +26,6 @@ import {
   DateRangePickerAllModule,
   DateTimePickerModule
 } from "@syncfusion/ej2-angular-calendars";
-
 import {
   NumericTextBoxModule,
   MaskedTextBoxModule
