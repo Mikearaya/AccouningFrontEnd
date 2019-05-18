@@ -49,12 +49,12 @@ export class FilterOptionComponent implements OnInit {
     return this.filterForm.get("Year") as FormControl;
   }
 
-  get VoucherStartDate() {
-    return this.filterForm.get("VoucherStartDate") as FormControl;
+  get VoucherStartId() {
+    return this.filterForm.get("VoucherStartId") as FormControl;
   }
 
-  get VoucherEndDate() {
-    return this.filterForm.get("VoucherEndDate") as FormControl;
+  get VoucherEndId() {
+    return this.filterForm.get("VoucherEndId") as FormControl;
   }
 
   get CostCenter() {

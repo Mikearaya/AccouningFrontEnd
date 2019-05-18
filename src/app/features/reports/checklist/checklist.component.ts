@@ -1,9 +1,15 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { GridModel } from "@syncfusion/ej2-grids";
+import {
+  GridModel,
+  CustomSummaryType,
+  AggregateColumnModel,
+  getForeignData
+} from "@syncfusion/ej2-grids";
 import { GridComponent } from "@syncfusion/ej2-angular-grids";
 import { Checklist } from "../report";
 import { ChecklistService } from "./checklist.service";
 import { ClickEventArgs } from "@syncfusion/ej2-angular-navigations";
+import { getValue } from "@syncfusion/ej2-base";
 @Component({
   selector: "app-checklist",
   templateUrl: "./checklist.component.html",
@@ -15,6 +21,7 @@ export class ChecklistComponent implements OnInit {
   public toolbar: object;
   public Dialog: any;
   public initialPage: object;
+  public summaryRows;
   constructor(private checklistService: ChecklistService) {}
   public childGrid: GridModel = {
     dataSource: this.data,
@@ -31,6 +38,7 @@ export class ChecklistComponent implements OnInit {
       { field: "Credit", headerText: "Credit", width: 150 }
     ]
   };
+
   @ViewChild("grid")
   public grid: GridComponent;
 
@@ -79,18 +87,6 @@ export class ChecklistComponent implements OnInit {
       setTimeout(() => {
         window.print();
       }, 400);
-      /*    this.Dialog = DialogUtility.confirm({
-        title: " Confirmation Dialog",
-        content: "Do you want to print as it is!",
-        okButton: { text: "Yes", click: this.okClick.bind(this) },
-        cancelButton: {
-          text: "Expand and Print",
-          click: this.cancelClick.bind(this)
-        },
-        showCloseIcon: true,
-        closeOnEscape: true,
-        animationSettings: { effect: "Zoom" }
-      }); */
     }
     if (args.item.id === "Grid_excelexport") {
       this.grid.detailRowModule.expandAll();
@@ -114,18 +110,4 @@ export class ChecklistComponent implements OnInit {
       window.print();
     }, 100);
   }
-
-  /*   private okClick(): void {
-    this.Dialog.hide();
-    setTimeout(() => {
-      window.print();
-    }, 400);
-  }
-  private cancelClick(): void {
-    this.Dialog.hide();
-    this.grid.detailRowModule.expandAll();
-    setTimeout(() => {
-      window.print();
-    }, 400);
-  } */
 }

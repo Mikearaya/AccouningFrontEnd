@@ -16,7 +16,7 @@ describe("AccountSelectorComponent", () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [SharedModule],
+      imports: [SharedModule, RouterTestingModule],
       providers: [AccountsService]
     }).compileComponents();
   }));

@@ -15,7 +15,7 @@ import { ActivatedRoute, convertToParamMap } from "@angular/router";
 import { LookupFormComponent } from "./lookup-form.component";
 import { LookupService } from "../../../core/services/lookup.service";
 
-describe(" Account lookup form component", () => {
+describe(" Lookup form component", () => {
   let component: LookupFormComponent;
   let fixture: ComponentFixture<LookupFormComponent>;
   let debugEl: DebugElement;
@@ -90,6 +90,7 @@ describe(" Account lookup form component", () => {
           { Type: "01", Value: "val1" },
           { Type: "02", Value: "val2" }
         ]);
+
         expect(component.lookupForm.valid).toBeTruthy();
       });
     });

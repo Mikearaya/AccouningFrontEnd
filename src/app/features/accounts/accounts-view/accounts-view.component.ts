@@ -87,7 +87,7 @@ export class AccountsViewComponent implements OnInit {
       queryString: "Id",
       columns: [
         {
-          field: "Id",
+          field: "ParentId",
           headerText: "Id",
           textAlign: "Right",
           width: 100

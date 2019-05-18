@@ -8,7 +8,7 @@ import { CoreModule } from "src/app/core/core.module";
 import { RouterTestingModule } from "@angular/router/testing";
 import { Checklist, SubsidaryLedgerViewMdel } from "../report";
 
-fdescribe("Subsidary service", () => {
+describe("Subsidary service", () => {
   let subsidaryService: SubsidaryService;
   let httpMock: HttpTestingController;
 

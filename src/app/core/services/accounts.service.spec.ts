@@ -15,6 +15,7 @@ import { Accounts, AccountViewModel } from "../../features/accounts/accounts";
 import { TestBed } from "@angular/core/testing";
 import { RouterTestingModule } from "@angular/router/testing";
 import { CoreModule } from "../core.module";
+import { SharedModule } from "src/app/shared/shared.module";
 
 describe("Accounts service", () => {
   let accountService: AccountsService;
@@ -22,7 +23,12 @@ describe("Accounts service", () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, CoreModule, RouterTestingModule],
+      imports: [
+        HttpClientTestingModule,
+        CoreModule,
+        RouterTestingModule,
+        SharedModule
+      ],
       providers: [AccountsService]
     });
 

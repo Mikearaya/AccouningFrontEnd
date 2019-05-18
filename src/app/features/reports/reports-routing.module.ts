@@ -12,11 +12,11 @@ const routes: Routes = [
   {
     path: "subsidaries",
     component: SubsidaryLedgerReportComponent
-  },
-  {
+  }
+  /*  {
     path: "filter",
     component: FilterOptionComponent
-  }
+  } */
 ];
 
 @NgModule({
