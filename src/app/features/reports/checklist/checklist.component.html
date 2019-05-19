@@ -1,7 +1,15 @@
-<app-filter-option></app-filter-option>
+<app-filter-option
+  [allowDateSearch]="true"
+  [allowAccountSearch]="true"
+  [allowVocherSearch]="true"
+  [allowCostCenterSearch]="true"
+  [allwoYearSeach]="true"
+  (filtered)="onFiltered($event)"
+></app-filter-option>
 <div class="checklist-area">
   <div class="print-area">
     <ejs-grid
+      (actionBegin)="gridStateChanged($event)"
       #grid
       [dataSource]="gridData"
       foreign-key-field="LedgerId"

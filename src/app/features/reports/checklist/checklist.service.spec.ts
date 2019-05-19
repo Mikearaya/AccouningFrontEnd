@@ -91,7 +91,7 @@ describe("Checklist service", () => {
         ]
       }
     ];
-    checklistService.getChecklistReport().subscribe((data: any) => {
+    checklistService.getChecklistReport("").subscribe((data: any) => {
       expect(data).toEqual(response);
     });
     // telling the httmock what kind of request we expect and toward which url

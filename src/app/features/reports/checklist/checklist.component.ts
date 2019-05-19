@@ -1,16 +1,10 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import {
-  GridModel,
-  CustomSummaryType,
-  AggregateColumnModel,
-  getForeignData
-} from "@syncfusion/ej2-grids";
+import { GridModel } from "@syncfusion/ej2-grids";
 import { GridComponent } from "@syncfusion/ej2-angular-grids";
 import { Checklist } from "../report";
-
 import { ClickEventArgs } from "@syncfusion/ej2-angular-navigations";
-import { getValue } from "@syncfusion/ej2-base";
 import { ReportApiService } from "../report-api.service";
+import { ActionCompleteEventArgs } from "@syncfusion/ej2-inputs";
 @Component({
   selector: "app-checklist",
   templateUrl: "./checklist.component.html",
@@ -39,7 +33,7 @@ export class ChecklistComponent implements OnInit {
       { field: "Credit", headerText: "Credit", width: 150 }
     ]
   };
-
+  lastFilter = "";
   @ViewChild("grid")
   public grid: GridComponent;
 
@@ -49,19 +43,17 @@ export class ChecklistComponent implements OnInit {
       pageSize: 20
     };
     this.checklistService
-      .getChecklistReport()
+      .getChecklistReport(this.generateSearchString())
       .subscribe((data: Checklist[]) => {
-        this.data = data;
-        this.gridData = this.data;
+        this.gridData = data;
         const x = [];
-        this.data.forEach(element => {
+        data.forEach(element => {
           element.Entries.forEach(elementx => {
             x.push(elementx);
           });
         });
-        console.log(x);
+
         this.childGrid.dataSource = x;
-        console.log("child", this.childGrid.dataSource);
       });
     this.toolbar = [
       { text: "Expand All", prefixIcon: "e-expand", id: "expandall" },
@@ -73,6 +65,28 @@ export class ChecklistComponent implements OnInit {
         id: "Grid_excelexport"
       }
     ];
+  }
+
+  generateSearchString(): string {
+    return `pageSize=${this.grid.pageSettings.pageSize}&pageNumber=${
+      this.grid.pageSettings.currentPage
+    }`;
+  }
+  onFiltered(data: any): void {
+    this.lastFilter = data;
+    this.checklistService
+      .getChecklistReport(`${data}${this.generateSearchString()}`)
+      .subscribe((result: Checklist[]) => {
+        this.data = result;
+        this.gridData = this.data;
+        const x = [];
+        this.data.forEach(element => {
+          element.Entries.forEach(elementx => {
+            x.push(elementx);
+          });
+        });
+        this.childGrid.dataSource = x;
+      });
   }
   clickHandler(args: ClickEventArgs): void {
     // var c = confirm("expand all entries or print as is");
@@ -94,6 +108,13 @@ export class ChecklistComponent implements OnInit {
       setTimeout(() => {
         this.grid.excelExport();
       }, 400);
+    }
+  }
+
+  gridStateChanged($event: any) {
+    console.log($event);
+    if ($event.requestType === "referesh") {
+      this.onFiltered(this.lastFilter);
     }
   }
   expand(): void {

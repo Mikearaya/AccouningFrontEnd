@@ -12,10 +12,12 @@
                 <div class="col-4">
                   <label for="year">Year</label>
                   <ejs-dropdownlist
+                    [enabled]="allwoYearSeach"
                     id="year"
+                    [dataSource]="years"
                     name="year"
-                    formControlName="Year"
                     placeholder="Year"
+                    formControlName="Year"
                     [fields]="yearTypeFields"
                     [dataSource]="yearList"
                   ></ejs-dropdownlist>
@@ -23,6 +25,7 @@
                 <div class="col-4">
                   <label for="start date">Start date</label>
                   <ejs-datepicker
+                    [enabled]="allowDateSearch"
                     formControlName="StartDate"
                     id="start-date"
                     name="start-date"
@@ -34,6 +37,7 @@
                   <label for="end date">End date</label>
                   <ejs-datepicker
                     formControlName="EndDate"
+                    [enabled]="allowDateSearch"
                     id="end-date"
                     name="end-date"
                     placeholder="End date"
@@ -45,57 +49,57 @@
                 <div class="col-4">
                   <label for="voucher start">Voucher start</label>
                   <input
+                    formControlName="VoucherStartId"
+                    [disabled]="!allowVocherSearch"
                     type="text"
                     id="voucher-start"
                     name="voucher-start"
                     class="e-input"
                     placeholder="Voucher start"
-                    formControlName="VoucherStartId"
                   />
                 </div>
                 <div class="col-4">
                   <label for="voucher end">Voucher end</label>
                   <input
+                    formControlName="VoucherEndId"
+                    [disabled]="!allowVocherSearch"
                     type="text"
                     id="voucher-end"
                     name="voucher-end"
                     class="e-input"
                     placeholder="Voucher end"
-                    formControlName="VoucherEndId"
                   />
                 </div>
                 <div class="col-4">
                   <label for="cost center">Cost center</label>
-                  <ejs-dropdownlist
-                    id="cost-center"
-                    name="cost-center"
-                    formControlName="CostCenter"
-                    [fields]="lookupTypeFields"
-                    [dataSource]="lookupsList"
-                  ></ejs-dropdownlist>
+                  <app-lookup-selector
+                    [type]="'cost center'"
+                  ></app-lookup-selector>
                 </div>
               </div>
               <div class="row">
                 <div class="col-4">
                   <label for="control account">Control account</label>
                   <input
+                    formControlName="ControlAccount"
+                    [disabled]="!allowAccountSearch"
                     type="text"
                     id="control-account"
                     name="control-account"
                     class="e-input"
                     placeholder="Control account"
-                    formControlName="ControlAccount"
                   />
                 </div>
                 <div class="col-4">
                   <label for="subsidary">Subsidary</label>
                   <input
+                    formControlName="Subsidary"
                     type="text"
                     id="subsidary"
+                    [disabled]="!allowAccountSearch"
                     name="subsidary"
                     class="e-input"
                     placeholder="Subsidary"
-                    formControlName="Subsidary"
                   />
                 </div>
                 <div class="col-4">

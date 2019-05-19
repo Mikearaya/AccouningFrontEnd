@@ -45,7 +45,7 @@ export class SubsidaryLedgerReportComponent implements OnInit {
 
   ngOnInit() {
     this.subsidaryService
-      .getSubsidaryLedgerReport()
+      .getSubsidaryLedgerReport(this.generateSearchString())
       .subscribe((data: SubsidaryLedgerViewMdel[]) => {
         this.data = data;
         this.gridData = data;
@@ -70,6 +70,12 @@ export class SubsidaryLedgerReportComponent implements OnInit {
       { text: "Print", prefixIcon: "e-print", id: "print" },
       { text: "ExcelExport", prefixIcon: "", id: "Grid_excelexport" }
     ];
+  }
+
+  generateSearchString(): string {
+    return `pageSize=${this.grid.pageSettings.pageSize};pageNumber=${
+      this.grid.pageSettings.currentPage
+    }`;
   }
   clickHandler(args: ClickEventArgs): void {
     // var c = confirm("expand all entries or print as is");
