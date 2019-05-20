@@ -1,0 +1,13 @@
+.container-consolidated {
+  background-color: #fff
+}
+
+@media print {
+  #grid_293102821_0_toolbarItems {
+    display: none
+  }
+
+  .e-gridpager.e-control.e-pager.e-lib {
+    display: none
+  }
+}

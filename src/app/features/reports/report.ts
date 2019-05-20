@@ -15,7 +15,7 @@ export class Jornal {
 }
 
 // subsidaryLedgerReport model
-export class SubsidaryLedgerViewMdel {
+export class SubsidaryLedgerViewModel {
   AccountId: string;
   AccountType: string;
   SubAccountId: string;
@@ -31,4 +31,27 @@ export class SubsidaryLedgerDetailViewModel {
   Debit: number;
   Credit: number;
   Balance: number;
+}
+
+// trial balance model
+export class TrialBalanceDetailViewModel {
+  Id: number;
+  AccountId: string;
+  AccountName: string;
+  Entries: TrialBalanceDetail[] = [];
+}
+
+export class TrialBalanceDetail {
+  AccountId: string;
+  AccountName: string;
+  Credit: number;
+  Debit: number;
+}
+
+// consolidated trial balance model
+export class ConsolidatedTrialBalanceViewModel {
+  AccountId: string;
+  AccountName: string;
+  Credit: number;
+  Debit: number;
 }

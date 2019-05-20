@@ -1,31 +1,27 @@
-/* import { SharedModule } from "src/app/shared/shared.module";
-import { RouterTestingModule } from "@angular/router/testing";
-import { ChecklistComponent } from "./checklist.component";
-import { ChecklistService } from "./checklist.service";
-import { HttpClientTestingModule } from "@angular/common/http/testing";
-import {
-  ComponentFixture,
-  TestBed,
-  async,
-  inject
-} from "@angular/core/testing";
-import { ClickEventArgs } from "@syncfusion/ej2-navigations";
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-describe("ChecklistComponent", () => {
-  let component: ChecklistComponent;
-  let fixture: ComponentFixture<ChecklistComponent>;
+import { TrialBalanceDetailComponent } from "./trial-balance-detail.component";
+import { ClickEventArgs } from "@syncfusion/ej2-angular-navigations";
+import { SharedModule } from "src/app/shared/shared.module";
+import { RouterTestingModule } from "@angular/router/testing";
+import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { ReportApiService } from "../report-api.service";
+
+describe("TrialBalanceDetailComponent", () => {
+  let component: TrialBalanceDetailComponent;
+  let fixture: ComponentFixture<TrialBalanceDetailComponent>;
   let args: ClickEventArgs;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [SharedModule, RouterTestingModule, HttpClientTestingModule],
-      declarations: [ChecklistComponent],
-      providers: [ChecklistService]
+      declarations: [TrialBalanceDetailComponent],
+      providers: [ReportApiService]
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ChecklistComponent);
+    fixture = TestBed.createComponent(TrialBalanceDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -40,4 +36,3 @@ describe("ChecklistComponent", () => {
     expect(component.clickHandler).toHaveBeenCalled();
   });
 });
- */

@@ -55,7 +55,6 @@ describe("Accounts service", () => {
       CostCenterId: 11
     };
     accountService.getAccountById(1).subscribe((data: any) => {
-      this.returnedAccounts = data;
       expect(data.AccountId).toBe("2222");
     });
     // telling the httmock what kind of request we expect and toward which url
@@ -72,26 +71,38 @@ describe("Accounts service", () => {
     httpMock.verify();
   });
   it("Should get all account successfull", () => {
-    const returnedAccounts: Accounts[] = [
+    const returnedAccounts: AccountViewModel[] = [
       {
         Id: 1,
-        AccountId: "1111",
-        Name: "Account 1",
-        OpeningBalance: 1,
+        AccountId: "2222",
+        ParentAccount: "parent account",
+        AccountName: "account name",
         Active: false,
-        CatagoryId: 1,
-        ParentAccount: 3,
-        CostCenterId: "12"
+        Year: "2019",
+        OpeningBalance: 1,
+        ParentAccountId: 1,
+        Category: "catag1",
+        CategoryId: 1,
+        CostCenter: "lookup",
+        DateAdded: "1212",
+        DateUpdated: "12121",
+        CostCenterId: 11
       },
       {
         Id: 2,
         AccountId: "2222",
-        Name: "Account 2",
-        OpeningBalance: 1,
+        ParentAccount: "parent account",
+        AccountName: "account name",
         Active: false,
-        CatagoryId: 1,
-        ParentAccount: 3,
-        CostCenterId: "12"
+        Year: "2019",
+        OpeningBalance: 1,
+        ParentAccountId: 1,
+        Category: "catag1",
+        CategoryId: 1,
+        CostCenter: "lookup",
+        DateAdded: "1212",
+        DateUpdated: "12121",
+        CostCenterId: 11
       }
     ];
     accountService.getAccountsList().subscribe((data: any) => {

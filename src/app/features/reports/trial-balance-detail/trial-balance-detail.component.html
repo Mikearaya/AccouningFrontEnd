@@ -1,0 +1,38 @@
+<app-filter-option></app-filter-option>
+<div class="subsidary-area">
+  <div class="print-area">
+    <ejs-grid
+      #grid
+      [dataSource]="gridData"
+      foreign-key-field="LedgerId"
+      [childGrid]="childGrid"
+      query-string="Id"
+      [allowExcelExport]="true"
+      [allowPaging]="true"
+      [pageSettings]="initialPage"
+      [toolbar]="toolbar"
+      (toolbarClick)="clickHandler($event)"
+    >
+      <e-columns>
+        <e-column
+          field="Id"
+          headerText="ID"
+          textAlign="Left"
+          width="120"
+        ></e-column>
+        <e-column
+          field="AccountId"
+          headerText="Account Id"
+          textAlign="Left"
+          width="120"
+        ></e-column>
+        <e-column
+          field="AccountName"
+          headerText="Account Name"
+          textAlign="Left"
+          width="120"
+        ></e-column>
+      </e-columns>
+    </ejs-grid>
+  </div>
+</div>

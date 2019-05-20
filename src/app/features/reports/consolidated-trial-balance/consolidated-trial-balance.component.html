@@ -1,0 +1,42 @@
+<app-filter-option></app-filter-option>
+<div class="subsidary-area">
+  <div class="print-area">
+    <ejs-grid
+      #grid
+      [dataSource]="data"
+      query-string="Id"
+      [allowExcelExport]="true"
+      [allowPaging]="true"
+      [pageSettings]="initialPage"
+      [toolbar]="toolbar"
+      (toolbarClick)="clickHandler($event)"
+    >
+      <e-columns>
+        <e-column
+          field="AccountId"
+          headerText="Account Id"
+          textAlign="Left"
+          width="120"
+        ></e-column>
+        <e-column
+          field="AccountName"
+          headerText="Account name"
+          textAlign="Left"
+          width="120"
+        ></e-column>
+        <e-column
+          field="Credit"
+          headerText="Credit"
+          textAlign="Left"
+          width="120"
+        ></e-column>
+        <e-column
+          field="Debit"
+          headerText="Debit"
+          textAlign="Left"
+          width="120"
+        ></e-column>
+      </e-columns>
+    </ejs-grid>
+  </div>
+</div>
