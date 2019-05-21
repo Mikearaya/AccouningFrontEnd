@@ -153,30 +153,30 @@ describe(" Account form component", () => {
       });
     });
   });
-  describe("When an id is provided in the url param", () => {
-    beforeEach(async(() => {
-      makeCompiledTestBed({
-        provide: ActivatedRoute,
-        useValue: {
-          snapshot: {
-            paramMap: convertToParamMap({ id: 1 })
-          }
-        }
-      });
-    }));
+  // describe("When an id is provided in the url param", () => {
+  //   beforeEach(async(() => {
+  //     makeCompiledTestBed({
+  //       provide: ActivatedRoute,
+  //       useValue: {
+  //         snapshot: {
+  //           paramMap: convertToParamMap({ id: 1 })
+  //         }
+  //       }
+  //     });
+  //   }));
 
-    beforeEach(setupTestVars);
-    /*   describe("Initialize function", () => {
-      it("Should be called", () => {
-        spyOn(component, "initializeFunction");
-        component.initializeFunction;
-        expect(component.initializeFunction).toHaveBeenCalled();
-      });
-    });  */
+  //   beforeEach(setupTestVars);
+  //   /*   describe("Initialize function", () => {
+  //     it("Should be called", () => {
+  //       spyOn(component, "initializeFunction");
+  //       component.initializeFunction;
+  //       expect(component.initializeFunction).toHaveBeenCalled();
+  //     });
+  //   });  */
 
-    it("should show selected item", () => {
-      // const a = fixture.debugElement.injector.get(ActivatedRoute);
-      console.log(component.accountId);
-    });
-  });
+  //   it("should show selected item", async(() => {
+  //     // const a = fixture.debugElement.injector.get(ActivatedRoute);
+  //     console.log(component.accountId);
+  //   }));
+  // });
 });

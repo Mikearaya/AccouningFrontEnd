@@ -24,9 +24,9 @@ describe("LookupViewComponent", () => {
     fixture.detectChanges();
   });
 
-  it("Should be created", () => {
+  it("Should be created", async(() => {
     expect(component).toBeTruthy();
-  });
+  }));
   describe("Delete catagory", () => {
     it("Should be called", () => {
       spyOn(component, "deleteLookup");

@@ -4,11 +4,12 @@ import { CommonModule } from "@angular/common";
 import { ReportsRoutingModule } from "./reports-routing.module";
 import { ChecklistComponent } from "./checklist/checklist.component";
 import { SharedModule } from "src/app/shared/shared.module";
-import { GridModule } from "@syncfusion/ej2-angular-grids";
 import { SubsidaryLedgerReportComponent } from "./subsidary-ledger-report/subsidary-ledger-report.component";
 import { ReportApiService } from "./report-api.service";
 import { TrialBalanceDetailComponent } from "./trial-balance-detail/trial-balance-detail.component";
 import { ConsolidatedTrialBalanceComponent } from "./consolidated-trial-balance/consolidated-trial-balance.component";
+import { BalanceSheetComponent } from './balance-sheet/balance-sheet.component';
+import { IncomeStatmentComponent } from './income-statment/income-statment.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ConsolidatedTrialBalanceComponent } from "./consolidated-trial-balance/
     SubsidaryLedgerReportComponent,
     TrialBalanceDetailComponent,
     ConsolidatedTrialBalanceComponent,
-    ConsolidatedTrialBalanceComponent
+    BalanceSheetComponent,
+    IncomeStatmentComponent
   ],
   imports: [CommonModule, ReportsRoutingModule, SharedModule],
   providers: [ReportApiService]

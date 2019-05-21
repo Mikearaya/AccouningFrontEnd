@@ -12,7 +12,6 @@ import { LookupsIndexView } from "src/app/features/lookups/lookups";
       #account
       name="lookupSelector"
       placeholder="find lookup"
-      [width]="400"
       [text]="text"
       [enabled]="!disabled"
       [fields]="fields"

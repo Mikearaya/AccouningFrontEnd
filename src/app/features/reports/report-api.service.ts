@@ -5,7 +5,9 @@ import {
   Checklist,
   SubsidaryLedgerViewModel,
   TrialBalanceDetailViewModel,
-  ConsolidatedTrialBalanceViewModel
+  ConsolidatedTrialBalanceViewModel,
+  BalanceSheetViewModel,
+  IncomeStatmentViewModel
 } from "./report";
 
 @Injectable()
@@ -40,6 +42,18 @@ export class ReportApiService {
   ): Observable<ConsolidatedTrialBalanceViewModel[]> {
     return this.httpClient.get<ConsolidatedTrialBalanceViewModel[]>(
       `consolidated-trial-balance?${searchString}`
+    );
+  }
+
+  getBalanceSheet(searchString: string): Observable<BalanceSheetViewModel> {
+    return this.httpClient.get<BalanceSheetViewModel>(
+      `balance-sheet?${searchString}`
+    );
+  }
+
+  getIncomeStatment(searchString: string): Observable<IncomeStatmentViewModel> {
+    return this.httpClient.get<IncomeStatmentViewModel>(
+      `income-statment?${searchString}`
     );
   }
 }

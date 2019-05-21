@@ -36,7 +36,7 @@ export class LedgerViewComponent implements OnInit {
       type: "string"
     },
     {
-      key: "Reference",
+      key: "ReferenceNumber",
       header: "DocumentNo",
       visible: true,
       width: 50,

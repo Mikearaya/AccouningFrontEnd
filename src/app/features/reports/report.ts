@@ -55,3 +55,32 @@ export class ConsolidatedTrialBalanceViewModel {
   Credit: number;
   Debit: number;
 }
+
+// balance sheet model
+export class BalanceSheetViewModel {
+  Assets: BalanceSheetItemModel[] = [];
+  TotalAsset: number;
+  Capitals: BalanceSheetItemModel[] = [];
+  TotalCapital: number;
+  Liabilities: BalanceSheetItemModel[] = [];
+  TotalLiability: number;
+}
+
+export class BalanceSheetItemModel {
+  AccountCatagory: string;
+  Amount: number;
+}
+
+// income statment model
+export class IncomeStatmentViewModel {
+  Expense: IncomeStatmentItemModel[] = [];
+  TotalExpense: number;
+  Revenue: IncomeStatmentItemModel[] = [];
+  TotalRevenue: number;
+  NetSurplus: number;
+}
+
+export class IncomeStatmentItemModel {
+  AccountType: string;
+  Amount: number;
+}

@@ -1,6 +1,7 @@
 .center-align {
   text-align: left;
   padding: 0px;
+  font-size: 20px !important;
 }
 
 .burg-icon:before {
@@ -37,7 +38,7 @@
 #close:focus {
   /* csslint allow: adjoining-classes*/
   background: #fafafa;
-  color: black
+  color: black;
 }
 
 .sub-title {
@@ -49,7 +50,9 @@
 
 #default-sidebar {
   background-color: #4d841d21;
-  color: #ffffff;
+  border: none;
+  min-width: 250px;
+  position: fixed;
 }
 
 .close-btn:hover {
@@ -69,11 +72,6 @@
 
 #targetcontent {
   padding: 10Px;
-}
-
-#default-sidebar {
-  position: fixed;
-  min-width: 250px;
 }
 
 .main {

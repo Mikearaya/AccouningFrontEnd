@@ -110,15 +110,15 @@ export class AppComponent {
         {
           id: "04-02",
           name: "Balance Sheet",
-          url: "/reports/filter",
+          url: "/reports/balance-sheet",
           expanded: false,
           enabled: true,
           selected: false
         },
         {
           id: "04-03",
-          name: "Profit & Loss",
-          url: "/profit-and-loss",
+          name: "Income Statment",
+          url: "reports/income-statment",
           expanded: false,
           enabled: true,
           selected: false
@@ -141,22 +141,6 @@ export class AppComponent {
         },
         {
           id: "04-06",
-          name: "OE Cost Center",
-          url: "/oe-cost-center",
-          expanded: false,
-          enabled: true,
-          selected: false
-        },
-        {
-          id: "04-07",
-          name: "OE Detail",
-          url: "/oe-detail",
-          expanded: false,
-          enabled: true,
-          selected: false
-        },
-        {
-          id: "04-08",
           name: "Trial Balance detail",
           url: "reports/trial-balance-detail",
           expanded: false,
@@ -164,9 +148,25 @@ export class AppComponent {
           selected: false
         },
         {
-          id: "04-09",
+          id: "04-07",
           name: "Consolidated Trial Balance",
           url: "reports/consolidated-trial-balance",
+          expanded: false,
+          enabled: true,
+          selected: false
+        },
+        {
+          id: "04-08",
+          name: "OE Cost Center",
+          url: "/oe-cost-center",
+          expanded: false,
+          enabled: true,
+          selected: false
+        },
+        {
+          id: "04-09",
+          name: "OE Detail",
+          url: "/oe-detail",
           expanded: false,
           enabled: true,
           selected: false

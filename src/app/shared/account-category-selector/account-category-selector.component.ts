@@ -12,7 +12,6 @@ import { AccountsIndexView } from "src/app/features/accounts/accounts";
       #account
       name="accountCatagory"
       placeholder="find account catagory"
-      [width]="400"
       [enabled]="!disabled"
       [text]="text"
       [fields]="fields"

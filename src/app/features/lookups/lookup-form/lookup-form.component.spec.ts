@@ -77,20 +77,13 @@ describe(" Lookup form component", () => {
       it("Lookups array validity", () => {
         const lookups = component.Lookups;
         expect(lookups.valid).toBeFalsy();
-        lookups.setValue([
-          { Type: "type1", Value: "val2" },
-          { Type: "type2", Value: "val1" }
-        ]);
+        lookups.setValue([{ Type: "type1", Value: "val2" }]);
         expect(lookups.valid).toBeTruthy();
-        expect(lookups.length).toEqual(2);
+        expect(lookups.length).toEqual(1);
       });
 
       it("Should be valid when not empty", () => {
-        component.Lookups.setValue([
-          { Type: "01", Value: "val1" },
-          { Type: "02", Value: "val2" }
-        ]);
-
+        component.Lookups.setValue([{ Type: "01", Value: "val1" }]);
         expect(component.lookupForm.valid).toBeTruthy();
       });
     });

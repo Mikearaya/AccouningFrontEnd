@@ -60,12 +60,8 @@ export class LookupFormComponent implements OnInit {
     };
   }
 
-  get Type(): FormControl {
-    return this.lookupForm.get("Type") as FormControl;
-  }
-
-  get Value(): FormControl {
-    return this.lookupForm.get("Value") as FormControl;
+  get Lookups(): FormArray {
+    return this.lookupForm.get("Lookups") as FormArray;
   }
 
   createLookupForm() {
@@ -89,10 +85,6 @@ export class LookupFormComponent implements OnInit {
         })
       ])
     });
-  }
-
-  get Lookups(): FormArray {
-    return this.lookupForm.get("Lookups") as FormArray;
   }
 
   removeRow(index: number): void {

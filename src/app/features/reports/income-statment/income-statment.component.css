@@ -1,0 +1,9 @@
+div.content {
+  padding: 1em;
+}
+
+@media print {
+  .e-control.e-btn.e-lib {
+    display: none
+  }
+}

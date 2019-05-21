@@ -11,9 +11,10 @@ import {
   Checklist,
   SubsidaryLedgerViewModel,
   TrialBalanceDetailViewModel,
-  ConsolidatedTrialBalanceViewModel
+  ConsolidatedTrialBalanceViewModel,
+  IncomeStatmentViewModel,
+  BalanceSheetViewModel
 } from "./report";
-import { ConsolidatedTrialBalanceComponent } from "./consolidated-trial-balance/consolidated-trial-balance.component";
 
 fdescribe("ReportApiService", () => {
   let reportApi: ReportApiService;
@@ -242,7 +243,7 @@ fdescribe("ReportApiService", () => {
         ]
       }
     ];
-    reportApi.getSubsidaryLedgerReport("").subscribe((data: any) => {
+    reportApi.getTrialBalanceDetail("").subscribe((data: any) => {
       expect(data).toEqual(response);
     });
 
@@ -297,12 +298,106 @@ fdescribe("ReportApiService", () => {
       }
     ];
 
-    reportApi.getSubsidaryLedgerReport("").subscribe((data: any) => {
+    reportApi.getConsolidatedTrialBalance("").subscribe((data: any) => {
       expect(data).toEqual(response);
     });
 
     const req = httpMock.expectOne(
       "http://localhost:5000/consolidated-trial-balance?",
+      "call to api"
+    );
+    expect(req.request.method).toBe("GET");
+
+    req.flush(response);
+
+    httpMock.verify();
+  });
+
+  it("Should get income statment", () => {
+    const response: IncomeStatmentViewModel[] = [
+      {
+        Revenue: [
+          {
+            AccountType: "Net sales",
+            Amount: 1000
+          },
+          {
+            AccountType: "Other income",
+            Amount: 20000
+          }
+        ],
+        Expense: [
+          {
+            AccountType: "Maintainance",
+            Amount: 1000
+          },
+          {
+            AccountType: "Water",
+            Amount: 20000
+          }
+        ],
+        NetSurplus: 19099
+      }
+    ];
+    reportApi.getIncomeStatment("").subscribe((data: any) => {
+      expect(data).toEqual(response);
+    });
+
+    const req = httpMock.expectOne(
+      "http://localhost:5000/income-statment?",
+      "call to api"
+    );
+    expect(req.request.method).toBe("GET");
+
+    req.flush(response);
+
+    httpMock.verify();
+  });
+
+  it("Should get balance sheet", () => {
+    const response: BalanceSheetViewModel[] = [
+      {
+        Assets: [
+          {
+            AccountCatagory: "Fixed assets",
+            Amount: 1000
+          },
+          {
+            AccountCatagory: "Stock",
+            Amount: 20000
+          }
+        ],
+        TotalAsset: 21000,
+        Capitals: [
+          {
+            AccountCatagory: "Share capital",
+            Amount: 1000
+          },
+          {
+            AccountCatagory: "Net capital",
+            Amount: 20000
+          }
+        ],
+        TotalCapital: 21000,
+        Liabilities: [
+          {
+            AccountCatagory: "Bank overdraft",
+            Amount: 200
+          },
+          {
+            AccountCatagory: "Devidend payable",
+            Amount: 300
+          }
+        ],
+        TotalLiability: 500
+      }
+    ];
+    reportApi.getBalanceSheet("").subscribe((data: any) => {
+      expect(data).toEqual(response);
+    });
+
+    const req = httpMock.expectOne(
+      "http://localhost:5000/balance-sheet?",
       "call to api"
     );
     expect(req.request.method).toBe("GET");

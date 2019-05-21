@@ -1,13 +1,13 @@
 <form [formGroup]="lookupForm" (ngSubmit)="onSubmit()" name="lookupForm">
   <div class="container-fluid card m-2" formArrayName="Lookups">
     <div class="row">
-      <div class="col-sm-5 col-xs-12">
+      <div class="col-sm-4 col-xs-8">
         <label for="type"> Type</label>
       </div>
-      <div class="col-sm-5 col-xs-12">
+      <div class="col-sm-4 col-xs-8">
         <label for="value">Value</label>
       </div>
-      <div class="col-sm-2 col-xs-12">
+      <div class="col-sm-2 col-xs-4">
         <label for="action">Action</label>
       </div>
     </div>
@@ -16,7 +16,7 @@
       *ngFor="let lookup of Lookups.controls; let i = index; let last = last"
       [formGroup]="lookup"
     >
-      <div class="col-sm-5 col-xs-12">
+      <div class="col-sm-4 col-xs-8">
         <div>
           <ejs-dropdownlist
             id="Type"
@@ -35,7 +35,7 @@
           </div>
         </div>
       </div>
-      <div class="col-sm-5 col-xs-12">
+      <div class="col-sm-4 col-xs-8">
         <div>
           <input
             type="text"

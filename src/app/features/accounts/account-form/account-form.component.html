@@ -5,10 +5,9 @@
     (ngSubmit)="onSubmit()"
     name="accountForm"
   >
-    {{ accountForm.value | json }}
     <div class="content card m-3">
       <div class="row">
-        <div class="col-md-6 col-sm-12">
+        <div class="col-md-4 col-sm-8">
           <div class="row">
             <div class="col-12">
               <label for="accountName">Account Name</label>
@@ -79,7 +78,7 @@
           </div>
         </div>
         <!-- Second Column Starts-->
-        <div class="col-md-6 col-sm-12">
+        <div class="col-md-4 col-sm-8">
           <!-- Account Catagory-->
           <div class="row">
             <div class="col-12">
@@ -107,7 +106,6 @@
                   id="openingBalance"
                   name="openingBalance"
                   class="e-input"
-                  [width]="150"
                   formControlName="OpeningBalance"
                 >
                 </ejs-numerictextbox>

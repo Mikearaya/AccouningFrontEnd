@@ -14,7 +14,6 @@ import { Predicate, Query } from "@syncfusion/ej2-data/src";
       #accountElement
       name="account"
       placeholder="search for account"
-      [width]="400"
       [text]="text"
       [enabled]="!diabled"
       [fields]="fields"

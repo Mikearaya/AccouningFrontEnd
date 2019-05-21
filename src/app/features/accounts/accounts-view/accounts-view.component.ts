@@ -84,10 +84,10 @@ export class AccountsViewComponent implements OnInit {
     );
 
     this.childGrid = {
-      queryString: "Id",
+      queryString: "ParentAccount",
       columns: [
         {
-          field: "ParentId",
+          field: "Id",
           headerText: "Id",
           textAlign: "Right",
           width: 100
