@@ -14,3 +14,29 @@ body {
 .e-close::before {
   content: '\e7fc';
 }
+
+.e-Excel_Export::before {
+  content: '\e242';
+}
+
+.e-ArrowUp::before {
+  content: '\e56d';
+}
+
+.e-ArrowDown::before {
+  content: '\e56e'
+}
+
+.M_SingleUpArrow::before {
+  content: '\e651'
+}
+
+.e-acrdn-header {
+  background-color: rgb(217, 224, 212);
+}
+
+@media print {
+  .e-acrdn-item.e-select {
+    display: none
+  }
+}

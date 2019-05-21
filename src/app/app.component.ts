@@ -157,16 +157,16 @@ export class AppComponent {
         },
         {
           id: "04-08",
-          name: "Trial Balance Consolidated",
-          url: "/trial-balance-consolidated",
+          name: "Trial Balance detail",
+          url: "reports/trial-balance-detail",
           expanded: false,
           enabled: true,
           selected: false
         },
         {
           id: "04-09",
-          name: "Trial Balance Detail",
-          url: "/trial-balce-detail",
+          name: "Consolidated Trial Balance",
+          url: "reports/consolidated-trial-balance",
           expanded: false,
           enabled: true,
           selected: false

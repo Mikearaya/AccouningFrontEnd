@@ -31,7 +31,7 @@ export class RmHeaderInterceptorService implements HttpInterceptor {
     const requestUrl = request.url;
     const started = Date.now();
     const modifiedRequest = request.clone({
-      url: `http://localhost:5000/api/${requestUrl}`,
+      url: `http://localhost:5000/${requestUrl}`,
       setHeaders: {
         "Content-Type": "application/json; charset=utf-8",
         Accept: "application/json"

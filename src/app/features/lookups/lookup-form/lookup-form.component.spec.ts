@@ -96,32 +96,32 @@ describe(" Lookup form component", () => {
     });
   });
 
-  describe("When an id is provided in the url param--(Update lookup form)", () => {
-    beforeEach(async(() => {
-      makeCompiledTestBed({
-        provide: ActivatedRoute,
-        useValue: {
-          snapshot: {
-            paramMap: convertToParamMap({ id: 1 })
-          }
-        }
-      });
-    }));
-    beforeEach(setupTestVars);
+  // describe("When an id is provided in the url param--(Update lookup form)", () => {
+  //   beforeEach(async(() => {
+  //     makeCompiledTestBed({
+  //       provide: ActivatedRoute,
+  //       useValue: {
+  //         snapshot: {
+  //           paramMap: convertToParamMap({ id: 1 })
+  //         }
+  //       }
+  //     });
+  //   }));
+  //   beforeEach(setupTestVars);
 
-    /*  let catagoryId = 1;
-    let accountCatagory;
-    accountCatagory = ActivatedRoute.snapshot.paramMap.get(catagoryId);
-    it("should ..", () => {
-      expect(accountCatagory).toBe(1);
-    }); */
-    describe("Initialize catagory", () => {
-      let data: any;
-      it("Should be called", () => {
-        spyOn(component, "initializeLookup");
-        component.initializeLookup(data);
-        expect(component.initializeLookup).toHaveBeenCalled();
-      });
-    });
-  });
+  //   /*  let catagoryId = 1;
+  //   let accountCatagory;
+  //   accountCatagory = ActivatedRoute.snapshot.paramMap.get(catagoryId);
+  //   it("should ..", () => {
+  //     expect(accountCatagory).toBe(1);
+  //   }); */
+  //   describe("Initialize catagory", () => {
+  //     let data: any;
+  //     it("Should be called", () => {
+  //       spyOn(component, "initializeLookup");
+  //       component.initializeLookup(data);
+  //       expect(component.initializeLookup).toHaveBeenCalled();
+  //     });
+  //   });
+  // });
 });

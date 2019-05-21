@@ -1,22 +1,22 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { SubsidaryLedgerViewModel } from "../report";
+import { ReportApiService } from "../report-api.service";
 import { GridModel } from "@syncfusion/ej2-grids";
 import { GridComponent } from "@syncfusion/ej2-angular-grids";
+import { TrialBalanceDetailViewModel } from "../report";
 import { ClickEventArgs } from "@syncfusion/ej2-angular-navigations";
-import { ReportApiService } from "../report-api.service";
 
 @Component({
-  selector: "app-subsidary-ledger-report",
-  templateUrl: "./subsidary-ledger-report.component.html",
-  styleUrls: ["./subsidary-ledger-report.component.css"]
+  selector: "app-trial-balance-detail",
+  templateUrl: "./trial-balance-detail.component.html",
+  styleUrls: ["./trial-balance-detail.component.css"]
 })
-export class SubsidaryLedgerReportComponent implements OnInit {
+export class TrialBalanceDetailComponent implements OnInit {
   public gridData: object[];
-  public data: SubsidaryLedgerViewModel[];
+  public data: TrialBalanceDetailViewModel[];
   public toolbar: object;
   public initialPage: object;
 
-  constructor(private subsidaryService: ReportApiService) {
+  constructor(private reportService: ReportApiService) {
     this.initialPage = {
       pageSizes: ["20", "50", "100", "200", "500", "1000", "All"],
       pageSize: 20
@@ -24,40 +24,37 @@ export class SubsidaryLedgerReportComponent implements OnInit {
   }
   public childGrid: GridModel = {
     dataSource: this.data,
-    queryString: "Id",
+    queryString: "AccountId",
     columns: [
       {
-        field: "VoucherId",
-        headerText: "Voucher no",
+        field: "AccountId",
+        headerText: "Account Id",
         textAlign: "Left",
         width: 120
       },
-      // { field: "LedgerId", headerText: "Ledgeddddr", width: 150 },
-      { field: "Date", headerText: "Date", width: 150 },
-      { field: "ReferenceNumber", headerText: "Reference", width: 150 },
+      { field: "AccountName", headerText: "AccountName", width: 150 },
       { field: "Debit", headerText: "Debit", width: 150 },
-      { field: "Credit", headerText: "Credit", width: 150 },
-      { field: "Balance", headerText: "Balance", width: 150 }
+      { field: "Credit", headerText: "Credit", width: 150 }
     ]
   };
   @ViewChild("grid")
   public grid: GridComponent;
 
   ngOnInit() {
-    this.subsidaryService
-      .getSubsidaryLedgerReport(this.generateSearchString())
-      .subscribe((data: SubsidaryLedgerViewModel[]) => {
+    this.reportService
+      .getTrialBalanceDetail(this.generateSearchString())
+      .subscribe((data: TrialBalanceDetailViewModel[]) => {
         this.data = data;
         this.gridData = data;
-        const subsidaryDetails = [];
+        const trialDetails = [];
         this.data.forEach(element => {
-          element.Entries.forEach(elementSubsidary => {
-            subsidaryDetails.push(elementSubsidary);
+          element.Entries.forEach(elementTrial => {
+            trialDetails.push(elementTrial);
           });
         });
-
-        this.childGrid.dataSource = subsidaryDetails;
-
+        console.log(this.data);
+        this.childGrid.dataSource = trialDetails;
+        console.log("child", this.childGrid.dataSource);
       });
 
     this.toolbar = [
@@ -102,12 +99,5 @@ export class SubsidaryLedgerReportComponent implements OnInit {
         this.grid.excelExport();
       }, 400);
     }
-  }
-  expand(): void {
-    this.grid.detailRowModule.expandAll();
-  }
-
-  collapse(): void {
-    this.grid.detailRowModule.collapseAll();
   }
 }

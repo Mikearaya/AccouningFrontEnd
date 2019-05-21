@@ -18,11 +18,9 @@ import { AccountsService } from "../../../core/services/accounts.service";
 import { RouterTestingModule } from "@angular/router/testing";
 import { SharedModule } from "src/app/shared/shared.module";
 import { Accounts } from "../accounts";
-import { ActivatedRoute, convertToParamMap } from "@angular/router";
 import { DebugElement } from "@angular/core";
 import { AccountCatagoryApiService } from "src/app/core/account-catagory-api.service";
-import { FormBuilder } from "@angular/forms";
-import { LookupService } from "src/app/core/services/lookup.service";
+import { ActivatedRoute, convertToParamMap } from "@angular/router";
 
 describe(" Account form component", () => {
   let component: AccountFormComponent;
@@ -33,7 +31,7 @@ describe(" Account form component", () => {
     const moduleDef: TestModuleMetadata = {
       imports: [SharedModule, RouterTestingModule],
       declarations: [AccountFormComponent],
-      providers: [AccountsService, AccountCatagoryApiService, LookupService]
+      providers: [AccountsService, AccountCatagoryApiService]
     };
     if (moduleDef.providers && provider) {
       moduleDef.providers.push(provider);

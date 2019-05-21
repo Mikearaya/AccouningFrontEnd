@@ -66,7 +66,7 @@ export class ChecklistComponent implements OnInit {
       { text: "Print", prefixIcon: "e-print", id: "print" },
       {
         text: "ExcelExport",
-        prefixIcon: "e-ExcelExport",
+        prefixIcon: "e-Excel_Export",
         id: "Grid_excelexport"
       }
     ];
