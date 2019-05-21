@@ -1,23 +1,23 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
 import {
-  Checklist,
+  LedgerChecklistView,
   SubsidaryLedgerViewModel,
   TrialBalanceDetailViewModel,
   ConsolidatedTrialBalanceViewModel,
   BalanceSheetViewModel,
   IncomeStatmentViewModel
 } from "./report";
+import { Observable } from "rxjs";
 
 @Injectable()
 export class ReportApiService {
   private url = "report";
   constructor(private httpClient: HttpClient) {}
 
-  getChecklistReport(searchString: string): Observable<Checklist[]> {
-    return this.httpClient.get<Checklist[]>(
-      `ledger-checklists?${searchString}`
+  getChecklistReport(searchString: string): Observable<LedgerChecklistView> {
+    return this.httpClient.get<LedgerChecklistView>(
+      `${this.url}/ledger-checklists?${searchString}`
     );
   }
 

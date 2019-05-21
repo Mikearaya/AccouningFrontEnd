@@ -33,6 +33,10 @@ export class SubsidaryLedgerDetailViewModel {
   Balance: number;
 }
 
+export interface LedgerChecklistView {
+  Items: Checklist[];
+  Count: number;
+}
 // trial balance model
 export class TrialBalanceDetailViewModel {
   Id: number;

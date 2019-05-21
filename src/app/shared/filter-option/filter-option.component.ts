@@ -106,6 +106,11 @@ export class FilterOptionComponent implements OnInit {
 
   filter() {
     // const costCenter = this.costCenter.value;
+
+    this.filtered.emit(this.prepareFilter());
+  }
+
+  private prepareFilter(): string {
     this.searchString = "";
     if (this.Year.value) {
       this.searchString = `year=${this.Year.value}&`;
@@ -131,6 +136,10 @@ export class FilterOptionComponent implements OnInit {
       this.searchString += `costCenter=${this.CostCenter.value}&`;
     }
 
-    this.filtered.emit(this.searchString);
+    return this.searchString;
+  }
+
+  getFilterContent(): string {
+    return this.prepareFilter();
   }
 }
