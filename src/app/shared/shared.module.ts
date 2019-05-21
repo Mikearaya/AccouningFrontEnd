@@ -6,7 +6,7 @@ import {
   SwitchModule,
   RadioButtonModule
 } from "@syncfusion/ej2-angular-buttons";
-import { GridModule } from "@syncfusion/ej2-angular-grids";
+import { GridModule, PagerModule } from "@syncfusion/ej2-angular-grids";
 import {
   ToolbarModule,
   SidebarModule,
@@ -40,10 +40,10 @@ import { AccountSelectorComponent } from "./account-selector/account-selector.co
 import { AccountCategorySelectorComponent } from "./account-category-selector/account-category-selector.component";
 import { LookupSelectorComponent } from "./lookup-selector/lookup-selector.component";
 import { TreeGridModule } from "@syncfusion/ej2-angular-treegrid";
-import { DialogModule } from "@syncfusion/ej2-angular-popups";
 import { DialogBoxComponent } from "./dialog-box/dialog-box.component";
 import { FilterOptionComponent } from "./filter-option/filter-option.component";
 import { CoreModule } from "../core/core.module";
+import { PaginationComponent } from "./pagination/pagination.component";
 
 @NgModule({
   imports: [
@@ -69,7 +69,8 @@ import { CoreModule } from "../core/core.module";
     MaskedTextBoxModule,
     TreeGridModule,
     AccordionModule,
-    CoreModule
+    CoreModule,
+    PagerModule
   ],
   exports: [
     CommonModule,
@@ -99,7 +100,9 @@ import { CoreModule } from "../core/core.module";
     TreeGridModule,
     AccordionModule,
     CoreModule,
-    FilterOptionComponent
+    FilterOptionComponent,
+    PagerModule,
+    PaginationComponent
   ],
   declarations: [
     FormOptionsComponent,
@@ -111,7 +114,8 @@ import { CoreModule } from "../core/core.module";
     AccountCategorySelectorComponent,
     LookupSelectorComponent,
     DialogBoxComponent,
-    FilterOptionComponent
+    FilterOptionComponent,
+    PaginationComponent
   ],
   providers: []
 })

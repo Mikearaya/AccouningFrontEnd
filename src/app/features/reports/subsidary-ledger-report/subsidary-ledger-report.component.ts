@@ -55,9 +55,9 @@ export class SubsidaryLedgerReportComponent implements OnInit {
             subsidaryDetails.push(elementSubsidary);
           });
         });
-        console.log(this.data);
+
         this.childGrid.dataSource = subsidaryDetails;
-        console.log("child", this.childGrid.dataSource);
+
       });
 
     this.toolbar = [

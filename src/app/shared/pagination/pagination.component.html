@@ -1,0 +1,21 @@
+<ejs-pager
+  (click)="click($event)"
+  #pagger
+  [pageSize]="pageSize"
+  [pageCount]="5"
+  [totalRecordsCount]="totalPage"
+>
+  <!--   <ng-template #template let-data>
+    <div class="container">
+      <button [disabled]="currentPage == 1" (click)="previous()">
+        previous
+      </button>
+
+      Current Page: {{ currentPage }}
+      <ejs-dropdownlist [width]="100" [dataSource]="pageSizes">
+      </ejs-dropdownlist>
+
+      <button (click)="next()">next</button>
+    </div>
+  </ng-template> -->
+</ejs-pager>

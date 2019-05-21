@@ -32,3 +32,10 @@ export class SubsidaryLedgerDetailViewModel {
   Credit: number;
   Balance: number;
 }
+
+
+
+export interface LedgerChecklistView {
+  Items: Checklist[];
+  Count: number;
+}

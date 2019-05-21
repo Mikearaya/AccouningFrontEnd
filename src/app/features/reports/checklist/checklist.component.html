@@ -4,20 +4,21 @@
   [allowVocherSearch]="true"
   [allowCostCenterSearch]="true"
   [allwoYearSeach]="true"
+  #filter
   (filtered)="onFiltered($event)"
 ></app-filter-option>
 <div class="checklist-area">
   <div class="print-area">
     <ejs-grid
-      (actionBegin)="gridStateChanged($event)"
+      (dropDownChanged)="gridStateChanged($event)"
       #grid
       [dataSource]="gridData"
       foreign-key-field="LedgerId"
       [childGrid]="childGrid"
-      query-string="Id"
-      [allowExcelExport]="true"
       [allowPaging]="true"
       [pageSettings]="initialPage"
+      query-string="Id"
+      [allowExcelExport]="true"
       [toolbar]="toolbar"
       (toolbarClick)="clickHandler($event)"
     >

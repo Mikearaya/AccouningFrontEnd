@@ -197,7 +197,7 @@ export class DataViewComponent implements OnInit {
 
   actionEndHandler(args: ActionEventArgs) {
     this.query.selectedColumns = [];
-
+    console.log(args);
     this.grid
       .getColumns()
       .filter(c => c.visible && c.field !== undefined)
@@ -210,6 +210,7 @@ export class DataViewComponent implements OnInit {
 
         break;
       case "filtering":
+        alert(JSON.stringify(args.requestType));
         const filteringModel = new FilterEventModel();
         filteringModel.columnName = args["currentFilterObject"]["field"];
         filteringModel.operator = args["currentFilterObject"]["operator"];
@@ -217,6 +218,11 @@ export class DataViewComponent implements OnInit {
 
         break;
       case "searching":
+        this.query.searchString = args["searchString"];
+
+        break;
+      case "paging":
+        alert(JSON.stringify(args.requestType));
         this.query.searchString = args["searchString"];
 
         break;
