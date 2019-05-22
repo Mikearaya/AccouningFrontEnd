@@ -82,6 +82,10 @@
   margin-left: 250px;
 }
 
+.main-content {
+  padding-top: 5px;
+}
+
 @media print {
 
   #default-sidebar {
@@ -91,4 +95,36 @@
   .e-content-animation {
     margin-left: 0 !important;
   }
+}
+
+.content-head {
+  height: 3em;
+  border-top: 1px solid #4d841d;
+  background: #eee;
+}
+
+.sidebar-header {
+  background: #4d841d;
+  height: 39px;
+  color: white;
+  font-family: inherit;
+  font-size: x-large;
+  text-align: center;
+}
+
+.second-sidebar-header {
+  background: #4d841d11;
+  height: 100px;
+  text-align: center;
+  font-size: 20px;
+}
+
+.e-fullrow:hover {
+  background: #4d841d55 !important;
+  border: none !important;
+}
+
+#year-dropdown {
+  float: right;
+  margin-right: 20px;
 }

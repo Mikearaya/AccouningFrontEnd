@@ -10,27 +10,33 @@ import { IncomeStatmentComponent } from "./income-statment/income-statment.compo
 const routes: Routes = [
   {
     path: "checklist",
-    component: ChecklistComponent
+    component: ChecklistComponent,
+    data: { breadCrum: "Checklist" }
   },
   {
     path: "subsidaries",
-    component: SubsidaryLedgerReportComponent
+    component: SubsidaryLedgerReportComponent,
+    data: { breadCrum: "Subsidary" }
   },
   {
     path: "consolidated-trial-balance",
-    component: ConsolidatedTrialBalanceComponent
+    component: ConsolidatedTrialBalanceComponent,
+    data: { breadCrum: "Consolidated trial balance" }
   },
   {
     path: "trial-balance-detail",
-    component: TrialBalanceDetailComponent
+    component: TrialBalanceDetailComponent,
+    data: { breadCrum: "Trial balance detail" }
   },
   {
     path: "balance-sheet",
-    component: BalanceSheetComponent
+    component: BalanceSheetComponent,
+    data: { breadCrum: "Balance sheet" }
   },
   {
     path: "income-statment",
-    component: IncomeStatmentComponent
+    component: IncomeStatmentComponent,
+    data: { breadCrum: "Income statment" }
   }
 ];
 

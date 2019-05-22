@@ -9,21 +9,20 @@ const routes: Routes = [
     path: "",
     component: LedgerViewComponent,
     data: {
-      title: "Jornal Entries",
-      breadCrum: ""
+      breadCrum: "View"
     }
   }, // organization view route
   {
     path: "add",
     component: LedgerComponent,
     data: {
-      title: "Make jornal entry",
-      breadCrum: "New"
+      breadCrum: "Add"
     }
   }, // when creating a new organization data
   {
     path: ":ledgerId/update",
-    component: LedgerComponent
+    component: LedgerComponent,
+    data: { breadCrum: "Update" }
   }
 ];
 @NgModule({

@@ -1,25 +1,19 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { PaginationComponent } from './pagination.component';
+import { PaginationComponent } from "./pagination.component";
+import { SharedModule } from "../shared.module";
+import { RouterTestingModule } from "@angular/router/testing";
+import { BrowserDynamicTestingModule } from "@angular/platform-browser-dynamic/testing";
+import { CoreModule } from "src/app/core/core.module";
 
-describe('PaginationComponent', () => {
+describe("PaginationComponent", () => {
   let component: PaginationComponent;
-  let fixture: ComponentFixture<PaginationComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ PaginationComponent ]
-    })
-    .compileComponents();
-  }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PaginationComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    component = new PaginationComponent();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

@@ -1,6 +1,12 @@
 <div class="main">
   <div class="sidebar-content">
     <ejs-sidebar id="default-sidebar" #sidebar [type]="type" [target]="target">
+      <div class="sidebar-header">
+        Smart Accounting
+      </div>
+      <div class="second-sidebar-header">
+        Appdiv system development
+      </div>
       <div class="center-align">
         <ejs-treeview
           #tree
@@ -23,14 +29,26 @@
           isToggle="true"
           (click)="btnClick()"
         ></button>
+        <ejs-dropdownlist
+          id="year-dropdown"
+          [dataSource]="yearData"
+          [width]="200"
+          placeholder="Year"
+        ></ejs-dropdownlist>
       </div>
 
-      <!--  <ejs-toolbar>
+      <!--  <ejs-toolbar> 
         <e-items> </e-items>
       </ejs-toolbar> -->
 
       <div id="targetcontent">
-        <router-outlet></router-outlet>
+        <div class="content-head">
+          <app-page-identity></app-page-identity>
+        </div>
+
+        <div class="main-content">
+          <router-outlet></router-outlet>
+        </div>
       </div>
     </div>
   </div>

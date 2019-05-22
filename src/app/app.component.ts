@@ -24,6 +24,8 @@ export class AppComponent {
   @ViewChild("togglebtn")
   public togglebtn: ButtonComponent;
 
+  public yearData: string[] = ["2015", "2016", "2017", "2018", "2019"];
+
   public smartAccountingLinks: object[] = [
     {
       id: "01",

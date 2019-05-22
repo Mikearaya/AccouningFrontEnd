@@ -16,7 +16,7 @@ import {
   BalanceSheetViewModel
 } from "./report";
 
-fdescribe("ReportApiService", () => {
+describe("ReportApiService", () => {
   let reportApi: ReportApiService;
   let httpMock: HttpTestingController;
 
@@ -326,6 +326,7 @@ fdescribe("ReportApiService", () => {
             Amount: 20000
           }
         ],
+        TotalRevenue: 100,
         Expense: [
           {
             AccountType: "Maintainance",
@@ -336,6 +337,7 @@ fdescribe("ReportApiService", () => {
             Amount: 20000
           }
         ],
+        TotalExpense: 200,
         NetSurplus: 19099
       }
     ];

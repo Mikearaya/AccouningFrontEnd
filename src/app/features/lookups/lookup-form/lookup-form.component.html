@@ -1,16 +1,5 @@
 <form [formGroup]="lookupForm" (ngSubmit)="onSubmit()" name="lookupForm">
   <div class="container-fluid card m-2" formArrayName="Lookups">
-    <div class="row">
-      <div class="col-sm-4 col-xs-8">
-        <label for="type"> Type</label>
-      </div>
-      <div class="col-sm-4 col-xs-8">
-        <label for="value">Value</label>
-      </div>
-      <div class="col-sm-2 col-xs-4">
-        <label for="action">Action</label>
-      </div>
-    </div>
     <div
       class="row"
       *ngFor="let lookup of Lookups.controls; let i = index; let last = last"
@@ -18,6 +7,7 @@
     >
       <div class="col-sm-4 col-xs-8">
         <div>
+          <label for="type"> Type</label>
           <ejs-dropdownlist
             id="Type"
             name="Type"
@@ -37,6 +27,7 @@
       </div>
       <div class="col-sm-4 col-xs-8">
         <div>
+          <label for="value">Value</label>
           <input
             type="text"
             id="Value"
@@ -54,34 +45,32 @@
           </div>
         </div>
       </div>
-      <div class="col-sm-2">
-        <button
-          *ngIf="last"
-          [disabled]="Lookups.invalid"
-          type="button"
-          ejs-button
-          cssClass="e-round e-info e-small"
-          iconCss="e-icons e-plus-icon"
-          (click)="addRow()"
-        ></button>
-        <button
-          id="remove-button"
-          type="button"
-          ejs-button
-          cssClass="e-round e-danger e-small"
-          iconCss="e-icons e-close"
-          (click)="removeRow(i)"
-        ></button>
+      <div class="col-sm-2 col-xs-1">
+        <label for="action">Action</label>
+        <div>
+          <button
+            *ngIf="last"
+            [disabled]="Lookups.invalid"
+            type="button"
+            ejs-button
+            cssClass="e-round e-info e-small"
+            iconCss="e-icons e-plus-icon"
+            (click)="addRow()"
+          ></button>
+          <button
+            id="remove-button"
+            type="button"
+            ejs-button
+            cssClass="e-round e-danger e-small"
+            iconCss="e-icons e-close"
+            (click)="removeRow(i)"
+          ></button>
+        </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-4"></div>
-      <div class="col-4">
-        <app-form-options
-          [submitDisabled]="lookupForm.invalid"
-        ></app-form-options>
-      </div>
-      <div class="col-4"></div>
-    </div>
+
+    <app-form-options [submitDisabled]="lookupForm.invalid"></app-form-options>
+
+    <div class="col-4"></div>
   </div>
 </form>

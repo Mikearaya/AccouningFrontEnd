@@ -17,7 +17,7 @@ export class ReportApiService {
 
   getChecklistReport(searchString: string): Observable<LedgerChecklistView> {
     return this.httpClient.get<LedgerChecklistView>(
-      `${this.url}/ledger-checklists?${searchString}`
+      `ledger-checklists?${searchString}`
     );
   }
 
