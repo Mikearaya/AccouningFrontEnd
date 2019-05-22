@@ -39,4 +39,8 @@ body {
   .e-acrdn-item.e-select {
     display: none
   }
+
+  .content-head {
+    display: none;
+  }
 }

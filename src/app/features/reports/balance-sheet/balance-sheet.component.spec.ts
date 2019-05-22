@@ -6,7 +6,7 @@ import { RouterTestingModule } from "@angular/router/testing";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { ReportApiService } from "../report-api.service";
 
-fdescribe("BalanceSheetComponent", () => {
+describe("BalanceSheetComponent", () => {
   let component: BalanceSheetComponent;
   let fixture: ComponentFixture<BalanceSheetComponent>;
 

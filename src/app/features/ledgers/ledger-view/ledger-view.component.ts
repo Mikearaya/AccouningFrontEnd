@@ -63,6 +63,7 @@ export class LedgerViewComponent implements OnInit {
       visible: false,
       width: 90,
       type: "date",
+
       format: "yMd"
     }
   ];

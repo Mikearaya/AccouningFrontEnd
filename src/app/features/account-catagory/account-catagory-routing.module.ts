@@ -4,9 +4,21 @@ import { AccountCatagoryViewComponent } from "./account-catagory-view/account-ca
 import { AccountCatagoryFormComponent } from "./account-catagory-form/account-catagory-form.component";
 
 const routes: Routes = [
-  { path: "", component: AccountCatagoryViewComponent },
-  { path: "add", component: AccountCatagoryFormComponent },
-  { path: ":catagoryId/update", component: AccountCatagoryFormComponent }
+  {
+    path: "",
+    component: AccountCatagoryViewComponent,
+    data: { breadCrum: "View" }
+  },
+  {
+    path: "add",
+    component: AccountCatagoryFormComponent,
+    data: { breadCrum: "Add" }
+  },
+  {
+    path: ":catagoryId/update",
+    component: AccountCatagoryFormComponent,
+    data: { breadCrum: "Update" }
+  }
 ];
 
 @NgModule({

@@ -13,6 +13,7 @@ import { CoreModule } from "./core/core.module";
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { RmHeaderInterceptorService } from "./Services/rm-header-interceptor.service";
 import { LookupsModule } from "./features/lookups/lookups.module";
+import { SharedModule } from "./shared/shared.module";
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,7 +25,8 @@ import { LookupsModule } from "./features/lookups/lookups.module";
     ToolbarModule,
     ButtonModule,
     CoreModule,
-    LookupsModule
+    LookupsModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

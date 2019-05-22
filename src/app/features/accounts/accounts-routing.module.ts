@@ -9,15 +9,13 @@ const routes: Routes = [
     path: "",
     component: AccountsViewComponent,
     data: {
-      title: "Account Chart",
-      breadCrum: ""
+      breadCrum: "View"
     }
   },
   {
     path: "new",
     component: AccountFormComponent,
     data: {
-      title: "Create accounts",
       breadCrum: "Create"
     }
   },
@@ -25,7 +23,6 @@ const routes: Routes = [
     path: ":accountId/update",
     component: AccountFormComponent,
     data: {
-      title: "Update accounts",
       breadCrum: "Update"
     }
   }

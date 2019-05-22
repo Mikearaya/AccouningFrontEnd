@@ -6,15 +6,18 @@ import { AccountTypeFormComponent } from "./account-type-form/account-type-form.
 const routes: Routes = [
   {
     path: "",
-    component: AccountTypeViewComponent
+    component: AccountTypeViewComponent,
+    data: { breadCrum: "View" }
   },
   {
     path: "add",
-    component: AccountTypeFormComponent
+    component: AccountTypeFormComponent,
+    data: { breadCrum: "Add" }
   },
   {
     path: ":accountTypeId/update",
-    component: AccountTypeFormComponent
+    component: AccountTypeFormComponent,
+    data: { breadCrum: "Update" }
   }
 ];
 

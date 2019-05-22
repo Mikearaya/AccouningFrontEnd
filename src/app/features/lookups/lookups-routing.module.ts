@@ -4,9 +4,13 @@ import { LookupViewComponent } from "./lookup-view/lookup-view.component";
 import { LookupFormComponent } from "./lookup-form/lookup-form.component";
 
 const routes: Routes = [
-  { path: "", component: LookupViewComponent },
-  { path: "add", component: LookupFormComponent },
-  { path: ":lookupId/update", component: LookupFormComponent }
+  { path: "", component: LookupViewComponent, data: { breadCrum: "View" } },
+  { path: "add", component: LookupFormComponent, data: { breadCrum: "Add" } },
+  {
+    path: ":lookupId/update",
+    component: LookupFormComponent,
+    data: { breadCrum: "Update" }
+  }
 ];
 
 @NgModule({

@@ -102,7 +102,8 @@ import { PaginationComponent } from "./pagination/pagination.component";
     CoreModule,
     FilterOptionComponent,
     PagerModule,
-    PaginationComponent
+    PaginationComponent,
+    BreadCrumbComponent
   ],
   declarations: [
     FormOptionsComponent,
