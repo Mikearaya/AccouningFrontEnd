@@ -25,7 +25,7 @@ export class ReportApiService {
     searchString: string
   ): Observable<SubsidaryLedgerViewModel[]> {
     return this.httpClient.get<SubsidaryLedgerViewModel[]>(
-      `subsidaries?${searchString}`
+      `${this.url}/subsidary-ledgers?Year=2011&${searchString}`
     );
   }
 
@@ -33,7 +33,7 @@ export class ReportApiService {
     searchString: string
   ): Observable<TrialBalanceDetailViewModel[]> {
     return this.httpClient.get<TrialBalanceDetailViewModel[]>(
-      `trial-balance-detail?${searchString}`
+      `${this.url}/trial-balance/detail?Year=2011&${searchString}`
     );
   }
 
@@ -41,19 +41,19 @@ export class ReportApiService {
     searchString: string
   ): Observable<ConsolidatedTrialBalanceViewModel[]> {
     return this.httpClient.get<ConsolidatedTrialBalanceViewModel[]>(
-      `consolidated-trial-balance?${searchString}`
+      `${this.url}/trial-balance/consolidated?Year=2011&${searchString}`
     );
   }
 
   getBalanceSheet(searchString: string): Observable<BalanceSheetViewModel> {
     return this.httpClient.get<BalanceSheetViewModel>(
-      `balance-sheet?${searchString}`
+      `${this.url}/balance-sheet?year=2011&${searchString}`
     );
   }
 
   getIncomeStatment(searchString: string): Observable<IncomeStatmentViewModel> {
     return this.httpClient.get<IncomeStatmentViewModel>(
-      `income-statment?${searchString}`
+      `${this.url}/income-statement?year=2011&${searchString}`
     );
   }
 }

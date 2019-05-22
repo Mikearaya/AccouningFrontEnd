@@ -250,6 +250,12 @@ export class DataViewComponent implements OnInit {
       searchString += `searchString=${this.query.searchString}&`;
     }
 
+    if (this.query.sortColumn) {
+      searchString += `sortBy=${this.query.sortColumn}&sortDirection=${
+        this.query.sortDirection
+      }&`;
+    }
+
     searchString += `pageSize=${this.query.pageSize}&pageNumber=${
       this.query.pageNumber
     }`;

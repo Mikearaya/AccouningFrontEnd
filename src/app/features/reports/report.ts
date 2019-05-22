@@ -71,7 +71,7 @@ export class BalanceSheetViewModel {
 }
 
 export class BalanceSheetItemModel {
-  AccountCatagory: string;
+  AccountCategory: string;
   Amount: number;
 }
 

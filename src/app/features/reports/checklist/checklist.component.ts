@@ -31,9 +31,12 @@ export class ChecklistComponent implements OnInit {
   public summaryRows;
   public totalPages: number;
   filterSettings: { type: string };
+  // current: { pageSize: number; pageNumber: number };
 
   constructor(private checklistService: ReportApiService) {
     this.filterSettings = { type: "Menu" };
+    /*     this.current.pageSize = 10;
+    this.current.pageNumber = 1; */
   }
   public childGrid: GridModel = {
     dataSource: this.data,
@@ -59,6 +62,7 @@ export class ChecklistComponent implements OnInit {
       pageSizes: ["3", "20", "50", "100", "200", "500", "1000", "All"],
       pageSize: 20
     };
+
     this.onFiltered();
     this.toolbar = [
       { text: "Expand All", prefixIcon: "e-expand", id: "expandall" },
@@ -70,6 +74,18 @@ export class ChecklistComponent implements OnInit {
         id: "Grid_excelexport"
       }
     ];
+  }
+
+  onActionComplete(args: ActionEventArgs) {
+    /*     if (
+      this.current.pageSize !== this.grid.pageSettings.pageSize ||
+      this.current.pageNumber !== this.grid.pageSettings.currentPage
+    ) {
+      this.current.pageSize = this.grid.pageSettings.pageSize;
+      this.current.pageNumber = this.grid.pageSettings.currentPage;
+ */
+    this.onFiltered();
+    //    }
   }
 
   generateSearchString(): string {
@@ -98,7 +114,7 @@ export class ChecklistComponent implements OnInit {
       });
   }
 
-  onPageChanged($event: PageChanged): void {
+  onPageChanged(event: PageChanged): void {
     const search = this.filter.getFilterContent();
 
     this.onFiltered(search);
@@ -127,13 +143,6 @@ export class ChecklistComponent implements OnInit {
     }
   }
 
-  gridStateChanged(event: ActionEventArgs) {
-    console.log(event);
-    if (event.requestType === "paging") {
-      alert("refereshed when paged");
-      this.onFiltered(this.lastFilter);
-    }
-  }
   expand(): void {
     this.grid.detailRowModule.expandAll();
   }
@@ -150,7 +159,5 @@ export class ChecklistComponent implements OnInit {
     }, 100);
   }
 
-  dropDownChanged(data: any): void {
-    console.log(data);
-  }
+  dropDownChanged(data: any): void {}
 }

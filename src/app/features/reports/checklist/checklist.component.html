@@ -10,7 +10,7 @@
 <div class="checklist-area">
   <div class="print-area">
     <ejs-grid
-      (dropDownChanged)="gridStateChanged($event)"
+      (actionComplete)="onActionComplete($event)"
       #grid
       [dataSource]="gridData"
       foreign-key-field="LedgerId"
