@@ -45,7 +45,7 @@ export class AppComponent implements OnInit {
 
   public smartAccountingLinks: object[] = NAVIGATION_LINKS;
 
-  public field: object;
+  public field: Object;
   public yearFields: { key: string; value: string };
   ngOnInit(): void {
     this.accountingApi
@@ -56,10 +56,15 @@ export class AppComponent implements OnInit {
   public loadRoutingContent(args: NodeSelectEventArgs): void {
     const data: any = this.tree.getTreeData(args.node);
     const routerLink: string = data[0].url;
+    this.router.navigate([routerLink]);
+  }
 
-    if (routerLink) {
-      this.router.navigate([routerLink]);
+  yearChanged(data: any): void {
+    if (data) {
+      this.accountingApi.setSelectedYear(data);
     }
+
+    console.log(this.accountingApi.getSelectedYear());
   }
 
   btnClick() {

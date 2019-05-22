@@ -97,14 +97,14 @@ export const NAVIGATION_LINKS = [
         enabled: true,
         selected: false
       },
-      {
+      /*       {
         id: "04-04",
         name: "COGS Schedule",
         url: "/cogs-schedule",
         expanded: false,
         enabled: true,
         selected: false
-      },
+      }, */
       {
         id: "04-05",
         name: "Subsidiary Ledger",
@@ -128,8 +128,8 @@ export const NAVIGATION_LINKS = [
         expanded: false,
         enabled: true,
         selected: false
-      },
-      {
+      }
+      /*       {
         id: "04-08",
         name: "OE Cost Center",
         url: "/oe-cost-center",
@@ -144,7 +144,7 @@ export const NAVIGATION_LINKS = [
         expanded: false,
         enabled: true,
         selected: false
-      }
+      } */
     ]
   }
 ];
