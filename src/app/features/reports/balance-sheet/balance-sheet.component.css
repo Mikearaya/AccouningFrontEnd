@@ -16,4 +16,6 @@ div.content {
 
 table {
   font-family: 'Courier New', Courier, monospace;
+  background: white;
+  margin-top: 20px;
 }

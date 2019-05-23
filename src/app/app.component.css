@@ -1,13 +1,17 @@
+@import "../../node_modules/font-awesome/css/font-awesome.min.css";
+
 .center-align {
   text-align: left;
   padding: 0px;
   font-size: 20px !important;
+  border-right: 1px solid lightgray;
 }
 
 .burg-icon:before {
   content: '\e10d';
   font-size: 16px;
   font-family: 'e-icons';
+  color: white
 }
 
 :host {
@@ -18,7 +22,7 @@
 #head {
   border: none;
   border-bottom-color: transparent;
-  background: #4d841d21;
+  background: #4d841d;
   margin-left: 0px !important;
 }
 
@@ -49,7 +53,7 @@
 
 
 #default-sidebar {
-  background-color: #4d841d21;
+  background-color: #f9fafc;
   border: none;
   min-width: 250px;
   position: fixed;
@@ -71,7 +75,7 @@
 }
 
 #targetcontent {
-  padding: 10Px;
+  padding: 20Px;
 }
 
 .main {
@@ -99,8 +103,7 @@
 
 .content-head {
   height: 3em;
-  border-top: 1px solid #4d841d;
-  background: #eee;
+  background: #ecf0f5;
 }
 
 .sidebar-header {
@@ -112,11 +115,12 @@
   text-align: center;
 }
 
-.second-sidebar-header {
-  background: #4d841d11;
-  height: 100px;
+.user-panel {
+  height: 90px;
   text-align: center;
   font-size: 20px;
+  border-right: 1px solid lightgray;
+  padding: 5px
 }
 
 .e-fullrow:hover {
@@ -127,4 +131,39 @@
 #year-dropdown {
   float: right;
   margin-right: 20px;
+  margin-top: 7px;
 }
+
+.e-input-group.e-control-wrapper.e-ddl.e-lib.e-keyboard {
+  background: #ecf0f5;
+  border-radius: 3px;
+  height: 25px;
+}
+
+
+.image {
+  float: left;
+  padding: 5px;
+}
+
+#treeview-icons {
+  height: 20px;
+  float: left;
+  align-items: center;
+}
+
+.info {
+  float: left;
+  font-size: 14px;
+  text-align: start;
+  padding-top: 15px;
+}
+
+i::before {
+  background: #4d841d;
+}
+
+/* .e-treeview div.e-icons::before {
+  content: '\e434'
+}
+ */

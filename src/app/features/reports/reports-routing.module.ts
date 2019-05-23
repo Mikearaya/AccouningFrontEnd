@@ -37,9 +37,9 @@ const routes: Routes = [
     data: { title: "Balance sheet", breadCrum: "Balance sheet" }
   },
   {
-    path: "income-statment",
+    path: "income-statement",
     component: IncomeStatmentComponent,
-    data: { title: "Income statment", breadCrum: "Income statment" }
+    data: { title: "Income statement", breadCrum: "Income statement" }
   }
 ];
 

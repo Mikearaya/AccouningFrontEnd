@@ -15,10 +15,10 @@ import { Component, OnInit, Input } from "@angular/core";
   styleUrls: ["./form-options.component.css"]
 })
 export class FormOptionsComponent implements OnInit {
-  @Input() isSelfContained: Boolean;
-  @Input() submitDisabled: Boolean;
-  @Input() cancelDisabled: Boolean;
-  @Input() showDelete: Boolean;
+  @Input() isSelfContained: boolean;
+  @Input() submitDisabled: boolean;
+  @Input() cancelDisabled: boolean;
+  @Input() showDelete: boolean;
   @Input() isUpdate: boolean;
   buttonText: string;
 

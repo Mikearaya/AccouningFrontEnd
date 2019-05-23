@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FilterOptionsComponent } from './filter-options.component';
+import { CreateNewYearDataComponent } from './create-new-year-data.component';
 
-describe('FilterOptionsComponent', () => {
-  let component: FilterOptionsComponent;
-  let fixture: ComponentFixture<FilterOptionsComponent>;
+describe('CreateNewYearDataComponent', () => {
+  let component: CreateNewYearDataComponent;
+  let fixture: ComponentFixture<CreateNewYearDataComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FilterOptionsComponent ]
+      declarations: [ CreateNewYearDataComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FilterOptionsComponent);
+    fixture = TestBed.createComponent(CreateNewYearDataComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

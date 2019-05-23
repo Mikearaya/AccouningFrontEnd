@@ -10,6 +10,7 @@ import { ButtonComponent } from "@syncfusion/ej2-angular-buttons";
 import { AccountingApiService } from "./Services/accounting-api.service";
 import { AvailableYearsModel } from "./Services/system-data.model";
 import { NAVIGATION_LINKS } from "./navigation-data.model";
+import { FilterService } from "./shared/filter-option/filter.service";
 
 @Component({
   selector: "app-root",
@@ -17,6 +18,7 @@ import { NAVIGATION_LINKS } from "./navigation-data.model";
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent implements OnInit {
+  public cssClass = "custom";
   constructor(
     private router: Router,
     private accountingApi: AccountingApiService
@@ -45,7 +47,7 @@ export class AppComponent implements OnInit {
 
   public smartAccountingLinks: object[] = NAVIGATION_LINKS;
 
-  public field: Object;
+  public field: object;
   public yearFields: { key: string; value: string };
   ngOnInit(): void {
     this.accountingApi
