@@ -15,12 +15,18 @@ import {
   AccountsIndexView,
   AccountViewModel
 } from "../../features/accounts/accounts";
+import { AccountingApiService } from "src/app/Services/accounting-api.service";
 
 @Injectable()
 export class AccountsService {
   public url = "accounts";
-
-  constructor(private httpClient: HttpClient) {}
+  private year: string;
+  constructor(
+    private httpClient: HttpClient,
+    private accountingApi: AccountingApiService
+  ) {
+    this.year = this.accountingApi.getSelectedYear();
+  }
   // Gets a single Account information by Id and returns an observable of Account
   getAccountById(id: number): Observable<AccountViewModel> {
     return this.httpClient.get<AccountViewModel>(`${this.url}/${id}`);
@@ -28,7 +34,7 @@ export class AccountsService {
 
   getAccountsList(searchString: string = ""): Observable<AccountViewModel[]> {
     return this.httpClient.get<AccountViewModel[]>(
-      `${this.url}?${searchString}`
+      `${this.url}?year=${this.accountingApi.getSelectedYear()}&${searchString}`
     );
   }
 

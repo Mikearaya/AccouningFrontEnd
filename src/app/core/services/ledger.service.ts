@@ -15,14 +15,20 @@ import {
   UpdateLedgerStatus,
   LedgerEntry
 } from "../../features/ledgers/ledger";
+import { AccountingApiService } from "src/app/Services/accounting-api.service";
 
 @Injectable()
 export class LedgerService {
   private url = "ledgers";
-  constructor(private httpClient: HttpClient) {}
+  constructor(
+    private httpClient: HttpClient,
+    private accountingApi: AccountingApiService
+  ) {}
 
   getAllLedgerEntries(query: string = ""): Observable<LedgerEntryViewModel[]> {
-    return this.httpClient.get<LedgerEntryViewModel[]>(`${this.url}?${query}`);
+    return this.httpClient.get<LedgerEntryViewModel[]>(
+      `${this.url}?year=${this.accountingApi.getSelectedYear()}${query}`
+    );
   }
 
   getLedgerEntryById(id: number): Observable<JornalEntryViewModel> {

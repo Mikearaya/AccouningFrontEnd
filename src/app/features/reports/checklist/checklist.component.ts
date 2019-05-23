@@ -84,7 +84,7 @@ export class ChecklistComponent implements OnInit {
       this.current.pageSize = this.grid.pageSettings.pageSize;
       this.current.pageNumber = this.grid.pageSettings.currentPage;
  */
-    this.onFiltered();
+    // this.onFiltered();
     //    }
   }
 
