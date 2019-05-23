@@ -1,12 +1,17 @@
 a {
   font-family: unset;
-  color: #4d841d;
+  color: #333;
 }
 
 a:hover {
-  color: blue;
+  color: #4d841d;
 }
 
 a:active {
-  color: black;
+  color: #4d841d;
+}
+
+span {
+  margin-right: 2px;
+  margin-left: 3px;
 }

@@ -1,3 +1,4 @@
+<app-filter-option></app-filter-option>
 <div class="row">
   <div class="col-3">
     <button ejs-button (click)="print()">Print</button>
@@ -16,26 +17,26 @@
     </tr>
     <tr *ngFor="let revenue of data?.Revenue">
       <td>{{ revenue.AccountType }}</td>
-      <td>{{ revenue.Amount }}</td>
+      <td>{{ revenue.Amount | currency: "":"" }}</td>
     </tr>
     <tr>
       <td>Total revenue:</td>
-      <td>{{ data?.TotalRevenue }}</td>
+      <td>{{ data?.TotalRevenue | currency: "":"" }}</td>
     </tr>
     <tr>
       <th>Expense</th>
     </tr>
     <tr *ngFor="let expense of data?.Expense">
       <td>{{ expense.AccountType }}</td>
-      <td>{{ expense.Amount }}</td>
+      <td>{{ expense.Amount | currency: "":"" }}</td>
     </tr>
     <tr>
       <td>Total Expense:</td>
-      <td>{{ data?.TotalExpense }}</td>
+      <td>{{ data?.TotalExpense | currency: "":"" }}</td>
     </tr>
     <tr>
       <td>Net Surplus:</td>
-      <td>{{ data?.NetSurplus }}</td>
+      <td>{{ data?.NetSurplus | currency: "":"" }}</td>
     </tr>
   </tbody>
 </table>

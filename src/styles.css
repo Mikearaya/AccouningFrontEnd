@@ -2,8 +2,10 @@
   content: '\e993';
 }
 
+@import "../node_modules/font-awesome/css/font-awesome.min.css";
+
 body {
-  background-color: #fafafa !important;
+  background-color: #ecf0f5 !important;
   padding: 0px;
 }
 

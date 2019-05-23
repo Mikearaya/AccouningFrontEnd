@@ -4,6 +4,7 @@ export const NAVIGATION_LINKS = [
     name: "Account Managment",
     expanded: true,
     enabled: true,
+    icon: "../assets/a.jpg",
     selected: false,
     subChild: [
       {
@@ -29,6 +30,14 @@ export const NAVIGATION_LINKS = [
         expanded: false,
         enabled: true,
         selected: false
+      },
+      {
+        id: "01-04",
+        name: "Create new year data",
+        url: "new-year-data",
+        expanded: false,
+        enabled: true,
+        selected: false
       }
     ]
   },
@@ -37,6 +46,7 @@ export const NAVIGATION_LINKS = [
     name: "Ledger Entries",
     expanded: true,
     enabled: true,
+    icon: "../assets/a.jpg",
     selected: false,
     subChild: [
       {
@@ -55,6 +65,8 @@ export const NAVIGATION_LINKS = [
     expanded: true,
     enabled: true,
     selected: false,
+    icon: "../assets/a.jpg",
+
     subChild: [
       {
         id: "03-01",
@@ -71,6 +83,7 @@ export const NAVIGATION_LINKS = [
     name: "Reports",
     expanded: true,
     enabled: true,
+    icon: "../assets/a.jpg",
     selected: false,
     subChild: [
       {
@@ -91,8 +104,8 @@ export const NAVIGATION_LINKS = [
       },
       {
         id: "04-03",
-        name: "Income Statment",
-        url: "reports/income-statment",
+        name: "Income Statement",
+        url: "reports/income-statement",
         expanded: false,
         enabled: true,
         selected: false
@@ -103,6 +116,7 @@ export const NAVIGATION_LINKS = [
         url: "/cogs-schedule",
         expanded: false,
         enabled: true,
+           icon: "../assets/a.jpg",
         selected: false
       }, */
       {
@@ -135,6 +149,7 @@ export const NAVIGATION_LINKS = [
         url: "/oe-cost-center",
         expanded: false,
         enabled: true,
+           icon: "../assets/a.jpg",
         selected: false
       },
       {
@@ -143,6 +158,7 @@ export const NAVIGATION_LINKS = [
         url: "/oe-detail",
         expanded: false,
         enabled: true,
+           icon: "../assets/a.jpg",
         selected: false
       } */
     ]

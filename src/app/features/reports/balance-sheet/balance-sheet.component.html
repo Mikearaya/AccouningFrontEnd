@@ -1,3 +1,4 @@
+<app-filter-option></app-filter-option>
 <div class="row">
   <div class="col-3">
     <button ejs-button (click)="print()">Print</button>
@@ -16,33 +17,33 @@
     </tr>
     <tr *ngFor="let asset of data?.Assets">
       <td>{{ asset.AccountCategory }}</td>
-      <td>{{ asset.Amount }}</td>
+      <td>{{ asset.Amount | currency: "":"" }}</td>
     </tr>
     <tr>
       <td>Total current assets:</td>
-      <td>{{ data?.TotalAsset }}</td>
+      <td>{{ data?.TotalAsset | currency: "":"" }}</td>
     </tr>
     <tr>
       <th>Capital</th>
     </tr>
     <tr *ngFor="let capital of data?.Capitals">
       <td>{{ capital.AccountCategory }}</td>
-      <td>{{ capital.Amount }}</td>
+      <td>{{ capital.Amount | currency: "":"" }}</td>
     </tr>
     <tr>
       <td>Net capital:</td>
-      <td>{{ data?.TotalAsset }}</td>
+      <td>{{ data?.TotalAsset | currency: "":"" }}</td>
     </tr>
     <tr>
       <th>Liabilities</th>
     </tr>
     <tr *ngFor="let liability of data?.Liabilities">
       <td>{{ liability.AccountCategory }}</td>
-      <td>{{ liability.Amount }}</td>
+      <td>{{ liability.Amount | currency: "":"" }}</td>
     </tr>
     <tr>
       <td>Total current liabilities:</td>
-      <td>{{ data?.TotalAsset }}</td>
+      <td>{{ data?.TotalAsset | currency: "":"" }}</td>
     </tr>
   </tbody>
 </table>

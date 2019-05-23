@@ -2,7 +2,7 @@
   width: 50%;
   float: left;
   font-family: unset;
-  color: #4d841d;
+  color: #333;
   font-size: x-large
 }
 
@@ -10,11 +10,10 @@
   width: 50%;
   float: left;
   height: 3em;
-  color: #4d841d;
-  margin-left: 65%;
+  color: #333;
+  text-align: right;
 }
 
 div {
-  display: flex;
   align-items: center;
 }

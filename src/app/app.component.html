@@ -4,8 +4,18 @@
       <div class="sidebar-header">
         Smart Accounting
       </div>
-      <div class="second-sidebar-header">
-        Appdiv system development
+      <div class="user-panel">
+        <div class="image">
+          <span class="e-avatar e-avatar-circle">AP</span>
+        </div>
+        <div class="info">
+          <div class="name">
+            Appdiv system development
+          </div>
+          <div class="status">
+            <small>Online</small>
+          </div>
+        </div>
       </div>
       <div class="center-align">
         <ejs-treeview
@@ -13,7 +23,13 @@
           (nodeClicked)="loadRoutingContent($event)"
           id="treeelement"
           [fields]="field"
-        ></ejs-treeview>
+        >
+          <ng-template #nodeTemplate="" let-data="">
+            <div>
+              <div class="ename">{{ data.name }}</div>
+            </div>
+          </ng-template>
+        </ejs-treeview>
       </div>
     </ejs-sidebar>
   </div>
@@ -52,6 +68,7 @@
         </div>
 
         <div class="main-content">
+          <i class="fas fa-ad"></i>
           <router-outlet></router-outlet>
         </div>
       </div>

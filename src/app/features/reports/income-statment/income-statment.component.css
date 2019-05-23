@@ -7,3 +7,14 @@ div.content {
     display: none
   }
 }
+
+.e-control.e-btn.e-lib {
+  background-color: #4d841d;
+  color: white;
+}
+
+table {
+  font-family: 'Courier New', Courier, monospace;
+  background: white;
+  margin-top: 20px;
+}

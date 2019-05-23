@@ -29,6 +29,15 @@ const routes: Routes = [
     }
   },
   {
+    path: "new-year-data",
+    loadChildren:
+      "../features/new-year-data/new-year-data.module#NewYearDataModule",
+    data: {
+      title: "New year data",
+      breadCrum: "New year data"
+    }
+  },
+  {
     path: "lookups",
     loadChildren: "../features/lookups/lookups.module#LookupsModule",
     data: {
