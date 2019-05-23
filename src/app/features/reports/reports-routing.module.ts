@@ -11,32 +11,35 @@ const routes: Routes = [
   {
     path: "checklist",
     component: ChecklistComponent,
-    data: { breadCrum: "Checklist" }
+    data: { title: "Checklist", breadCrum: "Checklist" }
   },
   {
     path: "subsidaries",
     component: SubsidaryLedgerReportComponent,
-    data: { breadCrum: "Subsidary" }
+    data: { title: "Subsidary ledger", breadCrum: "Subsidary" }
   },
   {
     path: "consolidated-trial-balance",
     component: ConsolidatedTrialBalanceComponent,
-    data: { breadCrum: "Consolidated trial balance" }
+    data: {
+      title: "Consolidated trial balance",
+      breadCrum: "Consolidated trial balance"
+    }
   },
   {
     path: "trial-balance-detail",
     component: TrialBalanceDetailComponent,
-    data: { breadCrum: "Trial balance detail" }
+    data: { title: "Trial balance detail", breadCrum: "Trial balance detail" }
   },
   {
     path: "balance-sheet",
     component: BalanceSheetComponent,
-    data: { breadCrum: "Balance sheet" }
+    data: { title: "Balance sheet", breadCrum: "Balance sheet" }
   },
   {
     path: "income-statment",
     component: IncomeStatmentComponent,
-    data: { breadCrum: "Income statment" }
+    data: { title: "Income statment", breadCrum: "Income statment" }
   }
 ];
 

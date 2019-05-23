@@ -6,4 +6,14 @@ div.content {
   .e-control.e-btn.e-lib {
     display: none
   }
+
+}
+
+.e-control.e-btn.e-lib {
+  background-color: #4d841d;
+  color: white;
+}
+
+table {
+  font-family: 'Courier New', Courier, monospace;
 }

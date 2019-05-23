@@ -177,7 +177,7 @@ export class AppComponent {
     }
   ];
 
-  public field: Object;
+  public field: object;
   constructor(private router: Router) {
     this.field = {
       dataSource: this.smartAccountingLinks,
