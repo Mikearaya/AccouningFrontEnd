@@ -159,8 +159,8 @@
   padding-top: 15px;
 }
 
-i::before {
-  background: #4d841d;
+i {
+ margin-right: 1em;
 }
 
 /* .e-treeview div.e-icons::before {

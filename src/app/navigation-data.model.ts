@@ -2,9 +2,10 @@ export const NAVIGATION_LINKS = [
   {
     id: "01",
     name: "Account Managment",
-    expanded: true,
+    expanded: false,
     enabled: true,
-    icon: "../assets/a.jpg",
+
+    icon: "fas fa-sitemap",
     selected: false,
     subChild: [
       {
@@ -44,10 +45,10 @@ export const NAVIGATION_LINKS = [
   {
     id: "02",
     name: "Ledger Entries",
-    expanded: true,
+    expanded: false,
     enabled: true,
-    icon: "../assets/a.jpg",
     selected: false,
+    icon: "fas fa-book-open",
     subChild: [
       {
         id: "02-01",
@@ -62,10 +63,10 @@ export const NAVIGATION_LINKS = [
   {
     id: "03",
     name: "Settings",
-    expanded: true,
+    expanded: false,
     enabled: true,
     selected: false,
-    icon: "../assets/a.jpg",
+    icon: "fas fa-cogs",
 
     subChild: [
       {
@@ -81,10 +82,11 @@ export const NAVIGATION_LINKS = [
   {
     id: "04",
     name: "Reports",
-    expanded: true,
+    expanded: false,
     enabled: true,
-    icon: "../assets/a.jpg",
+
     selected: false,
+    icon: "fas fa-briefcase",
     subChild: [
       {
         id: "04-01",
@@ -116,7 +118,7 @@ export const NAVIGATION_LINKS = [
         url: "/cogs-schedule",
         expanded: false,
         enabled: true,
-           icon: "../assets/a.jpg",
+
         selected: false
       }, */
       {
@@ -149,7 +151,7 @@ export const NAVIGATION_LINKS = [
         url: "/oe-cost-center",
         expanded: false,
         enabled: true,
-           icon: "../assets/a.jpg",
+
         selected: false
       },
       {
@@ -158,7 +160,7 @@ export const NAVIGATION_LINKS = [
         url: "/oe-detail",
         expanded: false,
         enabled: true,
-           icon: "../assets/a.jpg",
+
         selected: false
       } */
     ]

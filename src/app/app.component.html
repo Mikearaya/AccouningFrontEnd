@@ -26,7 +26,10 @@
         >
           <ng-template #nodeTemplate="" let-data="">
             <div>
-              <div class="ename">{{ data.name }}</div>
+              <div>
+                <i [attr.class]="data.icon" aria-hidden="true"> </i
+                >{{ data.name }}
+              </div>
             </div>
           </ng-template>
         </ejs-treeview>
