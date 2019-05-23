@@ -10,10 +10,9 @@ import {
 } from "@syncfusion/ej2-angular-navigations";
 import { ButtonModule } from "@syncfusion/ej2-angular-buttons";
 import { CoreModule } from "./core/core.module";
-import { HTTP_INTERCEPTORS } from "@angular/common/http";
-import { RmHeaderInterceptorService } from "./Services/rm-header-interceptor.service";
 import { LookupsModule } from "./features/lookups/lookups.module";
 import { SharedModule } from "./shared/shared.module";
+import { AccountingApiService } from "./Services/accounting-api.service";
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,7 +27,7 @@ import { SharedModule } from "./shared/shared.module";
     LookupsModule,
     SharedModule
   ],
-  providers: [],
+  providers: [AccountingApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

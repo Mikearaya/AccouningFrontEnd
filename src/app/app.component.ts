@@ -1,4 +1,4 @@
-import { Component, ViewChild } from "@angular/core";
+import { Component, ViewChild, OnInit } from "@angular/core";
 import {
   TreeViewComponent,
   NodeSelectEventArgs,
@@ -7,13 +7,30 @@ import {
 } from "@syncfusion/ej2-angular-navigations";
 import { Router } from "@angular/router";
 import { ButtonComponent } from "@syncfusion/ej2-angular-buttons";
+import { AccountingApiService } from "./Services/accounting-api.service";
+import { AvailableYearsModel } from "./Services/system-data.model";
+import { NAVIGATION_LINKS } from "./navigation-data.model";
 
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.css"]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+  constructor(
+    private router: Router,
+    private accountingApi: AccountingApiService
+  ) {
+    this.yearFields = { key: "Year", value: "Year" };
+    this.field = {
+      dataSource: this.smartAccountingLinks,
+      id: "id",
+      text: "name",
+      child: "subChild",
+      expanded: "expanded",
+      selected: "selected"
+    };
+  }
   title = "";
   @ViewChild("sidebar")
   public sidebar: SidebarComponent;
@@ -24,178 +41,30 @@ export class AppComponent {
   @ViewChild("togglebtn")
   public togglebtn: ButtonComponent;
 
-  public yearData: string[] = ["2015", "2016", "2017", "2018", "2019"];
+  public yearData: AvailableYearsModel[] = [];
 
-  public smartAccountingLinks: object[] = [
-    {
-      id: "01",
-      name: "Account Managment",
-      expanded: true,
-      enabled: true,
-      selected: false,
-      subChild: [
-        {
-          id: "01-01",
-          name: "Account chart",
-          url: "/accounts",
-          expanded: false,
-          enabled: true,
-          selected: false
-        },
-        {
-          id: "01-02",
-          name: "Account catagory",
-          url: "/account-catagories",
-          expanded: false,
-          enabled: true,
-          selected: false
-        },
-        {
-          id: "01-03",
-          name: "Account Type",
-          url: "/account-types",
-          expanded: false,
-          enabled: true,
-          selected: false
-        }
-      ]
-    },
-    {
-      id: "02",
-      name: "Ledger Entries",
-      expanded: true,
-      enabled: true,
-      selected: false,
-      subChild: [
-        {
-          id: "02-01",
-          name: "Ledger Entry View",
-          url: "/ledgers",
-          expanded: false,
-          enabled: true,
-          selected: false
-        }
-      ]
-    },
-    {
-      id: "03",
-      name: "Settings",
-      expanded: true,
-      enabled: true,
-      selected: false,
-      subChild: [
-        {
-          id: "03-01",
-          name: "Lookup",
-          url: "/lookups",
-          expanded: false,
-          enabled: true,
-          selected: false
-        }
-      ]
-    },
-    {
-      id: "04",
-      name: "Reports",
-      expanded: true,
-      enabled: true,
-      selected: false,
-      subChild: [
-        {
-          id: "04-01",
-          name: "Checklist",
-          url: "/reports/checklist",
-          expanded: false,
-          enabled: true,
-          selected: false
-        },
-        {
-          id: "04-02",
-          name: "Balance Sheet",
-          url: "/reports/balance-sheet",
-          expanded: false,
-          enabled: true,
-          selected: false
-        },
-        {
-          id: "04-03",
-          name: "Income Statment",
-          url: "reports/income-statment",
-          expanded: false,
-          enabled: true,
-          selected: false
-        },
-        {
-          id: "04-04",
-          name: "COGS Schedule",
-          url: "/cogs-schedule",
-          expanded: false,
-          enabled: true,
-          selected: false
-        },
-        {
-          id: "04-05",
-          name: "Subsidiary Ledger",
-          url: "reports/subsidaries",
-          expanded: false,
-          enabled: true,
-          selected: false
-        },
-        {
-          id: "04-06",
-          name: "Trial Balance detail",
-          url: "reports/trial-balance-detail",
-          expanded: false,
-          enabled: true,
-          selected: false
-        },
-        {
-          id: "04-07",
-          name: "Consolidated Trial Balance",
-          url: "reports/consolidated-trial-balance",
-          expanded: false,
-          enabled: true,
-          selected: false
-        },
-        {
-          id: "04-08",
-          name: "OE Cost Center",
-          url: "/oe-cost-center",
-          expanded: false,
-          enabled: true,
-          selected: false
-        },
-        {
-          id: "04-09",
-          name: "OE Detail",
-          url: "/oe-detail",
-          expanded: false,
-          enabled: true,
-          selected: false
-        }
-      ]
-    }
-  ];
+  public smartAccountingLinks: object[] = NAVIGATION_LINKS;
 
-  public field: object;
-  constructor(private router: Router) {
-    this.field = {
-      dataSource: this.smartAccountingLinks,
-      id: "id",
-      text: "name",
-      child: "subChild",
-      expanded: "expanded",
-      selected: "selected"
-    };
+  public field: Object;
+  public yearFields: { key: string; value: string };
+  ngOnInit(): void {
+    this.accountingApi
+      .getAvailableYears()
+      .subscribe((data: AvailableYearsModel[]) => (this.yearData = data));
   }
 
   public loadRoutingContent(args: NodeSelectEventArgs): void {
     const data: any = this.tree.getTreeData(args.node);
     const routerLink: string = data[0].url;
+    this.router.navigate([routerLink]);
+  }
 
-    if (routerLink) {
-      this.router.navigate([routerLink]);
+  yearChanged(data: any): void {
+    if (data) {
+      this.accountingApi.setSelectedYear(data);
     }
+
+    console.log(this.accountingApi.getSelectedYear());
   }
 
   btnClick() {
