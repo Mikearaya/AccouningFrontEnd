@@ -10,4 +10,13 @@
   .e-gridpager.e-control.e-pager.e-lib {
     display: none
   }
+
+  .e-icons.e-dtdiagonaldown.e-icon-gdownarrow,
+  .e-icons.e-dtdiagonalright.e-icon-grightarrow {
+    display: none;
+  }
+
+  .e-emptyrow {
+    display: none !important;
+  }
 }

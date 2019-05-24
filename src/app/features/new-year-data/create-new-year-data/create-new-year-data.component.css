@@ -4,3 +4,29 @@
   height: 100vh;
 
 }
+
+/* button {
+  background: #4d841d;
+  border: none;
+  border-radius: 2px;
+  box-shadow: azure;
+  color: white;
+  height: 50px;
+  width: 200px;
+  font-size: xx-large;
+} */
+
+button {
+  width: 140px;
+  height: 45px;
+  text-transform: uppercase;
+  color: white;
+  background: #4d841d;
+  border: none;
+  border-radius: 45px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 1);
+  transition: all 0.3s ease 0s;
+  cursor: pointer;
+  outline: none;
+  font-size: larger;
+}
