@@ -43,12 +43,14 @@ export class TrialBalanceDetailViewModel {
   Id: number;
   AccountId: string;
   AccountName: string;
+  ControlAccountId?: number;
   Entries: TrialBalanceDetail[] = [];
 }
 
 export class TrialBalanceDetail {
   AccountId: string;
   AccountName: string;
+  ControlAccountId: number;
   Credit: number;
   Debit: number;
 }

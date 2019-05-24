@@ -24,7 +24,7 @@ export class TrialBalanceDetailComponent implements OnInit {
   }
   public childGrid: GridModel = {
     dataSource: this.data,
-    queryString: "AccountId",
+    queryString: "ControlAccountId",
     columns: [
       {
         field: "AccountId",
