@@ -8,6 +8,7 @@ export class Checklist {
 
 export class Jornal {
   ControlAccountId: string;
+  LedgerId?: number;
   SubAccountId: string;
   Credit?: number;
   Debit?: number;

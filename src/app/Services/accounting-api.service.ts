@@ -19,4 +19,8 @@ export class AccountingApiService {
   getSelectedYear(): string {
     return this.selectedYear;
   }
+
+  createNextFiscalPeriod(): Observable<void> {
+    return this.httpClient.post<void>(`accounts/create-new-year`, {});
+  }
 }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from "@angular/core";
+import { AccountingApiService } from "src/app/Services/accounting-api.service";
+import { HttpErrorResponse } from "@angular/common/http";
 
 @Component({
   selector: "app-create-new-year-data",
@@ -9,11 +11,15 @@ import { Component, OnInit } from "@angular/core";
   `,
   styleUrls: ["./create-new-year-data.component.css"]
 })
-export class CreateNewYearDataComponent implements OnInit {
-  constructor() {}
+export class CreateNewYearDataComponent {
+  constructor(private accountingApi: AccountingApiService) {}
 
-  ngOnInit() {}
   create() {
-    alert("create clicked");
+    this.accountingApi
+      .createNextFiscalPeriod()
+      .subscribe(
+        () => alert("Accounts for the next fiscal period created successfuly"),
+        (error: HttpErrorResponse) => alert(error.message)
+      );
   }
 }

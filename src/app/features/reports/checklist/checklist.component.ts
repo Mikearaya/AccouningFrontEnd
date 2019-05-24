@@ -110,6 +110,8 @@ export class ChecklistComponent implements OnInit {
             x.push(elementx);
           });
         });
+
+        console.log(x);
         this.childGrid.dataSource = x;
       });
   }

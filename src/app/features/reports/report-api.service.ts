@@ -9,15 +9,19 @@ import {
   IncomeStatmentViewModel
 } from "./report";
 import { Observable } from "rxjs";
+import { AccountingApiService } from "src/app/Services/accounting-api.service";
 
 @Injectable()
 export class ReportApiService {
   private url = "report";
-  constructor(private httpClient: HttpClient) {}
+  constructor(
+    private httpClient: HttpClient,
+    private accountingService: AccountingApiService
+  ) {}
 
   getChecklistReport(searchString: string): Observable<LedgerChecklistView> {
     return this.httpClient.get<LedgerChecklistView>(
-      `${this.url}/ledger-checklists?${searchString}`
+      `${this.url}/ledger-checklists?year=2019${searchString}`
     );
   }
 
@@ -25,7 +29,9 @@ export class ReportApiService {
     searchString: string
   ): Observable<SubsidaryLedgerViewModel[]> {
     return this.httpClient.get<SubsidaryLedgerViewModel[]>(
-      `subsidary-ledgers?${searchString}`
+      `${
+        this.url
+      }/subsidary-ledgers?year=${this.accountingService.getSelectedYear()}&${searchString}`
     );
   }
 
@@ -33,7 +39,9 @@ export class ReportApiService {
     searchString: string
   ): Observable<TrialBalanceDetailViewModel[]> {
     return this.httpClient.get<TrialBalanceDetailViewModel[]>(
-      `trial-balance-datail?${searchString}`
+      `${
+        this.url
+      }/trial-balance/detail?year=${this.accountingService.getSelectedYear()}&${searchString}`
     );
   }
 
@@ -41,19 +49,25 @@ export class ReportApiService {
     searchString: string
   ): Observable<ConsolidatedTrialBalanceViewModel[]> {
     return this.httpClient.get<ConsolidatedTrialBalanceViewModel[]>(
-      `consolidated-trial-balance?${searchString}`
+      `${
+        this.url
+      }/trial-balance/consolidated?year=${this.accountingService.getSelectedYear()}&${searchString}`
     );
   }
 
   getBalanceSheet(searchString: string): Observable<BalanceSheetViewModel> {
     return this.httpClient.get<BalanceSheetViewModel>(
-      `balance-sheet?${searchString}`
+      `${
+        this.url
+      }/balance-sheet?year=${this.accountingService.getSelectedYear()}&${searchString}`
     );
   }
 
   getIncomeStatment(searchString: string): Observable<IncomeStatmentViewModel> {
     return this.httpClient.get<IncomeStatmentViewModel>(
-      `income-statement?${searchString}`
+      `${
+        this.url
+      }/income-statement?year=${this.accountingService.getSelectedYear()}&${searchString}`
     );
   }
 }
