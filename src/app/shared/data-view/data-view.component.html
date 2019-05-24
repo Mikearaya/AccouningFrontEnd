@@ -1,48 +1,46 @@
-<div class="e-card">
-  <div class="title"></div>
-  <ejs-grid
-    [dataSource]="data"
-    #grid
-    id="dataview"
-    [editSettings]="editSettings"
-    [rowHeight]="25"
-    [toolbar]="toolbar"
-    [allowSorting]="enableSorting"
-    allowPaging="showPagin"
-    [pageSettings]="initialPage"
-    allowResizing="true"
-    allowFiltering="showFilter"
-    [filterSettings]="filterSettings"
-    (toolbarClick)="toolbarClick($event)"
-    (rowSelected)="rowIsSelected($event)"
-    [groupSettings]="groupOptions"
-    [allowGrouping]="allowGrouping"
-    (actionComplete)="actionEndHandler($event)"
-    [allowPdfExport]="showPdfExport"
-    [showColumnChooser]="showColumnChooser"
-    [height]="500"
-  >
-    <e-columns>
-      <e-column
-        *ngFor="let column of columnsList"
-        [field]="column.key"
-        [headerText]="column.header"
-        [width]="column.width"
-        [textAlign]="column.textAlign"
-        [headerTextAlign]="column.hederAlign"
-        [visible]="column.visible"
-        [type]="column.type"
-        [format]="column.format"
-        [visible]="column.visible"
-      ></e-column>
-      <e-column
-        headerText="Actions"
-        width="30"
-        [commands]="commands"
-        *ngIf="commands.length > 0"
-        textAlign="center"
-      >
-      </e-column>
-    </e-columns>
-  </ejs-grid>
-</div>
+<div class="title"></div>
+<ejs-grid
+  [dataSource]="data"
+  #grid
+  id="dataview"
+  [editSettings]="editSettings"
+  [rowHeight]="25"
+  [toolbar]="toolbar"
+  [allowSorting]="enableSorting"
+  allowPaging="showPagin"
+  [pageSettings]="initialPage"
+  allowResizing="true"
+  allowFiltering="showFilter"
+  [filterSettings]="filterSettings"
+  (toolbarClick)="toolbarClick($event)"
+  (rowSelected)="rowIsSelected($event)"
+  [groupSettings]="groupOptions"
+  [allowGrouping]="allowGrouping"
+  (actionComplete)="actionEndHandler($event)"
+  [allowPdfExport]="showPdfExport"
+  [showColumnChooser]="showColumnChooser"
+  [height]="500"
+>
+  <e-columns>
+    <e-column
+      *ngFor="let column of columnsList"
+      [field]="column.key"
+      [headerText]="column.header"
+      [width]="column.width"
+      [textAlign]="column.textAlign"
+      [headerTextAlign]="column.hederAlign"
+      [visible]="column.visible"
+      [type]="column.type"
+      [format]="column.format"
+      [visible]="column.visible"
+    ></e-column>
+    <e-column
+      headerText="Actions"
+      width="30"
+      [commands]="commands"
+      *ngIf="commands.length > 0"
+      textAlign="center"
+    >
+    </e-column>
+  </e-columns>
+</ejs-grid>

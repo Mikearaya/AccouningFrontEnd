@@ -1,0 +1,13 @@
+.header {
+  font-family: 'Courier New',
+    Courier,
+    monospace;
+  display: none;
+  text-align: center
+}
+
+@media print {
+  .header {
+    display: block;
+  }
+}

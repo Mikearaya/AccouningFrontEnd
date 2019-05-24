@@ -1,0 +1,34 @@
+<div class="dashboard">
+  <div class="section">
+    <div class="row">
+      <div class="col-3 content card m-3" *ngFor="let items of dashboardItems">
+        <div class="icons"><i [attr.class]="items.icon"></i></div>
+        <div class="item-name">
+          {{ items.name }}
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <ejs-chart
+          id="chart-container"
+          [primaryXAxis]="primaryXAxis"
+          [title]="title"
+          [titleStyle]="titleStyle"
+        >
+          <e-series-collection>
+            <e-series
+              [dataSource]="chartData"
+              type="Line"
+              xName="month"
+              yName="sales"
+              width="2"
+              name="China"
+              [marker]="marker"
+            ></e-series>
+          </e-series-collection>
+        </ejs-chart>
+      </div>
+    </div>
+  </div>
+</div>

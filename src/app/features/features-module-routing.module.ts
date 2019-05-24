@@ -3,6 +3,13 @@ import { Routes, RouterModule } from "@angular/router";
 
 const routes: Routes = [
   {
+    path: "",
+    loadChildren: "../features/dashboard/dashboard.module#DashboardModule",
+    data: {
+      title: "Dashboard"
+    }
+  },
+  {
     path: "accounts",
     loadChildren: "../features/accounts/accounts.module#AccountsModule",
     data: {

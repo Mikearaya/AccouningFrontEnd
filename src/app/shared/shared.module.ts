@@ -44,6 +44,9 @@ import { DialogBoxComponent } from "./dialog-box/dialog-box.component";
 import { FilterOptionComponent } from "./filter-option/filter-option.component";
 import { CoreModule } from "../core/core.module";
 import { PaginationComponent } from "./pagination/pagination.component";
+import { DashboardLayoutModule } from "@syncfusion/ej2-angular-layouts";
+import { ChartModule } from "@syncfusion/ej2-angular-charts";
+import { PrintHeaderComponent } from "./print-header/print-header.component";
 
 @NgModule({
   imports: [
@@ -70,7 +73,9 @@ import { PaginationComponent } from "./pagination/pagination.component";
     TreeGridModule,
     AccordionModule,
     CoreModule,
-    PagerModule
+    PagerModule,
+    DashboardLayoutModule,
+    ChartModule
   ],
   exports: [
     CommonModule,
@@ -103,7 +108,10 @@ import { PaginationComponent } from "./pagination/pagination.component";
     FilterOptionComponent,
     PagerModule,
     PaginationComponent,
-    BreadCrumbComponent
+    BreadCrumbComponent,
+    DashboardLayoutModule,
+    ChartModule,
+    PrintHeaderComponent
   ],
   declarations: [
     FormOptionsComponent,
@@ -116,7 +124,8 @@ import { PaginationComponent } from "./pagination/pagination.component";
     LookupSelectorComponent,
     DialogBoxComponent,
     FilterOptionComponent,
-    PaginationComponent
+    PaginationComponent,
+    PrintHeaderComponent
   ],
   providers: []
 })

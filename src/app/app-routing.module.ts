@@ -6,7 +6,6 @@ const routes: Routes = [
     path: "",
     loadChildren: "../app/features/features-module.module#FeaturesModule",
     data: {
-      title: "Home",
       breadCrum: "Home"
     }
   }

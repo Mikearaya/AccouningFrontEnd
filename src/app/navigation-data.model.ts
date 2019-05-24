@@ -1,5 +1,14 @@
 export const NAVIGATION_LINKS = [
   {
+    id: "00",
+    name: "Dashboard",
+    enabled: true,
+    expanded: false,
+    url: "/",
+    selected: true,
+    icon: "fas fa-columns"
+  },
+  {
     id: "01",
     name: "Account Managment",
     expanded: false,

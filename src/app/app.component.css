@@ -160,10 +160,18 @@
 }
 
 i {
- margin-right: 1em;
+  margin-right: 1em;
 }
 
 /* .e-treeview div.e-icons::before {
   content: '\e434'
 }
  */
+
+.e-list-item.e-level-2.e-active>.e-fullrow {
+  background: #4d841d55;
+}
+
+.e-treeview .e-list-item.e-active>.e-text-content * {
+  color: black;
+}

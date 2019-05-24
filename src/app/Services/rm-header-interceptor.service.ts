@@ -19,19 +19,30 @@ import {
 import { Observable, throwError } from "rxjs";
 import { ActivatedRoute } from "@angular/router";
 import { tap, catchError, finalize } from "rxjs/operators";
+import {
+  hideSpinner,
+  showSpinner,
+  createSpinner
+} from "@syncfusion/ej2-popups";
 
 @Injectable()
 export class RmHeaderInterceptorService implements HttpInterceptor {
-  constructor(private location: ActivatedRoute) {}
+  constructor(private location: ActivatedRoute) {
+    createSpinner({
+      // Specify the target for the spinner to show
+      target: document.getElementById("spinner-container")
+    });
+  }
 
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
+    showSpinner(document.getElementById("spinner-container"));
     const requestUrl = request.url;
     const started = Date.now();
     const modifiedRequest = request.clone({
-      url: `http://localhost:5000/api/${requestUrl}`,
+      url: `http://localhost:5000/${requestUrl}`,
       setHeaders: {
         "Content-Type": "application/json; charset=utf-8",
         Accept: "application/json"
@@ -53,6 +64,7 @@ export class RmHeaderInterceptorService implements HttpInterceptor {
         return throwError(error);
       }),
       finalize(() => {
+        hideSpinner(document.getElementById("spinner-container"));
         const elapsed = Date.now() - started;
         const msg = `${request.method} "${
           request.urlWithParams

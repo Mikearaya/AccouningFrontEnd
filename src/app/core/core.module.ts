@@ -24,6 +24,10 @@ import { LedgerService } from "./services/ledger.service";
 import { AccountsService } from "./services/accounts.service";
 import { RmHeaderInterceptorService } from "../Services/rm-header-interceptor.service";
 import { LookupService } from "./services/lookup.service";
+import {
+  LineSeriesService,
+  CategoryService
+} from "@syncfusion/ej2-angular-charts";
 
 @NgModule({
   declarations: [],
@@ -49,6 +53,8 @@ import { LookupService } from "./services/lookup.service";
     LookupService,
     AccountCatagoryApiService,
     LedgerService,
+    LineSeriesService,
+    CategoryService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: RmHeaderInterceptorService,

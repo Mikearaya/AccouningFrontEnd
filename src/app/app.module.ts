@@ -13,6 +13,7 @@ import { CoreModule } from "./core/core.module";
 import { LookupsModule } from "./features/lookups/lookups.module";
 import { SharedModule } from "./shared/shared.module";
 import { AccountingApiService } from "./Services/accounting-api.service";
+import { DashboardLayoutModule } from "@syncfusion/ej2-angular-layouts";
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,7 +26,8 @@ import { AccountingApiService } from "./Services/accounting-api.service";
     ButtonModule,
     CoreModule,
     LookupsModule,
-    SharedModule
+    SharedModule,
+    DashboardLayoutModule
   ],
   providers: [AccountingApiService],
   bootstrap: [AppComponent]
