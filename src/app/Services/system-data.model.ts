@@ -4,8 +4,8 @@ export interface AvailableYearsModel {
 
 export interface DashboardViewModel {
   TotalRevenue: number;
-  TotalAsset: number;
+  TotalAssets: number;
   TotalCapital: number;
   TotalLiability: number;
-  TotalExpence: number;
+  TotalExpense: number;
 }

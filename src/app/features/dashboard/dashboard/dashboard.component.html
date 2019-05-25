@@ -6,9 +6,13 @@
     >
       <div class="items-panel" [attr.class]="items.name">
         <div class="item-name">
-          <h1>{{ items.name }}</h1>
+          {{ items.name }}
+          {{ items.value }}
         </div>
-        <div class="icons"><i [attr.class]="items.icon"></i></div>
+
+        <div class="icons">
+          <i [attr.class]="items.icon"></i>
+        </div>
       </div>
     </div>
   </div>

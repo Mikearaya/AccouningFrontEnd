@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { AccountingApiService } from "src/app/Services/accounting-api.service";
+import { DashboardViewModel } from "src/app/Services/system-data.model";
 
 @Component({
   selector: "app-dashboard",
@@ -48,5 +49,14 @@ export class DashboardComponent implements OnInit {
       textAlignment: "Far",
       textOverflow: "Wrap"
     };
+    this.accountingService
+      .getDashboardReport()
+      .subscribe((data: DashboardViewModel) => {
+        this.dashboardItems[0].value = data.TotalAssets;
+        this.dashboardItems[1].value = data.TotalCapital;
+        this.dashboardItems[2].value = data.TotalLiability;
+        this.dashboardItems[3].value = data.TotalExpense;
+        this.dashboardItems[4].value = data.TotalRevenue;
+      });
   }
 }

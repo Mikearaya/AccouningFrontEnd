@@ -25,6 +25,6 @@ export class AccountingApiService {
   }
 
   getDashboardReport(): Observable<DashboardViewModel> {
-    return this.httpClient.get<DashboardViewModel>(`reports/dashboard`);
+    return this.httpClient.get<DashboardViewModel>(`report/dashboard`);
   }
 }
