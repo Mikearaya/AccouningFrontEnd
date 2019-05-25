@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { AvailableYearsModel } from "./system-data.model";
+import { AvailableYearsModel, DashboardViewModel } from "./system-data.model";
 import { Observable } from "rxjs";
 
 @Injectable()
@@ -22,5 +22,9 @@ export class AccountingApiService {
 
   createNextFiscalPeriod(): Observable<void> {
     return this.httpClient.post<void>(`accounts/create-new-year`, {});
+  }
+
+  getDashboardReport(): Observable<DashboardViewModel> {
+    return this.httpClient.get<DashboardViewModel>(`reports/dashboard`);
   }
 }

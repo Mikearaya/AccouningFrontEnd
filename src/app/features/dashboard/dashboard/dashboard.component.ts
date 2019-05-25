@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { AccountingApiService } from "src/app/Services/accounting-api.service";
 
 @Component({
   selector: "app-dashboard",
@@ -7,19 +8,19 @@ import { Component, OnInit } from "@angular/core";
 })
 export class DashboardComponent implements OnInit {
   public dashboardItems: any = [
-    { name: "Asset", icon: "fas fa-wallet" },
-    { name: "Capital", icon: "fas fa-coins" },
-    { name: "Liability", icon: "fas fa-funnel-dollar" },
-    { name: "Expence", icon: "fas fa-comments-dollar" },
-    { name: "Revenue", icon: "fas fa-hand-holding-usd" },
-    { name: "Dashboard", icon: "" }
+    { name: "Asset", icon: "fas fa-wallet", value: 0 },
+    { name: "Capital", icon: "fas fa-coins", value: 0 },
+    { name: "Liability", icon: "fas fa-funnel-dollar", value: 0 },
+    { name: "Expence", icon: "fas fa-comments-dollar", value: 0 },
+    { name: "Revenue", icon: "fas fa-hand-holding-usd", value: 0 },
+    { name: "Dashboard", icon: "", value: 0 }
   ];
   public primaryXAxis: object;
   public chartData: object[];
   public title: string;
   public marker: object;
   public titleStyle: object;
-  constructor() {}
+  constructor(private accountingService: AccountingApiService) {}
 
   ngOnInit(): void {
     this.chartData = [

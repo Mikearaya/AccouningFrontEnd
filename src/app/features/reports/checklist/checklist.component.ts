@@ -51,6 +51,22 @@ export class ChecklistComponent implements OnInit {
       { field: "AccountName", headerText: "Account name", width: 150 },
       { field: "Debit", headerText: "Debit", width: 150 },
       { field: "Credit", headerText: "Credit", width: 150 }
+    ],
+    aggregates: [
+      {
+        columns: [
+          {
+            type: "Sum",
+            field: "Debit",
+            footerTemplate: "${Sum}"
+          },
+          {
+            type: "Sum",
+            field: "Credit",
+            footerTemplate: "${Sum}"
+          }
+        ]
+      }
     ]
   };
   lastFilter = "";

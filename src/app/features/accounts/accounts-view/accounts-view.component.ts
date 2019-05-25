@@ -84,7 +84,7 @@ export class AccountsViewComponent implements OnInit {
     );
 
     this.childGrid = {
-      queryString: "ParentAccount",
+      queryString: "ParentAccountId",
       columns: [
         {
           field: "Id",
