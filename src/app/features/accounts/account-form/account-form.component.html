@@ -110,7 +110,7 @@
           </div>
         </div>
       </div>
-            <div class="row">
+      <div class="row">
         <div class="col-12">
           <label for="status"
             >Active
@@ -125,12 +125,8 @@
     </div>
     <!-- Second Column Starts-->
 
-
-      <!--Submit Button Area-->
-      <app-form-options
-        [submitDisabled]="accountForm.invalid"
-      ></app-form-options>
-  
+    <!--Submit Button Area-->
+    <app-form-options [submitDisabled]="accountForm.invalid"></app-form-options>
   </form>
 </section>
 <!-- Opening Balance Input Field-->
