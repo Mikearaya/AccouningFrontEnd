@@ -1,36 +1,5 @@
-.content.card.m-3 {
-  height: 200px;
-  box-shadow: hsl(0, 0%, 80%) 0 0 16px;
-  border-top: 2px solid #4d841d;
-}
-
-.content.card.m-3:hover {
-  box-shadow: #4d841d88 0 0 10px;
-  cursor: pointer;
-}
-
-.item-name {
-  font-size: xx-large;
-}
-
-.icons {
-  font-size: 100px;
-}
-
-#chart-container_svg {
-  overflow: visible !important;
-  width: 80% !important;
-}
-
 #chart-container {
-  width: 80% !important;
-  overflow: visible !important;
-  box-shadow: hsl(0, 0%, 80%) 0 0 16px;
-}
-#chart-container:hover,
-#chart-container_svg {
-  box-shadow: #4d841d88 0 0 10px;
-  cursor: pointer;
+  margin-top: 10px;
 }
 
 #loader {
@@ -42,12 +11,100 @@
   left: 45%;
 }
 
-#container {
-  height: 100%;
-  height: 100px;
-}
-
 #wrapper {
   margin: 0 auto;
   padding-top: 20px;
+}
+
+
+.col-lg-3.col-xs-6 {
+  width: 25%;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.items-panel {
+  background: #f39c12 !important;
+  padding-left: 30px;
+  padding-right: 30px;
+  border-radius: 2px;
+  padding-top: 40px;
+  color: white;
+}
+
+.item-name {
+  font-size: x-large;
+  padding: 10px;
+}
+
+.icons {
+  font-size: 70px;
+  transition: all .3s linear;
+  top: 5px;
+  right: 40px;
+  z-index: 0;
+  color: rgba(0, 0, 0, 0.15);
+  position: absolute;
+}
+
+.Asset {
+  background: #00c0ef;
+  padding-left: 30px;
+  padding-right: 30px;
+  border-radius: 2px;
+  padding-top: 40px;
+  color: white;
+  cursor: pointer;
+}
+
+.Liability {
+  background: #f39c12;
+  padding-left: 30px;
+  padding-right: 30px;
+  border-radius: 2px;
+  padding-top: 40px;
+  color: white;
+  cursor: pointer;
+}
+
+.Capital {
+  background: #00a65a;
+  padding-left: 30px;
+  padding-right: 30px;
+  border-radius: 2px;
+  padding-top: 40px;
+  color: white;
+  cursor: pointer;
+}
+
+.Expence {
+  background: #dd4b39;
+  padding-left: 30px;
+  padding-right: 30px;
+  border-radius: 2px;
+  padding-top: 40px;
+  color: white;
+  cursor: pointer;
+}
+
+.Revenue {
+  background: #954cd2ad;
+  padding-left: 30px;
+  padding-right: 30px;
+  border-radius: 2px;
+  padding-top: 40px;
+  color: white;
+  cursor: pointer;
+}
+
+.Dashboard {
+  background: #aed24cad;
+  padding-left: 30px;
+  padding-right: 30px;
+  border-radius: 2px;
+  padding-top: 40px;
+  color: white;
+  cursor: pointer;
 }

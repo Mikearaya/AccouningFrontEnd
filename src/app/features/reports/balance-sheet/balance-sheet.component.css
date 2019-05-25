@@ -19,3 +19,7 @@ table {
   background: white;
   margin-top: 20px;
 }
+
+.e-control.e-btn.e-lib {
+  margin-top: 10px;
+}

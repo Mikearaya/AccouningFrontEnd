@@ -2,6 +2,10 @@
   position: relative;
 }
 
+.checklist-area {
+  margin-top: 10px;
+}
+
 /* 
 @media print {
   @page {
