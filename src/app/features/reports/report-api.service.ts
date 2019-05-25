@@ -29,9 +29,7 @@ export class ReportApiService {
     searchString: string
   ): Observable<SubsidaryLedgerViewModel[]> {
     return this.httpClient.get<SubsidaryLedgerViewModel[]>(
-      `${
-        this.url
-      }/subsidary-ledgers?year=${this.accountingService.getSelectedYear()}&${searchString}`
+      `subsidary-ledgers?${searchString}`
     );
   }
 

@@ -46,6 +46,17 @@
           [visible]="true"
         ></e-column>
       </e-columns>
+      <e-aggregates>
+        <e-aggregate>
+          <e-columns>
+            <e-column field="SubAccountId" type="sum">
+              <ng-template #footerTemplate let-data
+                >Sum: {{ data.sum }}</ng-template
+              >
+            </e-column>
+          </e-columns>
+        </e-aggregate>
+      </e-aggregates>
     </ejs-grid>
   </div>
 </div>

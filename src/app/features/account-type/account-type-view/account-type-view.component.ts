@@ -98,7 +98,11 @@ export class AccountTypeViewComponent implements OnInit {
     this.filterOptions = { type: "Menu" }; // put unique filter menue for each column based on the column type
     this.selectionOptions = { type: "Single" }; // allow only single row to be selected at a time for edit or delete
 
-    this.toolbarOptions = ["Create", "Search"];
+    this.toolbarOptions = [
+      "Create",
+      "Search",
+      { text: "Print", prefixIcon: "e-print", id: "print" }
+    ];
     this.commands = [
       {
         type: "Edit",
@@ -151,6 +155,12 @@ export class AccountTypeViewComponent implements OnInit {
     console.log(args.item.id);
     if (args.item.id.toUpperCase() === "ACCOUNTS_CREATE") {
       this.router.navigate(["account-types/add"]); // when user click add route to the accounts form
+    }
+    if (args.item.id === "print") {
+      this.grid.detailRowModule.expandAll();
+      setTimeout(() => {
+        window.print();
+      }, 400);
     }
   }
 

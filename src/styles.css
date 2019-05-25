@@ -44,7 +44,41 @@ body {
     display: none
   }
 
+
   .content-head {
     display: none;
+  }
+
+  .e-emptyrow {
+    display: none !important;
+  }
+
+  .e-gridpager.e-control.e-pager.e-lib {
+    display: none;
+  }
+
+  .e-btn-icon.e-edit.e-icons {
+    display: none;
+  }
+
+  .e-btn-icon.e-delete.e-icons {
+    display: none;
+  }
+
+  .e-icons.e-dtdiagonaldown.e-icon-gdownarrow,
+  .e-icons.e-dtdiagonalright.e-icon-grightarrow {
+    display: none;
+  }
+
+  .e-filtermenudiv.e-icons.e-icon-filter {
+    display: none;
+  }
+
+  #dataview_toolbarItems {
+    display: none;
+  }
+
+  .e-table {
+    font-family: 'Courier New', Courier, monospace;
   }
 }

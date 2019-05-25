@@ -50,13 +50,18 @@ export class SubsidaryLedgerReportComponent implements OnInit {
         this.data = data;
         this.gridData = data;
         const subsidaryDetails = [];
+        let totalCredit = 0;
+
         this.data.forEach(element => {
           element.Entries.forEach(elementSubsidary => {
             subsidaryDetails.push(elementSubsidary);
+            totalCredit += elementSubsidary.Credit;
           });
         });
 
         this.childGrid.dataSource = subsidaryDetails;
+        console.log();
+        console.log(totalCredit);
       });
 
     this.toolbar = [

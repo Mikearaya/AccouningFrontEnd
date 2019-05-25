@@ -1,0 +1,13 @@
+@media print {
+  .e-toolbar-items.e-tbar-pos {
+    display: none;
+  }
+
+  .e-table {
+    font-family: 'Courier New', Courier, monospace;
+  }
+
+  #accounts_toolbarItems {
+    display: none;
+  }
+}

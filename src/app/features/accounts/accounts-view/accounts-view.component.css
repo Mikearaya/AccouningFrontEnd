@@ -1,0 +1,9 @@
+@media print {
+  #accounts_toolbarItems {
+    display: none;
+  }
+}
+
+#accounts_content_table {
+  font-family: 'Courier New', Courier, monospace;
+}
