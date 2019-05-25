@@ -1,0 +1,17 @@
+@media print {
+  .e-headertext {
+    display: none !important;
+  }
+
+  .e-headercell.e-lastcell {
+    display: none !important;
+  }
+
+  .e-headercelldiv {
+    display: none !important;
+  }
+}
+
+.e-content * {
+  height: auto !important;
+}

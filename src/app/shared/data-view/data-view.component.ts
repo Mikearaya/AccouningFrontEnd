@@ -303,7 +303,7 @@ export class DataViewComponent implements OnInit {
         this.grid.excelExport();
         break;
       case "dataview_print":
-        this.grid.print();
+        window.print();
         break;
     }
   }

@@ -2,6 +2,10 @@
   position: relative;
 }
 
+.checklist-area {
+  margin-top: 10px;
+}
+
 /* 
 @media print {
   @page {
@@ -14,9 +18,6 @@
   }
 } */
 
-td.e-emptyrow {
-  display: none !important;
-}
 
 @media print {
   #grid_867862622_0_toolbarItems {
@@ -30,9 +31,5 @@ td.e-emptyrow {
   .e-icons.e-dtdiagonaldown.e-icon-gdownarrow,
   .e-icons.e-dtdiagonalright.e-icon-grightarrow {
     display: none;
-  }
-
-  .e-emptyrow {
-    display: none !important;
   }
 }
