@@ -15,6 +15,7 @@ export class SubsidaryLedgerReportComponent implements OnInit {
   public data: SubsidaryLedgerViewModel[];
   public toolbar: object;
   public initialPage: object;
+  lastFilter: string;
 
   constructor(private subsidaryService: ReportApiService) {
     this.initialPage = {
@@ -38,6 +39,22 @@ export class SubsidaryLedgerReportComponent implements OnInit {
       { field: "Debit", headerText: "Debit", width: 150 },
       { field: "Credit", headerText: "Credit", width: 150 },
       { field: "Balance", headerText: "Balance", width: 150 }
+    ],
+    aggregates: [
+      {
+        columns: [
+          {
+            type: "Sum",
+            field: "Debit",
+            footerTemplate: "${Sum}"
+          },
+          {
+            type: "Sum",
+            field: "Credit",
+            footerTemplate: "${Sum}"
+          }
+        ]
+      }
     ]
   };
   @ViewChild("grid")
@@ -78,6 +95,26 @@ export class SubsidaryLedgerReportComponent implements OnInit {
         id: "Grid_excelexport"
       }
     ];
+  }
+
+  onFiltered(data: string = ""): void {
+    this.lastFilter = data;
+
+    this.subsidaryService
+      .getSubsidaryLedgerReport(`${data}&${this.generateSearchString()}`)
+      .subscribe((result: SubsidaryLedgerViewModel[]) => {
+        this.data = result;
+        this.gridData = result;
+
+        const x = [];
+        result.forEach(element => {
+          element.Entries.forEach(elementx => {
+            x.push(elementx);
+          });
+        });
+
+        this.childGrid.dataSource = x;
+      });
   }
 
   generateSearchString(): string {
