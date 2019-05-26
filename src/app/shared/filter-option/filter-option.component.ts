@@ -1,18 +1,6 @@
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  Input,
-  Output,
-  EventEmitter,
-  AfterViewInit,
-  OnChanges
-} from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 
 import { FormBuilder, FormGroup, FormControl } from "@angular/forms";
-
-import { FilterService } from "./filter.service";
-import { LookupIndexView, YearIndexView } from "./filter";
 
 @Component({
   selector: "app-filter-option",
@@ -171,6 +159,13 @@ export class FilterOptionComponent implements OnInit {
       this.searchString += `&endDate=${new Date(
         this.EndDate.value
       ).toUTCString()}`;
+    }
+
+    if (this.ControlAccount.value) {
+      this.searchString += `&controlAccountId=${this.ControlAccount.value}`;
+    }
+    if (this.Subsidary.value) {
+      this.searchString += `&subsidaryId=${this.Subsidary.value}`;
     }
 
     if (this.CostCenter.value) {
