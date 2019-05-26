@@ -11,6 +11,7 @@ import { element } from "@angular/core/src/render3";
 export class BalanceSheetComponent implements OnInit {
   public data: BalanceSheetViewModel;
   public searchString: string;
+  lastFilter: string;
 
   constructor(private reportService: ReportApiService) {}
 
@@ -24,5 +25,15 @@ export class BalanceSheetComponent implements OnInit {
   }
   print() {
     window.print();
+  }
+
+  onFiltered(data: string = ""): void {
+    this.lastFilter = data;
+
+    this.reportService
+      .getBalanceSheet(`${data}`)
+      .subscribe((result: BalanceSheetViewModel) => {
+        this.data = result;
+      });
   }
 }

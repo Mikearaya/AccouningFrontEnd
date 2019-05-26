@@ -1,4 +1,7 @@
-<app-filter-option></app-filter-option>
+<app-filter-option
+  [allowDateSearch]="true"
+  (filtered)="onFiltered($event)"
+></app-filter-option>
 <div class="row">
   <div class="col-3">
     <button ejs-button (click)="print()">Print</button>
