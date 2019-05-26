@@ -1,4 +1,8 @@
-<app-filter-option></app-filter-option>
+<app-filter-option
+  [allowDateSearch]="true"
+  #filter
+  (filtered)="onFiltered($event)"
+></app-filter-option>
 <app-print-header [header]="'Consolidated trial balance'"></app-print-header>
 <div class="subsidary-area">
   <div class="print-area">

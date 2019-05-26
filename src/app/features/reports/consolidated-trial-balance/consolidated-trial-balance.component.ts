@@ -13,6 +13,7 @@ export class ConsolidatedTrialBalanceComponent implements OnInit {
   public data: ConsolidatedTrialBalanceViewModel[];
   public initialPage: object;
   public toolbar: object;
+  lastFilter: string;
 
   constructor(private reportService: ReportApiService) {
     this.initialPage = {
@@ -51,5 +52,15 @@ export class ConsolidatedTrialBalanceComponent implements OnInit {
     if (args.item.id === "Grid_excelexport") {
       this.grid.excelExport();
     }
+  }
+
+  onFiltered(data: string = ""): void {
+    this.lastFilter = data;
+
+    this.reportService
+      .getConsolidatedTrialBalance(`${data}&${this.generateSearchString()}`)
+      .subscribe((result: ConsolidatedTrialBalanceViewModel[]) => {
+        this.data = result;
+      });
   }
 }

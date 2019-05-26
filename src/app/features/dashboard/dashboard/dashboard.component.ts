@@ -8,7 +8,7 @@ import { DashboardViewModel } from "src/app/Services/system-data.model";
   styleUrls: ["./dashboard.component.css"]
 })
 export class DashboardComponent implements OnInit {
-  public dashboardItems: any = [
+  public dashboardItems: { name: string; icon: string; value: number }[] = [
     { name: "Asset", icon: "fas fa-wallet", value: 0 },
     { name: "Capital", icon: "fas fa-coins", value: 0 },
     { name: "Liability", icon: "fas fa-funnel-dollar", value: 0 },

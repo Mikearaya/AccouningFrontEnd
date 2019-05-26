@@ -4,7 +4,9 @@ import {
   ViewChild,
   Input,
   Output,
-  EventEmitter
+  EventEmitter,
+  AfterViewInit,
+  OnChanges
 } from "@angular/core";
 
 import { FormBuilder, FormGroup, FormControl } from "@angular/forms";
@@ -69,6 +71,30 @@ export class FilterOptionComponent implements OnInit {
       text: "Year",
       value: "Id"
     };
+    this.disableAll();
+
+    if (this.allowVocherSearch) {
+      this.VoucherEndId.enable();
+      this.VoucherStartId.enable();
+    }
+
+    if (this.allowAccountSearch) {
+      this.ControlAccount.enable();
+      this.Subsidary.enable();
+    }
+
+    if (this.allwoYearSeach) {
+      this.Year.enable();
+    }
+
+    if (this.allowCostCenterSearch) {
+      this.CostCenter.enable();
+    }
+
+    if (this.allowDateSearch) {
+      this.StartDate.enable();
+      this.EndDate.enable();
+    }
   }
 
   get Year(): FormControl {
@@ -83,7 +109,18 @@ export class FilterOptionComponent implements OnInit {
     return this.filterForm.get("VoucherEndId") as FormControl;
   }
 
-  disableAll(): void {}
+  disableAll(): void {
+    this.VoucherEndId.disable();
+    this.VoucherStartId.disable();
+    this.ControlAccount.disable();
+    this.Subsidary.disable();
+
+    this.Year.disable();
+    this.CostCenter.disable();
+
+    this.StartDate.disable();
+    this.EndDate.disable();
+  }
   get CostCenter() {
     return this.filterForm.get("CostCenter") as FormControl;
   }
@@ -113,27 +150,31 @@ export class FilterOptionComponent implements OnInit {
   private prepareFilter(): string {
     this.searchString = "";
     if (this.Year.value) {
-      this.searchString = `year=${this.Year.value}&`;
+      this.searchString = `year=${this.Year.value}`;
     }
 
     if (this.VoucherStartId.value) {
-      this.searchString += `fromVoucherId=${this.VoucherStartId.value}&`;
+      this.searchString += `&fromVoucherId=${this.VoucherStartId.value}`;
     }
 
     if (this.VoucherEndId.value) {
-      this.searchString += `toVoucherId=${this.VoucherEndId.value}&`;
+      this.searchString += `&toVoucherId=${this.VoucherEndId.value}`;
     }
 
     if (this.StartDate.value) {
-      this.searchString += `startDate=${this.StartDate.value}`;
+      this.searchString += `&startDate=${new Date(
+        this.StartDate.value
+      ).toUTCString()}`;
     }
 
     if (this.EndDate.value) {
-      this.searchString += `endDate=${this.EndDate.value}&`;
+      this.searchString += `&endDate=${new Date(
+        this.EndDate.value
+      ).toUTCString()}`;
     }
 
     if (this.CostCenter.value) {
-      this.searchString += `costCenter=${this.CostCenter.value}&`;
+      this.searchString += `&costCenter=${this.CostCenter.value}`;
     }
 
     return this.searchString;

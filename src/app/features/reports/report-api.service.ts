@@ -49,7 +49,7 @@ export class ReportApiService {
     return this.httpClient.get<ConsolidatedTrialBalanceViewModel[]>(
       `${
         this.url
-      }/trial-balance/consolidated?year=${this.accountingService.getSelectedYear()}&${searchString}`
+      }/trial-balance/consolidated?year=${this.accountingService.getSelectedYear()}${searchString}`
     );
   }
 
