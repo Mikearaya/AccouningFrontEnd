@@ -21,7 +21,8 @@ import {
   GridModel,
   ActionEventArgs,
   Column,
-  IRow
+  IRow,
+  RowDataBoundEventArgs
 } from "@syncfusion/ej2-angular-grids";
 import { Router, ActivatedRoute } from "@angular/router";
 
@@ -34,6 +35,7 @@ import {
 } from "src/app/shared/data-view/data-view.model";
 import { AccountsService } from "../../../core/services/accounts.service";
 import { closest } from "@syncfusion/ej2-base";
+import { DataManager, Query } from "@syncfusion/ej2-data";
 
 @Component({
   selector: "app-accounts-view",
@@ -83,8 +85,11 @@ export class AccountsViewComponent implements OnInit {
       (error: HttpErrorResponse) => alert(error.message)
     );
 
-    this.childGrid = {
+    this.grid.groupModule.collapseAll();
+
+    /*    this.childGrid = {
       queryString: "ParentAccountId",
+      dataSource: new DataManager(this.data),
       columns: [
         {
           field: "Id",
@@ -101,8 +106,14 @@ export class AccountsViewComponent implements OnInit {
         { field: "AccountName", headerText: "Account Name", width: 150 },
         { field: "Active", headerText: "Status", width: 150 },
         { field: "ParentAccount", headerText: "Parent", width: 150 }
-      ]
-    };
+      ],
+         load() {
+        const parentID = "Id";
+        this.parentDetails.parentKeyFieldValue = this.parentDetails.parentRowData[
+          parentID
+        ];
+      }
+    }; */
 
     this.filterOptions = { type: "Menu" }; // put unique filter menue for each column based on the column type
     this.selectionOptions = { type: "Single" }; // allow only single row to be selected at a time for edit or delete
@@ -110,8 +121,8 @@ export class AccountsViewComponent implements OnInit {
     this.toolbarOptions = [
       "Create Account",
       "Search",
-      { text: "Expand All", prefixIcon: "e-expand", id: "expandall" },
-      { text: "Collapse All", prefixIcon: "e-collapse", id: "collapseall" },
+      // { text: "Expand All", prefixIcon: "e-expand", id: "expandall" },
+      // { text: "Collapse All", prefixIcon: "e-collapse", id: "collapseall" },
       { text: "Print", prefixIcon: "e-print", id: "print" },
       {
         text: "ExcelExport",
@@ -138,6 +149,18 @@ export class AccountsViewComponent implements OnInit {
       }
     ];
     this.pageSettings = { pageSize: 200 }; // initial page row size for the grid
+  }
+
+  public rowDataBound(args: RowDataBoundEventArgs) {
+    const filter: string = args.data["ParentAccountId"];
+    const childrecord: any = new DataManager(this.grid.childGrid
+      .dataSource as JSON[]).executeLocal(
+      new Query().where("ParentAccountId", "equal", parseInt(filter, 10), true)
+    );
+    if (childrecord === 0) {
+      args.row.querySelector("td").innerHTML = "";
+      args.row.querySelector("td").className = "e-customizedExpandcell";
+    }
   }
 
   handleError(error: HttpErrorResponse) {
@@ -179,10 +202,7 @@ export class AccountsViewComponent implements OnInit {
       this.grid.detailRowModule.collapseAll();
     }
     if (args.item.id === "print") {
-      this.grid.detailRowModule.expandAll();
-      setTimeout(() => {
-        window.print();
-      }, 400);
+      window.print();
     }
     if (args.item.id === "Grid_excelexport") {
       this.grid.detailRowModule.expandAll();

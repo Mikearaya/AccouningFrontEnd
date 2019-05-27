@@ -7,6 +7,7 @@
  * @Description: Modify Here, Please
  */
 import { Location } from "@angular/common";
+import { Router } from "@angular/router";
 import { Component, OnInit, Input } from "@angular/core";
 
 @Component({
@@ -22,7 +23,7 @@ export class FormOptionsComponent implements OnInit {
   @Input() isUpdate: boolean;
   buttonText: string;
 
-  constructor(private location: Location) {
+  constructor(private location: Location, private router: Router) {
     // setting default valeue
     this.cancelDisabled = false;
     this.submitDisabled = false;
@@ -40,5 +41,6 @@ export class FormOptionsComponent implements OnInit {
   // on cancel button click return the user back
   cancel() {
     this.location.back();
+    // this.router.navigate(["../"]);
   }
 }

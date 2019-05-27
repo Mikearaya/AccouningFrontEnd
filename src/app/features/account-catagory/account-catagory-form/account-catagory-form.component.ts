@@ -135,7 +135,4 @@ export class AccountCatagoryFormComponent implements OnInit {
         );
     }
   }
-  cancel() {
-    this.location.back();
-  }
 }

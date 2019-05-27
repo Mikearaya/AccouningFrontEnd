@@ -19,6 +19,7 @@
   [childGrid]="childGrid"
   [showColumnChooser]="true"
   (actionComplete)="actionEndHandler($event)"
+  [allowGrouping]="true"
 >
   <e-columns>
     <e-column
@@ -63,6 +64,18 @@
       field="Category"
       textAlign="left"
       headerText="Category"
+      isPrimaryKey="false"
+      type="string"
+      editType="textbox"
+      filterable="true"
+      editable="true"
+      groupable="false"
+      [width]="100"
+    ></e-column>
+    <e-column
+      field="ParentAccountId"
+      textAlign="left"
+      headerText="Parent"
       isPrimaryKey="false"
       type="string"
       editType="textbox"

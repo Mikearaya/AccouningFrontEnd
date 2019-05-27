@@ -1,8 +1,14 @@
 .e-acrdn-header {
-  background: #d3d7dc;
-  color: black !important;
+  background: #4d841d55;
+  border-bottom: none;
+  border-top: none;
 }
 
-.e-acrdn-header:hover {
-  background: #d3d7dc;
+.e-accordion .e-acrdn-item.e-expand-state.e-select {
+  border-bottom: none;
+  border-top: none;
+}
+
+.e-acrdn-header-content {
+  color: black !important;
 }

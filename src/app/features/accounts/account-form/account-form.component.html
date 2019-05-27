@@ -47,10 +47,13 @@
               id="accountName"
               name="AccountName"
               class="e-input"
-              formControlName="Name"
+              formControlName="AccountName"
             />
-            <div class="e-error" *ngIf="Name.errors && Name.touched">
-              <div *ngIf="Name.errors['required']">
+            <div
+              class="e-error"
+              *ngIf="AccountName.errors && AccountName.touched"
+            >
+              <div *ngIf="AccountName.errors['required']">
                 *Account Name is Required
               </div>
             </div>

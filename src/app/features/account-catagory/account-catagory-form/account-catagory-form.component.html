@@ -1,52 +1,54 @@
-<form [formGroup]="catagoryForm" (ngSubmit)="onSubmit()" name="accountForm">
-  <div class="content card m-3">
-    <div class="row">
-      <div class="col-sm-4 col-xs-8">
-        <label for="Catagory name">Catagory Name</label>
-        <div>
-          <input
-            type="text"
-            id="CatagoryName"
-            name="CatagoryName"
-            class="e-input"
-            formControlName="CategoryName"
-          />
-          <div
-            class="e-error"
-            *ngIf="CategoryName.errors && CategoryName.touched"
-          >
-            <div *ngIf="CategoryName.errors['required']">
-              *Catagory name is Required
+<section>
+  <form [formGroup]="catagoryForm" (ngSubmit)="onSubmit()" name="accountForm">
+    <div class="content card m-3">
+      <div class="row">
+        <div class="col-sm-4 col-xs-8">
+          <label for="Catagory name">Catagory Name</label>
+          <div>
+            <input
+              type="text"
+              id="CatagoryName"
+              name="CatagoryName"
+              class="e-input"
+              formControlName="CategoryName"
+            />
+            <div
+              class="e-error"
+              *ngIf="CategoryName.errors && CategoryName.touched"
+            >
+              <div *ngIf="CategoryName.errors['required']">
+                *Catagory name is Required
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 col-xs-4">
+          <label for="Account type"> Account Type</label>
+          <div>
+            <ejs-dropdownlist
+              id="AccountType"
+              name="AccountType"
+              formControlName="AccountType"
+              [dataSource]="accountTypes"
+            ></ejs-dropdownlist>
+            <div
+              class="e-error"
+              *ngIf="AccountType.errors && AccountType.touched"
+            >
+              <div *ngIf="AccountType.errors['required']">
+                *Account type is Required
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-sm-4 col-xs-4">
-        <label for="Account type"> Account Type</label>
-        <div>
-          <ejs-dropdownlist
-            id="AccountType"
-            name="AccountType"
-            formControlName="AccountType"
-            [dataSource]="accountTypes"
-          ></ejs-dropdownlist>
-          <div
-            class="e-error"
-            *ngIf="AccountType.errors && AccountType.touched"
-          >
-            <div *ngIf="AccountType.errors['required']">
-              *Account type is Required
-            </div>
-          </div>
+      <div class="row">
+        <div class="col-12">
+          <app-form-options
+            [submitDisabled]="catagoryForm.invalid"
+          ></app-form-options>
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-12">
-        <app-form-options
-          [submitDisabled]="catagoryForm.invalid"
-        ></app-form-options>
-      </div>
-    </div>
-  </div>
-</form>
+  </form>
+</section>

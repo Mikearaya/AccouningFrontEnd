@@ -20,9 +20,9 @@ import { Observable, throwError } from "rxjs";
 import { ActivatedRoute } from "@angular/router";
 import { tap, catchError, finalize } from "rxjs/operators";
 import {
-  hideSpinner,
+  createSpinner,
   showSpinner,
-  createSpinner
+  hideSpinner
 } from "@syncfusion/ej2-popups";
 
 @Injectable()

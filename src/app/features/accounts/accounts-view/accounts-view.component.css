@@ -7,3 +7,11 @@
 #accounts_content_table {
   font-family: 'Courier New', Courier, monospace;
 }
+
+.e-customizedExpandcell {
+  background-color: rebeccapurple;
+}
+
+.e-grid.e-gridhover tr[role='row']:hover {
+  background-color: #eee;
+}
