@@ -28,7 +28,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 
 import { HttpErrorResponse } from "@angular/common/http";
 import { ClickEventArgs } from "@syncfusion/ej2-navigations";
-import { AccountViewModel } from "../accounts";
+import { AccountViewModel, AccountView } from "../accounts";
 import {
   QueryString,
   FilterEventModel
@@ -47,7 +47,7 @@ export class AccountsViewComponent implements OnInit {
 
   @ViewChild("grid")
   public grid: GridComponent;
-  public data: AccountViewModel[];
+  public data: AccountView[];
   public excelExportProperties: ExcelExportProperties;
   public filterSettings: FilterSettingsModel;
   public toolbarOptions: Object[];
@@ -59,7 +59,7 @@ export class AccountsViewComponent implements OnInit {
   public filterOptions: FilterSettingsModel;
   public commands: CommandModel[];
   public groupOptions: GroupSettingsModel = { showDropArea: false };
-  public initialPage: object;
+  public initialPage: { pageSize: number; pageSizes: string[] };
 
   public childGrid: GridModel;
   query: QueryString;
@@ -78,9 +78,11 @@ export class AccountsViewComponent implements OnInit {
 
   ngOnInit() {
     this.accountApi.getAccountsList().subscribe(
-      (data: AccountViewModel[]) => {
-        this.data = data;
-        this.childGrid.dataSource = data;
+      (data: AccountViewModel) => {
+        this.data = data.Items;
+        this.childGrid.dataSource = data.Items;
+
+        this.grid.pageSettings.totalRecordsCount = data.Count;
       },
       (error: HttpErrorResponse) => alert(error.message)
     );
@@ -191,7 +193,6 @@ export class AccountsViewComponent implements OnInit {
   }
   // Click handler for when the toolbar is cliked
   toolbarClick(args: ClickEventArgs): void {
-    console.log(args.item.id);
     if (args.item.id.toUpperCase() === "ACCOUNTS_CREATE ACCOUNT") {
       this.router.navigate(["accounts/new"]); // when user click add route to the accounts form
     }
@@ -261,11 +262,24 @@ export class AccountsViewComponent implements OnInit {
       searchString += `searchString=${this.query.searchString}&`;
     }
 
+    if (this.query.sortColumn) {
+      searchString += `sortBy=${this.query.sortColumn}&`;
+    }
+
+    if (this.query.sortDirection) {
+      searchString += `sortDirection=${this.query.sortDirection}&`;
+    }
+
     searchString += `pageSize=${this.query.pageSize}&pageNumber=${
       this.query.pageNumber
     }`;
     this.accountApi
       .getAccountsList(searchString)
-      .subscribe(data => (this.data = data));
+      .subscribe((data: AccountViewModel) => {
+        this.data = data.Items;
+        this.childGrid.dataSource = data.Items;
+
+        this.grid.pageSettings.pageCount = data.Count;
+      });
   }
 }

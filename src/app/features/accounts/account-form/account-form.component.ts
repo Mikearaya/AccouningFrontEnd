@@ -17,7 +17,7 @@ import { Query } from "@syncfusion/ej2-data";
 import { Location } from "@angular/common";
 import { ActivatedRoute } from "@angular/router";
 import { HttpErrorResponse } from "@angular/common/http";
-import { AccountsIndexView, AccountViewModel } from "../accounts";
+import { AccountsIndexView, AccountViewModel, AccountView } from "../accounts";
 import { AccountsService } from "../../../core/services/accounts.service";
 import { AccountCategoryIndex } from "../../account-catagory/account-catagory-domain";
 
@@ -60,7 +60,7 @@ export class AccountFormComponent implements OnInit {
       // initialize the form with the retrived account value
       this.accountApi
         .getAccountById(this.accountId)
-        .subscribe((data: AccountViewModel) => this.initializeFunction(data));
+        .subscribe((data: AccountView) => this.initializeFunction(data));
     }
 
     this.accountFields = { value: "AccountName" };
@@ -128,7 +128,7 @@ export class AccountFormComponent implements OnInit {
     });
   }
 
-  initializeFunction(data: AccountViewModel) {
+  initializeFunction(data: AccountView) {
     this.accountForm = this.formBuilder.group({
       AccountId: [
         data.AccountId,

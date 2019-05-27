@@ -1,8 +1,12 @@
-<app-filter-option></app-filter-option>
+<app-filter-option
+  [allowDateSearch]="true"
+  (filtered)="onFiltered($event)"
+></app-filter-option>
 <div class="subsidary-area">
   <app-print-header [header]="'Trial balance detail'"></app-print-header>
   <div class="print-area">
     <ejs-grid
+      [allowResizing]="true"
       #grid
       [dataSource]="gridData"
       foreign-key-field="LedgerId"
@@ -19,13 +23,12 @@
           field="AccountId"
           headerText="Account Id"
           textAlign="Left"
-          width="120"
+          width="70"
         ></e-column>
         <e-column
           field="AccountName"
           headerText="Account Name"
           textAlign="Left"
-          width="120"
         ></e-column>
       </e-columns>
     </ejs-grid>

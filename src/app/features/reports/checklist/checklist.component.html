@@ -13,6 +13,7 @@
     <ejs-grid
       (actionComplete)="onActionComplete($event)"
       #grid
+      [allowResizing]="true"
       [dataSource]="gridData"
       foreign-key-field="LedgerId"
       [childGrid]="childGrid"

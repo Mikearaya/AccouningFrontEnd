@@ -13,7 +13,8 @@ import { catchError } from "rxjs/operators";
 import {
   Accounts,
   AccountsIndexView,
-  AccountViewModel
+  AccountViewModel,
+  AccountView
 } from "../../features/accounts/accounts";
 import { AccountingApiService } from "src/app/Services/accounting-api.service";
 
@@ -28,12 +29,12 @@ export class AccountsService {
     this.year = this.accountingApi.getSelectedYear();
   }
   // Gets a single Account information by Id and returns an observable of Account
-  getAccountById(id: number): Observable<AccountViewModel> {
-    return this.httpClient.get<AccountViewModel>(`${this.url}/${id}`);
+  getAccountById(id: number): Observable<AccountView> {
+    return this.httpClient.get<AccountView>(`${this.url}/${id}`);
   }
 
-  getAccountsList(searchString: string = ""): Observable<AccountViewModel[]> {
-    return this.httpClient.get<AccountViewModel[]>(
+  getAccountsList(searchString: string = ""): Observable<AccountViewModel> {
+    return this.httpClient.get<AccountViewModel>(
       `${this.url}?year=${this.accountingApi.getSelectedYear()}&${searchString}`
     );
   }

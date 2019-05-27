@@ -15,6 +15,7 @@ export class TrialBalanceDetailComponent implements OnInit {
   public data: TrialBalanceDetailViewModel[];
   public toolbar: object;
   public initialPage: object;
+  lastFilter: any;
 
   constructor(private reportService: ReportApiService) {
     this.initialPage = {
@@ -115,5 +116,25 @@ export class TrialBalanceDetailComponent implements OnInit {
         this.grid.excelExport();
       }, 400);
     }
+  }
+
+  onFiltered(data: any): void {
+    this.lastFilter = data;
+
+    this.reportService
+      .getTrialBalanceDetail(`${data}&${this.generateSearchString()}`)
+      .subscribe((result: TrialBalanceDetailViewModel[]) => {
+        this.data = result;
+        this.gridData = result;
+
+        const x = [];
+        result.forEach(element => {
+          element.Entries.forEach(elementx => {
+            x.push(elementx);
+          });
+        });
+
+        this.childGrid.dataSource = x;
+      });
   }
 }
