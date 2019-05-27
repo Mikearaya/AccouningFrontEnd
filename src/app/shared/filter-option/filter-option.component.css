@@ -12,3 +12,7 @@
 .e-acrdn-header-content {
   color: black !important;
 }
+
+.e-acrdn-header.e-select.e-expand-state {
+  background: #4d841d55;
+}

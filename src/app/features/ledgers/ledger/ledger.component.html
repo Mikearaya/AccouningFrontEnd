@@ -5,7 +5,7 @@
   (ngSubmit)="onSubmit()"
 >
   <section>
-    <div class="container-fluid">
+    <div class="content card m-3">
       <div class="section-one">
         <div class="row">
           <div class="col-5">
@@ -98,8 +98,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-1"></div>
-              <div class="col-1">
+              <div class="col-2" id="action-header">
                 Action
               </div>
             </div>
@@ -174,8 +173,8 @@
                   </div>
                 </div>
               </div>
-              <div class="col-1"></div>
-              <div class="col-1">
+              <!-- <div class="col-1"></div> -->
+              <div class="col-2" id="remove-buttons">
                 <button
                   id="remove-button"
                   type="button"
@@ -199,8 +198,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-1"></div>
-              <div class="col-1">
+              <div class="col-1" id="add-icon">
                 <button
                   [disabled]="!Entries.valid"
                   id="add-button"

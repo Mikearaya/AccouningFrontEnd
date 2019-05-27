@@ -16,10 +16,10 @@
   (toolbarClick)="toolbarClick($event)"
   [pageSettings]="initialPage"
   [filterSettings]="filterOptions"
-  [childGrid]="childGrid"
   [showColumnChooser]="true"
   (actionComplete)="actionEndHandler($event)"
   [allowGrouping]="true"
+  [groupSettings]="groupOptions"
 >
   <e-columns>
     <e-column
@@ -69,7 +69,7 @@
       editType="textbox"
       filterable="true"
       editable="true"
-      groupable="false"
+      [allowGrouping]="false"
       [width]="100"
     ></e-column>
     <e-column
@@ -81,7 +81,7 @@
       editType="textbox"
       filterable="true"
       editable="true"
-      groupable="false"
+      [allowGrouping]="false"
       [width]="100"
     ></e-column>
     <!--     <e-column field="TotalAmount" textAlign="left" headerText="Amount" isPrimaryKey="false" type="string" editType="textbox"
@@ -95,7 +95,7 @@
       editType="booleanedit"
       filterable="true"
       editable="true"
-      groupable="true"
+      groupable="false"
       width="60"
     ></e-column>
     <e-column

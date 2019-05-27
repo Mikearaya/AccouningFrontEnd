@@ -22,7 +22,8 @@ import {
   ActionEventArgs,
   Column,
   IRow,
-  RowDataBoundEventArgs
+  RowDataBoundEventArgs,
+  columnSelectionBegin
 } from "@syncfusion/ej2-angular-grids";
 import { Router, ActivatedRoute } from "@angular/router";
 
@@ -70,7 +71,18 @@ export class AccountsViewComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {
     this.initialPage = {
-      pageSizes: ["20", "50", "100", "200", "500", "1000", "All"],
+      pageSizes: [
+        "20",
+        "50",
+        "100",
+        "200",
+        "500",
+        "1000",
+        "3000",
+        "4000",
+        "400000",
+        "All"
+      ],
       pageSize: 20
     };
     this.query = new QueryString();
@@ -80,42 +92,12 @@ export class AccountsViewComponent implements OnInit {
     this.accountApi.getAccountsList().subscribe(
       (data: AccountViewModel) => {
         this.data = data.Items;
-        this.childGrid.dataSource = data.Items;
-
         this.grid.pageSettings.totalRecordsCount = data.Count;
       },
       (error: HttpErrorResponse) => alert(error.message)
     );
 
-    this.grid.groupModule.collapseAll();
-
-    /*    this.childGrid = {
-      queryString: "ParentAccountId",
-      dataSource: new DataManager(this.data),
-      columns: [
-        {
-          field: "Id",
-          headerText: "Id",
-          textAlign: "Right",
-          width: 100
-        },
-        {
-          field: "AccountId",
-          headerText: "Account Id",
-          textAlign: "Right",
-          width: 120
-        },
-        { field: "AccountName", headerText: "Account Name", width: 150 },
-        { field: "Active", headerText: "Status", width: 150 },
-        { field: "ParentAccount", headerText: "Parent", width: 150 }
-      ],
-         load() {
-        const parentID = "Id";
-        this.parentDetails.parentKeyFieldValue = this.parentDetails.parentRowData[
-          parentID
-        ];
-      }
-    }; */
+    this.groupOptions = { columns: ["ParentAccountId"] };
 
     this.filterOptions = { type: "Menu" }; // put unique filter menue for each column based on the column type
     this.selectionOptions = { type: "Single" }; // allow only single row to be selected at a time for edit or delete
@@ -186,6 +168,7 @@ export class AccountsViewComponent implements OnInit {
     );
 
     this.accountApi.deleteAccount(rowObj.data["Id"]).subscribe();
+    this.grid.currentViewData;
   }
 
   onDataBound() {
@@ -277,7 +260,6 @@ export class AccountsViewComponent implements OnInit {
       .getAccountsList(searchString)
       .subscribe((data: AccountViewModel) => {
         this.data = data.Items;
-        this.childGrid.dataSource = data.Items;
 
         this.grid.pageSettings.pageCount = data.Count;
       });
