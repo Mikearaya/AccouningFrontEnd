@@ -93,15 +93,7 @@ export class ChecklistComponent implements OnInit {
   }
 
   onActionComplete(args: ActionEventArgs) {
-    /*     if (
-      this.current.pageSize !== this.grid.pageSettings.pageSize ||
-      this.current.pageNumber !== this.grid.pageSettings.currentPage
-    ) {
-      this.current.pageSize = this.grid.pageSettings.pageSize;
-      this.current.pageNumber = this.grid.pageSettings.currentPage;
- */
-    // this.onFiltered();
-    //    }
+
   }
 
   generateSearchString(): string {

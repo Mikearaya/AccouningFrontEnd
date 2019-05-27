@@ -14,7 +14,14 @@ export interface AccountsIndexView {
   Name: string;
 }
 
+
+
 export interface AccountViewModel {
+  Items: AccountView[];
+  Count: number;
+}
+
+export interface AccountView {
   Id: number;
   AccountId: string;
   ParentAccount: string;
@@ -30,3 +37,5 @@ export interface AccountViewModel {
   DateUpdated: Date | string | null;
   CostCenterId: number;
 }
+
+

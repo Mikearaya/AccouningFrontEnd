@@ -10,8 +10,8 @@
   <div class="print-area">
     <ejs-grid
       #grid
+      [allowResizing]="true"
       [dataSource]="gridData"
-      foreign-key-field="LedgerId"
       [childGrid]="childGrid"
       query-string="Id"
       [allowExcelExport]="true"
