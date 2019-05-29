@@ -23,7 +23,8 @@ import {
   Column,
   IRow,
   RowDataBoundEventArgs,
-  columnSelectionBegin
+  columnSelectionBegin,
+  HierarchyGridPrintMode
 } from "@syncfusion/ej2-angular-grids";
 import { Router, ActivatedRoute } from "@angular/router";
 
@@ -37,6 +38,8 @@ import {
 import { AccountsService } from "../../../core/services/accounts.service";
 import { closest } from "@syncfusion/ej2-base";
 import { DataManager, Query } from "@syncfusion/ej2-data";
+import { ContextMenuItem } from "@syncfusion/ej2-treegrid";
+import { PieCenter } from "@syncfusion/ej2-charts";
 
 @Component({
   selector: "app-accounts-view",
@@ -61,6 +64,8 @@ export class AccountsViewComponent implements OnInit {
   public commands: CommandModel[];
   public groupOptions: GroupSettingsModel = { showDropArea: false };
   public initialPage: { pageSize: number; pageSizes: string[] };
+  public hierarchyPrintMode: HierarchyGridPrintMode;
+  public contextMenuItems: ContextMenuItem[];
 
   public childGrid: GridModel;
   query: QueryString;
@@ -97,17 +102,22 @@ export class AccountsViewComponent implements OnInit {
       (error: HttpErrorResponse) => alert(error.message)
     );
 
-    this.groupOptions = { columns: ["ParentAccountId"] };
+    this.groupOptions = {
+      disablePageWiseAggregates: false,
+      showDropArea: false,
+      columns: ["ParentAccountId"]
+    };
 
     this.filterOptions = { type: "Menu" }; // put unique filter menue for each column based on the column type
     this.selectionOptions = { type: "Single" }; // allow only single row to be selected at a time for edit or delete
 
     this.editSettings = { allowDeleting: true };
+    // this.contextMenuItems = ["Delete", "Edit"];
     this.toolbarOptions = [
-      "Create Account",
+      { text: "Create Account", prefixIcon: "e-create" },
       "Search",
-      // { text: "Expand All", prefixIcon: "e-expand", id: "expandall" },
-      // { text: "Collapse All", prefixIcon: "e-collapse", id: "collapseall" },
+      { text: "Expand All", prefixIcon: "e-expand", id: "expandall" },
+      { text: "Collapse All", prefixIcon: "e-collapse", id: "collapseall" },
       { text: "Print", prefixIcon: "e-print", id: "print" },
       {
         text: "ExcelExport",
@@ -169,7 +179,6 @@ export class AccountsViewComponent implements OnInit {
     );
 
     this.accountApi.deleteAccount(rowObj.data["Id"]).subscribe();
-    this.grid.currentViewData;
   }
 
   onDataBound() {
@@ -181,18 +190,21 @@ export class AccountsViewComponent implements OnInit {
       this.router.navigate(["accounts/new"]); // when user click add route to the accounts form
     }
     if (args.item.id === "expandall") {
-      this.grid.detailRowModule.expandAll();
+      this.grid.groupModule.expandAll();
     }
     if (args.item.id === "collapseall") {
-      this.grid.detailRowModule.collapseAll();
+      this.grid.groupModule.collapseAll();
     }
     if (args.item.id === "print") {
-      window.print();
+      this.grid.groupModule.expandAll();
+      this.hierarchyPrintMode = "All";
+      setTimeout(() => {
+        this.grid.print();
+      }, 1000);
     }
     if (args.item.id === "Grid_excelexport") {
-      this.grid.detailRowModule.expandAll();
       setTimeout(() => {
-        this.grid.excelExport();
+        this.grid.excelExport(this.getExcelExportProperties());
       }, 400);
     }
   }
@@ -264,5 +276,27 @@ export class AccountsViewComponent implements OnInit {
 
         this.grid.pageSettings.pageCount = data.Count;
       });
+  }
+
+  private getExcelExportProperties(): any {
+    return {
+      header: {
+        headerRows: 7,
+        rows: [
+          {
+            index: 1,
+            cells: [
+              {
+                index: 1,
+                colspan: 5,
+                rowspan: 3,
+                value: "Chart of accounts",
+                style: { align: "Center", fontSize: 25, bold: true }
+              }
+            ]
+          }
+        ]
+      }
+    };
   }
 }

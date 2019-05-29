@@ -23,16 +23,16 @@ body {
   content: '\e242';
 }
 
-.e-ArrowUp::before {
-  content: '\e56d';
+.e-expand::before {
+  content: '\e919';
 }
 
-.e-ArrowDown::before {
-  content: '\e56e'
+.e-create::before {
+  content: '\e555'
 }
 
-.M_SingleUpArrow::before {
-  content: '\e651'
+.e-collapse::before {
+  content: '\e918'
 }
 
 .e-acrdn-header {

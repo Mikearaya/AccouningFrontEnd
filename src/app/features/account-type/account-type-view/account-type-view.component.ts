@@ -99,7 +99,7 @@ export class AccountTypeViewComponent implements OnInit {
     this.selectionOptions = { type: "Single" }; // allow only single row to be selected at a time for edit or delete
 
     this.toolbarOptions = [
-      "Create",
+      { text: "Create", prefixIcon: "e-create" },
       "Search",
       { text: "Print", prefixIcon: "e-print", id: "print" }
     ];

@@ -4,7 +4,7 @@ export const NAVIGATION_LINKS = [
     name: "Dashboard",
     enabled: true,
     expanded: false,
-    url: "/",
+    url: "",
     selected: true,
     icon: "fas fa-columns"
   },
@@ -13,7 +13,6 @@ export const NAVIGATION_LINKS = [
     name: "Account Managment",
     expanded: false,
     enabled: true,
-
     icon: "fas fa-sitemap",
     selected: false,
     subChild: [
@@ -56,6 +55,7 @@ export const NAVIGATION_LINKS = [
     name: "Ledger Entries",
     expanded: false,
     enabled: true,
+    url: "",
     selected: false,
     icon: "fas fa-book-open",
     subChild: [
@@ -74,6 +74,7 @@ export const NAVIGATION_LINKS = [
     name: "Settings",
     expanded: false,
     enabled: true,
+    url: "",
     selected: false,
     icon: "fas fa-cogs",
 
@@ -93,7 +94,7 @@ export const NAVIGATION_LINKS = [
     name: "Reports",
     expanded: false,
     enabled: true,
-
+    url: "",
     selected: false,
     icon: "fas fa-briefcase",
     subChild: [

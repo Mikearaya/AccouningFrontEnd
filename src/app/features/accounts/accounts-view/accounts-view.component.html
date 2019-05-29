@@ -21,6 +21,8 @@
   [allowGrouping]="true"
   [groupSettings]="groupOptions"
   [editSettings]="editSettings"
+  [height]="700"
+  [contextMenuItems]="contextMenuItems"
 >
   <e-columns>
     <e-column
@@ -29,11 +31,11 @@
       headerText="ID"
       isPrimaryKey="true"
       type="number"
-      width="30"
+      width="70"
       editable="false"
       filterable="false"
       groupable="false"
-      [visible]="true"
+      [visible]="false"
     >
     </e-column>
     <e-column
@@ -41,11 +43,11 @@
       textAlign="left"
       headerText="Account Id"
       type="number"
-      width="30"
+      width="100"
       editable="false"
       filterable="false"
       groupable="false"
-      [width]="70"
+      [width]="100"
     >
     </e-column>
 
@@ -71,7 +73,7 @@
       filterable="true"
       editable="true"
       [allowGrouping]="false"
-      [width]="100"
+      [width]="150"
     ></e-column>
     <e-column
       field="ParentAccountId"
@@ -82,8 +84,8 @@
       editType="textbox"
       filterable="true"
       editable="true"
-      [allowGrouping]="false"
-      [width]="100"
+      [allowGrouping]="true"
+      [width]="10"
     ></e-column>
     <!--     <e-column field="TotalAmount" textAlign="left" headerText="Amount" isPrimaryKey="false" type="string" editType="textbox"
       filterable="true" editable="true" groupable="true" width='50'></e-column> -->
@@ -97,7 +99,7 @@
       filterable="true"
       editable="true"
       groupable="false"
-      width="60"
+      width="100"
     ></e-column>
     <e-column
       field="DateAdded"
@@ -110,7 +112,7 @@
       filterable="true"
       editable="true"
       groupable="false"
-      [width]="100"
+      [width]="80"
       [visible]="false"
     ></e-column>
     <e-column
@@ -125,7 +127,7 @@
       editable="true"
       [visible]="false"
       groupable="false"
-      [width]="100"
+      [width]="80"
     ></e-column>
     <e-column [commands]="commands" [width]="50" textAlign="center"></e-column>
   </e-columns>

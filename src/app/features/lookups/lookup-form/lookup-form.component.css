@@ -1,11 +1,7 @@
-div.content {
-  padding: 1em;
-
+.m-3 {
+  margin: 0rem !important;
 }
 
-section {
-  margin-left: -15px;
-  margin-right: -15px;
-  margin-top: -15px;
-
+.container-fluid {
+  padding: 15px;
 }
