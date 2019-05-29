@@ -102,6 +102,7 @@ export class AccountsViewComponent implements OnInit {
     this.filterOptions = { type: "Menu" }; // put unique filter menue for each column based on the column type
     this.selectionOptions = { type: "Single" }; // allow only single row to be selected at a time for edit or delete
 
+    this.editSettings = { allowDeleting: true };
     this.toolbarOptions = [
       "Create Account",
       "Search",
