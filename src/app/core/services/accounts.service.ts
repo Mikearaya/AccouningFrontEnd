@@ -7,9 +7,9 @@
  * @Description: Modify Here, Please
  */
 import { Injectable } from "@angular/core";
-import { Observable, of } from "rxjs";
+import { Observable, of, Subject } from "rxjs";
 import { HttpClient } from "@angular/common/http";
-import { catchError } from "rxjs/operators";
+import { catchError, map } from "rxjs/operators";
 import {
   Accounts,
   AccountsIndexView,
@@ -18,15 +18,19 @@ import {
 } from "../../features/accounts/accounts";
 import { AccountingApiService } from "src/app/Services/accounting-api.service";
 import { QueryString } from "src/app/shared/data-view/data-view.model";
+import { DataStateChangeEventArgs, Sorts } from "@syncfusion/ej2-grids";
 
 @Injectable()
-export class AccountsService {
+export class AccountsService extends Subject<DataStateChangeEventArgs> {
   public url = "accounts";
   private year: string;
+  private query = new QueryString();
+
   constructor(
     private httpClient: HttpClient,
     private accountingApi: AccountingApiService
   ) {
+    super();
     this.year = this.accountingApi.getSelectedYear();
   }
   // Gets a single Account information by Id and returns an observable of Account
@@ -35,13 +39,10 @@ export class AccountsService {
   }
 
   getAccountsList(queryString: QueryString): Observable<AccountViewModel> {
-    
-    queryString.year = this.accountingApi.getSelectedYear(); 
+    queryString.year = this.accountingApi.getSelectedYear();
     return this.httpClient.post<AccountViewModel>(
-      `${
-        this.url
-      }/filter?year=${this.accountingApi.getSelectedYear()}`,
-        queryString
+      `${this.url}/filter?year=${this.accountingApi.getSelectedYear()}`,
+      queryString
     );
   }
 
@@ -75,9 +76,91 @@ export class AccountsService {
       .pipe(catchError(this.handleError));
   }
 
+  public execute(state: any): void {
+    this.getData(state).subscribe(x => super.next(x));
+  }
+
+  protected getData(
+    state: DataStateChangeEventArgs
+  ): Observable<DataStateChangeEventArgs> {
+    if (state.action) {
+      if (state.action.requestType === "filtering") {
+      }
+
+      switch (state.action.requestType) {
+        case "sorting":
+          this.query.sortColumn = state.action["columnName"];
+          this.query.sortDirection = state.action["direction"];
+          break;
+        case "filtering":
+          console.log(state.action);
+          this.query.filter = [];
+
+          state.action["columns"].forEach(element => {
+            this.query.filter.push({
+              propertyName: element.field,
+              operation: element.operator,
+              value: element.value
+            });
+          });
+
+          break;
+        case "searching":
+          this.query.searchString = state.action["searchString"];
+
+          break;
+        /*
+        case "paging":
+
+          break; */
+      }
+    }
+
+    this.query.year = this.accountingApi.getSelectedYear();
+    this.query.pageSize = state.take;
+    this.query.pageNumber = state.skip;
+
+    const pageQuery = `$skip=${state.skip}&$top=${state.take}`;
+    let sortQuery = "";
+
+    if ((state.sorted || []).length) {
+      sortQuery =
+        `&$orderby=` +
+        state.sorted
+          .map((obj: Sorts) => {
+            return obj.direction === "descending"
+              ? `${obj.name} desc`
+              : obj.name;
+          })
+          .reverse()
+          .join(",");
+    }
+
+    return this.httpClient
+      .post(
+        `${
+          this.url
+        }/filter?${pageQuery}${sortQuery}&$inlinecount=allpages&$format=json`,
+        this.query
+      )
+      .pipe(
+        map((response: any) => {
+          return {
+            result: response["Items"],
+            count: parseInt(response["Count"], 10)
+          } as DataResult;
+        })
+      )
+      .pipe((data: any) => {
+        return data;
+      });
+  }
   private handleError(error: Response | any) {
     return Observable.throw(error.status);
   }
+}
 
-
+export interface DataResult {
+  result: any[];
+  count: number;
 }

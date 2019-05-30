@@ -21,7 +21,7 @@ export class FilterEventModel {
 
 export class QueryString {
   year?: string;
-  selectedColumns: string[] = [];
+  selectedColumns = "";
   sortDirection = "Asc";
   sortColumn: string;
   searchString = "";

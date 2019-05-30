@@ -1,24 +1,23 @@
 <app-print-header [header]="'Chart of accounts'"></app-print-header>
 <ejs-grid
-  [dataSource]="data"
+  [dataSource]="data | async"
   #grid
   [allowExcelExport]="true"
   id="accounts"
   [toolbar]="toolbarOptions"
+  (dataStateChange)="dataStateChange($event)"
   [allowPaging]="true"
   [allowFiltering]="true"
   [allowSorting]="true"
   [allowResizing]="true"
-  ()
   allowFiltering="true"
   [showColumnChooser]="true"
-  [selectionSettings]="selectionOptions"
+ 
   [allowPdfExport]="true"
   (toolbarClick)="toolbarClick($event)"
   [pageSettings]="initialPage"
   [filterSettings]="filterOptions"
   [showColumnChooser]="true"
-  (actionComplete)="actionEndHandler($event)"
   [allowGrouping]="true"
   [groupSettings]="groupOptions"
   [editSettings]="editSettings"
