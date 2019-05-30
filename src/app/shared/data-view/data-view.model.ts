@@ -4,7 +4,6 @@ export class GroupingEventModel {
   columns: string[];
 }
 
-
 export class SortingEventModel {
   columnName: string;
   direction: string;
@@ -12,17 +11,21 @@ export class SortingEventModel {
 }
 
 export class FilterEventModel {
-  columnName: string;
-  operator: string;
+  columnName?: string;
+  propertyName?: string;
+  operator?: string;
   value: string;
-  columns: string;
+  operation?: string;
+  columns?: string;
 }
 
 export class QueryString {
+  year?: string;
   selectedColumns: string[] = [];
-  sortDirection = 'Asc';
+  sortDirection = "Asc";
   sortColumn: string;
-  searchString = '';
+  searchString = "";
   pageNumber = 0;
   pageSize = 10;
+  filter: FilterEventModel[] = [];
 }

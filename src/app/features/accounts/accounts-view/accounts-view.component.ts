@@ -75,7 +75,7 @@ export class AccountsViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.accountApi.getAccountsList().subscribe(
+    this.accountApi.getAccountsList(this.query).subscribe(
       (data: AccountViewModel) => {
         this.data = data.Items;
         this.childGrid.dataSource = data.Items;
@@ -194,6 +194,7 @@ export class AccountsViewComponent implements OnInit {
   }
 
   actionEndHandler(args: ActionEventArgs) {
+    console.log(args);
     this.query.selectedColumns = [];
 
     this.grid
@@ -211,7 +212,25 @@ export class AccountsViewComponent implements OnInit {
         const filteringModel = new FilterEventModel();
         filteringModel.columnName = args["currentFilterObject"]["field"];
         filteringModel.operator = args["currentFilterObject"]["operator"];
+        filteringModel.propertyName = args["currentFilterObject"]["field"];
+        filteringModel.operation = args["currentFilterObject"]["operator"];
         filteringModel.value = args["currentFilterObject"]["value"];
+        let x;
+        if (this.query.filter.length !== 0) {
+          x = this.query.filter.filter(
+            f => f.propertyName !== args["currentFilterObject"]["field"]
+          );
+          console.log("has filter if");
+          console.log(x);
+          x.push(x);
+        } else {
+          console.log("have filter else");
+
+          x = filteringModel;
+          console.log(x);
+        }
+
+        this.query.filter = x;
 
         break;
       case "searching":
@@ -254,7 +273,7 @@ export class AccountsViewComponent implements OnInit {
       this.query.pageNumber
     }`;
     this.accountApi
-      .getAccountsList(searchString)
+      .getAccountsList(this.query)
       .subscribe((data: AccountViewModel) => {
         this.data = data.Items;
         this.childGrid.dataSource = data.Items;

@@ -17,6 +17,7 @@ import {
   AccountView
 } from "../../features/accounts/accounts";
 import { AccountingApiService } from "src/app/Services/accounting-api.service";
+import { QueryString } from "src/app/shared/data-view/data-view.model";
 
 @Injectable()
 export class AccountsService {
@@ -33,9 +34,14 @@ export class AccountsService {
     return this.httpClient.get<AccountView>(`${this.url}/${id}`);
   }
 
-  getAccountsList(searchString: string = ""): Observable<AccountViewModel> {
-    return this.httpClient.get<AccountViewModel>(
-      `${this.url}?year=${this.accountingApi.getSelectedYear()}&${searchString}`
+  getAccountsList(queryString: QueryString): Observable<AccountViewModel> {
+    
+    queryString.year = this.accountingApi.getSelectedYear(); 
+    return this.httpClient.post<AccountViewModel>(
+      `${
+        this.url
+      }/filter?year=${this.accountingApi.getSelectedYear()}`,
+        queryString
     );
   }
 
@@ -72,4 +78,6 @@ export class AccountsService {
   private handleError(error: Response | any) {
     return Observable.throw(error.status);
   }
+
+
 }

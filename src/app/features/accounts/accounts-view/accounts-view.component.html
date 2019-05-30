@@ -9,6 +9,7 @@
   [allowFiltering]="true"
   [allowSorting]="true"
   [allowResizing]="true"
+  ()
   allowFiltering="true"
   [showColumnChooser]="true"
   [selectionSettings]="selectionOptions"
@@ -71,8 +72,7 @@
       groupable="false"
       [width]="100"
     ></e-column>
-    <!--     <e-column field="TotalAmount" textAlign="left" headerText="Amount" isPrimaryKey="false" type="string" editType="textbox"
-      filterable="true" editable="true" groupable="true" width='50'></e-column> -->
+
     <e-column
       field="Active"
       textAlign="left"
@@ -84,7 +84,8 @@
       editable="true"
       groupable="true"
       width="60"
-    ></e-column>
+    >
+    </e-column>
     <e-column
       field="DateAdded"
       textAlign="left"
