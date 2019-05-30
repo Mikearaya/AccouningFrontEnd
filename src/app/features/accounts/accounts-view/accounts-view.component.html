@@ -1,6 +1,6 @@
 <app-print-header [header]="'Chart of accounts'"></app-print-header>
 <ejs-grid
-  [dataSource]="data"
+  [dataSource]="data | async"
   #grid
   [allowExcelExport]="true"
   id="accounts"
