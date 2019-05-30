@@ -123,7 +123,23 @@
                     [attr.name]="'parentAccount' + i"
                   ></app-account-selector>
                 </div>
-                <div *ngIf=""></div>
+                <!--  <div
+                  *ngIf="
+                    ledgerForm.controls['Entries'].controls[0].controls
+                      .AccountId.errors &&
+                    ledgerForm.controls['Entries'].controls[0].controls
+                      .AccountId.touched
+                  "
+                ></div>
+                <div
+                  *ngIf="
+                    ledgerForm.controls[
+                      'Entries'
+                    ].controls[0].controls.AccountId.hasError('incorrect')
+                  "
+                >
+                  dsfsdfsdf
+                </div> -->
               </div>
               <div class="col-5">
                 <div class="row">

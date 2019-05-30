@@ -201,7 +201,7 @@ export class DataViewComponent implements OnInit {
     switch (args.requestType) {
       case "sorting":
         this.query.sortDirection = args["direction"];
-        this.query.sortColumn = args["columnName"];
+        this.query.sortBy = args["columnName"];
 
         break;
       case "filtering":
@@ -245,8 +245,8 @@ export class DataViewComponent implements OnInit {
       searchString += `searchString=${this.query.searchString}&`;
     }
 
-    if (this.query.sortColumn) {
-      searchString += `sortBy=${this.query.sortColumn}&sortDirection=${
+    if (this.query.sortBy) {
+      searchString += `sortBy=${this.query.sortBy}&sortDirection=${
         this.query.sortDirection
       }&`;
     }

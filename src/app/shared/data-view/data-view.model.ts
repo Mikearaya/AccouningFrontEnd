@@ -23,7 +23,7 @@ export class QueryString {
   year?: string;
   selectedColumns = "";
   sortDirection = "Asc";
-  sortColumn: string;
+  sortBy: string;
   searchString = "";
   pageNumber = 0;
   pageSize = 10;

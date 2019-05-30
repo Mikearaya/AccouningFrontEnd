@@ -80,7 +80,7 @@ export class AccountsService extends Subject<DataStateChangeEventArgs> {
     this.getData(state).subscribe(x => super.next(x));
   }
 
-  protected getData(
+  getData(
     state: DataStateChangeEventArgs
   ): Observable<DataStateChangeEventArgs> {
     if (state.action) {
@@ -89,7 +89,7 @@ export class AccountsService extends Subject<DataStateChangeEventArgs> {
 
       switch (state.action.requestType) {
         case "sorting":
-          this.query.sortColumn = state.action["columnName"];
+          this.query.sortBy = state.action["columnName"];
           this.query.sortDirection = state.action["direction"];
           break;
         case "filtering":
@@ -137,23 +137,18 @@ export class AccountsService extends Subject<DataStateChangeEventArgs> {
     }
 
     return this.httpClient
-      .post(
-        `${
-          this.url
-        }/filter?${pageQuery}${sortQuery}&$inlinecount=allpages&$format=json`,
-        this.query
-      )
+      .post(`${this.url}/filter`, this.query)
+      .pipe(map((response: any) => response))
       .pipe(
-        map((response: any) => {
-          return {
-            result: response["Items"],
-            count: parseInt(response["Count"], 10)
-          } as DataResult;
-        })
+        map(
+          (response: any) =>
+            ({
+              result: response["Items"],
+              count: parseInt(response["Count"], 10)
+            } as DataResult)
+        )
       )
-      .pipe((data: any) => {
-        return data;
-      });
+      .pipe((data: any) => data);
   }
   private handleError(error: Response | any) {
     return Observable.throw(error.status);
