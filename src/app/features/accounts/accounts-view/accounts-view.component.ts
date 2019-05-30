@@ -24,12 +24,13 @@ import {
   IRow,
   RowDataBoundEventArgs,
   columnSelectionBegin,
-  HierarchyGridPrintMode
+  HierarchyGridPrintMode,
+  DataStateChangeEventArgs
 } from "@syncfusion/ej2-angular-grids";
 import { Router, ActivatedRoute } from "@angular/router";
 
 import { HttpErrorResponse } from "@angular/common/http";
-import { ClickEventArgs } from "@syncfusion/ej2-navigations";
+import { ClickEventArgs, ChangeEventArgs } from "@syncfusion/ej2-navigations";
 import { AccountViewModel, AccountView } from "../accounts";
 import {
   QueryString,
@@ -40,6 +41,7 @@ import { closest } from "@syncfusion/ej2-base";
 import { DataManager, Query } from "@syncfusion/ej2-data";
 import { ContextMenuItem } from "@syncfusion/ej2-treegrid";
 import { PieCenter } from "@syncfusion/ej2-charts";
+import { Observable } from "rxjs";
 
 @Component({
   selector: "app-accounts-view",
@@ -51,7 +53,6 @@ export class AccountsViewComponent implements OnInit {
 
   @ViewChild("grid")
   public grid: GridComponent;
-  public data: AccountView[];
   public excelExportProperties: ExcelExportProperties;
   public filterSettings: FilterSettingsModel;
   public toolbarOptions: Object[];
@@ -67,6 +68,10 @@ export class AccountsViewComponent implements OnInit {
   public hierarchyPrintMode: HierarchyGridPrintMode;
   public contextMenuItems: ContextMenuItem[];
 
+  public data: Observable<DataStateChangeEventArgs>;
+  public pageOptions: Object;
+  public state: DataStateChangeEventArgs;
+
   public childGrid: GridModel;
   query: QueryString;
 
@@ -75,6 +80,7 @@ export class AccountsViewComponent implements OnInit {
     private accountApi: AccountsService,
     private activatedRoute: ActivatedRoute
   ) {
+    this.data = accountApi;
     this.initialPage = {
       pageSizes: [
         "20",
@@ -85,7 +91,6 @@ export class AccountsViewComponent implements OnInit {
         "1000",
         "3000",
         "4000",
-        "400000",
         "All"
       ],
       pageSize: 20
@@ -93,14 +98,22 @@ export class AccountsViewComponent implements OnInit {
     this.query = new QueryString();
   }
 
+  public dataStateChange(state: DataStateChangeEventArgs): void {
+    this.accountApi.execute(state);
+  }
+
   ngOnInit() {
-    this.accountApi.getAccountsList().subscribe(
+    /*     this.accountApi.getAccountsList(this.query).subscribe(
       (data: AccountViewModel) => {
         this.data = data.Items;
         this.grid.pageSettings.totalRecordsCount = data.Count;
       },
       (error: HttpErrorResponse) => alert(error.message)
-    );
+    ); */
+
+    this.pageSettings = { pageSize: 5, pageCount: 4 };
+    const state = { skip: 0, take: 10 };
+    this.accountApi.execute(state);
 
     this.groupOptions = {
       disablePageWiseAggregates: false,
@@ -143,7 +156,6 @@ export class AccountsViewComponent implements OnInit {
         }
       }
     ];
-    this.pageSettings = { pageSize: 200 }; // initial page row size for the grid
   }
 
   public rowDataBound(args: RowDataBoundEventArgs) {
@@ -209,13 +221,6 @@ export class AccountsViewComponent implements OnInit {
   }
 
   actionEndHandler(args: ActionEventArgs) {
-    this.query.selectedColumns = [];
-
-    this.grid
-      .getColumns()
-      .filter(c => c.visible && c.field !== undefined)
-      .forEach(s => this.query.selectedColumns.push(s.field));
-
     switch (args.requestType) {
       case "sorting":
         this.query.sortDirection = args["direction"];
@@ -226,6 +231,8 @@ export class AccountsViewComponent implements OnInit {
         const filteringModel = new FilterEventModel();
         filteringModel.columnName = args["currentFilterObject"]["field"];
         filteringModel.operator = args["currentFilterObject"]["operator"];
+        filteringModel.propertyName = args["currentFilterObject"]["field"];
+        filteringModel.operation = args["currentFilterObject"]["operator"];
         filteringModel.value = args["currentFilterObject"]["value"];
 
         break;
@@ -268,13 +275,13 @@ export class AccountsViewComponent implements OnInit {
     searchString += `pageSize=${this.query.pageSize}&pageNumber=${
       this.query.pageNumber
     }`;
-    this.accountApi
-      .getAccountsList(searchString)
+    /*    this.accountApi
+      .getAccountsList(this.query)
       .subscribe((data: AccountViewModel) => {
         this.data = data.Items;
 
         this.grid.pageSettings.pageCount = data.Count;
-      });
+      }); */
   }
 
   private getExcelExportProperties(): any {

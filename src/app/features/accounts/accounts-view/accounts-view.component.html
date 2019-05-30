@@ -1,23 +1,23 @@
 <app-print-header [header]="'Chart of accounts'"></app-print-header>
 <ejs-grid
-  [dataSource]="data"
+  [dataSource]="data | async"
   #grid
   [allowExcelExport]="true"
   id="accounts"
   [toolbar]="toolbarOptions"
+  (dataStateChange)="dataStateChange($event)"
   [allowPaging]="true"
   [allowFiltering]="true"
   [allowSorting]="true"
   [allowResizing]="true"
   allowFiltering="true"
   [showColumnChooser]="true"
-  [selectionSettings]="selectionOptions"
+ 
   [allowPdfExport]="true"
   (toolbarClick)="toolbarClick($event)"
   [pageSettings]="initialPage"
   [filterSettings]="filterOptions"
   [showColumnChooser]="true"
-  (actionComplete)="actionEndHandler($event)"
   [allowGrouping]="true"
   [groupSettings]="groupOptions"
   [editSettings]="editSettings"
@@ -87,8 +87,7 @@
       [allowGrouping]="true"
       [width]="10"
     ></e-column>
-    <!--     <e-column field="TotalAmount" textAlign="left" headerText="Amount" isPrimaryKey="false" type="string" editType="textbox"
-      filterable="true" editable="true" groupable="true" width='50'></e-column> -->
+
     <e-column
       field="Active"
       textAlign="left"
@@ -98,9 +97,10 @@
       editType="booleanedit"
       filterable="true"
       editable="true"
-      groupable="false"
-      width="100"
-    ></e-column>
+      groupable="true"
+      width="60"
+    >
+    </e-column>
     <e-column
       field="DateAdded"
       textAlign="left"
