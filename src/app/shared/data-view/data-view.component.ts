@@ -196,13 +196,6 @@ export class DataViewComponent implements OnInit {
   }
 
   actionEndHandler(args: ActionEventArgs) {
-    this.query.selectedColumns = [];
-    console.log(args);
-    this.grid
-      .getColumns()
-      .filter(c => c.visible && c.field !== undefined)
-      .forEach(s => this.query.selectedColumns.push(s.field));
-
     switch (args.requestType) {
       case "sorting":
         this.query.sortDirection = args["direction"];

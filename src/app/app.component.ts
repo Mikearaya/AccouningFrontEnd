@@ -11,6 +11,8 @@ import { AccountingApiService } from "./Services/accounting-api.service";
 import { AvailableYearsModel } from "./Services/system-data.model";
 import { NAVIGATION_LINKS } from "./navigation-data.model";
 import { FilterService } from "./shared/filter-option/filter.service";
+import { Location } from "@angular/common";
+import { element } from "@angular/core/src/render3";
 
 @Component({
   selector: "app-root",
@@ -21,7 +23,8 @@ export class AppComponent implements OnInit {
   public cssClass = "custom";
   constructor(
     private router: Router,
-    private accountingApi: AccountingApiService
+    private accountingApi: AccountingApiService,
+    private location: Location
   ) {
     this.yearFields = { key: "Year", value: "Year" };
     this.field = {
@@ -58,7 +61,12 @@ export class AppComponent implements OnInit {
   public loadRoutingContent(args: NodeSelectEventArgs): void {
     const data: any = this.tree.getTreeData(args.node);
     const routerLink: string = data[0].url;
-    this.router.navigate([routerLink]);
+    // alert(routerLink);
+    // this.router.navigate([routerLink]);
+
+    if (routerLink !== "parent") {
+      this.router.navigate([routerLink]);
+    }
   }
 
   yearChanged(data: any): void {
