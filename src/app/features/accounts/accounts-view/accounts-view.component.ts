@@ -21,7 +21,10 @@ import {
   GridModel,
   ActionEventArgs,
   Column,
-  IRow
+  IRow,
+  RowDataBoundEventArgs,
+  columnSelectionBegin,
+  HierarchyGridPrintMode
 } from "@syncfusion/ej2-angular-grids";
 import { Router, ActivatedRoute } from "@angular/router";
 
@@ -34,6 +37,9 @@ import {
 } from "src/app/shared/data-view/data-view.model";
 import { AccountsService } from "../../../core/services/accounts.service";
 import { closest } from "@syncfusion/ej2-base";
+import { DataManager, Query } from "@syncfusion/ej2-data";
+import { ContextMenuItem } from "@syncfusion/ej2-treegrid";
+import { PieCenter } from "@syncfusion/ej2-charts";
 
 @Component({
   selector: "app-accounts-view",
@@ -58,6 +64,8 @@ export class AccountsViewComponent implements OnInit {
   public commands: CommandModel[];
   public groupOptions: GroupSettingsModel = { showDropArea: false };
   public initialPage: { pageSize: number; pageSizes: string[] };
+  public hierarchyPrintMode: HierarchyGridPrintMode;
+  public contextMenuItems: ContextMenuItem[];
 
   public childGrid: GridModel;
   query: QueryString;
@@ -68,7 +76,18 @@ export class AccountsViewComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {
     this.initialPage = {
-      pageSizes: ["20", "50", "100", "200", "500", "1000", "All"],
+      pageSizes: [
+        "20",
+        "50",
+        "100",
+        "200",
+        "500",
+        "1000",
+        "3000",
+        "4000",
+        "400000",
+        "All"
+      ],
       pageSize: 20
     };
     this.query = new QueryString();
@@ -78,39 +97,24 @@ export class AccountsViewComponent implements OnInit {
     this.accountApi.getAccountsList(this.query).subscribe(
       (data: AccountViewModel) => {
         this.data = data.Items;
-        this.childGrid.dataSource = data.Items;
-
         this.grid.pageSettings.totalRecordsCount = data.Count;
       },
       (error: HttpErrorResponse) => alert(error.message)
     );
 
-    this.childGrid = {
-      queryString: "ParentAccountId",
-      columns: [
-        {
-          field: "Id",
-          headerText: "Id",
-          textAlign: "Right",
-          width: 100
-        },
-        {
-          field: "AccountId",
-          headerText: "Account Id",
-          textAlign: "Right",
-          width: 120
-        },
-        { field: "AccountName", headerText: "Account Name", width: 150 },
-        { field: "Active", headerText: "Status", width: 150 },
-        { field: "ParentAccount", headerText: "Parent", width: 150 }
-      ]
+    this.groupOptions = {
+      disablePageWiseAggregates: false,
+      showDropArea: false,
+      columns: ["ParentAccountId"]
     };
 
     this.filterOptions = { type: "Menu" }; // put unique filter menue for each column based on the column type
     this.selectionOptions = { type: "Single" }; // allow only single row to be selected at a time for edit or delete
 
+    this.editSettings = { allowDeleting: true };
+    // this.contextMenuItems = ["Delete", "Edit"];
     this.toolbarOptions = [
-      "Create Account",
+      { text: "Create Account", prefixIcon: "e-create" },
       "Search",
       { text: "Expand All", prefixIcon: "e-expand", id: "expandall" },
       { text: "Collapse All", prefixIcon: "e-collapse", id: "collapseall" },
@@ -140,6 +144,18 @@ export class AccountsViewComponent implements OnInit {
       }
     ];
     this.pageSettings = { pageSize: 200 }; // initial page row size for the grid
+  }
+
+  public rowDataBound(args: RowDataBoundEventArgs) {
+    const filter: string = args.data["ParentAccountId"];
+    const childrecord: any = new DataManager(this.grid.childGrid
+      .dataSource as JSON[]).executeLocal(
+      new Query().where("ParentAccountId", "equal", parseInt(filter, 10), true)
+    );
+    if (childrecord === 0) {
+      args.row.querySelector("td").innerHTML = "";
+      args.row.querySelector("td").className = "e-customizedExpandcell";
+    }
   }
 
   handleError(error: HttpErrorResponse) {
@@ -174,21 +190,21 @@ export class AccountsViewComponent implements OnInit {
       this.router.navigate(["accounts/new"]); // when user click add route to the accounts form
     }
     if (args.item.id === "expandall") {
-      this.grid.detailRowModule.expandAll();
+      this.grid.groupModule.expandAll();
     }
     if (args.item.id === "collapseall") {
-      this.grid.detailRowModule.collapseAll();
+      this.grid.groupModule.collapseAll();
     }
     if (args.item.id === "print") {
-      this.grid.detailRowModule.expandAll();
+      this.grid.groupModule.expandAll();
+      this.hierarchyPrintMode = "All";
       setTimeout(() => {
-        window.print();
-      }, 400);
+        this.grid.print();
+      }, 1000);
     }
     if (args.item.id === "Grid_excelexport") {
-      this.grid.detailRowModule.expandAll();
       setTimeout(() => {
-        this.grid.excelExport();
+        this.grid.excelExport(this.getExcelExportProperties());
       }, 400);
     }
   }
@@ -276,9 +292,30 @@ export class AccountsViewComponent implements OnInit {
       .getAccountsList(this.query)
       .subscribe((data: AccountViewModel) => {
         this.data = data.Items;
-        this.childGrid.dataSource = data.Items;
 
         this.grid.pageSettings.pageCount = data.Count;
       });
+  }
+
+  private getExcelExportProperties(): any {
+    return {
+      header: {
+        headerRows: 7,
+        rows: [
+          {
+            index: 1,
+            cells: [
+              {
+                index: 1,
+                colspan: 5,
+                rowspan: 3,
+                value: "Chart of accounts",
+                style: { align: "Center", fontSize: 25, bold: true }
+              }
+            ]
+          }
+        ]
+      }
+    };
   }
 }

@@ -1,4 +1,7 @@
-div.content {
-  padding: 1em;
+.m-3 {
+  margin: 0rem !important;
+}
 
+.container-fluid {
+  padding: 15px;
 }

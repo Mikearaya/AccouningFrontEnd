@@ -63,7 +63,7 @@ export class AccountFormComponent implements OnInit {
         .subscribe((data: AccountView) => this.initializeFunction(data));
     }
 
-    this.accountFields = { value: "Name" };
+    this.accountFields = { value: "AccountName" };
   }
 
   deleteAccount(): void {
@@ -89,8 +89,8 @@ export class AccountFormComponent implements OnInit {
     return this.accountForm.get("CatagoryId") as FormControl;
   }
 
-  get Name(): FormControl {
-    return this.accountForm.get("Name") as FormControl;
+  get AccountName(): FormControl {
+    return this.accountForm.get("AccountName") as FormControl;
   }
 
   get ParentAccount(): FormControl {
@@ -120,7 +120,7 @@ export class AccountFormComponent implements OnInit {
         [Validators.required, Validators.minLength(4), Validators.maxLength(4)]
       ],
       CatagoryId: [""],
-      Name: ["", Validators.required],
+      AccountName: ["", Validators.required],
       ParentAccount: [0],
       Active: [true],
       OpeningBalance: [0],
@@ -138,7 +138,10 @@ export class AccountFormComponent implements OnInit {
         { value: data.CategoryId, disabled: true },
         Validators.required
       ],
-      Name: [data.AccountName, [Validators.required, Validators.minLength(3)]],
+      AccountName: [
+        data.AccountName,
+        [Validators.required, Validators.minLength(3)]
+      ],
       ParentAccount: [data.ParentAccountId],
       Active: [data.Active],
       OpeningBalance: [data.OpeningBalance],
@@ -184,13 +187,5 @@ export class AccountFormComponent implements OnInit {
     // sets cursor at specified position
     args.selectionStart = 4;
     args.selectionEnd = 4;
-  }
-
-  /*
-  used to handel the event when user click the cancel button
-  it will return the user to wherever the user came from previously
-  */
-  cancel() {
-    this.location.back();
   }
 }

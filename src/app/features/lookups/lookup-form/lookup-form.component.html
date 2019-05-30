@@ -1,76 +1,80 @@
-<form [formGroup]="lookupForm" (ngSubmit)="onSubmit()" name="lookupForm">
-  <div class="container-fluid card m-2" formArrayName="Lookups">
-    <div
-      class="row"
-      *ngFor="let lookup of Lookups.controls; let i = index; let last = last"
-      [formGroup]="lookup"
-    >
-      <div class="col-sm-4 col-xs-8">
-        <div>
-          <label for="type"> Type</label>
-          <ejs-dropdownlist
-            id="Type"
-            name="Type"
-            formControlName="Type"
-            [fields]="lookupFields"
-            [dataSource]="lookupsList"
-          ></ejs-dropdownlist>
-          <div
-            class="e-error"
-            *ngIf="lookup.get('Type').errors && lookup.get('Type').touched"
-          >
-            <div *ngIf="lookup.get('Type').errors['required']">
-              *Type is Required
+<section>
+  <form [formGroup]="lookupForm" (ngSubmit)="onSubmit()" name="lookupForm">
+    <div class="container-fluid card m-3" formArrayName="Lookups">
+      <div
+        class="row"
+        *ngFor="let lookup of Lookups.controls; let i = index; let last = last"
+        [formGroup]="lookup"
+      >
+        <div class="col-sm-4 col-xs-8">
+          <div>
+            <label for="type"> Type</label>
+            <ejs-dropdownlist
+              id="Type"
+              name="Type"
+              formControlName="Type"
+              [fields]="lookupFields"
+              [dataSource]="lookupsList"
+            ></ejs-dropdownlist>
+            <div
+              class="e-error"
+              *ngIf="lookup.get('Type').errors && lookup.get('Type').touched"
+            >
+              <div *ngIf="lookup.get('Type').errors['required']">
+                *Type is Required
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-sm-4 col-xs-8">
-        <div>
-          <label for="value">Value</label>
-          <input
-            type="text"
-            id="Value"
-            name="Value"
-            class="e-input"
-            formControlName="Value"
-          />
-          <div
-            class="e-error"
-            *ngIf="lookup.get('Value').errors && lookup.get('Value').touched"
-          >
-            <div *ngIf="lookup.get('Value').errors['required']">
-              *Value is Required
+        <div class="col-sm-4 col-xs-8">
+          <div>
+            <label for="value">Value</label>
+            <input
+              type="text"
+              id="Value"
+              name="Value"
+              class="e-input"
+              formControlName="Value"
+            />
+            <div
+              class="e-error"
+              *ngIf="lookup.get('Value').errors && lookup.get('Value').touched"
+            >
+              <div *ngIf="lookup.get('Value').errors['required']">
+                *Value is Required
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-sm-2 col-xs-1">
-        <label for="action">Action</label>
-        <div>
-          <button
-            *ngIf="last"
-            [disabled]="Lookups.invalid"
-            type="button"
-            ejs-button
-            cssClass="e-round e-info e-small"
-            iconCss="e-icons e-plus-icon"
-            (click)="addRow()"
-          ></button>
-          <button
-            id="remove-button"
-            type="button"
-            ejs-button
-            cssClass="e-round e-danger e-small"
-            iconCss="e-icons e-close"
-            (click)="removeRow(i)"
-          ></button>
+        <div class="col-sm-2 col-xs-1">
+          <label for="action">Action</label>
+          <div>
+            <button
+              *ngIf="last"
+              [disabled]="Lookups.invalid"
+              type="button"
+              ejs-button
+              cssClass="e-round e-info e-small"
+              iconCss="e-icons e-plus-icon"
+              (click)="addRow()"
+            ></button>
+            <button
+              id="remove-button"
+              type="button"
+              ejs-button
+              cssClass="e-round e-danger e-small"
+              iconCss="e-icons e-close"
+              (click)="removeRow(i)"
+            ></button>
+          </div>
         </div>
       </div>
+
+      <app-form-options
+        [submitDisabled]="lookupForm.invalid"
+      ></app-form-options>
+
+      <div class="col-4"></div>
     </div>
-
-    <app-form-options [submitDisabled]="lookupForm.invalid"></app-form-options>
-
-    <div class="col-4"></div>
-  </div>
-</form>
+  </form>
+</section>

@@ -1,8 +1,18 @@
 .e-acrdn-header {
-  background: #d3d7dc;
+  background: #4d841d55;
+  border-bottom: none;
+  border-top: none;
+}
+
+.e-accordion .e-acrdn-item.e-expand-state.e-select {
+  border-bottom: none;
+  border-top: none;
+}
+
+.e-acrdn-header-content {
   color: black !important;
 }
 
-.e-acrdn-header:hover {
-  background: #d3d7dc;
+.e-acrdn-header.e-select.e-expand-state {
+  background: #4d841d55;
 }

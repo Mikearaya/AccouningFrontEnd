@@ -273,7 +273,4 @@ export class LedgerComponent implements OnInit {
     this.Date.enable();
     this.Entries.enable();
   }
-  cancel() {
-    this.location.back();
-  }
 }

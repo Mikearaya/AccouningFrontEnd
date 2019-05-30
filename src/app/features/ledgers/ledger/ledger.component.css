@@ -1,7 +1,11 @@
 section {
-  background-color: #eee;
-  padding: 10px;
+  margin-left: -15px;
+  margin-right: -15px;
+  margin-top: -15px;
+
 }
+
+
 
 label {
   display: block;
@@ -35,11 +39,21 @@ label {
 
 #add-button {
   display: grid;
+  margin-right: -50px;
 }
 
 .total,
 .last-section {
   text-align: left;
+}
+
+#action-header {
+  padding-left: 135px;
+}
+
+#remove-buttons,
+#add-icon {
+  padding-left: 145px;
 }
 
 .secone-rowone {

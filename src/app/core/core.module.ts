@@ -16,7 +16,8 @@ import {
   CommandColumnService,
   ToolbarService,
   ResizeService,
-  PageService
+  PageService,
+  ContextMenuService
 } from "@syncfusion/ej2-angular-grids";
 import { AccountCatagoryApiService } from "./account-catagory-api.service";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
@@ -55,6 +56,7 @@ import {
     LedgerService,
     LineSeriesService,
     CategoryService,
+    ContextMenuService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: RmHeaderInterceptorService,
