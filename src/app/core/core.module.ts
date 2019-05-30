@@ -56,7 +56,6 @@ import {
     LedgerService,
     LineSeriesService,
     CategoryService,
-    ContextMenuService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: RmHeaderInterceptorService,

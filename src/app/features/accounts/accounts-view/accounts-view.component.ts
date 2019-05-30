@@ -197,9 +197,8 @@ export class AccountsViewComponent implements OnInit {
     }
     if (args.item.id === "print") {
       this.grid.groupModule.expandAll();
-      this.hierarchyPrintMode = "All";
       setTimeout(() => {
-        this.grid.print();
+        window.print();
       }, 1000);
     }
     if (args.item.id === "Grid_excelexport") {
@@ -281,17 +280,42 @@ export class AccountsViewComponent implements OnInit {
   private getExcelExportProperties(): any {
     return {
       header: {
-        headerRows: 7,
+        headerRows: 5,
         rows: [
           {
-            index: 1,
             cells: [
               {
-                index: 1,
-                colspan: 5,
-                rowspan: 3,
-                value: "Chart of accounts",
-                style: { align: "Center", fontSize: 25, bold: true }
+                colSpan: 4,
+                rowSpan: 3,
+                value: "Chart of Accounts",
+                style: {
+                  fontSize: 25,
+                  hAlign: "Center",
+                  bold: true
+                }
+              }
+            ]
+          }
+        ]
+      },
+      footer: {
+        footerRows: 4,
+        rows: [
+          {
+            cells: [
+              {
+                colSpan: 4,
+                value: "Thank you for your business!",
+                style: { hAlign: "Center", bold: true }
+              }
+            ]
+          },
+          {
+            cells: [
+              {
+                colSpan: 4,
+                value: "Visit again!",
+                style: { hAlign: "Center", bold: true }
               }
             ]
           }

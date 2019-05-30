@@ -2,6 +2,10 @@
   #accounts_toolbarItems {
     display: none;
   }
+
+  #accounts * {
+    height: auto !important;
+  }
 }
 
 #accounts_content_table {
