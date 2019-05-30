@@ -15,7 +15,6 @@ import { Predicate, Query } from "@syncfusion/ej2-data/src";
       name="account"
       placeholder="search for account"
       [text]="text"
-      [enabled]="!diabled"
       [fields]="fields"
       (filtering)="onFiltering($event)"
       [dataSource]="accounts"

@@ -26,6 +26,7 @@ import { closest } from "@syncfusion/ej2-base";
 import { ClickEventArgs } from "@syncfusion/ej2-angular-navigations";
 import { AccountTypeViewModel } from "../account-type";
 import { AccountTypeService } from "../account-type.service";
+import { PageSizes } from "../../../page-model";
 
 @Component({
   selector: "app-account-type-view",
@@ -49,17 +50,21 @@ export class AccountTypeViewComponent implements OnInit {
   public filterOptions: FilterSettingsModel;
   public commands: CommandModel[];
   public groupOptions: GroupSettingsModel = { showDropArea: true };
+  public pageSizes: string[] = PageSizes;
+  public initialPage: { pageSize: string; pageSizes: string[] };
 
   public childGrid: GridModel;
   query: QueryString;
-  initialPage: { pageSize: any; pageSizes: boolean };
 
   constructor(
     private router: Router,
     private accountTypeApi: AccountTypeService,
     private activatedRoute: ActivatedRoute
   ) {
-    this.initialPage = { pageSize: 10, pageSizes: true };
+    this.initialPage = {
+      pageSize: this.pageSizes[0],
+      pageSizes: this.pageSizes
+    };
     this.query = new QueryString();
   }
 
@@ -70,7 +75,7 @@ export class AccountTypeViewComponent implements OnInit {
       },
       (error: HttpErrorResponse) => alert(error.message)
     );
-    this.groupOptions = { columns: ["AccountType"], showDropArea: false };
+    this.groupOptions = { columns: ["Type"], showDropArea: false };
     this.childGrid = {
       queryString: "ParentAccount",
       columns: [
@@ -99,7 +104,7 @@ export class AccountTypeViewComponent implements OnInit {
     this.selectionOptions = { type: "Single" }; // allow only single row to be selected at a time for edit or delete
 
     this.toolbarOptions = [
-      { text: "Create", prefixIcon: "e-create" },
+      { text: "Create", prefixIcon: "e-create", id: "create" },
       "Search",
       { text: "Print", prefixIcon: "e-print", id: "print" }
     ];
@@ -153,7 +158,7 @@ export class AccountTypeViewComponent implements OnInit {
   // Click handler for when the toolbar is cliked
   toolbarClick(args: ClickEventArgs): void {
     console.log(args.item.id);
-    if (args.item.id.toUpperCase() === "ACCOUNTS_CREATE") {
+    if (args.item.id === "create") {
       this.router.navigate(["account-types/add"]); // when user click add route to the accounts form
     }
     if (args.item.id === "print") {

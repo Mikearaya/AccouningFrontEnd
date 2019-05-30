@@ -81,4 +81,8 @@ body {
   .e-table {
     font-family: 'Courier New', Courier, monospace;
   }
+
+  .e-icons.e-gdiagonaldown.e-icon-gdownarrow {
+    display: none;
+  }
 }

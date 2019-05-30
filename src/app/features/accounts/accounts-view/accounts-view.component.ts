@@ -42,6 +42,7 @@ import { DataManager, Query } from "@syncfusion/ej2-data";
 import { ContextMenuItem } from "@syncfusion/ej2-treegrid";
 import { PieCenter } from "@syncfusion/ej2-charts";
 import { Observable } from "rxjs";
+import { PageSizes } from "src/app/page-model";
 
 @Component({
   selector: "app-accounts-view",
@@ -64,9 +65,8 @@ export class AccountsViewComponent implements OnInit {
   public filterOptions: FilterSettingsModel;
   public commands: CommandModel[];
   public groupOptions: GroupSettingsModel = { showDropArea: false };
-  public initialPage: { pageSize: number; pageSizes: string[] };
-  public hierarchyPrintMode: HierarchyGridPrintMode;
-  public contextMenuItems: ContextMenuItem[];
+  public pageSizes: string[] = PageSizes;
+  public initialPage: { pageSize: string; pageSizes: string[] };
 
   public data: Observable<DataStateChangeEventArgs>;
   public pageOptions: Object;
@@ -82,18 +82,8 @@ export class AccountsViewComponent implements OnInit {
   ) {
     this.data = accountApi;
     this.initialPage = {
-      pageSizes: [
-        "20",
-        "50",
-        "100",
-        "200",
-        "500",
-        "1000",
-        "3000",
-        "4000",
-        "All"
-      ],
-      pageSize: 20
+      pageSize: PageSizes[0],
+      pageSizes: this.pageSizes
     };
     this.query = new QueryString();
   }
@@ -127,7 +117,7 @@ export class AccountsViewComponent implements OnInit {
     this.editSettings = { allowDeleting: true };
     // this.contextMenuItems = ["Delete", "Edit"];
     this.toolbarOptions = [
-      { text: "Create Account", prefixIcon: "e-create" },
+      { text: "Create Account", prefixIcon: "e-create", id: "create" },
       "Search",
       { text: "Expand All", prefixIcon: "e-expand", id: "expandall" },
       { text: "Collapse All", prefixIcon: "e-collapse", id: "collapseall" },
@@ -198,7 +188,7 @@ export class AccountsViewComponent implements OnInit {
   }
   // Click handler for when the toolbar is cliked
   toolbarClick(args: ClickEventArgs): void {
-    if (args.item.id.toUpperCase() === "ACCOUNTS_CREATE ACCOUNT") {
+    if (args.item.id === "create") {
       this.router.navigate(["accounts/new"]); // when user click add route to the accounts form
     }
     if (args.item.id === "expandall") {
@@ -214,9 +204,10 @@ export class AccountsViewComponent implements OnInit {
       }, 1000);
     }
     if (args.item.id === "Grid_excelexport") {
+      this.grid.pageSettings.pageSize = this.grid.pageSettings.totalRecordsCount;
       setTimeout(() => {
         this.grid.excelExport(this.getExcelExportProperties());
-      }, 400);
+      }, 1000);
     }
   }
 

@@ -23,6 +23,7 @@ import {
   RowSelectEventArgs
 } from "@syncfusion/ej2-grids";
 import { GridComponent } from "@syncfusion/ej2-angular-grids";
+import { PageSizes } from "src/app/page-model";
 
 @Component({
   selector: "app-data-view",
@@ -95,7 +96,8 @@ export class DataViewComponent implements OnInit {
   @ViewChild("grid")
   public grid: GridComponent;
 
-  public initialPage: Object;
+  public pageSizes: string[] = PageSizes;
+  public initialPage: { pageSize: number; pageSizes: string[] };
 
   public groupOptions: GroupSettingsModel;
   public filterSettings: FilterSettingsModel;
@@ -106,12 +108,12 @@ export class DataViewComponent implements OnInit {
   public selectionOptions: SelectionSettingsModel;
   private query: QueryString;
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {
+    this.initialPage = { pageSize: 50, pageSizes: this.pageSizes };
     this.query = new QueryString();
   }
 
   ngOnInit() {
     this.customAttributes = { class: "custom-grid-header" };
-    this.initialPage = { pageSize: this.pageSize, pageSizes: true };
     this.groupOptions = { showGroupedColumn: true };
     this.filterSettings = { type: "Menu" };
     this.selectOptions = { type: "Multiple", persistSelection: true };
@@ -282,6 +284,13 @@ export class DataViewComponent implements OnInit {
 
   toolbarClick(args: ClickEventArgs): void {
     switch (args.item.id) {
+      case "create":
+        if (this.addRoute.trim().length === 0) {
+          this.router.navigate(["add"], { relativeTo: this.activatedRoute });
+        } else {
+          this.router.navigate([this.addRoute]);
+        }
+        break;
       case "dataview_add":
         if (this.addRoute.trim().length === 0) {
           this.router.navigate(["add"], { relativeTo: this.activatedRoute });

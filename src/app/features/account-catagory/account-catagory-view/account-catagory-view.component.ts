@@ -1,6 +1,7 @@
 import { Component, OnInit, Output } from "@angular/core";
 import { AccountCatagoryApiService } from "../../../core/account-catagory-api.service";
 import { AccountCatagoryView } from "../account-catagory-domain";
+import { PageSizes } from "src/app/page-model";
 
 @Component({
   selector: "app-account-catagory-view",
@@ -11,6 +12,8 @@ export class AccountCatagoryViewComponent implements OnInit {
   public data: any;
   public customAttributes: { class: string };
   public filterOptions: { type: string };
+  public pageSizes: string[] = PageSizes;
+  public initialPage: { pageSize: number; pageSizes: string[] };
   public columnBluePrint = [
     {
       key: "Id",
@@ -34,7 +37,9 @@ export class AccountCatagoryViewComponent implements OnInit {
       type: "string"
     }
   ];
-  constructor(private accountCatagApi: AccountCatagoryApiService) {}
+  constructor(private accountCatagApi: AccountCatagoryApiService) {
+    this.initialPage = { pageSize: 20, pageSizes: this.pageSizes };
+  }
 
   ngOnInit() {
     this.accountCatagApi
