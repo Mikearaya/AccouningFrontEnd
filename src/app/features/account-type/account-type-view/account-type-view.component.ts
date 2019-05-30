@@ -168,7 +168,7 @@ export class AccountTypeViewComponent implements OnInit {
     switch (args.requestType) {
       case "sorting":
         this.query.sortDirection = args["direction"];
-        this.query.sortColumn = args["columnName"];
+        this.query.sortBy = args["columnName"];
 
         break;
       case "filtering":

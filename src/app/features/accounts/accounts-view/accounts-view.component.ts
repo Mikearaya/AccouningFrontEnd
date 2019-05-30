@@ -6,7 +6,7 @@
  * @Last Modified Time: Apr 25, 2019 2:21 PM
  * @Description: Modify Here, Please
  */
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild, AfterViewInit } from "@angular/core";
 import {
   GridComponent,
   ExcelExportProperties,
@@ -22,25 +22,21 @@ import {
   ActionEventArgs,
   Column,
   IRow,
-  RowDataBoundEventArgs,
-  columnSelectionBegin,
   HierarchyGridPrintMode,
   DataStateChangeEventArgs
 } from "@syncfusion/ej2-angular-grids";
 import { Router, ActivatedRoute } from "@angular/router";
 
 import { HttpErrorResponse } from "@angular/common/http";
-import { ClickEventArgs, ChangeEventArgs } from "@syncfusion/ej2-navigations";
-import { AccountViewModel, AccountView } from "../accounts";
+import { ClickEventArgs } from "@syncfusion/ej2-navigations";
+
 import {
   QueryString,
   FilterEventModel
 } from "src/app/shared/data-view/data-view.model";
 import { AccountsService } from "../../../core/services/accounts.service";
 import { closest } from "@syncfusion/ej2-base";
-import { DataManager, Query } from "@syncfusion/ej2-data";
 import { ContextMenuItem } from "@syncfusion/ej2-treegrid";
-import { PieCenter } from "@syncfusion/ej2-charts";
 import { Observable } from "rxjs";
 
 @Component({
@@ -68,7 +64,7 @@ export class AccountsViewComponent implements OnInit {
   public hierarchyPrintMode: HierarchyGridPrintMode;
   public contextMenuItems: ContextMenuItem[];
 
-  public data: Observable<DataStateChangeEventArgs>;
+  public data: object;
   public pageOptions: Object;
   public state: DataStateChangeEventArgs;
 
@@ -82,17 +78,7 @@ export class AccountsViewComponent implements OnInit {
   ) {
     this.data = accountApi;
     this.initialPage = {
-      pageSizes: [
-        "20",
-        "50",
-        "100",
-        "200",
-        "500",
-        "1000",
-        "3000",
-        "4000",
-        "All"
-      ],
+      pageSizes: ["20", "50", "100", "200", "500", "1000", "3000", "All"],
       pageSize: 20
     };
     this.query = new QueryString();
@@ -103,22 +89,13 @@ export class AccountsViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    /*     this.accountApi.getAccountsList(this.query).subscribe(
-      (data: AccountViewModel) => {
-        this.data = data.Items;
-        this.grid.pageSettings.totalRecordsCount = data.Count;
-      },
-      (error: HttpErrorResponse) => alert(error.message)
-    ); */
-
     this.pageSettings = { pageSize: 5, pageCount: 4 };
-    const state = { skip: 0, take: 10 };
-    this.accountApi.execute(state);
+    const state = { skip: 0, take: 5 };
 
     this.groupOptions = {
       disablePageWiseAggregates: false,
       showDropArea: false,
-      columns: ["ParentAccountId"]
+      columns: ["ParentAccount"]
     };
 
     this.filterOptions = { type: "Menu" }; // put unique filter menue for each column based on the column type
@@ -127,7 +104,7 @@ export class AccountsViewComponent implements OnInit {
     this.editSettings = { allowDeleting: true };
     // this.contextMenuItems = ["Delete", "Edit"];
     this.toolbarOptions = [
-      { text: "Create Account", prefixIcon: "e-create" },
+      { text: "Create Account", prefixIcon: "e-create", id: "createAccount" },
       "Search",
       { text: "Expand All", prefixIcon: "e-expand", id: "expandall" },
       { text: "Collapse All", prefixIcon: "e-collapse", id: "collapseall" },
@@ -156,18 +133,8 @@ export class AccountsViewComponent implements OnInit {
         }
       }
     ];
-  }
 
-  public rowDataBound(args: RowDataBoundEventArgs) {
-    const filter: string = args.data["ParentAccountId"];
-    const childrecord: any = new DataManager(this.grid.childGrid
-      .dataSource as JSON[]).executeLocal(
-      new Query().where("ParentAccountId", "equal", parseInt(filter, 10), true)
-    );
-    if (childrecord === 0) {
-      args.row.querySelector("td").innerHTML = "";
-      args.row.querySelector("td").className = "e-customizedExpandcell";
-    }
+    this.accountApi.execute(state);
   }
 
   handleError(error: HttpErrorResponse) {
@@ -198,7 +165,7 @@ export class AccountsViewComponent implements OnInit {
   }
   // Click handler for when the toolbar is cliked
   toolbarClick(args: ClickEventArgs): void {
-    if (args.item.id.toUpperCase() === "ACCOUNTS_CREATE ACCOUNT") {
+    if (args.item.id.toUpperCase() === "CREATEACCOUNT") {
       this.router.navigate(["accounts/new"]); // when user click add route to the accounts form
     }
     if (args.item.id === "expandall") {
@@ -224,7 +191,7 @@ export class AccountsViewComponent implements OnInit {
     switch (args.requestType) {
       case "sorting":
         this.query.sortDirection = args["direction"];
-        this.query.sortColumn = args["columnName"];
+        this.query.sortBy = args["columnName"];
 
         break;
       case "filtering":
@@ -264,8 +231,8 @@ export class AccountsViewComponent implements OnInit {
       searchString += `searchString=${this.query.searchString}&`;
     }
 
-    if (this.query.sortColumn) {
-      searchString += `sortBy=${this.query.sortColumn}&`;
+    if (this.query.sortBy) {
+      searchString += `sortBy=${this.query.sortBy}&`;
     }
 
     if (this.query.sortDirection) {
@@ -275,13 +242,6 @@ export class AccountsViewComponent implements OnInit {
     searchString += `pageSize=${this.query.pageSize}&pageNumber=${
       this.query.pageNumber
     }`;
-    /*    this.accountApi
-      .getAccountsList(this.query)
-      .subscribe((data: AccountViewModel) => {
-        this.data = data.Items;
-
-        this.grid.pageSettings.pageCount = data.Count;
-      }); */
   }
 
   private getExcelExportProperties(): any {
