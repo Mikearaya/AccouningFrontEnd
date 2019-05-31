@@ -139,7 +139,7 @@ export class LedgerComponent implements OnInit {
   /*  public RequireMatch(control: AbstractControl) {
     const selection: any = control.value;
     if (typeof selection === "string") {
-      return { incorrect: "" };
+      return { match: true };
     }
     return null;
   } */

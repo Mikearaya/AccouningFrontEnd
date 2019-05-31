@@ -115,6 +115,7 @@
               "
               [formGroup]="account"
             >
+              {{ account.value | json }}
               <div class="col-5">
                 <div class="form-group">
                   <app-account-selector
@@ -123,15 +124,12 @@
                     [attr.name]="'parentAccount' + i"
                   ></app-account-selector>
                 </div>
+                <div *ngIf="account.errors && account.touched">
+                  <div *ngIf="account.errors['required']">
+                    AccountId required
+                  </div>
+                </div>
                 <!--  <div
-                  *ngIf="
-                    ledgerForm.controls['Entries'].controls[0].controls
-                      .AccountId.errors &&
-                    ledgerForm.controls['Entries'].controls[0].controls
-                      .AccountId.touched
-                  "
-                ></div>
-                <div
                   *ngIf="
                     ledgerForm.controls[
                       'Entries'
