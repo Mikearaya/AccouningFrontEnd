@@ -1,19 +1,22 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import {
   GridModel,
-  ActionEventArgs,
-  PageSettingsModel
+  PageSettingsModel,
+  DataStateChangeEventArgs
 } from "@syncfusion/ej2-grids";
 import { GridComponent } from "@syncfusion/ej2-angular-grids";
-import { Checklist, LedgerChecklistView } from "../report";
+
 import { ClickEventArgs } from "@syncfusion/ej2-angular-navigations";
-import { ReportApiService } from "../report-api.service";
+
 import {
   PageChanged,
   PaginationComponent
 } from "src/app/shared/pagination/pagination.component";
 import { FilterOptionComponent } from "src/app/shared/filter-option/filter-option.component";
 import { PageSizes } from "src/app/page-model";
+import { CheckListReportApiService } from "./check-list-report-api.service";
+import { ReportFilterModel } from "src/app/shared/filter-option/filter";
+import { Subject } from "rxjs";
 @Component({
   selector: "app-checklist",
   templateUrl: "./checklist.component.html",
@@ -25,21 +28,25 @@ export class ChecklistComponent implements OnInit {
   @ViewChild("pagger")
   public pagger: PaginationComponent;
   public gridData: object[];
-  public data: Checklist[];
+  public data: Subject<DataStateChangeEventArgs>;
   public toolbar: object;
   public Dialog: any;
   public pageSizes: string[] = PageSizes;
   public initialPage: { pageSize: number; pageSizes: string[] };
   public summaryRows;
   public totalPages: number;
-  filterSettings: { type: string };
-  // current: { pageSize: number; pageNumber: number };
+  public filterData: ReportFilterModel;
+  public stateData: DataStateChangeEventArgs;
+  public filterSettings: { type: string };
 
-  constructor(private checklistService: ReportApiService) {
+  constructor(private checklistService: CheckListReportApiService) {
     this.filterSettings = { type: "Menu" };
-    /*     this.current.pageSize = 10;
-    this.current.pageNumber = 1; */
+
+    this.stateData = { skip: 0, take: 50 };
+    this.filterData = new ReportFilterModel();
+    this.data = this.checklistService;
   }
+
   public childGrid: GridModel = {
     dataSource: this.data,
     queryString: "LedgerId",
@@ -71,17 +78,18 @@ export class ChecklistComponent implements OnInit {
       }
     ]
   };
+
   lastFilter = "";
   @ViewChild("grid")
   public grid: GridComponent;
 
   ngOnInit(): void {
+    this.checklistService.execute(this.stateData, this.filterData);
     this.initialPage = {
       pageSize: 50,
       pageSizes: this.pageSizes
     };
 
-    this.onFiltered();
     this.toolbar = [
       { text: "Expand All", prefixIcon: "e-expand", id: "expandall" },
       { text: "Collapse All", prefixIcon: "e-collapse", id: "collapseall" },
@@ -92,42 +100,23 @@ export class ChecklistComponent implements OnInit {
         id: "Grid_excelexport"
       }
     ];
-  }
 
-  onActionComplete(args: ActionEventArgs) {}
+    this.checklistService.execute({ skip: 0, take: 50 }, this.filterData);
+  }
 
   generateSearchString(): string {
     return `pageSize=${this.grid.pageSettings.pageSize}&pageNumber=${
       this.grid.pageSettings.currentPage
     }`;
   }
-  onFiltered(data: string = ""): void {
-    this.lastFilter = data;
 
-    this.checklistService
-      .getChecklistReport(`${data}&${this.generateSearchString()}`)
-      .subscribe((result: LedgerChecklistView) => {
-        this.data = result.Items;
-        this.gridData = result.Items;
-        this.initialPage.pageSize = result.Count;
-
-        this.totalPages = result.Count;
-        const x = [];
-        result.Items.forEach(element => {
-          element.Entries.forEach(elementx => {
-            x.push(elementx);
-          });
-        });
-
-        console.log(x);
-        this.childGrid.dataSource = x;
-      });
+  onDataStateChange(state: DataStateChangeEventArgs): void {
+    this.stateData = state;
+    this.checklistService.execute(state, this.filterData);
   }
 
   onPageChanged(event: PageChanged): void {
     const search = this.filter.getFilterContent();
-
-    this.onFiltered(search);
   }
 
   clickHandler(args: ClickEventArgs): void {
@@ -151,6 +140,10 @@ export class ChecklistComponent implements OnInit {
         this.grid.excelExport();
       }, 400);
     }
+  }
+
+  onFilterStateChange(filterData: ReportFilterModel): void {
+    this.checklistService.execute(this.stateData, filterData);
   }
 
   expand(): void {

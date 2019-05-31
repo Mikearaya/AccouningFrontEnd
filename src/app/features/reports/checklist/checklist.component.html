@@ -5,21 +5,21 @@
   [allowCostCenterSearch]="true"
   [allwoYearSeach]="true"
   #filter
-  (filtered)="onFiltered($event)"
+  (filterChanged)="onFilterStateChange($event)"
 ></app-filter-option>
 <div class="checklist-area">
   <app-print-header [header]="'Checklist'"></app-print-header>
   <div class="print-area">
     <ejs-grid
-      (actionComplete)="onActionComplete($event)"
       #grid
       [allowResizing]="true"
-      [dataSource]="gridData"
       foreign-key-field="LedgerId"
       [childGrid]="childGrid"
       [allowPaging]="true"
       [pageSettings]="initialPage"
       query-string="Id"
+      [dataSource]="data | async"
+      (dataStateChange)="onDataStateChange($event)"
       [allowExcelExport]="true"
       [toolbar]="toolbar"
       (toolbarClick)="clickHandler($event)"

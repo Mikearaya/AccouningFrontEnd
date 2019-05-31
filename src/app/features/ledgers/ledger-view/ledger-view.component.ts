@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 
 import { LedgerService } from "../../../core/services/ledger.service";
-import { HttpErrorResponse } from "@angular/common/http";
 import { CustomGridColumns } from "src/app/shared/data-view/data-view.component";
 import { DataStateChangeEventArgs } from "@syncfusion/ej2-grids";
 import { Subject } from "rxjs";
@@ -38,7 +37,7 @@ export class LedgerViewComponent implements OnInit {
       type: "string"
     },
     {
-      key: "ReferenceNumber",
+      key: "Reference",
       header: "DocumentNo",
       visible: true,
       width: 50,
@@ -74,17 +73,9 @@ export class LedgerViewComponent implements OnInit {
     this.data = this.ledgerService;
   }
   ngOnInit() {
-    this.loadLedgerEntries();
     this.ledgerService.execute({ skip: 0, take: 50 });
   }
-  loadLedgerEntries() {
-    this.ledgerService
-      .getAllLedgerEntries()
-      .subscribe(
-        (data: any) => (this.data = data),
-        (error: HttpErrorResponse) => console.error(error)
-      );
-  }
+
   deleteLedgerEntry(data: any) {
     this.ledgerService
       .deleteLedgerEntry(data["Id"])
