@@ -48,7 +48,7 @@ export class AccountCatagoryViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    const state = { skip: 0, take: 10 };
+    const state = { skip: 0, take: 50 };
     this.accountCatagApi.execute(state);
   }
 

@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { LookupService } from "../../../core/services/lookup.service";
 import { LookupView } from "../lookups";
+import { DataStateChangeEventArgs } from "@syncfusion/ej2-grids";
+import { Subject } from "rxjs";
 
 @Component({
   selector: "app-lookup-view",
@@ -8,7 +10,7 @@ import { LookupView } from "../lookups";
   styleUrls: ["./lookup-view.component.css"]
 })
 export class LookupViewComponent implements OnInit {
-  public data: any;
+  public data: Subject<DataStateChangeEventArgs>;
   public customAttributes: { class: string };
   public filterOptions: { type: string };
   public columnBluePrint = [
@@ -35,22 +37,18 @@ export class LookupViewComponent implements OnInit {
     }
   ];
 
-  constructor(private lookupApi: LookupService) {}
+  constructor(private lookupApi: LookupService) {
+    this.data = this.lookupApi;
+  }
   ngOnInit() {
-    this.loadLookups();
+    this.lookupApi.execute({ skip: 0, take: 50 });
   }
 
   deleteLookup(data: any) {
     this.lookupApi.deleteLookup(data["Id"]).subscribe(() => alert("called"));
   }
-  loadLookups(search: string = "") {
-    this.lookupApi.getLookups(search).subscribe((data: LookupView[]) => {
-      this.data = data;
-    });
-  }
 
-  filterLookup(data: any) {
-    // alert(JSON.stringify(data));
-    this.loadLookups(data);
+  onDataStateChanged(state: DataStateChangeEventArgs): void {
+    this.lookupApi.execute(state);
   }
 }
