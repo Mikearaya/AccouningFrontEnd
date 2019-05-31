@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 
 import { FormBuilder, FormGroup, FormControl } from "@angular/forms";
+import { QueryString } from "../data-view/data-view.model";
+import { ReportFilterModel } from "./filter";
 
 @Component({
   selector: "app-filter-option",
@@ -13,6 +15,7 @@ export class FilterOptionComponent implements OnInit {
   public lookupsList: object;
   public yearTypeFields: object;
   public yearList: object;
+  private reportQueryModel: ReportFilterModel;
 
   years = ["2011", "2010", "2019"];
   @Input()
@@ -29,10 +32,14 @@ export class FilterOptionComponent implements OnInit {
   public searchString = "";
 
   @Output()
+  public filterChanged: EventEmitter<ReportFilterModel> = new EventEmitter();
+
+  @Output()
   public filtered: EventEmitter<string> = new EventEmitter();
 
   constructor(private formBuilder: FormBuilder) {
     this.createControls();
+    this.reportQueryModel = new ReportFilterModel();
   }
 
   createControls(): void {
@@ -129,48 +136,56 @@ export class FilterOptionComponent implements OnInit {
     return this.filterForm.get("EndDate") as FormControl;
   }
 
-  filter() {
-    // const costCenter = this.costCenter.value;
-
-    this.filtered.emit(this.prepareFilter());
-  }
-
   private prepareFilter(): string {
     this.searchString = "";
+    this.reportQueryModel = new ReportFilterModel();
     if (this.Year.value) {
       this.searchString = `year=${this.Year.value}`;
+      this.reportQueryModel.searchString = this.Year.value;
     }
 
     if (this.VoucherStartId.value) {
       this.searchString += `&fromVoucherId=${this.VoucherStartId.value}`;
+      this.reportQueryModel.FromVoucherId = this.VoucherStartId.value;
     }
 
     if (this.VoucherEndId.value) {
       this.searchString += `&toVoucherId=${this.VoucherEndId.value}`;
+      this.reportQueryModel.ToVoucherId = this.VoucherEndId.value;
     }
 
     if (this.StartDate.value) {
       this.searchString += `&startDate=${new Date(
         this.StartDate.value
       ).toUTCString()}`;
+
+      this.reportQueryModel.StartDate = this.StartDate.value;
     }
 
     if (this.EndDate.value) {
       this.searchString += `&endDate=${new Date(
         this.EndDate.value
       ).toUTCString()}`;
+      this.reportQueryModel.EndDate = this.EndDate.value;
     }
 
     if (this.ControlAccount.value) {
       this.searchString += `&controlAccountId=${this.ControlAccount.value}`;
+      this.reportQueryModel.ControlAccountId = this.ControlAccount.value;
     }
     if (this.Subsidary.value) {
       this.searchString += `&subsidaryId=${this.Subsidary.value}`;
+      this.reportQueryModel.SubsidaryId = this.Subsidary.value;
     }
 
     if (this.CostCenter.value) {
       this.searchString += `&costCenter=${this.CostCenter.value}`;
+      this.reportQueryModel.CostCenter = this.CostCenter.value;
     }
+
+    console.log("filter changed");
+    console.log(this.reportQueryModel);
+    this.filterChanged.emit(this.reportQueryModel);
 
     return this.searchString;
   }
