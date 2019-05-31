@@ -115,10 +115,7 @@ export class AccountFormComponent implements OnInit {
   */
   createForm() {
     this.accountForm = this.formBuilder.group({
-      AccountId: [
-        "",
-        [Validators.required, Validators.minLength(4), Validators.maxLength(4)]
-      ],
+      AccountId: ["", [Validators.required]],
       CatagoryId: [""],
       AccountName: ["", Validators.required],
       ParentAccount: [0],
@@ -130,10 +127,7 @@ export class AccountFormComponent implements OnInit {
 
   initializeFunction(data: AccountView) {
     this.accountForm = this.formBuilder.group({
-      AccountId: [
-        data.AccountId,
-        [Validators.minLength(4), Validators.maxLength(4)]
-      ],
+      AccountId: [data.AccountId, [Validators.required]],
       CatagoryId: [
         { value: data.CategoryId, disabled: true },
         Validators.required

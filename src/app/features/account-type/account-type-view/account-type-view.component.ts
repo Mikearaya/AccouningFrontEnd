@@ -13,7 +13,8 @@ import {
   GridModel,
   IRow,
   Column,
-  ActionEventArgs
+  ActionEventArgs,
+  DataStateChangeEventArgs
 } from "@syncfusion/ej2-grids";
 import {
   QueryString,
@@ -26,6 +27,8 @@ import { closest } from "@syncfusion/ej2-base";
 import { ClickEventArgs } from "@syncfusion/ej2-angular-navigations";
 import { AccountTypeViewModel } from "../account-type";
 import { AccountTypeService } from "../account-type.service";
+import { PageSizes } from "../../../page-model";
+import { Subject } from "rxjs";
 
 @Component({
   selector: "app-account-type-view",
@@ -37,7 +40,7 @@ export class AccountTypeViewComponent implements OnInit {
 
   @ViewChild("grid")
   public grid: GridComponent;
-  public data: AccountTypeViewModel[];
+  public data: Subject<DataStateChangeEventArgs>;
   public excelExportProperties: ExcelExportProperties;
   public filterSettings: FilterSettingsModel;
   public toolbarOptions: object;
@@ -49,28 +52,28 @@ export class AccountTypeViewComponent implements OnInit {
   public filterOptions: FilterSettingsModel;
   public commands: CommandModel[];
   public groupOptions: GroupSettingsModel = { showDropArea: true };
+  public pageSizes: string[] = PageSizes;
+  public initialPage: { pageSize: string; pageSizes: string[] };
 
   public childGrid: GridModel;
   query: QueryString;
-  initialPage: { pageSize: any; pageSizes: boolean };
 
   constructor(
     private router: Router,
     private accountTypeApi: AccountTypeService,
     private activatedRoute: ActivatedRoute
   ) {
-    this.initialPage = { pageSize: 10, pageSizes: true };
+    this.initialPage = {
+      pageSize: this.pageSizes[0],
+      pageSizes: this.pageSizes
+    };
+    this.data = this.accountTypeApi;
+
     this.query = new QueryString();
   }
 
   ngOnInit() {
-    this.accountTypeApi.getAccountTypes().subscribe(
-      (data: AccountTypeViewModel[]) => {
-        this.data = data;
-      },
-      (error: HttpErrorResponse) => alert(error.message)
-    );
-    this.groupOptions = { columns: ["AccountType"], showDropArea: false };
+    this.groupOptions = { columns: ["Type"], showDropArea: false };
     this.childGrid = {
       queryString: "ParentAccount",
       columns: [
@@ -99,7 +102,7 @@ export class AccountTypeViewComponent implements OnInit {
     this.selectionOptions = { type: "Single" }; // allow only single row to be selected at a time for edit or delete
 
     this.toolbarOptions = [
-      { text: "Create", prefixIcon: "e-create" },
+      { text: "Create", prefixIcon: "e-create", id: "create" },
       "Search",
       { text: "Print", prefixIcon: "e-print", id: "print" }
     ];
@@ -122,6 +125,12 @@ export class AccountTypeViewComponent implements OnInit {
       }
     ];
     this.pageSettings = { pageSize: 15 }; // initial page row size for the grid
+
+    this.accountTypeApi.execute({ skip: 0, take: 20 });
+  }
+
+  onDataStateChange(state: DataStateChangeEventArgs): void {
+    this.accountTypeApi.execute(state);
   }
 
   handleError(error: HttpErrorResponse) {
@@ -153,7 +162,7 @@ export class AccountTypeViewComponent implements OnInit {
   // Click handler for when the toolbar is cliked
   toolbarClick(args: ClickEventArgs): void {
     console.log(args.item.id);
-    if (args.item.id.toUpperCase() === "ACCOUNTS_CREATE") {
+    if (args.item.id === "create") {
       this.router.navigate(["account-types/add"]); // when user click add route to the accounts form
     }
     if (args.item.id === "print") {
@@ -209,8 +218,5 @@ export class AccountTypeViewComponent implements OnInit {
     searchString += `pageSize=${this.query.pageSize}&pageNumber=${
       this.query.pageNumber
     }`;
-    this.accountTypeApi
-      .getAccountTypes(searchString)
-      .subscribe(data => (this.data = data));
   }
 }

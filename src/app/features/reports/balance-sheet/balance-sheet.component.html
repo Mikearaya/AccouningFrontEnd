@@ -8,46 +8,48 @@
   </div>
 </div>
 <app-print-header [header]="'Balance sheet'"></app-print-header>
-<table class="table table-borderless">
-  <thead>
-    <tr>
-      <th scope="col">Catagory</th>
-      <th scope="col">Amount</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>Asset</th>
-    </tr>
-    <tr *ngFor="let asset of data?.Assets">
-      <td>{{ asset.AccountCategory }}</td>
-      <td>{{ asset.Amount | currency: "":"" }}</td>
-    </tr>
-    <tr>
-      <td>Total current assets:</td>
-      <td>{{ data?.TotalAsset | currency: "":"" }}</td>
-    </tr>
-    <tr>
-      <th>Capital</th>
-    </tr>
-    <tr *ngFor="let capital of data?.Capitals">
-      <td>{{ capital.AccountCategory }}</td>
-      <td>{{ capital.Amount | currency: "":"" }}</td>
-    </tr>
-    <tr>
-      <td>Net capital:</td>
-      <td>{{ data?.TotalAsset | currency: "":"" }}</td>
-    </tr>
-    <tr>
-      <th>Liabilities</th>
-    </tr>
-    <tr *ngFor="let liability of data?.Liabilities">
-      <td>{{ liability.AccountCategory }}</td>
-      <td>{{ liability.Amount | currency: "":"" }}</td>
-    </tr>
-    <tr>
-      <td>Total current liabilities:</td>
-      <td>{{ data?.TotalAsset | currency: "":"" }}</td>
-    </tr>
-  </tbody>
-</table>
+<div class="table-section">
+  <table class="table table-borderless">
+    <thead>
+      <tr>
+        <th scope="col">Catagory</th>
+        <th scope="col">Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th>Asset</th>
+      </tr>
+      <tr *ngFor="let asset of data?.Assets">
+        <td>{{ asset.AccountCategory }}</td>
+        <td>{{ asset.Amount | currency: "":"" }}</td>
+      </tr>
+      <tr>
+        <td>Total current assets:</td>
+        <td>{{ data?.TotalAsset | currency: "":"" }}</td>
+      </tr>
+      <tr>
+        <th>Capital</th>
+      </tr>
+      <tr *ngFor="let capital of data?.Capitals">
+        <td>{{ capital.AccountCategory }}</td>
+        <td>{{ capital.Amount | currency: "":"" }}</td>
+      </tr>
+      <tr>
+        <td>Net capital:</td>
+        <td>{{ data?.TotalAsset | currency: "":"" }}</td>
+      </tr>
+      <tr>
+        <th>Liabilities</th>
+      </tr>
+      <tr *ngFor="let liability of data?.Liabilities">
+        <td>{{ liability.AccountCategory }}</td>
+        <td>{{ liability.Amount | currency: "":"" }}</td>
+      </tr>
+      <tr>
+        <td>Total current liabilities:</td>
+        <td>{{ data?.TotalAsset | currency: "":"" }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

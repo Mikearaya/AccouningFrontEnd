@@ -74,13 +74,6 @@
               <div *ngIf="AccountId.errors['required']">
                 *Account Id is Required
               </div>
-              <div
-                *ngIf="
-                  AccountId.errors['minlength'] || AccountId.errors['maxlength']
-                "
-              >
-                *Account ID must be 4 chars long
-              </div>
             </div>
           </div>
         </div>

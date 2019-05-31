@@ -38,6 +38,7 @@ import { AccountsService } from "../../../core/services/accounts.service";
 import { closest } from "@syncfusion/ej2-base";
 import { ContextMenuItem } from "@syncfusion/ej2-treegrid";
 import { Observable, Subject } from "rxjs";
+import { PageSizes } from "src/app/page-model";
 
 @Component({
   selector: "app-accounts-view",
@@ -60,9 +61,8 @@ export class AccountsViewComponent implements OnInit {
   public filterOptions: FilterSettingsModel;
   public commands: CommandModel[];
   public groupOptions: GroupSettingsModel = { showDropArea: false };
-  public initialPage: { pageSize: number; pageSizes: string[] };
-  public hierarchyPrintMode: HierarchyGridPrintMode;
-  public contextMenuItems: ContextMenuItem[];
+  public pageSizes: string[] = PageSizes;
+  public initialPage: { pageSize: string; pageSizes: string[] };
 
   public data: Subject<DataStateChangeEventArgs>;
   public pageOptions: Object;
@@ -78,8 +78,8 @@ export class AccountsViewComponent implements OnInit {
   ) {
     this.data = this.accountApi;
     this.initialPage = {
-      pageSizes: ["20", "50", "100", "200", "500", "1000", "All"],
-      pageSize: 20
+      pageSize: PageSizes[0],
+      pageSizes: this.pageSizes
     };
     this.groupOptions = {
       disablePageWiseAggregates: false,
@@ -165,7 +165,7 @@ export class AccountsViewComponent implements OnInit {
   }
   // Click handler for when the toolbar is cliked
   toolbarClick(args: ClickEventArgs): void {
-    if (args.item.id.toUpperCase() === "CREATEACCOUNT") {
+    if (args.item.id === "createAccount") {
       this.router.navigate(["accounts/new"]); // when user click add route to the accounts form
     }
     if (args.item.id === "expandall") {
@@ -181,9 +181,10 @@ export class AccountsViewComponent implements OnInit {
       }, 1000);
     }
     if (args.item.id === "Grid_excelexport") {
+      this.grid.pageSettings.pageSize = this.grid.pageSettings.totalRecordsCount;
       setTimeout(() => {
         this.grid.excelExport(this.getExcelExportProperties());
-      }, 400);
+      }, 1000);
     }
   }
 

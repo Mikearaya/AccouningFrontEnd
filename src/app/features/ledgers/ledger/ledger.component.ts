@@ -136,6 +136,14 @@ export class LedgerComponent implements OnInit {
     return this.ledgerForm.get("Entries") as FormArray;
   }
 
+  /*  public RequireMatch(control: AbstractControl) {
+    const selection: any = control.value;
+    if (typeof selection === "string") {
+      return { incorrect: "" };
+    }
+    return null;
+  } */
+
   createForm() {
     this.ledgerForm = this.formBuilder.group({
       VoucherId: ["", Validators.required],
@@ -145,7 +153,7 @@ export class LedgerComponent implements OnInit {
       Date: ["", Validators.required],
       Entries: this.formBuilder.array([
         this.formBuilder.group({
-          AccountId: ["", Validators.required],
+          AccountId: ["", Validators.required /* , this.RequireMatch */],
           Debit: [0],
           Credit: [0]
         }),

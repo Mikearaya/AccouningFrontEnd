@@ -23,3 +23,9 @@ table {
 .e-control.e-btn.e-lib {
   margin-top: 10px;
 }
+
+.table-section {
+  background: white;
+  padding-left: 35px;
+  padding-right: 40px;
+}

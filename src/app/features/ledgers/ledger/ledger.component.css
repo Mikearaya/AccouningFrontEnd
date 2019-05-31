@@ -39,7 +39,7 @@ label {
 
 #add-button {
   display: grid;
-  margin-right: -50px;
+  /* margin-right: -50px; */
 }
 
 .total,
@@ -47,13 +47,13 @@ label {
   text-align: left;
 }
 
-#action-header {
+/* #action-header {
   padding-left: 135px;
-}
+} */
 
 #remove-buttons,
 #add-icon {
-  padding-left: 145px;
+  /* padding-left: 145px; */
 }
 
 .secone-rowone {

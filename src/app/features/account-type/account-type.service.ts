@@ -1,9 +1,5 @@
 import { Injectable } from "@angular/core";
-
 import { Observable, Subject } from "rxjs";
-
-import { AccountViewModel } from "../accounts/accounts";
-
 import { catchError, map } from "rxjs/operators";
 import {
   AccountTypeViewModel,

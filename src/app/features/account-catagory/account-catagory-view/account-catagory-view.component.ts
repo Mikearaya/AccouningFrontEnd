@@ -3,6 +3,8 @@ import { AccountCatagoryApiService } from "../../../core/account-catagory-api.se
 import { DataStateChangeEventArgs } from "@syncfusion/ej2-grids";
 import { Subject } from "rxjs";
 import { DataViewComponent } from "src/app/shared/data-view/data-view.component";
+import { AccountCatagoryView } from "../account-catagory-domain";
+import { PageSizes } from "src/app/page-model";
 
 @Component({
   selector: "app-account-catagory-view",
@@ -15,6 +17,8 @@ export class AccountCatagoryViewComponent implements OnInit {
   public grid: DataViewComponent;
   public customAttributes: { class: string };
   public filterOptions: { type: string };
+  public pageSizes: string[] = PageSizes;
+  public initialPage: { pageSize: number; pageSizes: string[] };
   public columnBluePrint = [
     {
       key: "Id",
@@ -40,6 +44,7 @@ export class AccountCatagoryViewComponent implements OnInit {
   ];
   constructor(private accountCatagApi: AccountCatagoryApiService) {
     this.data = this.accountCatagApi;
+    this.initialPage = { pageSize: 20, pageSizes: this.pageSizes };
   }
 
   ngOnInit() {
