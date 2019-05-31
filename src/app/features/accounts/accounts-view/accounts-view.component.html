@@ -1,4 +1,5 @@
 <app-print-header [header]="'Chart of accounts'"></app-print-header>
+
 <ejs-grid
   [dataSource]="data | async"
   #grid
@@ -107,7 +108,7 @@
       editable="true"
       groupable="false"
       [width]="80"
-      [visible]="true"
+      [visible]="false"
     ></e-column>
     <e-column
       field="DateUpdated"
@@ -118,7 +119,7 @@
       [format]="'yMd'"
       filterable="true"
       editable="true"
-      [visible]="true"
+      [visible]="false"
       groupable="false"
       [width]="80"
     ></e-column>

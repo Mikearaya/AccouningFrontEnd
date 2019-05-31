@@ -1,6 +1,6 @@
 <app-print-header [header]="'Account types'"></app-print-header>
 <ejs-grid
-  [dataSource]="data"
+  [dataSource]="data | async"
   #grid
   [allowExcelExport]="true"
   id="accounts"
@@ -20,7 +20,7 @@
   [childGrid]="childGrid"
   [showColumnChooser]="true"
   [groupSettings]="groupOptions"
-  (actionComplete)="actionEndHandler($event)"
+  (dataStateChange)="onDataStateChange($event)"
 >
   <e-columns>
     <e-column
@@ -33,36 +33,32 @@
       editable="false"
       filterable="false"
       groupable="false"
-      [visible]="true"
+      [visible]="false"
     >
     </e-column>
 
     <e-column
       field="Type"
-      textAlign="left"
       headerText="Account type"
       isPrimaryKey="false"
       type="string"
-      editType="textbox"
       filterable="true"
       editable="true"
       groupable="false"
-      [width]="200"
+      [visible]="true"
     ></e-column>
     <e-column
       field="AccountType"
       textAlign="left"
-      headerText="AccountType"
+      headerText="Type"
       isPrimaryKey="false"
       type="string"
-      editType="textbox"
       filterable="true"
       editable="true"
       groupable="false"
       [width]="100"
     ></e-column>
-    <!--     <e-column field="TotalAmount" textAlign="left" headerText="Amount" isPrimaryKey="false" type="string" editType="textbox"
-      filterable="true" editable="true" groupable="true" width='50'></e-column> -->
+
     <e-column
       field="IsSummary"
       textAlign="left"
@@ -73,7 +69,7 @@
       filterable="true"
       editable="true"
       groupable="true"
-      width="100"
+      width="30"
     ></e-column>
     <e-column
       field="DateAdded"

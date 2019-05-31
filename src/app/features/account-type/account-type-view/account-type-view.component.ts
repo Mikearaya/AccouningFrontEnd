@@ -13,7 +13,8 @@ import {
   GridModel,
   IRow,
   Column,
-  ActionEventArgs
+  ActionEventArgs,
+  DataStateChangeEventArgs
 } from "@syncfusion/ej2-grids";
 import {
   QueryString,
@@ -27,6 +28,7 @@ import { ClickEventArgs } from "@syncfusion/ej2-angular-navigations";
 import { AccountTypeViewModel } from "../account-type";
 import { AccountTypeService } from "../account-type.service";
 import { PageSizes } from "../../../page-model";
+import { Subject } from "rxjs";
 
 @Component({
   selector: "app-account-type-view",
@@ -38,7 +40,7 @@ export class AccountTypeViewComponent implements OnInit {
 
   @ViewChild("grid")
   public grid: GridComponent;
-  public data: AccountTypeViewModel[];
+  public data: Subject<DataStateChangeEventArgs>;
   public excelExportProperties: ExcelExportProperties;
   public filterSettings: FilterSettingsModel;
   public toolbarOptions: object;
@@ -65,16 +67,12 @@ export class AccountTypeViewComponent implements OnInit {
       pageSize: this.pageSizes[0],
       pageSizes: this.pageSizes
     };
+    this.data = this.accountTypeApi;
+
     this.query = new QueryString();
   }
 
   ngOnInit() {
-    this.accountTypeApi.getAccountTypes().subscribe(
-      (data: AccountTypeViewModel[]) => {
-        this.data = data;
-      },
-      (error: HttpErrorResponse) => alert(error.message)
-    );
     this.groupOptions = { columns: ["Type"], showDropArea: false };
     this.childGrid = {
       queryString: "ParentAccount",
@@ -127,6 +125,12 @@ export class AccountTypeViewComponent implements OnInit {
       }
     ];
     this.pageSettings = { pageSize: 15 }; // initial page row size for the grid
+
+    this.accountTypeApi.execute({ skip: 0, take: 20 });
+  }
+
+  onDataStateChange(state: DataStateChangeEventArgs): void {
+    this.accountTypeApi.execute(state);
   }
 
   handleError(error: HttpErrorResponse) {
@@ -214,8 +218,5 @@ export class AccountTypeViewComponent implements OnInit {
     searchString += `pageSize=${this.query.pageSize}&pageNumber=${
       this.query.pageNumber
     }`;
-    this.accountTypeApi
-      .getAccountTypes(searchString)
-      .subscribe(data => (this.data = data));
   }
 }

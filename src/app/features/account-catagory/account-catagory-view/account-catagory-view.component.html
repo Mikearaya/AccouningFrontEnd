@@ -3,13 +3,16 @@
   [data]="data"
   [showAdd]="true"
   [showDelete]="true"
+  [pageSize]="20"
+  [enableSorting]="true"
   [showUpdate]="true"
   (deleteRecord)="deleteCatagory($event)"
   [showPdfExport]="true"
   [showPrint]="true"
   [columnsList]="columnBluePrint"
+  (dataStateChaged)="onDataStateChange($event)"
   [enableSearching]="true"
   [showColumnChooser]="true"
-  (dataQueried)="filterAccountCategory($event)"
+  #grid
 >
 </app-data-view>

@@ -6,7 +6,7 @@
  * @Last Modified Time: Apr 25, 2019 2:21 PM
  * @Description: Modify Here, Please
  */
-import { Component, OnInit, ViewChild, AfterViewInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import {
   GridComponent,
   ExcelExportProperties,
@@ -37,7 +37,7 @@ import {
 import { AccountsService } from "../../../core/services/accounts.service";
 import { closest } from "@syncfusion/ej2-base";
 import { ContextMenuItem } from "@syncfusion/ej2-treegrid";
-import { Observable } from "rxjs";
+import { Observable, Subject } from "rxjs";
 import { PageSizes } from "src/app/page-model";
 
 @Component({
@@ -64,7 +64,7 @@ export class AccountsViewComponent implements OnInit {
   public pageSizes: string[] = PageSizes;
   public initialPage: { pageSize: string; pageSizes: string[] };
 
-  public data: object;
+  public data: Subject<DataStateChangeEventArgs>;
   public pageOptions: Object;
   public state: DataStateChangeEventArgs;
 
@@ -76,11 +76,18 @@ export class AccountsViewComponent implements OnInit {
     private accountApi: AccountsService,
     private activatedRoute: ActivatedRoute
   ) {
-    this.data = accountApi;
+    this.data = this.accountApi;
     this.initialPage = {
       pageSize: PageSizes[0],
       pageSizes: this.pageSizes
     };
+    this.groupOptions = {
+      disablePageWiseAggregates: false,
+      showDropArea: false,
+      columns: ["ParentAccount"]
+    };
+
+    this.filterOptions = { type: "Menu" }; // put unique filter menue for each column based on the column type
     this.query = new QueryString();
   }
 
@@ -89,16 +96,9 @@ export class AccountsViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.pageSettings = { pageSize: 5, pageCount: 4 };
-    const state = { skip: 0, take: 5 };
+    this.pageSettings = { pageSize: 5, pageCount: 4, currentPage: 1 };
+    const state = { skip: 0, take: 20 };
 
-    this.groupOptions = {
-      disablePageWiseAggregates: false,
-      showDropArea: false,
-      columns: ["ParentAccount"]
-    };
-
-    this.filterOptions = { type: "Menu" }; // put unique filter menue for each column based on the column type
     this.selectionOptions = { type: "Single" }; // allow only single row to be selected at a time for edit or delete
 
     this.editSettings = { allowDeleting: true };

@@ -1,6 +1,6 @@
 <div class="title"></div>
 <ejs-grid
-  [dataSource]="data"
+  [dataSource]="data | async"
   #grid
   id="dataview"
   [editSettings]="editSettings"
@@ -19,6 +19,7 @@
   (actionComplete)="actionEndHandler($event)"
   [allowPdfExport]="showPdfExport"
   [showColumnChooser]="showColumnChooser"
+  (dataStateChange)="onDataStateChanged($event)"
   [height]="500"
 >
   <e-columns>

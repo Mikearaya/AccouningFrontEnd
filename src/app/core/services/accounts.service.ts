@@ -18,7 +18,11 @@ import {
 } from "../../features/accounts/accounts";
 import { AccountingApiService } from "src/app/Services/accounting-api.service";
 import { QueryString } from "src/app/shared/data-view/data-view.model";
-import { DataStateChangeEventArgs, Sorts } from "@syncfusion/ej2-grids";
+import {
+  DataStateChangeEventArgs,
+  Sorts,
+  DataResult
+} from "@syncfusion/ej2-grids";
 
 @Injectable()
 export class AccountsService extends Subject<DataStateChangeEventArgs> {
@@ -77,7 +81,9 @@ export class AccountsService extends Subject<DataStateChangeEventArgs> {
   }
 
   public execute(state: any): void {
-    this.getData(state).subscribe(x => super.next(x));
+    this.getData(state).subscribe(x =>
+      super.next(x as DataStateChangeEventArgs)
+    );
   }
 
   getData(
@@ -109,10 +115,6 @@ export class AccountsService extends Subject<DataStateChangeEventArgs> {
           this.query.searchString = state.action["searchString"];
 
           break;
-        /*
-        case "paging":
-
-          break; */
       }
     }
 
@@ -138,7 +140,6 @@ export class AccountsService extends Subject<DataStateChangeEventArgs> {
 
     return this.httpClient
       .post(`${this.url}/filter`, this.query)
-      .pipe(map((response: any) => response))
       .pipe(
         map(
           (response: any) =>
@@ -153,9 +154,4 @@ export class AccountsService extends Subject<DataStateChangeEventArgs> {
   private handleError(error: Response | any) {
     return Observable.throw(error.status);
   }
-}
-
-export interface DataResult {
-  result: any[];
-  count: number;
 }

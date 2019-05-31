@@ -49,11 +49,6 @@ describe("AccountCatagoryViewComponent", () => {
           AccountType: "posting type"
         }
       ];
-      spyOn(component, "loadCatagories").and.returnValue(of(response));
-      component.loadCatagories();
-      fixture.detectChanges();
-      expect(component.loadCatagories).toHaveBeenCalled();
-      expect(response.length).toEqual(2);
     });
   });
 });
