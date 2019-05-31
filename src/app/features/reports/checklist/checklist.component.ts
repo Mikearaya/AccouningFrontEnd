@@ -141,6 +141,7 @@ export class ChecklistComponent implements OnInit {
   }
 
   onFilterStateChange(filterData: ReportFilterModel): void {
+    this.filterData = filterData;
     this.checklistService.execute(this.stateData, filterData);
   }
 

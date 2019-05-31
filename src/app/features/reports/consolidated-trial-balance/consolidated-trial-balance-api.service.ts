@@ -1,20 +1,20 @@
 import { Injectable } from "@angular/core";
+import { QueryString } from "src/app/shared/data-view/data-view.model";
+import { HttpClient } from "@angular/common/http";
+import { AccountingApiService } from "src/app/Services/accounting-api.service";
 import {
   DataStateChangeEventArgs,
   Sorts,
   DataResult
 } from "@syncfusion/ej2-grids";
-import { Subject, Observable } from "rxjs";
-import { HttpClient } from "@angular/common/http";
-import { AccountingApiService } from "src/app/Services/accounting-api.service";
-import { QueryString } from "src/app/shared/data-view/data-view.model";
-import { map } from "rxjs/operators";
 import { ReportFilterModel } from "src/app/shared/filter-option/filter";
+import { Observable, Subject } from "rxjs";
+import { map } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root"
 })
-export class CheckListReportApiService extends Subject<
+export class ConsolidatedTrialBalanceApiService extends Subject<
   DataStateChangeEventArgs
 > {
   private query = new QueryString();
@@ -44,7 +44,6 @@ export class CheckListReportApiService extends Subject<
           this.query.sortDirection = state.action["direction"];
           break;
         case "filtering":
-          console.log(state.action);
           this.query.filter = [];
 
           state.action["columns"].forEach(element => {
@@ -91,7 +90,7 @@ export class CheckListReportApiService extends Subject<
     }
 
     return this.httpClient
-      .post(`report/ledger-checklists`, filter)
+      .post(`report/trial-balance/consolidated`, filter)
       .pipe(
         map(
           (response: any) =>

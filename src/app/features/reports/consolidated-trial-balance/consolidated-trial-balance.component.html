@@ -1,7 +1,7 @@
 <app-filter-option
   [allowDateSearch]="true"
   #filter
-  (filtered)="onFiltered($event)"
+  (filterChanged)="onFilterStateChange($event)"
 ></app-filter-option>
 <app-print-header [header]="'Consolidated trial balance'"></app-print-header>
 <div class="subsidary-area">
@@ -9,13 +9,17 @@
     <ejs-grid
       #grid
       [allowResizing]="true"
-      [dataSource]="data"
+      [dataSource]="data | async"
       query-string="Id"
+      [allowSorting]="true"
+      [allowFiltering]="true"
       [allowExcelExport]="true"
       [allowPaging]="true"
       [pageSettings]="initialPage"
       [toolbar]="toolbar"
+      [filterSettings]="filterOptions"
       (toolbarClick)="clickHandler($event)"
+      (filterChanged)="onDataStateChange($event)"
     >
       <e-columns>
         <e-column
