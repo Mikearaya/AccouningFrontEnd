@@ -122,7 +122,10 @@
     <!-- Second Column Starts-->
 
     <!--Submit Button Area-->
-    <app-form-options [submitDisabled]="accountForm.invalid"></app-form-options>
+    <app-form-options
+      [isUpdate]="isUpdate"
+      [submitDisabled]="accountForm.invalid"
+    ></app-form-options>
   </form>
 </section>
 <!-- Opening Balance Input Field-->

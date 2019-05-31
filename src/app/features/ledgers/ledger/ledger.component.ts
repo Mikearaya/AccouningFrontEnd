@@ -217,16 +217,14 @@ export class LedgerComponent implements OnInit {
   }
 
   removeRow(index: number) {
-    const Id = this.Entries.controls[index].get("Id").value;
-    if (this.Entries.controls[index].get("Id").value) {
+    if (this.Entries.controls[index].get("Id")) {
       const confirmation = confirm("Are you sure u want to delete this entry");
       if (confirmation) {
         this.Entries.removeAt(index);
-        this.deletedIds.push(Id);
+        this.deletedIds.push(this.Entries.controls[index].get("Id").value);
       }
     }
     this.Entries.removeAt(index);
-    console.log(this.Entries.controls[index].get("Id").value);
   }
   prepareData(data: FormGroup): LedgerEntry {
     const form = data.value;

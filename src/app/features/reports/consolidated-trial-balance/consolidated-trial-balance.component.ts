@@ -3,6 +3,7 @@ import { ReportApiService } from "../report-api.service";
 import { ConsolidatedTrialBalanceViewModel } from "../report";
 import { ClickEventArgs } from "@syncfusion/ej2-angular-navigations";
 import { GridComponent } from "@syncfusion/ej2-angular-grids";
+import { PageSizes } from "src/app/page-model";
 
 @Component({
   selector: "app-consolidated-trial-balance",
@@ -11,14 +12,15 @@ import { GridComponent } from "@syncfusion/ej2-angular-grids";
 })
 export class ConsolidatedTrialBalanceComponent implements OnInit {
   public data: ConsolidatedTrialBalanceViewModel[];
-  public initialPage: object;
+  public pageSizes: string[] = PageSizes;
+  public initialPage: { pageSize: string; pageSizes: string[] };
   public toolbar: object;
   lastFilter: string;
 
   constructor(private reportService: ReportApiService) {
     this.initialPage = {
-      pageSizes: ["20", "50", "100", "200", "500", "1000", "All"],
-      pageSize: 20
+      pageSize: this.pageSizes[0],
+      pageSizes: this.pageSizes
     };
   }
   @ViewChild("grid")
