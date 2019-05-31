@@ -1,6 +1,8 @@
-import { Component, OnInit, Output } from "@angular/core";
+import { Component, OnInit, Output, ViewChild } from "@angular/core";
 import { AccountCatagoryApiService } from "../../../core/account-catagory-api.service";
-import { AccountCatagoryView } from "../account-catagory-domain";
+import { DataStateChangeEventArgs } from "@syncfusion/ej2-grids";
+import { Subject } from "rxjs";
+import { DataViewComponent } from "src/app/shared/data-view/data-view.component";
 
 @Component({
   selector: "app-account-catagory-view",
@@ -8,14 +10,16 @@ import { AccountCatagoryView } from "../account-catagory-domain";
   styleUrls: ["./account-catagory-view.component.css"]
 })
 export class AccountCatagoryViewComponent implements OnInit {
-  public data: any;
+  public data: Subject<DataStateChangeEventArgs>;
+  @ViewChild("gird")
+  public grid: DataViewComponent;
   public customAttributes: { class: string };
   public filterOptions: { type: string };
   public columnBluePrint = [
     {
       key: "Id",
       header: "Id",
-      visible: true,
+      visible: false,
       width: "40",
       type: "number"
     },
@@ -23,41 +27,33 @@ export class AccountCatagoryViewComponent implements OnInit {
       key: "CategoryName",
       header: "Catagory Name",
       visible: true,
-      width: "100",
+
       type: "string"
     },
     {
       key: "AccountType",
       header: "Account Type",
       visible: true,
-      width: "100",
+      width: "50",
       type: "string"
     }
   ];
-  constructor(private accountCatagApi: AccountCatagoryApiService) {}
+  constructor(private accountCatagApi: AccountCatagoryApiService) {
+    this.data = this.accountCatagApi;
+  }
 
   ngOnInit() {
-    this.accountCatagApi
-      .getAccountCatagories("")
-      .subscribe((data: AccountCatagoryView[]) => {
-        this.data = data;
-      });
+    const state = { skip: 0, take: 10 };
+    this.accountCatagApi.execute(state);
+  }
+
+  onDataStateChange(state: DataStateChangeEventArgs): void {
+    this.accountCatagApi.execute(state);
   }
 
   deleteCatagory(data: any) {
     this.accountCatagApi
       .deleteAccountCatagory(data["Id"])
       .subscribe(() => alert("deleted"));
-  }
-  loadCatagories(search: string = "") {
-    this.accountCatagApi
-      .getAccountCatagories(search)
-      .subscribe((data: AccountCatagoryView[]) => {
-        this.data = data;
-      });
-  }
-
-  filterAccountCategory(data: any) {
-    this.loadCatagories(data);
   }
 }

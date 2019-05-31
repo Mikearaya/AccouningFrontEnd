@@ -4,7 +4,8 @@ import {
   Input,
   ViewChild,
   EventEmitter,
-  Output
+  Output,
+  OnChanges
 } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { ClickEventArgs } from "@syncfusion/ej2-navigations";
@@ -20,9 +21,12 @@ import {
   IRow,
   Column,
   ActionEventArgs,
-  RowSelectEventArgs
+  RowSelectEventArgs,
+  DataStateChangeEventArgs
 } from "@syncfusion/ej2-grids";
 import { GridComponent } from "@syncfusion/ej2-angular-grids";
+import { stat } from "fs";
+import { Subject } from "rxjs";
 
 @Component({
   selector: "app-data-view",
@@ -34,7 +38,7 @@ export class DataViewComponent implements OnInit {
   public columnsList: CustomGridColumns[];
 
   @Input()
-  public data: any[] = [];
+  public data: Subject<DataStateChangeEventArgs>;
   @Input()
   public showUpdate: Boolean;
   @Input()
@@ -91,6 +95,11 @@ export class DataViewComponent implements OnInit {
   public deleteRecord: EventEmitter<any> = new EventEmitter();
   @Output()
   public editRecord: EventEmitter<any> = new EventEmitter();
+
+  @Output()
+  public dataStateChaged: EventEmitter<
+    DataStateChangeEventArgs
+  > = new EventEmitter();
 
   @ViewChild("grid")
   public grid: GridComponent;
@@ -185,6 +194,10 @@ export class DataViewComponent implements OnInit {
     //  this.editRecord.emit(rowObj.data);
   }
 
+  onDataStateChanged(state: DataStateChangeEventArgs) {
+    this.dataStateChaged.emit(state);
+  }
+
   viewAction(event: Event): void {
     const rowObj: IRow<Column> = this.grid.getRowObjectFromUID(
       closest(event.target as Element, ".e-row").getAttribute("data-uid")
@@ -203,7 +216,6 @@ export class DataViewComponent implements OnInit {
 
         break;
       case "filtering":
-        alert(JSON.stringify(args.requestType));
         const filteringModel = new FilterEventModel();
         filteringModel.columnName = args["currentFilterObject"]["field"];
         filteringModel.operator = args["currentFilterObject"]["operator"];
@@ -215,7 +227,6 @@ export class DataViewComponent implements OnInit {
 
         break;
       case "paging":
-        alert(JSON.stringify(args.requestType));
         this.query.searchString = args["searchString"];
 
         break;
