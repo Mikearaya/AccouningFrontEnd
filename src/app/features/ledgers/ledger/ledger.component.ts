@@ -136,13 +136,13 @@ export class LedgerComponent implements OnInit {
     return this.ledgerForm.get("Entries") as FormArray;
   }
 
-  /*  public RequireMatch(control: AbstractControl) {
+  public RequireMatch(control: AbstractControl) {
     const selection: any = control.value;
     if (typeof selection === "string") {
-      return { match: true };
+      return { incorrect: true };
     }
     return null;
-  } */
+  }
 
   createForm() {
     this.ledgerForm = this.formBuilder.group({
@@ -153,19 +153,18 @@ export class LedgerComponent implements OnInit {
       Date: ["", Validators.required],
       Entries: this.formBuilder.array([
         this.formBuilder.group({
-          AccountId: ["", Validators.required /* , this.RequireMatch */],
+          AccountId: ["", [Validators.required, this.RequireMatch]],
           Debit: [0],
           Credit: [0]
         }),
         this.formBuilder.group({
-          AccountId: ["", Validators.required],
+          AccountId: ["", [Validators.required, this.RequireMatch]],
           Debit: [0],
           Credit: [0]
         })
       ])
     });
   }
-
   initializeForm(data: JornalEntryViewModel) {
     this.ledgerForm = this.formBuilder.group({
       VoucherId: [data.VoucherId, Validators.required],
@@ -213,7 +212,7 @@ export class LedgerComponent implements OnInit {
       Id: [data.Id, Validators.required],
       Credit: [data.Credit],
       Debit: [data.Debit],
-      AccountId: [data.AccountId]
+      AccountId: [data.AccountId, [Validators.required, this.RequireMatch]]
     });
   }
 
@@ -226,6 +225,7 @@ export class LedgerComponent implements OnInit {
       }
     }
     this.Entries.removeAt(index);
+    console.log(this.Entries.controls[index].get("Id").value);
   }
   prepareData(data: FormGroup): LedgerEntry {
     const form = data.value;
@@ -258,7 +258,7 @@ export class LedgerComponent implements OnInit {
   addForm() {
     this.Entries.push(
       this.formBuilder.group({
-        AccountId: ["", Validators.required],
+        AccountId: ["", [Validators.required, this.RequireMatch]],
         Debit: [0, Validators.required],
         Credit: [0, Validators.required]
       })
