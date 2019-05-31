@@ -4,6 +4,10 @@ import { ConsolidatedTrialBalanceViewModel } from "../report";
 import { ClickEventArgs } from "@syncfusion/ej2-angular-navigations";
 import { GridComponent } from "@syncfusion/ej2-angular-grids";
 import { PageSizes } from "src/app/page-model";
+import { DataStateChangeEventArgs } from "@syncfusion/ej2-angular-grids";
+import { ConsolidatedTrialBalanceApiService } from "./consolidated-trial-balance-api.service";
+import { Subject } from "rxjs";
+import { ReportFilterModel } from "src/app/shared/filter-option/filter";
 
 @Component({
   selector: "app-consolidated-trial-balance",
@@ -11,27 +15,30 @@ import { PageSizes } from "src/app/page-model";
   styleUrls: ["./consolidated-trial-balance.component.css"]
 })
 export class ConsolidatedTrialBalanceComponent implements OnInit {
-  public data: ConsolidatedTrialBalanceViewModel[];
   public pageSizes: string[] = PageSizes;
   public initialPage: { pageSize: string; pageSizes: string[] };
+  public data: Subject<DataStateChangeEventArgs>;
   public toolbar: object;
   lastFilter: string;
+  public filterData: ReportFilterModel;
+  public stateData: DataStateChangeEventArgs;
+  filterOptions: { type: string };
 
-  constructor(private reportService: ReportApiService) {
+  constructor(
+    private consolidatedTrialApi: ConsolidatedTrialBalanceApiService
+  ) {
     this.initialPage = {
       pageSize: this.pageSizes[0],
       pageSizes: this.pageSizes
     };
+    this.filterOptions = { type: "Menu" };
+    this.filterData = new ReportFilterModel();
+
+    this.data = this.consolidatedTrialApi;
   }
   @ViewChild("grid")
   public grid: GridComponent;
   ngOnInit() {
-    this.reportService
-      .getConsolidatedTrialBalance("")
-      .subscribe((data: ConsolidatedTrialBalanceViewModel[]) => {
-        this.data = data;
-      });
-
     this.toolbar = [
       { text: "Print", prefixIcon: "e-print", id: "print" },
       {
@@ -40,6 +47,18 @@ export class ConsolidatedTrialBalanceComponent implements OnInit {
         id: "Grid_excelexport"
       }
     ];
+
+    this.consolidatedTrialApi.execute({ skip: 0, take: 50 }, this.filterData);
+  }
+
+  onFilterStateChange(filterData: ReportFilterModel): void {
+    this.filterData = filterData;
+    this.consolidatedTrialApi.execute(this.stateData, filterData);
+  }
+
+  onDataStateChange(state: DataStateChangeEventArgs): void {
+    this.stateData = state;
+    this.consolidatedTrialApi.execute(state, this.filterData);
   }
 
   generateSearchString(): string {
@@ -54,15 +73,5 @@ export class ConsolidatedTrialBalanceComponent implements OnInit {
     if (args.item.id === "Grid_excelexport") {
       this.grid.excelExport();
     }
-  }
-
-  onFiltered(data: string = ""): void {
-    this.lastFilter = data;
-
-    this.reportService
-      .getConsolidatedTrialBalance(`${data}&${this.generateSearchString()}`)
-      .subscribe((result: ConsolidatedTrialBalanceViewModel[]) => {
-        this.data = result;
-      });
   }
 }
