@@ -3,6 +3,8 @@ import { Component, OnInit } from "@angular/core";
 import { LedgerService } from "../../../core/services/ledger.service";
 import { HttpErrorResponse } from "@angular/common/http";
 import { CustomGridColumns } from "src/app/shared/data-view/data-view.component";
+import { DataStateChangeEventArgs } from "@syncfusion/ej2-grids";
+import { Subject } from "rxjs";
 
 @Component({
   selector: "app-ledger-view",
@@ -10,7 +12,7 @@ import { CustomGridColumns } from "src/app/shared/data-view/data-view.component"
   styleUrls: ["./ledger-view.component.css"]
 })
 export class LedgerViewComponent implements OnInit {
-  public data: Object;
+  public data: Subject<DataStateChangeEventArgs>;
 
   public columnBluePrint: CustomGridColumns[] = [
     {
@@ -68,9 +70,12 @@ export class LedgerViewComponent implements OnInit {
     }
   ];
 
-  constructor(private ledgerService: LedgerService) {}
+  constructor(private ledgerService: LedgerService) {
+    this.data = this.ledgerService;
+  }
   ngOnInit() {
     this.loadLedgerEntries();
+    this.ledgerService.execute({ skip: 0, take: 50 });
   }
   loadLedgerEntries() {
     this.ledgerService
@@ -86,9 +91,7 @@ export class LedgerViewComponent implements OnInit {
       .subscribe(() => alert("deleted"));
   }
 
-  dataQuiredHandler(event: string): void {
-    this.ledgerService
-      .getAllLedgerEntries(event)
-      .subscribe(data => (this.data = data));
+  onDataStateChanged(state: DataStateChangeEventArgs): void {
+    this.ledgerService.execute(state);
   }
 }
