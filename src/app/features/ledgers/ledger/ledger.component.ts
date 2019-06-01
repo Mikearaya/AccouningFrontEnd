@@ -136,13 +136,13 @@ export class LedgerComponent implements OnInit {
     return this.ledgerForm.get("Entries") as FormArray;
   }
 
-  /*  public RequireMatch(control: AbstractControl) {
+  public RequireMatch(control: AbstractControl) {
     const selection: any = control.value;
     if (typeof selection === "string") {
-      return { incorrect: "" };
+      return { incorrect: true };
     }
     return null;
-  } */
+  }
 
   createForm() {
     this.ledgerForm = this.formBuilder.group({
@@ -153,19 +153,18 @@ export class LedgerComponent implements OnInit {
       Date: ["", Validators.required],
       Entries: this.formBuilder.array([
         this.formBuilder.group({
-          AccountId: ["", Validators.required /* , this.RequireMatch */],
+          AccountId: ["", [Validators.required, this.RequireMatch]],
           Debit: [0],
           Credit: [0]
         }),
         this.formBuilder.group({
-          AccountId: ["", Validators.required],
+          AccountId: ["", [Validators.required, this.RequireMatch]],
           Debit: [0],
           Credit: [0]
         })
       ])
     });
   }
-
   initializeForm(data: JornalEntryViewModel) {
     this.ledgerForm = this.formBuilder.group({
       VoucherId: [data.VoucherId, Validators.required],
@@ -213,17 +212,16 @@ export class LedgerComponent implements OnInit {
       Id: [data.Id, Validators.required],
       Credit: [data.Credit],
       Debit: [data.Debit],
-      AccountId: [data.AccountId]
+      AccountId: [data.AccountId, [Validators.required, this.RequireMatch]]
     });
   }
 
   removeRow(index: number) {
-    const Id = this.Entries.controls[index].get("Id").value;
-    if (this.Entries.controls[index].get("Id").value) {
+    if (this.Entries.controls[index].get("Id")) {
       const confirmation = confirm("Are you sure u want to delete this entry");
       if (confirmation) {
         this.Entries.removeAt(index);
-        this.deletedIds.push(Id);
+        this.deletedIds.push(this.Entries.controls[index].get("Id").value);
       }
     }
     this.Entries.removeAt(index);
@@ -259,7 +257,7 @@ export class LedgerComponent implements OnInit {
   addForm() {
     this.Entries.push(
       this.formBuilder.group({
-        AccountId: ["", Validators.required],
+        AccountId: ["", [Validators.required, this.RequireMatch]],
         Debit: [0, Validators.required],
         Credit: [0, Validators.required]
       })

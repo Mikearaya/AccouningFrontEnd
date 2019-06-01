@@ -95,14 +95,18 @@ export class AccountsViewComponent implements OnInit {
     this.accountApi.execute(state);
   }
 
+  public databound(args) {
+    this.grid.groupModule.collapseAll();
+  }
+
   ngOnInit() {
+    // this.grid.groupModule.collapseAll();
     this.pageSettings = { pageSize: 5, pageCount: 4, currentPage: 1 };
     const state = { skip: 0, take: 20 };
 
     this.selectionOptions = { type: "Single" }; // allow only single row to be selected at a time for edit or delete
 
     this.editSettings = { allowDeleting: true };
-    // this.contextMenuItems = ["Delete", "Edit"];
     this.toolbarOptions = [
       { text: "Create Account", prefixIcon: "e-create", id: "createAccount" },
       "Search",
@@ -175,6 +179,7 @@ export class AccountsViewComponent implements OnInit {
       this.grid.groupModule.collapseAll();
     }
     if (args.item.id === "print") {
+      // this.grid.pageSettings.pageSize = this.grid.pageSettings.totalRecordsCount;
       this.grid.groupModule.expandAll();
       setTimeout(() => {
         window.print();

@@ -13,6 +13,7 @@ import {
   PaginationComponent
 } from "src/app/shared/pagination/pagination.component";
 import { FilterOptionComponent } from "src/app/shared/filter-option/filter-option.component";
+import { PageSizes } from "src/app/page-model";
 import { CheckListReportApiService } from "./check-list-report-api.service";
 import { ReportFilterModel } from "src/app/shared/filter-option/filter";
 import { Subject } from "rxjs";
@@ -31,7 +32,8 @@ export class ChecklistComponent implements OnInit {
   public data: Subject<DataStateChangeEventArgs>;
   public toolbar: object;
   public Dialog: any;
-  public initialPage: PageSettingsModel;
+  public pageSizes: string[] = PageSizes;
+  public initialPage: { pageSize: number; pageSizes: string[] };
   public summaryRows;
   public totalPages: number;
   public filterData: ReportFilterModel;
@@ -85,8 +87,8 @@ export class ChecklistComponent implements OnInit {
   ngOnInit(): void {
     this.checklistService.execute(this.stateData, this.filterData);
     this.initialPage = {
-      pageSizes: ["3", "20", "50", "100", "200", "500", "1000", "All"],
-      pageSize: 20
+      pageSize: 50,
+      pageSizes: this.pageSizes
     };
 
     this.toolbar = [

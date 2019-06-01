@@ -42,7 +42,6 @@ label {
   /* margin-right: -50px; */
 }
 
-.total,
 .last-section {
   text-align: left;
 }
@@ -50,11 +49,11 @@ label {
 /* #action-header {
   padding-left: 135px;
 } */
-
+/* 
 #remove-buttons,
 #add-icon {
-  /* padding-left: 145px; */
-}
+  padding-left: 145px;
+} */
 
 .secone-rowone {
   padding: 15px;

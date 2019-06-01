@@ -2,10 +2,9 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { ReportApiService } from "../report-api.service";
 import { ConsolidatedTrialBalanceViewModel } from "../report";
 import { ClickEventArgs } from "@syncfusion/ej2-angular-navigations";
-import {
-  GridComponent,
-  DataStateChangeEventArgs
-} from "@syncfusion/ej2-angular-grids";
+import { GridComponent } from "@syncfusion/ej2-angular-grids";
+import { PageSizes } from "src/app/page-model";
+import { DataStateChangeEventArgs } from "@syncfusion/ej2-angular-grids";
 import { ConsolidatedTrialBalanceApiService } from "./consolidated-trial-balance-api.service";
 import { Subject } from "rxjs";
 import { ReportFilterModel } from "src/app/shared/filter-option/filter";
@@ -16,8 +15,9 @@ import { ReportFilterModel } from "src/app/shared/filter-option/filter";
   styleUrls: ["./consolidated-trial-balance.component.css"]
 })
 export class ConsolidatedTrialBalanceComponent implements OnInit {
+  public pageSizes: string[] = PageSizes;
+  public initialPage: { pageSize: string; pageSizes: string[] };
   public data: Subject<DataStateChangeEventArgs>;
-  public initialPage: object;
   public toolbar: object;
   lastFilter: string;
   public filterData: ReportFilterModel;
@@ -28,8 +28,8 @@ export class ConsolidatedTrialBalanceComponent implements OnInit {
     private consolidatedTrialApi: ConsolidatedTrialBalanceApiService
   ) {
     this.initialPage = {
-      pageSizes: ["20", "50", "100", "200", "500", "1000", "All"],
-      pageSize: 20
+      pageSize: this.pageSizes[0],
+      pageSizes: this.pageSizes
     };
     this.filterOptions = { type: "Menu" };
     this.filterData = new ReportFilterModel();

@@ -14,8 +14,6 @@ export interface AccountsIndexView {
   Name: string;
 }
 
-
-
 export interface AccountViewModel {
   Items: AccountView[];
   Count: number;
@@ -37,5 +35,3 @@ export interface AccountView {
   DateUpdated: Date | string | null;
   CostCenterId: number;
 }
-
-

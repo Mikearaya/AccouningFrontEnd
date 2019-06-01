@@ -4,6 +4,7 @@ import { GridModel } from "@syncfusion/ej2-grids";
 import { GridComponent } from "@syncfusion/ej2-angular-grids";
 import { TrialBalanceDetailViewModel } from "../report";
 import { ClickEventArgs } from "@syncfusion/ej2-angular-navigations";
+import { PageSizes } from "src/app/page-model";
 
 @Component({
   selector: "app-trial-balance-detail",
@@ -14,13 +15,14 @@ export class TrialBalanceDetailComponent implements OnInit {
   public gridData: object[];
   public data: TrialBalanceDetailViewModel[];
   public toolbar: object;
-  public initialPage: object;
+  public pageSizes: string[] = PageSizes;
+  public initialPage: { pageSize: string; pageSizes: string[] };
   lastFilter: any;
 
   constructor(private reportService: ReportApiService) {
     this.initialPage = {
-      pageSizes: ["20", "50", "100", "200", "500", "1000", "All"],
-      pageSize: 20
+      pageSize: this.pageSizes[0],
+      pageSizes: this.pageSizes
     };
   }
   public childGrid: GridModel = {
