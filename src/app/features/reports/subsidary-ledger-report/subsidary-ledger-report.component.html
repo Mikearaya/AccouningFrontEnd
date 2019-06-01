@@ -3,7 +3,7 @@
   [allowAccountSearch]="true"
   [allowCostCenterSearch]="true"
   #filter
-  (filtered)="onFiltered($event)"
+  (filterChanged)="onFilterStateChange($event)"
 ></app-filter-option>
 <div class="subsidary-area">
   <app-print-header [header]="'Subsidary ledgers'"></app-print-header>
@@ -11,25 +11,24 @@
     <ejs-grid
       #grid
       [allowResizing]="true"
-      [dataSource]="gridData"
+      [dataSource]="data | async"
       [childGrid]="childGrid"
       query-string="Id"
       [allowExcelExport]="true"
+      [allowSorting]="true"
+      [allowFiltering]="true"
+      [filterSettings]="filterOptions"
       [allowPaging]="true"
+      [allowGrouping]="true"
       [pageSettings]="initialPage"
       [toolbar]="toolbar"
+      (dataStateChange)="onDataStateChange($event)"
       (toolbarClick)="clickHandler($event)"
     >
       <e-columns>
         <e-column
           field="AccountId"
-          headerText="Account Id"
-          textAlign="Left"
-          width="120"
-        ></e-column>
-        <e-column
-          field="AccountType"
-          headerText="Account Type"
+          headerText="Control Account"
           textAlign="Left"
           width="120"
         ></e-column>
@@ -39,12 +38,20 @@
           textAlign="Left"
           width="120"
         ></e-column>
+
         <e-column
           field="AccountName"
           headerText="Account Name"
           textAlign="Left"
           width="120"
         ></e-column>
+        <e-column
+          field="AccountType"
+          headerText="Account Type"
+          textAlign="Left"
+          width="120"
+        ></e-column>
+
         <e-column
           field="BBF"
           headerText="Starting Balance"

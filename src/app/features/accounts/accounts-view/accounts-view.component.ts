@@ -36,8 +36,7 @@ import {
 } from "src/app/shared/data-view/data-view.model";
 import { AccountsService } from "../../../core/services/accounts.service";
 import { closest } from "@syncfusion/ej2-base";
-import { ContextMenuItem } from "@syncfusion/ej2-treegrid";
-import { Observable, Subject } from "rxjs";
+import { Subject } from "rxjs";
 import { PageSizes } from "src/app/page-model";
 
 @Component({
@@ -84,7 +83,7 @@ export class AccountsViewComponent implements OnInit {
     this.groupOptions = {
       disablePageWiseAggregates: false,
       showDropArea: false,
-      columns: ["ParentAccount"]
+      columns: ["AccountId"]
     };
 
     this.filterOptions = { type: "Menu" }; // put unique filter menue for each column based on the column type
