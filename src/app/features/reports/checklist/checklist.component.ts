@@ -1,9 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import {
-  GridModel,
-  PageSettingsModel,
-  DataStateChangeEventArgs
-} from "@syncfusion/ej2-grids";
+import { GridModel, DataStateChangeEventArgs } from "@syncfusion/ej2-grids";
 import { GridComponent } from "@syncfusion/ej2-angular-grids";
 
 import { ClickEventArgs } from "@syncfusion/ej2-angular-navigations";
