@@ -32,6 +32,7 @@ export class ConsolidatedTrialBalanceComponent implements OnInit {
       pageSizes: this.pageSizes
     };
     this.filterOptions = { type: "Menu" };
+    this.stateData = { skip: 0, take: 50 };
     this.filterData = new ReportFilterModel();
 
     this.data = this.consolidatedTrialApi;
