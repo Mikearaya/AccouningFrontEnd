@@ -66,6 +66,9 @@ export class AppComponent implements OnInit {
 
     if (routerLink !== "parent") {
       this.router.navigate([routerLink]);
+    } else {
+      data[0].expanded = true;
+      console.log(data[0].expanded);
     }
   }
 

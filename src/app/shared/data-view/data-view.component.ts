@@ -11,7 +11,9 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { ClickEventArgs } from "@syncfusion/ej2-navigations";
 import { closest } from "@syncfusion/ej2-base";
 import { FilterEventModel, QueryString } from "./data-view.model";
+
 import {
+  GridComponent,
   TextWrapSettingsModel,
   GroupSettingsModel,
   FilterSettingsModel,
@@ -23,8 +25,7 @@ import {
   ActionEventArgs,
   RowSelectEventArgs,
   DataStateChangeEventArgs
-} from "@syncfusion/ej2-grids";
-import { GridComponent } from "@syncfusion/ej2-angular-grids";
+} from "@syncfusion/ej2-angular-grids";
 
 import { Subject } from "rxjs";
 import { PageSizes } from "src/app/page-model";
@@ -132,7 +133,7 @@ export class DataViewComponent implements OnInit {
     this.editSettings = {
       allowEditing: false,
       allowAdding: true,
-      allowDeleting: false
+      allowDeleting: true
     };
     this.selectionOptions = { mode: "Both", type: "Single" };
 

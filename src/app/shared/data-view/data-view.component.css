@@ -1,3 +1,9 @@
 #dataview_content_table {
   font-family: 'Courier New', Courier, monospace
 }
+
+@media print {
+  .e-headercell.e-lastcell {
+    display: none;
+  }
+}

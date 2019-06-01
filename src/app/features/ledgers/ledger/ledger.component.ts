@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, AfterViewInit } from "@angular/core";
 import {
   FormGroup,
   FormBuilder,
@@ -20,6 +20,7 @@ import {
   LedgerEntryViewModel
 } from "../ledger";
 import { ActivatedRoute } from "@angular/router";
+import { EditSettingsModel } from "@syncfusion/ej2-treegrid";
 
 function balanceChecker(): ValidatorFn {
   return (c: AbstractControl): { [key: string]: boolean } | null => {

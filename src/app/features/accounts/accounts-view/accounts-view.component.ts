@@ -183,7 +183,7 @@ export class AccountsViewComponent implements OnInit {
       this.grid.groupModule.expandAll();
       setTimeout(() => {
         window.print();
-      }, 1000);
+      }, 300);
     }
     if (args.item.id === "Grid_excelexport") {
       this.grid.pageSettings.pageSize = this.grid.pageSettings.totalRecordsCount;

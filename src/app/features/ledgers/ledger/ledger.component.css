@@ -44,6 +44,11 @@ label {
 
 .last-section {
   text-align: left;
+  background: #4d841d33;
+  color: #4d841d;
+  height: auto;
+  height: 25px;
+  border-radius: 6px;
 }
 
 /* #action-header {
