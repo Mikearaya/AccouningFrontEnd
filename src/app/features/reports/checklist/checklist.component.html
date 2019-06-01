@@ -17,6 +17,7 @@
       [childGrid]="childGrid"
       [allowPaging]="true"
       [pageSettings]="initialPage"
+      [allowSorting]="true"
       query-string="Id"
       [dataSource]="data | async"
       (dataStateChange)="onDataStateChange($event)"

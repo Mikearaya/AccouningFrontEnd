@@ -16,6 +16,7 @@ import { FilterOptionComponent } from "src/app/shared/filter-option/filter-optio
 import { CheckListReportApiService } from "./check-list-report-api.service";
 import { ReportFilterModel } from "src/app/shared/filter-option/filter";
 import { Subject } from "rxjs";
+import { map } from "rxjs/operators";
 @Component({
   selector: "app-checklist",
   templateUrl: "./checklist.component.html",
@@ -100,6 +101,20 @@ export class ChecklistComponent implements OnInit {
     ];
 
     this.checklistService.execute({ skip: 0, take: 50 }, this.filterData);
+
+    this.data
+      .pipe(
+        map((response: any) => {
+          const Entries = [];
+          response.result.forEach(e => {
+            e.Entries.forEach(d => {
+              Entries.push(d);
+            });
+          });
+          return Entries;
+        })
+      )
+      .subscribe(e => (this.childGrid.dataSource = e));
   }
 
   generateSearchString(): string {
