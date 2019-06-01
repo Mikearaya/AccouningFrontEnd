@@ -1,6 +1,6 @@
 <app-filter-option
   [allowDateSearch]="true"
-  (filtered)="onFiltered($event)"
+  (filterChanged)="onFilterStateChange($event)"
 ></app-filter-option>
 <div class="subsidary-area">
   <app-print-header [header]="'Trial balance detail'"></app-print-header>
@@ -8,7 +8,7 @@
     <ejs-grid
       [allowResizing]="true"
       #grid
-      [dataSource]="gridData"
+      [dataSource]="data | async"
       foreign-key-field="LedgerId"
       [childGrid]="childGrid"
       query-string="Id"
@@ -16,7 +16,11 @@
       [allowPaging]="true"
       [pageSettings]="initialPage"
       [toolbar]="toolbar"
+      [allowFiltering]="true"
+      [filterSettings]="filterOptions"
       (toolbarClick)="clickHandler($event)"
+      [allowSorting]="true"
+      (dataStateChange)="onDataStateChange($event)"
     >
       <e-columns>
         <e-column

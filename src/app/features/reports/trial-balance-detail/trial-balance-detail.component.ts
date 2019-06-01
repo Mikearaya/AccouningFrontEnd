@@ -1,10 +1,14 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { ReportApiService } from "../report-api.service";
-import { GridModel } from "@syncfusion/ej2-grids";
+import { GridModel, DataStateChangeEventArgs } from "@syncfusion/ej2-grids";
 import { GridComponent } from "@syncfusion/ej2-angular-grids";
 import { TrialBalanceDetailViewModel } from "../report";
 import { ClickEventArgs } from "@syncfusion/ej2-angular-navigations";
 import { PageSizes } from "src/app/page-model";
+import { Subject } from "rxjs";
+import { TrialBalanceDetailApiService } from "./trial-balance-detail-api.service";
+import { map } from "rxjs/operators";
+import { ReportFilterModel } from "src/app/shared/filter-option/filter";
 
 @Component({
   selector: "app-trial-balance-detail",
@@ -13,18 +17,31 @@ import { PageSizes } from "src/app/page-model";
 })
 export class TrialBalanceDetailComponent implements OnInit {
   public gridData: object[];
-  public data: TrialBalanceDetailViewModel[];
+  public data: Subject<DataStateChangeEventArgs>;
   public toolbar: object;
   public pageSizes: string[] = PageSizes;
   public initialPage: { pageSize: string; pageSizes: string[] };
   lastFilter: any;
+  filterData: ReportFilterModel;
+  stateData: DataStateChangeEventArgs;
+  filterOptions: { type: string };
 
-  constructor(private reportService: ReportApiService) {
+  constructor(
+    private reportService: ReportApiService,
+    private trialBalanceDetailApi: TrialBalanceDetailApiService
+  ) {
     this.initialPage = {
       pageSize: this.pageSizes[0],
       pageSizes: this.pageSizes
     };
+
+    this.filterOptions = { type: "Menu" };
+    this.stateData = { skip: 0, take: 50 };
+    this.filterData = new ReportFilterModel();
+
+    this.data = this.trialBalanceDetailApi;
   }
+
   public childGrid: GridModel = {
     dataSource: this.data,
     queryString: "ControlAccountId",
@@ -56,25 +73,24 @@ export class TrialBalanceDetailComponent implements OnInit {
       }
     ]
   };
+
   @ViewChild("grid")
   public grid: GridComponent;
 
   ngOnInit() {
-    this.reportService
-      .getTrialBalanceDetail(this.generateSearchString())
-      .subscribe((data: TrialBalanceDetailViewModel[]) => {
-        this.data = data;
-        this.gridData = data;
-        const trialDetails = [];
-        this.data.forEach(element => {
-          element.Entries.forEach(elementTrial => {
-            trialDetails.push(elementTrial);
+    this.data
+      .pipe(
+        map((response: any) => {
+          const trialDetails = [];
+          response.result.forEach(element => {
+            element.Entries.forEach(elementTrial => {
+              trialDetails.push(elementTrial);
+            });
           });
-        });
-        console.log(this.data);
-        this.childGrid.dataSource = trialDetails;
-        console.log("child", this.childGrid.dataSource);
-      });
+          return trialDetails;
+        })
+      )
+      .subscribe(e => (this.childGrid.dataSource = e));
 
     this.toolbar = [
       { text: "Expand All", prefixIcon: "e-expand", id: "expandall" },
@@ -90,6 +106,8 @@ export class TrialBalanceDetailComponent implements OnInit {
         id: "Grid_excelexport"
       }
     ];
+
+    this.trialBalanceDetailApi.execute({ skip: 0, take: 50 }, this.filterData);
   }
 
   generateSearchString(): string {
@@ -120,23 +138,17 @@ export class TrialBalanceDetailComponent implements OnInit {
     }
   }
 
+  onFilterStateChange(filterData: ReportFilterModel): void {
+    this.filterData = filterData;
+    this.trialBalanceDetailApi.execute(this.stateData, filterData);
+  }
+
+  onDataStateChange(state: DataStateChangeEventArgs): void {
+    this.stateData = state;
+    this.trialBalanceDetailApi.execute(state, this.filterData);
+  }
+
   onFiltered(data: any): void {
     this.lastFilter = data;
-
-    this.reportService
-      .getTrialBalanceDetail(`${data}&${this.generateSearchString()}`)
-      .subscribe((result: TrialBalanceDetailViewModel[]) => {
-        this.data = result;
-        this.gridData = result;
-
-        const x = [];
-        result.forEach(element => {
-          element.Entries.forEach(elementx => {
-            x.push(elementx);
-          });
-        });
-
-        this.childGrid.dataSource = x;
-      });
   }
 }
