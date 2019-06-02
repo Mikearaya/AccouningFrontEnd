@@ -13,11 +13,13 @@
     <ejs-grid
       #grid
       [allowResizing]="true"
+      [allowFiltering]="true"
       foreign-key-field="LedgerId"
       [childGrid]="childGrid"
       [allowPaging]="true"
       [pageSettings]="initialPage"
       [allowSorting]="true"
+      [filterSettings]="filterSettings"
       query-string="Id"
       [dataSource]="data | async"
       (dataStateChange)="onDataStateChange($event)"

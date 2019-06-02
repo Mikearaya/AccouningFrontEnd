@@ -60,14 +60,6 @@ export class AccountTypeFormComponent implements OnInit {
       text: "Name",
       value: "Id"
     };
-
-    // get account type list to fill the Accounts drop down from back end
-    this.typeApi
-      .getAccountTypes()
-      .subscribe(
-        (data: AccountTypeViewModel[]) => (this.accountTypeList = data),
-        (error: HttpErrorResponse) => alert(error.message)
-      );
   }
 
   /* Creating value accessors for the reactive form

@@ -19,7 +19,7 @@ import { AccountingApiService } from "src/app/Services/accounting-api.service";
 @Injectable()
 export class AccountTypeService extends Subject<DataStateChangeEventArgs> {
   public url = "account-types";
-  public indexUrl = "types-index";
+  public indexUrl = "account-types/index";
   private query = new QueryString();
 
   constructor(

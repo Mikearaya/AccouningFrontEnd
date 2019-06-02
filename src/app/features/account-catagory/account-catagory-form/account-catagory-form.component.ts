@@ -19,7 +19,10 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { Location } from "@angular/common";
 import { ActivatedRoute } from "@angular/router";
 import { ButtonComponent } from "@syncfusion/ej2-angular-buttons";
-import { AccountCatagoryView } from "../account-catagory-domain";
+import {
+  AccountCatagoryView,
+  AccountCategoryIndex
+} from "../account-catagory-domain";
 
 @Component({
   selector: "app-account-catagory-form",
@@ -71,9 +74,9 @@ export class AccountCatagoryFormComponent implements OnInit {
 
     // get account list to fill the Accounts drop down from back end
     this.accountCatagoryApi
-      .getAccountCatagories()
+      .getAccountCatagoryIndex()
       .subscribe(
-        (data: AccountCatagoryView[]) => (this.accountTypeList = data),
+        (data: AccountCategoryIndex[]) => (this.accountTypeList = data),
         (error: HttpErrorResponse) => alert(error.message)
       );
   }
