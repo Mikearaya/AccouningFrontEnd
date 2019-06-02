@@ -26,8 +26,8 @@ import { DashboardLayoutModule } from "@syncfusion/ej2-angular-layouts";
     ButtonModule,
     CoreModule,
     LookupsModule,
-    SharedModule,
-    DashboardLayoutModule
+    DashboardLayoutModule,
+    SharedModule
   ],
   providers: [AccountingApiService],
   bootstrap: [AppComponent]

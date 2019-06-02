@@ -166,6 +166,7 @@ export class LedgerComponent implements OnInit {
       ])
     });
   }
+
   initializeForm(data: JornalEntryViewModel) {
     this.ledgerForm = this.formBuilder.group({
       VoucherId: [data.VoucherId, Validators.required],
@@ -209,6 +210,7 @@ export class LedgerComponent implements OnInit {
   }
 
   initializeEntryDetail(data: Jornal): FormGroup {
+    console.log(data.AccountId);
     return this.formBuilder.group({
       Id: [data.Id, Validators.required],
       Credit: [data.Credit],

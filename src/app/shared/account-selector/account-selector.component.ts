@@ -1,4 +1,4 @@
-import { Component, OnInit, forwardRef } from "@angular/core";
+import { Component, OnInit, forwardRef, OnChanges } from "@angular/core";
 import { AccountsService } from "src/app/core/services/accounts.service";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { AccountsIndexView } from "src/app/features/accounts/accounts";
@@ -30,7 +30,7 @@ import { Predicate, Query } from "@syncfusion/ej2-data/src";
     }
   ]
 })
-export class AccountSelectorComponent implements OnInit, ControlValueAccessor {
+export class AccountSelectorComponent implements ControlValueAccessor {
   constructor(private accountApi: AccountsService) {}
   public _value: any;
   public disabled: boolean;
@@ -60,9 +60,9 @@ export class AccountSelectorComponent implements OnInit, ControlValueAccessor {
     query = e.text != "" ? query.where(predicate) : query;
     // pass the filter data source, filter query to updateData method.
 
-    this.accountApi
-      .getAccountIndex(e.text)
-      .subscribe(data => e.updateData(data));
+    this.accountApi.getAccountIndex(e.text).subscribe(data => {
+      e.updateData(data);
+    });
   }
 
   onChanged: any = () => {};
@@ -70,6 +70,18 @@ export class AccountSelectorComponent implements OnInit, ControlValueAccessor {
 
   writeValue(obj: any): void {
     this._value = obj;
+
+    this.accountApi
+      .getAccountIndex("")
+      .subscribe((result: AccountsIndexView[]) => {
+        this.accounts = result;
+        this.data = result;
+
+        if (this._value) {
+          const data = this.accounts.filter(a => a.Id === obj);
+          this.text = data[0].Name;
+        }
+      });
   }
   registerOnChange(fn: any): void {
     this.onChanged = fn;
@@ -81,16 +93,5 @@ export class AccountSelectorComponent implements OnInit, ControlValueAccessor {
     this.disabled = isDisabled;
   }
 
-  ngOnInit() {
-    this.accountApi
-      .getAccountIndex("")
-      .subscribe((result: AccountsIndexView[]) => {
-        this.accounts = result;
-        this.data = result;
-        if (this._value) {
-          const data = this.accounts.filter(a => a.Id === this._value);
-          this.text = data[0].Name;
-        }
-      });
-  }
+  ngOnInit() {}
 }

@@ -2,8 +2,8 @@
  * @CreateTime: Nov 3, 2018 10:17 AM
  * @Author:  Mikael Araya
  * @Contact: MikaelAraya12@gmail.com
- * @Last Modified By: Naol
- * @Last Modified Time: May 6, 2019 4:33 PM
+ * @Last Modified By:  Mikael Araya
+ * @Last Modified Time: Jun 2, 2019 1:58 PM
  * @Description: Modify Here, Please
  */
 import { Component, OnInit, ViewChild } from "@angular/core";
@@ -128,10 +128,7 @@ export class AccountFormComponent implements OnInit {
   initializeFunction(data: AccountView) {
     this.accountForm = this.formBuilder.group({
       AccountId: [data.AccountId, [Validators.required]],
-      CatagoryId: [
-        { value: data.CategoryId, disabled: true },
-        Validators.required
-      ],
+      CatagoryId: [data.CategoryId, Validators.required],
       AccountName: [
         data.AccountName,
         [Validators.required, Validators.minLength(3)]

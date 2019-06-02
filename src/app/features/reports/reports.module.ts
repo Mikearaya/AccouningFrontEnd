@@ -8,8 +8,9 @@ import { SubsidaryLedgerReportComponent } from "./subsidary-ledger-report/subsid
 import { ReportApiService } from "./report-api.service";
 import { TrialBalanceDetailComponent } from "./trial-balance-detail/trial-balance-detail.component";
 import { ConsolidatedTrialBalanceComponent } from "./consolidated-trial-balance/consolidated-trial-balance.component";
-import { BalanceSheetComponent } from './balance-sheet/balance-sheet.component';
-import { IncomeStatmentComponent } from './income-statment/income-statment.component';
+import { BalanceSheetComponent } from "./balance-sheet/balance-sheet.component";
+import { IncomeStatmentComponent } from "./income-statment/income-statment.component";
+import { SystemCacheService } from "src/app/core/services/system-cache.service";
 
 @NgModule({
   declarations: [

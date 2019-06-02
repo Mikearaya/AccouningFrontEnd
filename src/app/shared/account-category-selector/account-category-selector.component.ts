@@ -28,8 +28,7 @@ import { AccountsIndexView } from "src/app/features/accounts/accounts";
     }
   ]
 })
-export class AccountCategorySelectorComponent
-  implements OnInit, OnChanges, ControlValueAccessor {
+export class AccountCategorySelectorComponent implements ControlValueAccessor {
   constructor(private accountApi: AccountCatagoryApiService) {}
   public _value: any;
   public disabled: boolean;
@@ -54,6 +53,15 @@ export class AccountCategorySelectorComponent
 
   writeValue(obj: number): void {
     this._value = obj;
+    this.accountApi.getAccountCatagoryIndex().subscribe((data: any) => {
+      this.accountCategories = data;
+      if (this._value) {
+        console.log(this._value);
+        const data = this.accountCategories.filter(a => a.Id === obj);
+        console.log(data);
+        this.text = data[0].Name;
+      }
+    });
   }
   registerOnChange(fn: any): void {
     this.onChanged = fn;
@@ -63,19 +71,5 @@ export class AccountCategorySelectorComponent
   }
   setDisabledState?(isDisabled: boolean): void {
     this.disabled = isDisabled;
-  }
-
-  ngOnChanges() {
-    console.log("changed");
-  }
-
-  ngOnInit() {
-    this.accountApi.getAccountCatagoryIndex().subscribe((data: any) => {
-      this.accountCategories = data;
-      if (this._value) {
-        const data = this.accountCategories.filter(a => a.Id === this._value);
-        this.text = data[0].Name;
-      }
-    });
   }
 }
