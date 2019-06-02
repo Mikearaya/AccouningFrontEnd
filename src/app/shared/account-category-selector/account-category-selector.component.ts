@@ -70,7 +70,7 @@ export class AccountCategorySelectorComponent
   }
 
   ngOnInit() {
-    this.accountApi.getAccountCatagoryIndex("").subscribe((data: any) => {
+    this.accountApi.getAccountCatagoryIndex().subscribe((data: any) => {
       this.accountCategories = data;
       if (this._value) {
         const data = this.accountCategories.filter(a => a.Id === this._value);

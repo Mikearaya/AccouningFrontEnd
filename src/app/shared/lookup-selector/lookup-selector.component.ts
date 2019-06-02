@@ -70,14 +70,12 @@ export class LookupSelectorComponent
   ngOnChanges() {}
 
   ngOnInit() {
-    this.lookupApi
-      .getLookUpType(this.type)
-      .subscribe((responseData: LookupsIndexView[]) => {
-        this.lookups = responseData;
-        if (this._value) {
-          const data = this.lookups.filter(a => a.Id === this._value);
-          this.text = data[0].Name;
-        }
-      });
+    this.lookupApi.getLookUpType(this.type).subscribe((responseData: any) => {
+      this.lookups = responseData.Items;
+      if (this._value) {
+        const data = this.lookups.filter(a => a.Id === this._value);
+        this.text = data[0].Name;
+      }
+    });
   }
 }
