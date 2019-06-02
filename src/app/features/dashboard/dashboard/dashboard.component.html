@@ -4,7 +4,7 @@
       class="col-lg-3 col-sm-4"
       *ngFor="let items of dashboardItems; let i = index"
     >
-      <div class="items-panel" [attr.class]="items.name">
+      <div class="items-panel" [attr.class]="items.class">
         <div class="item-name">
           {{ items.name }}
           {{ items.value }}

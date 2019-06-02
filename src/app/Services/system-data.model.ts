@@ -8,4 +8,5 @@ export interface DashboardViewModel {
   TotalCapital: number;
   TotalLiability: number;
   TotalExpense: number;
+  UnpostedEntries: number;
 }

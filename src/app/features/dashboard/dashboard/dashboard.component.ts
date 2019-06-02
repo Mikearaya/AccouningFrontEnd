@@ -8,13 +8,38 @@ import { DashboardViewModel } from "src/app/Services/system-data.model";
   styleUrls: ["./dashboard.component.css"]
 })
 export class DashboardComponent implements OnInit {
-  public dashboardItems: { name: string; icon: string; value: number }[] = [
-    { name: "Asset", icon: "fas fa-wallet", value: 0 },
-    { name: "Capital", icon: "fas fa-coins", value: 0 },
-    { name: "Liability", icon: "fas fa-funnel-dollar", value: 0 },
-    { name: "Expence", icon: "fas fa-comments-dollar", value: 0 },
-    { name: "Revenue", icon: "fas fa-hand-holding-usd", value: 0 },
-    { name: "Dashboard", icon: "", value: 0 }
+  public dashboardItems: {
+    name: string;
+    class: string;
+    icon: string;
+    value: number;
+  }[] = [
+    { name: "Asset", class: "Asset", icon: "fas fa-wallet", value: 0 },
+    { name: "Capital", class: "Capital", icon: "fas fa-coins", value: 0 },
+    {
+      name: "Liability",
+      class: "Liability",
+      icon: "fas fa-funnel-dollar",
+      value: 0
+    },
+    {
+      name: "Expence",
+      class: "Expence",
+      icon: "fas fa-comments-dollar",
+      value: 0
+    },
+    {
+      name: "Revenue",
+      class: "Revenue",
+      icon: "fas fa-hand-holding-usd",
+      value: 0
+    },
+    {
+      name: "Unposted Entries",
+      class: "unposted",
+      icon: "fas fa-hand-holding-usd",
+      value: 0
+    }
   ];
   public primaryXAxis: object;
   public chartData: object[];
@@ -57,6 +82,7 @@ export class DashboardComponent implements OnInit {
         this.dashboardItems[2].value = data.TotalLiability;
         this.dashboardItems[3].value = data.TotalExpense;
         this.dashboardItems[4].value = data.TotalRevenue;
+        this.dashboardItems[5].value = data.UnpostedEntries;
       });
   }
 }
