@@ -82,7 +82,7 @@ export class AccountsViewComponent implements OnInit {
     };
     this.groupOptions = {
       disablePageWiseAggregates: false,
-      showDropArea: false,
+      showDropArea: true,
       columns: ["ParentAccount"]
     };
 
