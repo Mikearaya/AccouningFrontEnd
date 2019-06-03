@@ -1,0 +1,44 @@
+<app-filter-option
+  [allowDateSearch]="true"
+  [allowAccountSearch]="true"
+  [allowCostCenterSearch]="true"
+  #filter
+  (filterChanged)="onFilterStateChange($event)"
+></app-filter-option>
+<div class="account-schedule-area">
+  <app-print-header [header]="'Account schedule'"></app-print-header>
+  <div class="print-area">
+    <ejs-grid
+      #grid
+      [allowResizing]="true"
+      [dataSource]="data | async"
+      query-string="Id"
+      [allowExcelExport]="true"
+      [allowSorting]="true"
+      [allowFiltering]="false"
+      [filterSettings]="filterOptions"
+      [allowPaging]="true"
+      [allowGrouping]="true"
+      [pageSettings]="initialPage"
+      [toolbar]="toolbar"
+      (dataStateChange)="onDataStateChange($event)"
+      (toolbarClick)="clickHandler($event)"
+      [height]="550"
+    >
+      <e-columns>
+        <e-column
+          field="ParentAccountId"
+          headerText="Control account"
+          textAlign="Left"
+          width="60"
+        ></e-column>
+        <e-column
+          field="ParentAccountName"
+          headerText="Parent account"
+          textAlign="Left"
+          width="60"
+        ></e-column>
+      </e-columns>
+    </ejs-grid>
+  </div>
+</div>

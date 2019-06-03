@@ -91,3 +91,19 @@ export class IncomeStatmentItemModel {
   AccountType: string;
   Amount: number;
 }
+
+// account schedule
+export class AccountScheduleModel {
+  ParentAccountId?: number;
+  ParentAccountName: string;
+  Subsidaries: AccountScheduleDetailModel[] = [];
+}
+
+export class AccountScheduleDetailModel {
+  SubsidaryId: string;
+  Subsidary: string;
+  Credit?: number;
+  Debit?: number;
+  EndingBalance?: number;
+  BeginningBalance?: number;
+}

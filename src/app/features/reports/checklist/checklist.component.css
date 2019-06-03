@@ -32,4 +32,9 @@
   .e-icons.e-dtdiagonalright.e-icon-grightarrow {
     display: none;
   }
+
+  .e-grid.e-default * {
+    height: auto !important;
+  }
+
 }

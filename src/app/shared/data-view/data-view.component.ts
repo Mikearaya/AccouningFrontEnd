@@ -9,7 +9,7 @@ import {
 } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { ClickEventArgs } from "@syncfusion/ej2-navigations";
-import { closest } from "@syncfusion/ej2-base";
+import { closest, NotifyPropertyChanges } from "@syncfusion/ej2-base";
 import { FilterEventModel, QueryString } from "./data-view.model";
 
 import {
@@ -127,14 +127,12 @@ export class DataViewComponent implements OnInit {
     this.groupOptions = { showGroupedColumn: true };
     this.filterSettings = { type: "Menu" };
     this.selectOptions = { type: "Multiple", persistSelection: true };
-    this.editSettings = { allowDeleting: true };
+    this.editSettings = {
+      allowDeleting: true,
+      allowAdding: true
+    };
     this.wrapSettings = { wrapMode: "Header" };
 
-    this.editSettings = {
-      allowEditing: false,
-      allowAdding: true,
-      allowDeleting: true
-    };
     this.selectionOptions = { mode: "Both", type: "Single" };
 
     this.initilizeCommandColumn();
@@ -176,8 +174,9 @@ export class DataViewComponent implements OnInit {
     const rowObj: IRow<Column> = this.grid.getRowObjectFromUID(
       closest(event.target as Element, ".e-row").getAttribute("data-uid")
     );
+
     this.deleteRecord.emit(rowObj.data);
-    this.grid.deleteRecord();
+    this.grid.refresh();
   }
 
   private editAction(event: Event): void {

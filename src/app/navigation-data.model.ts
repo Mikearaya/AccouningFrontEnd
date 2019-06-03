@@ -123,17 +123,8 @@ export const NAVIGATION_LINKS = [
         enabled: true,
         selected: false
       },
-      /*       {
-        id: "04-04",
-        name: "COGS Schedule",
-        url: "/cogs-schedule",
-        expanded: false,
-        enabled: true,
-
-        selected: false
-      }, */
       {
-        id: "04-05",
+        id: "04-04",
         name: "Subsidiary Ledger",
         url: "reports/subsidaries",
         expanded: false,
@@ -141,7 +132,7 @@ export const NAVIGATION_LINKS = [
         selected: false
       },
       {
-        id: "04-06",
+        id: "04-05",
         name: "Trial Balance detail",
         url: "reports/trial-balance-detail",
         expanded: false,
@@ -149,31 +140,21 @@ export const NAVIGATION_LINKS = [
         selected: false
       },
       {
-        id: "04-07",
+        id: "04-06",
         name: "Consolidated Trial Balance",
         url: "reports/consolidated-trial-balance",
         expanded: false,
         enabled: true,
         selected: false
-      }
-      /*       {
-        id: "04-08",
-        name: "OE Cost Center",
-        url: "/oe-cost-center",
-        expanded: false,
-        enabled: true,
-
-        selected: false
       },
       {
-        id: "04-09",
-        name: "OE Detail",
-        url: "/oe-detail",
+        id: "04-07",
+        name: "Account Schedule",
+        url: "reports/account-schedule",
         expanded: false,
         enabled: true,
-
         selected: false
-      } */
+      }
     ]
   }
 ];

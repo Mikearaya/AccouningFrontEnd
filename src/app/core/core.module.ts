@@ -52,7 +52,7 @@ import { SystemCacheService } from "./services/system-cache.service";
     ToolbarService,
     ResizeService,
     PageService,
-
+    ContextMenuService,
     LookupService,
     AccountCatagoryApiService,
     LedgerService,
