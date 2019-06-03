@@ -85,15 +85,33 @@ export class LedgerComponent implements OnInit {
     this.Entries.valueChanges.subscribe(value => this.calculateBalance(value));
   }
   public setPostStatus() {
+    const form = this.prepareData(this.ledgerForm);
     if (this.Posted.value) {
       if (this.isUpdate) {
-        this.enableForm();
         this.Posted.setValue(false);
+        this.ledgerService
+          .updateLedgerStatus(this.ledgerId, {
+            Id: this.ledgerId,
+            Posted: this.Posted.value
+          })
+          .subscribe(
+            () => {
+              this.enableForm();
+            },
+            () => this.Posted.setValue(true)
+          );
       }
     } else {
-      this.Posted.setValue(true);
       if (this.isUpdate) {
         this.disableForm();
+        this.ledgerService
+          .updateLedgerStatus(this.ledgerId, {
+            Id: this.ledgerId,
+            Posted: this.Posted.value
+          })
+          .subscribe(() => {
+            this.Posted.setValue(false);
+          });
       }
     }
   }
@@ -210,7 +228,6 @@ export class LedgerComponent implements OnInit {
   }
 
   initializeEntryDetail(data: Jornal): FormGroup {
-    console.log(data.AccountId);
     return this.formBuilder.group({
       Id: [data.Id, Validators.required],
       Credit: [data.Credit],
@@ -231,6 +248,7 @@ export class LedgerComponent implements OnInit {
   }
   prepareData(data: FormGroup): LedgerEntry {
     const form = data.value;
+    console.log(form);
 
     const ledger = new LedgerEntry();
     ledger.Id = this.ledgerId ? this.ledgerId : 0;

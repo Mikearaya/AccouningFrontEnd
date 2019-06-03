@@ -30,7 +30,7 @@
               name="date"
             >
             </ejs-datepicker>
-            date:{{ ledgerForm.get("Date").value | date: "M/d/yyyy" }}
+      
             <div class="e-error" *ngIf="Date.errors && Date.touched">
               <div *ngIf="Date.errors['required']">
                 *Date of Post is required
@@ -67,7 +67,7 @@
           <!-- <div class="col-1"></div> -->
           <div class="col-2" id="post-button">
             <button
-              [disabled]="!ledgerForm.valid || !isEqual"
+              [disabled]="!ledgerForm.valid"
               id="add-button"
               [ngClass]="this.Posted.value ? 'bg-danger' : 'e-info'"
               type="button"

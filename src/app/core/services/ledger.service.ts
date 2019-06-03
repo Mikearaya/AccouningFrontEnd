@@ -66,7 +66,7 @@ export class LedgerService extends Subject<DataStateChangeEventArgs> {
   ): Observable<boolean> {
     updatedLedgerStatus.Id = id;
     return this.httpClient.put<boolean>(
-      `${this.url}/${updatedLedgerStatus.Id}`,
+      `${this.url}/status/${updatedLedgerStatus.Id}`,
       updatedLedgerStatus
     );
   }
@@ -90,7 +90,6 @@ export class LedgerService extends Subject<DataStateChangeEventArgs> {
           this.query.sortDirection = state.action["direction"];
           break;
         case "filtering":
-          console.log(state.action);
           this.query.filter = [];
 
           state.action["columns"].forEach(element => {

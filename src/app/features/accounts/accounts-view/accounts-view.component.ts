@@ -83,7 +83,7 @@ export class AccountsViewComponent implements OnInit {
     this.groupOptions = {
       disablePageWiseAggregates: false,
       showDropArea: false,
-      columns: ["AccountId"]
+      columns: ["ParentAccount"]
     };
 
     this.filterOptions = { type: "Menu" }; // put unique filter menue for each column based on the column type
