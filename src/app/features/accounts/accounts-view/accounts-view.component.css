@@ -21,5 +21,10 @@
 }
 
 .e-groupdroparea.e-grouped.e-lib.e-droppable.e-draggable {
-  display: none;
+  /* display: none; */
+  background: #4d841d55;
+}
+
+.e-grid .e-groupheadercell {
+  background: #4d841d;
 }

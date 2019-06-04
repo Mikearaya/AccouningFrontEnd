@@ -139,13 +139,13 @@ export class SubsidaryLedgerReportComponent implements OnInit {
       this.grid.detailRowModule.expandAll();
       setTimeout(() => {
         window.print();
-      }, 400);
+      }, 1000);
     }
     if (args.item.id === "Grid_excelexport") {
       this.grid.detailRowModule.expandAll();
       setTimeout(() => {
         this.grid.excelExport();
-      }, 400);
+      }, 1000);
     }
   }
   expand(): void {

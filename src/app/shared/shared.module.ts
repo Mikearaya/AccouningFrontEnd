@@ -40,7 +40,6 @@ import { AccountSelectorComponent } from "./account-selector/account-selector.co
 import { AccountCategorySelectorComponent } from "./account-category-selector/account-category-selector.component";
 import { LookupSelectorComponent } from "./lookup-selector/lookup-selector.component";
 import { TreeGridModule } from "@syncfusion/ej2-angular-treegrid";
-import { DialogBoxComponent } from "./dialog-box/dialog-box.component";
 import { FilterOptionComponent } from "./filter-option/filter-option.component";
 import { CoreModule } from "../core/core.module";
 import { PaginationComponent } from "./pagination/pagination.component";
@@ -122,7 +121,6 @@ import { PrintHeaderComponent } from "./print-header/print-header.component";
     AccountSelectorComponent,
     AccountCategorySelectorComponent,
     LookupSelectorComponent,
-    DialogBoxComponent,
     FilterOptionComponent,
     PaginationComponent,
     PrintHeaderComponent

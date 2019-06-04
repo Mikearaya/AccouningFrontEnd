@@ -16,8 +16,20 @@
   .e-emptyrow {
     display: none !important;
   }
+
+  .e-grid.e-default * {
+    height: auto !important;
+  }
 }
 
 .subsidary-area {
   margin-top: 10px;
+}
+
+.e-grid .e-groupdroparea {
+  background: #4d841d55;
+}
+
+.e-grid .e-groupheadercell {
+  background: #4d841d;
 }

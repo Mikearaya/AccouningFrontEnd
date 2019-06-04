@@ -6,7 +6,8 @@ import {
   TrialBalanceDetailViewModel,
   ConsolidatedTrialBalanceViewModel,
   BalanceSheetViewModel,
-  IncomeStatmentViewModel
+  IncomeStatmentViewModel,
+  AccountScheduleModel
 } from "./report";
 import { Observable } from "rxjs";
 import { AccountingApiService } from "src/app/Services/accounting-api.service";
@@ -66,6 +67,14 @@ export class ReportApiService {
       `${
         this.url
       }/income-statement?year=${this.accountingService.getSelectedYear()}&${searchString}`
+    );
+  }
+
+  getAccountSchedule(searchString: string): Observable<AccountScheduleModel> {
+    return this.httpClient.get<AccountScheduleModel>(
+      `${
+        this.url
+      }/account-schedule?year=${this.accountingService.getSelectedYear()}&${searchString}`
     );
   }
 }

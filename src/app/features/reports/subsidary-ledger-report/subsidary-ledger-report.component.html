@@ -24,38 +24,38 @@
       [toolbar]="toolbar"
       (dataStateChange)="onDataStateChange($event)"
       (toolbarClick)="clickHandler($event)"
+      [height]="550"
     >
       <e-columns>
         <e-column
           field="AccountId"
           headerText="Control Account"
           textAlign="Left"
-          width="120"
+          width="60"
         ></e-column>
         <e-column
           field="SubAccountId"
           headerText="Subsidary Id"
           textAlign="Left"
-          width="120"
+          width="60"
         ></e-column>
 
         <e-column
           field="AccountName"
           headerText="Account Name"
           textAlign="Left"
-          width="120"
         ></e-column>
         <e-column
           field="AccountType"
           headerText="Account Type"
           textAlign="Left"
-          width="120"
+          width="60"
         ></e-column>
 
         <e-column
           field="BBF"
           headerText="Starting Balance"
-          width="150"
+          width="60"
           [visible]="true"
         ></e-column>
       </e-columns>

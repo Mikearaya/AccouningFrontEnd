@@ -61,14 +61,9 @@ export class AppComponent implements OnInit {
   public loadRoutingContent(args: NodeSelectEventArgs): void {
     const data: any = this.tree.getTreeData(args.node);
     const routerLink: string = data[0].url;
-    // alert(routerLink);
-    // this.router.navigate([routerLink]);
 
     if (routerLink !== "parent") {
       this.router.navigate([routerLink]);
-    } else {
-      data[0].expanded = true;
-      console.log(data[0].expanded);
     }
   }
 

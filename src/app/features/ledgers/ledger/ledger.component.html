@@ -30,7 +30,7 @@
               name="date"
             >
             </ejs-datepicker>
-      
+
             <div class="e-error" *ngIf="Date.errors && Date.touched">
               <div *ngIf="Date.errors['required']">
                 *Date of Post is required
@@ -129,7 +129,6 @@
                     *ngIf="account.get('AccountId').hasError('incorrect')"
                   >
                     *Please select a valid account
-                    {{ account.get("AccountId").value }}
                   </div>
                 </div>
               </div>

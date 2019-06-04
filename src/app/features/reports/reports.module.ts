@@ -1,6 +1,5 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-
 import { ReportsRoutingModule } from "./reports-routing.module";
 import { ChecklistComponent } from "./checklist/checklist.component";
 import { SharedModule } from "src/app/shared/shared.module";
@@ -10,7 +9,6 @@ import { TrialBalanceDetailComponent } from "./trial-balance-detail/trial-balanc
 import { ConsolidatedTrialBalanceComponent } from "./consolidated-trial-balance/consolidated-trial-balance.component";
 import { BalanceSheetComponent } from "./balance-sheet/balance-sheet.component";
 import { IncomeStatmentComponent } from "./income-statment/income-statment.component";
-
 import { AccountsScheduleComponent } from "./accounts-schedule/accounts-schedule.component";
 
 @NgModule({
@@ -21,6 +19,7 @@ import { AccountsScheduleComponent } from "./accounts-schedule/accounts-schedule
     ConsolidatedTrialBalanceComponent,
     BalanceSheetComponent,
     IncomeStatmentComponent,
+
     AccountsScheduleComponent
   ],
   imports: [CommonModule, ReportsRoutingModule, SharedModule],

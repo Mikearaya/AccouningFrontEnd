@@ -20,7 +20,7 @@
       <tr>
         <th>Revenue</th>
       </tr>
-      <tr *ngFor="let revenue of data?.Revenue">
+      <tr *ngFor="let revenue of data?.Revenue; let i = index">
         <td>{{ revenue.AccountType }}</td>
         <td>{{ revenue.Amount | currency: "":"" }}</td>
       </tr>
