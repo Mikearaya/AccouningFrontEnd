@@ -59,7 +59,7 @@ export class AccountsViewComponent implements OnInit {
   public pageSettings: PageSettingsModel;
   public filterOptions: FilterSettingsModel;
   public commands: CommandModel[];
-  public groupOptions: GroupSettingsModel = { showDropArea: false };
+  public groupOptions: GroupSettingsModel = { showDropArea: true };
   public pageSizes: string[] = PageSizes;
   public initialPage: { pageSize: string; pageSizes: string[] };
 
@@ -82,7 +82,7 @@ export class AccountsViewComponent implements OnInit {
     };
     this.groupOptions = {
       disablePageWiseAggregates: false,
-      showDropArea: false,
+      showDropArea: true,
       columns: ["ParentAccount"]
     };
 

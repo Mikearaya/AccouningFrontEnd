@@ -155,17 +155,19 @@ export const NAVIGATION_LINKS = [
         expanded: false,
         enabled: true,
         selected: false
-      }
-      /*       {
+      },
+      {
         id: "04-08",
-        name: "OE Cost Center",
-        url: "/oe-cost-center",
+        name: "Accounts Schedule",
+        url: "reports/accounts-schedule",
         expanded: false,
         enabled: true,
 
         selected: false
-      },
+      }
+      /*
       {
+
         id: "04-09",
         name: "OE Detail",
         url: "/oe-detail",

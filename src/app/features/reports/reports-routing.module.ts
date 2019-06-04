@@ -6,6 +6,7 @@ import { ConsolidatedTrialBalanceComponent } from "./consolidated-trial-balance/
 import { TrialBalanceDetailComponent } from "./trial-balance-detail/trial-balance-detail.component";
 import { BalanceSheetComponent } from "./balance-sheet/balance-sheet.component";
 import { IncomeStatmentComponent } from "./income-statment/income-statment.component";
+import { AccountsScheduleComponent } from "./accounts-schedule/accounts-schedule.component";
 
 const routes: Routes = [
   {
@@ -40,6 +41,11 @@ const routes: Routes = [
     path: "income-statement",
     component: IncomeStatmentComponent,
     data: { title: "Income statement", breadCrum: "Income statement" }
+  },
+  {
+    path: "accounts-schedule",
+    component: AccountsScheduleComponent,
+    data: { title: "Accounts Schedule", breadCrum: "Account Schedule" }
   }
 ];
 

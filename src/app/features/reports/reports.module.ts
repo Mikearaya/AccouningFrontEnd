@@ -10,7 +10,8 @@ import { TrialBalanceDetailComponent } from "./trial-balance-detail/trial-balanc
 import { ConsolidatedTrialBalanceComponent } from "./consolidated-trial-balance/consolidated-trial-balance.component";
 import { BalanceSheetComponent } from "./balance-sheet/balance-sheet.component";
 import { IncomeStatmentComponent } from "./income-statment/income-statment.component";
-import { SystemCacheService } from "src/app/core/services/system-cache.service";
+
+import { AccountsScheduleComponent } from "./accounts-schedule/accounts-schedule.component";
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { SystemCacheService } from "src/app/core/services/system-cache.service";
     TrialBalanceDetailComponent,
     ConsolidatedTrialBalanceComponent,
     BalanceSheetComponent,
-    IncomeStatmentComponent
+    IncomeStatmentComponent,
+    AccountsScheduleComponent
   ],
   imports: [CommonModule, ReportsRoutingModule, SharedModule],
   providers: [ReportApiService]
