@@ -6,6 +6,10 @@ div.content {
   .e-control.e-btn.e-lib {
     display: none
   }
+
+  .table-section {
+    overflow: hidden !important;
+  }
 }
 
 .e-control.e-btn.e-lib {
@@ -25,6 +29,13 @@ table {
 
 .table-section {
   background: white;
-  padding-left: 40px;
+  padding-left: 35px;
   padding-right: 40px;
+  height: 750px;
+  overflow: scroll;
+  margin-top: 15px;
+}
+
+.lists {
+  padding-left: 40px;
 }

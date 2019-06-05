@@ -1,126 +1,128 @@
-<app-print-header [header]="'Account Schedule'"></app-print-header>
 <app-filter-option
   [allowDateSearch]="true"
   [allowAccountSearch]="true"
   #filter
   (filterChanged)="onFilterStateChange($event)"
 ></app-filter-option>
-<ejs-grid
-  [dataSource]="data | async"
-  #grid
-  [allowExcelExport]="true"
-  id="accounts"
-  [toolbar]="toolbarOptions"
-  (dataStateChange)="onDataStateChange($event)"
-  [allowPaging]="true"
-  [allowFiltering]="true"
-  [allowSorting]="true"
-  [allowResizing]="true"
-  [showColumnChooser]="true"
-  [allowPdfExport]="true"
-  (toolbarClick)="toolbarClick($event)"
-  [pageSettings]="initialPage"
-  [filterSettings]="filterOptions"
-  [showColumnChooser]="true"
-  [allowGrouping]="true"
-  [groupSettings]="groupOptions"
-  [editSettings]="editSettings"
-  [height]="700"
->
-  <e-columns>
-    <e-column
-      field="ControlAccountId"
-      textAlign="left"
-      headerText="Control Account"
-      isPrimaryKey="true"
-      type="string"
-      width="10"
-      editable="false"
-      filterable="false"
-      groupable="false"
-      [visible]="false"
-    >
-    </e-column>
-    <e-column
-      field="ControlAccount"
-      textAlign="left"
-      headerText="Control Account Name"
-      isPrimaryKey="true"
-      type="string"
-      width="10"
-      editable="false"
-      filterable="false"
-      groupable="false"
-      [visible]="true"
-    >
-    </e-column>
-    <e-column
-      field="SubsidaryId"
-      textAlign="left"
-      headerText="Susidary Id"
-      type="string"
-      width="100"
-      editable="false"
-      filterable="false"
-      groupable="false"
-      [width]="100"
-    >
-    </e-column>
+<div class="schedule-area">
+  <app-print-header [header]="'Account Schedule'"></app-print-header>
+  <ejs-grid
+    [dataSource]="data | async"
+    #grid
+    [allowExcelExport]="true"
+    id="accounts-schedule"
+    [toolbar]="toolbarOptions"
+    (dataStateChange)="onDataStateChange($event)"
+    [allowPaging]="true"
+    [allowFiltering]="true"
+    [allowSorting]="true"
+    [allowResizing]="true"
+    [showColumnChooser]="true"
+    [allowPdfExport]="true"
+    (toolbarClick)="toolbarClick($event)"
+    [pageSettings]="initialPage"
+    [filterSettings]="filterOptions"
+    [showColumnChooser]="true"
+    [allowGrouping]="true"
+    [groupSettings]="groupOptions"
+    [editSettings]="editSettings"
+    [height]="600"
+  >
+    <e-columns>
+      <e-column
+        field="ControlAccountId"
+        textAlign="left"
+        headerText="Control Account"
+        isPrimaryKey="true"
+        type="string"
+        width="10"
+        editable="false"
+        filterable="false"
+        groupable="false"
+        [visible]="false"
+      >
+      </e-column>
+      <e-column
+        field="ControlAccount"
+        textAlign="left"
+        headerText="Control Account Name"
+        isPrimaryKey="true"
+        type="string"
+        width="150"
+        editable="false"
+        filterable="false"
+        groupable="false"
+        [visible]="true"
+      >
+      </e-column>
+      <e-column
+        field="SubsidaryId"
+        textAlign="left"
+        headerText="Susidary Id"
+        type="string"
+        width="100"
+        editable="false"
+        filterable="false"
+        groupable="false"
+        [width]="80"
+      >
+      </e-column>
 
-    <e-column
-      field="Subsidary"
-      textAlign="left"
-      headerText="Subsidary Name"
-      isPrimaryKey="false"
-      type="string"
-      filterable="true"
-      groupable="false"
-      [width]="250"
-    ></e-column>
-    <e-column
-      field="BBF"
-      textAlign="left"
-      headerText="BBF"
-      isPrimaryKey="false"
-      filterable="true"
-      [allowGrouping]="false"
-      [width]="100"
-    ></e-column>
-    <e-column
-      field="TotalCredit"
-      textAlign="left"
-      headerText="Credit"
-      isPrimaryKey="false"
-      type="number"
-      [format]="'C2'"
-      filterable="true"
-      [allowGrouping]="true"
-      [width]="100"
-    ></e-column>
+      <e-column
+        field="Subsidary"
+        textAlign="left"
+        headerText="Subsidary Name"
+        isPrimaryKey="false"
+        type="string"
+        filterable="true"
+        groupable="false"
+        [width]="200"
+      ></e-column>
+      <e-column
+        field="BBF"
+        textAlign="left"
+        headerText="BBF"
+        isPrimaryKey="false"
+        filterable="true"
+        [allowGrouping]="false"
+        [width]="100"
+      ></e-column>
+      <e-column
+        field="TotalCredit"
+        textAlign="left"
+        headerText="Credit"
+        isPrimaryKey="false"
+        type="number"
+        [format]="'C2'"
+        filterable="true"
+        [allowGrouping]="true"
+        [width]="100"
+      ></e-column>
 
-    <e-column
-      field="TotalDebit"
-      textAlign="left"
-      headerText="Debit"
-      isPrimaryKey="false"
-      type="number"
-      [format]="'C2'"
-      filterable="true"
-      groupable="true"
-      width="100"
-    >
-    </e-column>
-    <e-column
-      field="Balance"
-      textAlign="left"
-      headerText="Ending Balance"
-      isPrimaryKey="false"
-      type="number"
-      [format]="'C2'"
-      filterable="true"
-      groupable="false"
-      [width]="80"
-      [visible]="true"
-    ></e-column>
-  </e-columns>
-</ejs-grid>
+      <e-column
+        field="TotalDebit"
+        textAlign="left"
+        headerText="Debit"
+        isPrimaryKey="false"
+        type="number"
+        [format]="'C2'"
+        filterable="true"
+        groupable="true"
+        width="100"
+      >
+      </e-column>
+      <e-column
+        field="Balance"
+        textAlign="left"
+        headerText="Ending Balance"
+        isPrimaryKey="false"
+        type="number"
+        [format]="'C2'"
+        filterable="true"
+        groupable="false"
+        [width]="100"
+        [visible]="true"
+      ></e-column>
+    </e-columns>
+  </ejs-grid>
+</div>

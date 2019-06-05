@@ -10,6 +10,8 @@ import { IncomeStatmentViewModel } from "../report";
 export class IncomeStatmentComponent implements OnInit {
   public data: IncomeStatmentViewModel;
   public searchString: string;
+  public totalRevenue: number;
+  public totalExpense = 0;
   lastFilter: string;
   constructor(private reportService: ReportApiService) {}
 
@@ -18,6 +20,16 @@ export class IncomeStatmentComponent implements OnInit {
       .getIncomeStatment(this.searchString)
       .subscribe((data: IncomeStatmentViewModel) => {
         this.data = data;
+        const revenue = this.data.Revenue;
+        const expense = this.data.Expense;
+        let total = 0;
+        revenue.forEach(el => {
+          total = el.Amount + total;
+        });
+        expense.forEach(el => {
+          this.totalExpense = el.Amount + this.totalExpense;
+        });
+        this.totalRevenue = total - this.data.CostOfGoodsSold;
       });
   }
   print() {

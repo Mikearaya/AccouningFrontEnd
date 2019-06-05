@@ -7,6 +7,9 @@ div.content {
     display: none
   }
 
+  .table-section {
+    overflow: hidden !important;
+  }
 }
 
 .e-control.e-btn.e-lib {
@@ -18,6 +21,7 @@ table {
   font-family: 'Courier New', Courier, monospace;
   background: white;
   margin-top: 20px;
+  height: 400px;
 }
 
 .e-control.e-btn.e-lib {
@@ -28,4 +32,11 @@ table {
   background: white;
   padding-left: 35px;
   padding-right: 40px;
+  height: 750px;
+  overflow: scroll;
+  margin-top: 15px;
+}
+
+.lists {
+  padding-left: 40px;
 }

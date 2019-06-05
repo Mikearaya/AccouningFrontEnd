@@ -96,8 +96,6 @@ export class AccountsScheduleComponent implements OnInit {
 
     this.editSettings = { allowDeleting: true };
     this.toolbarOptions = [
-      { text: "Create Account", prefixIcon: "e-create", id: "createAccount" },
-      "Search",
       { text: "Expand All", prefixIcon: "e-expand", id: "expandall" },
       { text: "Collapse All", prefixIcon: "e-collapse", id: "collapseall" },
       { text: "Print", prefixIcon: "e-print", id: "print" },
@@ -117,9 +115,6 @@ export class AccountsScheduleComponent implements OnInit {
 
   // Click handler for when the toolbar is cliked
   toolbarClick(args: ClickEventArgs): void {
-    if (args.item.id === "createAccount") {
-      this.router.navigate(["accounts/new"]); // when user click add route to the accounts form
-    }
     if (args.item.id === "expandall") {
       this.grid.groupModule.expandAll();
     }

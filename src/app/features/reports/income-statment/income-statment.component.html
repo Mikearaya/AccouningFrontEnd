@@ -20,31 +20,32 @@
       <tr>
         <th>Revenue</th>
       </tr>
-      <tr *ngFor="let revenue of data?.Revenue; let i = index">
-        <td>{{ revenue.AccountType }}</td>
+      <tr *ngFor="let revenue of data?.Revenue">
+        <td class="lists">{{ revenue.AccountType }}</td>
         <td>{{ revenue.Amount | currency: "":"" }}</td>
       </tr>
       <tr>
-        <td>Total revenue:</td>
-        <td>{{ data?.TotalRevenue | currency: "":"" }}</td>
+        <td class="lists">Total revenue:</td>
+        <td>{{ totalRevenue | currency: "":"" }}</td>
       </tr>
       <tr>
-        <td>Cost of Goods Sold</td>
-        <td>{{ data.CostOfGoodsSold | currency: "":"" }}</td>
+        <td class="lists">Cost of goods sold:</td>
+        <td>{{ data?.CostOfGoodsSold | currency: "":"" }}</td>
       </tr>
+
       <tr>
-        <th>General & Admin Expenses</th>
+        <th>Expense</th>
       </tr>
       <tr *ngFor="let expense of data?.Expense">
-        <td>{{ expense.AccountType }}</td>
+        <td class="lists">{{ expense.AccountType }}</td>
         <td>{{ expense.Amount | currency: "":"" }}</td>
       </tr>
       <tr>
-        <td>Total Expense:</td>
-        <td>{{ data?.TotalExpense | currency: "":"" }}</td>
+        <td class="lists">Total Expense:</td>
+        <td>{{ totalExpense | currency: "":"" }}</td>
       </tr>
       <tr>
-        <td>Net Surplus:</td>
+        <td class="lists">Net Surplus:</td>
         <td>{{ data?.NetSurplus | currency: "":"" }}</td>
       </tr>
     </tbody>

@@ -46,6 +46,7 @@ import { PaginationComponent } from "./pagination/pagination.component";
 import { DashboardLayoutModule } from "@syncfusion/ej2-angular-layouts";
 import { ChartModule } from "@syncfusion/ej2-angular-charts";
 import { PrintHeaderComponent } from "./print-header/print-header.component";
+import { DropDownButtonModule } from "@syncfusion/ej2-angular-splitbuttons";
 
 @NgModule({
   imports: [
@@ -74,7 +75,8 @@ import { PrintHeaderComponent } from "./print-header/print-header.component";
     CoreModule,
     PagerModule,
     DashboardLayoutModule,
-    ChartModule
+    ChartModule,
+    DropDownButtonModule
   ],
   exports: [
     CommonModule,
@@ -110,6 +112,7 @@ import { PrintHeaderComponent } from "./print-header/print-header.component";
     BreadCrumbComponent,
     DashboardLayoutModule,
     ChartModule,
+    DropDownButtonModule,
     PrintHeaderComponent
   ],
   declarations: [

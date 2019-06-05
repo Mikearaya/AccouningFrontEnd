@@ -1,0 +1,38 @@
+.e-grouptext {
+  width: auto;
+}
+
+.e-grid-icon.e-groupheadercell {
+  background: #4d841d;
+  width: auto;
+}
+
+.e-groupdroparea.e-grouped.e-lib.e-droppable.e-draggable {
+  background: #4d841d55;
+}
+
+.schedule-area {
+  margin-top: 10px;
+}
+
+@media print {
+  .e-icons.e-gdiagonaldown.e-icon-gdownarrow {
+    display: none;
+  }
+
+  #accounts-schedule_toolbarItems {
+    display: none;
+  }
+
+  .e-ungroupbutton.e-icons.e-icon-hide {
+    display: none;
+  }
+
+  .e-groupsort.e-icons.e-ascending.e-icon-ascending {
+    display: none;
+  }
+
+  .e-grid.e-default * {
+    height: auto !important;
+  }
+}

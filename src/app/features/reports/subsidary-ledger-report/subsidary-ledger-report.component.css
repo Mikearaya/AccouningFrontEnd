@@ -33,3 +33,12 @@
 .e-grid .e-groupheadercell {
   background: #4d841d;
 }
+
+.e-grouptext {
+  width: auto;
+}
+
+.e-grid-icon.e-groupheadercell {
+  background: #4d841d;
+  width: auto;
+}

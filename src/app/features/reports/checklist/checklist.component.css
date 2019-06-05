@@ -6,19 +6,6 @@
   margin-top: 10px;
 }
 
-/* 
-@media print {
-  @page {
-    size: A4 landscape;
-    max-height: 100%;
-    max-width: 100%;
-    margin: 0;
-    padding: 0;
-    display: none;
-  }
-} */
-
-
 @media print {
   #grid_867862622_0_toolbarItems {
     display: none;
