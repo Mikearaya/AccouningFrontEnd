@@ -29,7 +29,11 @@
         <td>{{ data?.TotalRevenue | currency: "":"" }}</td>
       </tr>
       <tr>
-        <th>Expense</th>
+        <td>Cost of Goods Sold</td>
+        <td>{{ data.CostOfGoodsSold | currency: "":"" }}</td>
+      </tr>
+      <tr>
+        <th>General & Admin Expenses</th>
       </tr>
       <tr *ngFor="let expense of data?.Expense">
         <td>{{ expense.AccountType }}</td>

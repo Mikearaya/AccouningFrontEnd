@@ -82,6 +82,7 @@ export class BalanceSheetItemModel {
 export class IncomeStatmentViewModel {
   Expense: IncomeStatmentItemModel[] = [];
   TotalExpense: number;
+  CostOfGoodsSold:number;
   Revenue: IncomeStatmentItemModel[] = [];
   TotalRevenue: number;
   NetSurplus: number;
