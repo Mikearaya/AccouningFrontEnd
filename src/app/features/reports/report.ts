@@ -82,7 +82,7 @@ export class BalanceSheetItemModel {
 export class IncomeStatmentViewModel {
   Expense: IncomeStatmentItemModel[] = [];
   TotalExpense: number;
-  CostOfGoodsSold:number;
+  CostOfGoodsSold: number;
   Revenue: IncomeStatmentItemModel[] = [];
   TotalRevenue: number;
   NetSurplus: number;
@@ -107,4 +107,20 @@ export class AccountScheduleDetailModel {
   Debit?: number;
   EndingBalance?: number;
   BeginningBalance?: number;
+}
+
+// cost of goods
+export class CostOfGoodsSoldModel {
+  Accounts: CostofGoodsSoldItemsModel[] = [];
+  TotalProductionCost?: number;
+  TotalProductionCostForAccount?: number;
+  WorkInProcessBegining?: number;
+  WorkInProcessEnding?: number;
+  FinishedGoodsBeginning?: number;
+  CostOfAvailableGoods: number;
+}
+
+export class CostofGoodsSoldItemsModel {
+  AccountName: string;
+  Value: number;
 }

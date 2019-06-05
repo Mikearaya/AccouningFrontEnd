@@ -10,6 +10,7 @@ import { ConsolidatedTrialBalanceComponent } from "./consolidated-trial-balance/
 import { BalanceSheetComponent } from "./balance-sheet/balance-sheet.component";
 import { IncomeStatmentComponent } from "./income-statment/income-statment.component";
 import { AccountsScheduleComponent } from "./accounts-schedule/accounts-schedule.component";
+import { CostOfGoodsSoldComponent } from "./cost-of-goods-sold/cost-of-goods-sold.component";
 
 @NgModule({
   declarations: [
@@ -20,7 +21,9 @@ import { AccountsScheduleComponent } from "./accounts-schedule/accounts-schedule
     BalanceSheetComponent,
     IncomeStatmentComponent,
 
-    AccountsScheduleComponent
+    AccountsScheduleComponent,
+
+    CostOfGoodsSoldComponent
   ],
   imports: [CommonModule, ReportsRoutingModule, SharedModule],
   providers: [ReportApiService]

@@ -1,0 +1,41 @@
+div.content {
+  padding: 1em;
+}
+
+@media print {
+  .e-control.e-btn.e-lib {
+    display: none
+  }
+
+  .table-section {
+    overflow: hidden !important;
+  }
+}
+
+.e-control.e-btn.e-lib {
+  background-color: #4d841d;
+  color: white;
+}
+
+table {
+  font-family: 'Courier New', Courier, monospace;
+  background: white;
+  margin-top: 20px;
+}
+
+.e-control.e-btn.e-lib {
+  margin-top: 10px;
+}
+
+.table-section {
+  background: white;
+  padding-left: 35px;
+  padding-right: 40px;
+  height: 750px;
+  overflow: scroll;
+  margin-top: 15px;
+}
+
+.lists {
+  padding-left: 40px;
+}

@@ -7,6 +7,7 @@ import { TrialBalanceDetailComponent } from "./trial-balance-detail/trial-balanc
 import { BalanceSheetComponent } from "./balance-sheet/balance-sheet.component";
 import { IncomeStatmentComponent } from "./income-statment/income-statment.component";
 import { AccountsScheduleComponent } from "./accounts-schedule/accounts-schedule.component";
+import { CostOfGoodsSoldComponent } from "./cost-of-goods-sold/cost-of-goods-sold.component";
 
 const routes: Routes = [
   {
@@ -46,6 +47,11 @@ const routes: Routes = [
     path: "accounts-schedule",
     component: AccountsScheduleComponent,
     data: { title: "Accounts Schedule", breadCrum: "Account Schedule" }
+  },
+  {
+    path: "cost-of-goods-sold",
+    component: CostOfGoodsSoldComponent,
+    data: { title: "Cost of goods sold", breadCrum: "Cost of goods sold" }
   }
 ];
 

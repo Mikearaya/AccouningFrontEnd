@@ -1,0 +1,50 @@
+<app-filter-option
+  [allowDateSearch]="true"
+  (filtered)="onFiltered($event)"
+></app-filter-option>
+<div class="row">
+  <div class="col-3">
+    <button ejs-button (click)="print()">Print</button>
+  </div>
+</div>
+<app-print-header [header]="'Cost of goods sold'"></app-print-header>
+<div class="table-section">
+  <table class="table table-borderless">
+    <thead>
+      <tr>
+        <th scope="col">Account name</th>
+        <th scope="col">Value</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cogs of data?.Accounts">
+        <td class="lists">{{ cogs.AccountName }}</td>
+        <td>{{ cogs.Value | currency: "":"" }}</td>
+      </tr>
+      <tr>
+        <td class="lists">Total production cost</td>
+        <td>{{ data?.TotalProductionCost | currency: "":"" }}</td>
+      </tr>
+      <tr>
+        <td class="lists">Total production cost for account</td>
+        <td>{{ data?.TotalProductionCostForAccount | currency: "":"" }}</td>
+      </tr>
+      <tr>
+        <td class="lists">Work in process beginning</td>
+        <td>{{ data?.WorkInProcessBegining | currency: "":"" }}</td>
+      </tr>
+      <tr>
+        <td class="lists">Work in rocess ending</td>
+        <td>{{ data?.WorkInProcessEnding | currency: "":"" }}</td>
+      </tr>
+      <tr>
+        <td class="lists">Finished goods beginning</td>
+        <td>{{ data?.FinishedGoodsBeginning | currency: "":"" }}</td>
+      </tr>
+      <tr>
+        <td class="lists">Cost of available goods</td>
+        <td>{{ data?.CostOfAvailableGoods | currency: "":"" }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

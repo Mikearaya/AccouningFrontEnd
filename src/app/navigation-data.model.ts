@@ -153,7 +153,14 @@ export const NAVIGATION_LINKS = [
         url: "reports/accounts-schedule",
         expanded: false,
         enabled: true,
-
+        selected: false
+      },
+      {
+        id: "04-09",
+        name: "Cost of goods sold",
+        url: "reports/cost-of-goods-sold",
+        expanded: false,
+        enabled: true,
         selected: false
       }
     ]

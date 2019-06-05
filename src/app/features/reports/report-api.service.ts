@@ -7,7 +7,8 @@ import {
   ConsolidatedTrialBalanceViewModel,
   BalanceSheetViewModel,
   IncomeStatmentViewModel,
-  AccountScheduleModel
+  AccountScheduleModel,
+  CostOfGoodsSoldModel
 } from "./report";
 import { Observable } from "rxjs";
 import { AccountingApiService } from "src/app/Services/accounting-api.service";
@@ -75,6 +76,14 @@ export class ReportApiService {
       `${
         this.url
       }/account-schedule?year=${this.accountingService.getSelectedYear()}&${searchString}`
+    );
+  }
+
+  getCostOfGoodsSold(searchString: string): Observable<CostOfGoodsSoldModel> {
+    return this.httpClient.get<CostOfGoodsSoldModel>(
+      `${
+        this.url
+      }/cost-of-goods-sold?year=${this.accountingService.getSelectedYear()}&${searchString}`
     );
   }
 }
