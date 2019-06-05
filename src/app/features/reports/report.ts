@@ -109,7 +109,7 @@ export class AccountScheduleDetailModel {
   BeginningBalance?: number;
 }
 
-// cost of goods
+// cost of goods model
 export class CostOfGoodsSoldModel {
   Accounts: CostofGoodsSoldItemsModel[] = [];
   TotalProductionCost?: number;
