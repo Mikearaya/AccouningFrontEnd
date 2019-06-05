@@ -11,7 +11,8 @@ import {
   GroupSettingsModel,
   DataStateChangeEventArgs,
   GridModel,
-  ActionEventArgs
+  ActionEventArgs,
+  Toolbar
 } from "@syncfusion/ej2-grids";
 import { GridComponent } from "@syncfusion/ej2-angular-grids";
 import { PageSizes } from "src/app/page-model";
@@ -23,6 +24,9 @@ import {
 import { ReportFilterModel } from "src/app/shared/filter-option/filter";
 import { HttpErrorResponse } from "@angular/common/http";
 import { ClickEventArgs } from "@syncfusion/ej2-angular-navigations";
+import { ItemModel, MenuEventArgs } from "@syncfusion/ej2-splitbuttons";
+import { ToolbarItem } from "@syncfusion/ej2-treegrid";
+import { asap } from "rxjs/internal/scheduler/asap";
 
 @Component({
   selector: "app-accounts-schedule",
@@ -40,6 +44,7 @@ export class AccountsScheduleComponent implements OnInit {
   public wrapSettings: TextWrapSettingsModel;
   public toolbar: ToolbarItems[];
   public editSettings: EditSettingsModel;
+  public items: ItemModel[];
 
   public pageSettings: PageSettingsModel;
   public filterOptions: FilterSettingsModel;
@@ -65,15 +70,33 @@ export class AccountsScheduleComponent implements OnInit {
       pageSize: PageSizes[0],
       pageSizes: this.pageSizes
     };
-    this.groupOptions = {
+    /*   this.groupOptions = {
       disablePageWiseAggregates: false,
       showDropArea: true,
       columns: ["ControlAccountId"]
-    };
+    }; */
+    this.items = [{ text: "Control Account" }];
 
     this.filterOptions = { type: "Menu" }; // put unique filter menue for each column based on the column type
     this.query = new QueryString();
     this.filterData = new ReportFilterModel();
+  }
+
+  select(args: MenuEventArgs) {
+    if (args.item.text === "Control Account") {
+      this.groupOptions = {
+        disablePageWiseAggregates: false,
+        showDropArea: true,
+        columns: ["ControlAccountId"]
+      };
+    }
+    /*    if (args.item.text === "Subsidary Id") {
+      this.groupOptions = {
+        disablePageWiseAggregates: false,
+        showDropArea: true,
+        columns: ["Subsidary"]
+      };
+    } */
   }
 
   onFilterStateChange(filterData: ReportFilterModel): void {

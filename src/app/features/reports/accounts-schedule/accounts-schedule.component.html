@@ -6,6 +6,12 @@
 ></app-filter-option>
 <div class="schedule-area">
   <app-print-header [header]="'Account Schedule'"></app-print-header>
+  <button
+    ejs-dropdownbutton
+    [items]="items"
+    content="Group by"
+    (select)="select($event)"
+  ></button>
   <ejs-grid
     [dataSource]="data | async"
     #grid
@@ -35,7 +41,7 @@
         headerText="Control Account"
         isPrimaryKey="true"
         type="string"
-        width="10"
+        width="100"
         editable="false"
         filterable="false"
         groupable="false"
@@ -51,7 +57,7 @@
         width="150"
         editable="false"
         filterable="false"
-        groupable="false"
+        [allowGrouping]="false"
         [visible]="true"
       >
       </e-column>
@@ -63,7 +69,7 @@
         width="100"
         editable="false"
         filterable="false"
-        groupable="false"
+        [allowGrouping]="false"
         [width]="80"
       >
       </e-column>
@@ -75,7 +81,7 @@
         isPrimaryKey="false"
         type="string"
         filterable="true"
-        groupable="false"
+        [allowGrouping]="false"
         [width]="200"
       ></e-column>
       <e-column
@@ -93,9 +99,9 @@
         headerText="Credit"
         isPrimaryKey="false"
         type="number"
-        [format]="'C2'"
+        [format]="'ETB 00.00'"
         filterable="true"
-        [allowGrouping]="true"
+        [allowGrouping]="false"
         [width]="100"
       ></e-column>
 
@@ -105,9 +111,9 @@
         headerText="Debit"
         isPrimaryKey="false"
         type="number"
-        [format]="'C2'"
+        [format]="'ETB 00.00'"
         filterable="true"
-        groupable="true"
+        [allowGrouping]="false"
         width="100"
       >
       </e-column>
@@ -117,9 +123,9 @@
         headerText="Ending Balance"
         isPrimaryKey="false"
         type="number"
-        [format]="'C2'"
+        [format]="'ETB 00.00'"
         filterable="true"
-        groupable="false"
+        [allowGrouping]="false"
         [width]="100"
         [visible]="true"
       ></e-column>

@@ -15,6 +15,10 @@
   margin-top: 10px;
 }
 
+.e-grid.e-groupdroparea * {
+  background-color: #4d841d !important;
+}
+
 @media print {
   .e-icons.e-gdiagonaldown.e-icon-gdownarrow {
     display: none;
@@ -34,5 +38,14 @@
 
   .e-grid.e-default * {
     height: auto !important;
+    overflow: hidden !important;
+  }
+
+  .e-control.e-dropdown-btn.e-lib.e-btn {
+    display: none;
+  }
+
+  .e-groupdroparea.e-lib.e-droppable.e-draggable {
+    display: none;
   }
 }

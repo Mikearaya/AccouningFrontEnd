@@ -9,6 +9,7 @@ div.content {
 
   .table-section {
     overflow: hidden !important;
+    height: auto !important;
   }
 }
 
