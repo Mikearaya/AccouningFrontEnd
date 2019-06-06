@@ -6,4 +6,9 @@
   .e-headercell.e-lastcell {
     display: none;
   }
+
+  .e-grid.e-default * {
+    height: auto !important;
+    overflow: hidden !important;
+  }
 }

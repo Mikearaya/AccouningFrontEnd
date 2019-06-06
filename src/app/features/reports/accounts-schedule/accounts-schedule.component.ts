@@ -70,11 +70,11 @@ export class AccountsScheduleComponent implements OnInit {
       pageSize: PageSizes[0],
       pageSizes: this.pageSizes
     };
-    /*   this.groupOptions = {
-      disablePageWiseAggregates: false,
+    this.groupOptions = {
+      // disablePageWiseAggregates: false,
       showDropArea: true,
       columns: ["ControlAccountId"]
-    }; */
+    };
     this.items = [{ text: "Control Account" }];
 
     this.filterOptions = { type: "Menu" }; // put unique filter menue for each column based on the column type

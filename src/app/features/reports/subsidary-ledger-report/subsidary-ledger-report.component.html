@@ -19,12 +19,12 @@
       [allowFiltering]="true"
       [filterSettings]="filterOptions"
       [allowPaging]="true"
-      [allowGrouping]="true"
+      [allowGrouping]="false"
       [pageSettings]="initialPage"
       [toolbar]="toolbar"
       (dataStateChange)="onDataStateChange($event)"
       (toolbarClick)="clickHandler($event)"
-      [height]="550"
+      [height]="650"
     >
       <e-columns>
         <e-column
@@ -57,19 +57,9 @@
           headerText="Starting Balance"
           width="60"
           [visible]="true"
+          format="N2"
         ></e-column>
       </e-columns>
-      <e-aggregates>
-        <e-aggregate>
-          <e-columns>
-            <e-column field="SubAccountId" type="sum">
-              <ng-template #footerTemplate let-data
-                >Sum: {{ data.sum }}</ng-template
-              >
-            </e-column>
-          </e-columns>
-        </e-aggregate>
-      </e-aggregates>
     </ejs-grid>
   </div>
 </div>

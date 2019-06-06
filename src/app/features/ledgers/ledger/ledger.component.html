@@ -67,7 +67,7 @@
           <!-- <div class="col-1"></div> -->
           <div class="col-2" id="post-button">
             <button
-              [disabled]="!ledgerForm.valid"
+              [disabled]="!isEqual"
               id="add-button"
               [ngClass]="this.Posted.value ? 'bg-danger' : 'e-info'"
               type="button"
@@ -200,7 +200,13 @@
             </div>
             <div class="row">
               <div class="col-5"></div>
-              <div class="col-5 last-section">
+              <div
+                class="col-5 last-section"
+                [ngStyle]="{
+                  background: lastSectionBackColor,
+                  color: lastSectionColor
+                }"
+              >
                 <div class="row">
                   <div class="col-6">
                     <small
@@ -222,7 +228,6 @@
     </div>
   </section>
   <app-form-options
-    *ngIf="!hideSubmit()"
     [isUpdate]="isUpdate"
     [submitDisabled]="ledgerForm.invalid"
   ></app-form-options>

@@ -3,8 +3,9 @@
     display: none;
   }
 
-  #accounts * {
+  .e-grid.e-default * {
     height: auto !important;
+    overflow: hidden !important;
   }
 
   .e-ungroupbutton.e-icons.e-icon-hide {
@@ -14,6 +15,11 @@
   .e-groupsort.e-icons.e-ascending.e-icon-ascending {
     display: none;
   }
+
+  .e-groupsort.e-icons.e-descending.e-icon-descending {
+    display: none;
+  }
+
 }
 
 #accounts_content_table {
@@ -44,4 +50,8 @@
 
 .e-grid.e-groupdroparea * {
   background-color: #4d841d55 !important;
+}
+
+.e-ungroupbutton.e-icons.e-icon-hide {
+  display: none;
 }

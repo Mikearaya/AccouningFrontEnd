@@ -23,7 +23,8 @@ import {
   Column,
   IRow,
   HierarchyGridPrintMode,
-  DataStateChangeEventArgs
+  DataStateChangeEventArgs,
+  dataStateChange
 } from "@syncfusion/ej2-angular-grids";
 import { Router, ActivatedRoute } from "@angular/router";
 
@@ -159,8 +160,12 @@ export class AccountsViewComponent implements OnInit {
     const rowObj: IRow<Column> = this.grid.getRowObjectFromUID(
       closest(data.target as Element, ".e-row").getAttribute("data-uid")
     );
-
-    this.accountApi.deleteAccount(rowObj.data["Id"]).subscribe();
+    if (confirm("Are you sure to delete")) {
+      this.accountApi.deleteAccount(rowObj.data["Id"]).subscribe();
+    } else {
+      return null;
+    }
+    // this.accountApi.deleteAccount(rowObj.data["Id"]).subscribe();
   }
 
   onDataBound() {

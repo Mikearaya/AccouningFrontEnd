@@ -57,8 +57,6 @@ export class AccountCatagoryViewComponent implements OnInit {
   }
 
   deleteCatagory(data: any) {
-    this.accountCatagApi
-      .deleteAccountCatagory(data["Id"])
-      .subscribe(() => alert("deleted"));
+    this.accountCatagApi.deleteAccountCatagory(data["Id"]).subscribe();
   }
 }

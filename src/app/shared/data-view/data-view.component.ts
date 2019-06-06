@@ -174,9 +174,12 @@ export class DataViewComponent implements OnInit {
     const rowObj: IRow<Column> = this.grid.getRowObjectFromUID(
       closest(event.target as Element, ".e-row").getAttribute("data-uid")
     );
-
-    this.deleteRecord.emit(rowObj.data);
-    this.grid.refresh();
+    if (confirm("Are you sure to delete")) {
+      this.deleteRecord.emit(rowObj.data);
+      alert("Deleted successfully!");
+    } else {
+      return null;
+    }
   }
 
   private editAction(event: Event): void {
@@ -295,13 +298,6 @@ export class DataViewComponent implements OnInit {
 
   toolbarClick(args: ClickEventArgs): void {
     switch (args.item.id) {
-      case "create":
-        if (this.addRoute.trim().length === 0) {
-          this.router.navigate(["add"], { relativeTo: this.activatedRoute });
-        } else {
-          this.router.navigate([this.addRoute]);
-        }
-        break;
       case "dataview_add":
         if (this.addRoute.trim().length === 0) {
           this.router.navigate(["add"], { relativeTo: this.activatedRoute });
@@ -325,9 +321,9 @@ export class DataViewComponent implements OnInit {
     this.rowSelected.emit(event);
   }
 
-  deleteCatagory(event: Event) {
-    this.deleteRecord.emit(event);
-  }
+  // deleteCatagory(event: Event) {
+  //   this.deleteRecord.emit(event);
+  // }
 }
 
 export interface CustomGridColumns {

@@ -55,8 +55,8 @@ export class ChecklistComponent implements OnInit {
         width: 120
       },
       { field: "AccountName", headerText: "Account name", width: 150 },
-      { field: "Debit", headerText: "Debit", width: 150 },
-      { field: "Credit", headerText: "Credit", width: 150 }
+      { field: "Debit", headerText: "Debit", format: "N2", width: 150 },
+      { field: "Credit", headerText: "Credit", format: "N2", width: 150 }
     ],
     aggregates: [
       {
@@ -64,11 +64,13 @@ export class ChecklistComponent implements OnInit {
           {
             type: "Sum",
             field: "Debit",
+            format: "N2",
             footerTemplate: "${Sum}"
           },
           {
             type: "Sum",
             field: "Credit",
+            format: "N2",
             footerTemplate: "${Sum}"
           }
         ]

@@ -6,12 +6,6 @@
 ></app-filter-option>
 <div class="schedule-area">
   <app-print-header [header]="'Account Schedule'"></app-print-header>
-  <button
-    ejs-dropdownbutton
-    [items]="items"
-    content="Group by"
-    (select)="select($event)"
-  ></button>
   <ejs-grid
     [dataSource]="data | async"
     #grid
@@ -32,6 +26,8 @@
     [allowGrouping]="true"
     [groupSettings]="groupOptions"
     [editSettings]="editSettings"
+    summaryRows="summaryRows"
+    showSummary="true"
     [height]="600"
   >
     <e-columns>
@@ -91,6 +87,7 @@
         isPrimaryKey="false"
         filterable="true"
         [allowGrouping]="false"
+        [format]="'N2'"
         [width]="100"
       ></e-column>
       <e-column
@@ -99,7 +96,7 @@
         headerText="Credit"
         isPrimaryKey="false"
         type="number"
-        [format]="'ETB 00.00'"
+        [format]="'N2'"
         filterable="true"
         [allowGrouping]="false"
         [width]="100"
@@ -111,7 +108,7 @@
         headerText="Debit"
         isPrimaryKey="false"
         type="number"
-        [format]="'ETB 00.00'"
+        [format]="'N2'"
         filterable="true"
         [allowGrouping]="false"
         width="100"
@@ -123,12 +120,33 @@
         headerText="Ending Balance"
         isPrimaryKey="false"
         type="number"
-        [format]="'ETB 00.00'"
+        [format]="'N2'"
         filterable="true"
         [allowGrouping]="false"
         [width]="100"
         [visible]="true"
       ></e-column>
     </e-columns>
+    <e-aggregates>
+      <e-aggregate>
+        <e-columns>
+          <e-column field="TotalCredit" type="sum" [format]="'N2'">
+            <ng-template #groupFooterTemplate let-data>{{
+              data.sum
+            }}</ng-template>
+          </e-column>
+          <e-column field="TotalDebit" type="sum" [format]="'N2'">
+            <ng-template #groupFooterTemplate let-data>{{
+              data.sum
+            }}</ng-template>
+          </e-column>
+          <e-column field="Balance" type="sum" [format]="'N2'">
+            <ng-template #groupFooterTemplate let-data>
+              {{ data.sum }}
+            </ng-template>
+          </e-column>
+        </e-columns>
+      </e-aggregate>
+    </e-aggregates>
   </ejs-grid>
 </div>

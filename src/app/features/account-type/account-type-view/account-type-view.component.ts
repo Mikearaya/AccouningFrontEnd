@@ -104,6 +104,8 @@ export class AccountTypeViewComponent implements OnInit {
     this.toolbarOptions = [
       { text: "Create", prefixIcon: "e-create", id: "create" },
       "Search",
+      { text: "Expand All", prefixIcon: "e-expand", id: "expandall" },
+      { text: "Collapse All", prefixIcon: "e-collapse", id: "collapseall" },
       { text: "Print", prefixIcon: "e-print", id: "print" }
     ];
     this.commands = [
@@ -152,8 +154,12 @@ export class AccountTypeViewComponent implements OnInit {
     const rowObj: IRow<Column> = this.grid.getRowObjectFromUID(
       closest(data.target as Element, ".e-row").getAttribute("data-uid")
     );
-
-    this.accountTypeApi.deleteAccountType(rowObj.data["Id"]).subscribe();
+    if (confirm("Are you sure to delete?")) {
+      this.accountTypeApi.deleteAccountType(rowObj.data["Id"]).subscribe();
+      alert("Deleted successfully!");
+    } else {
+      return null;
+    }
   }
 
   onDataBound() {
@@ -165,8 +171,14 @@ export class AccountTypeViewComponent implements OnInit {
     if (args.item.id === "create") {
       this.router.navigate(["account-types/add"]); // when user click add route to the accounts form
     }
+    if (args.item.id === "expandall") {
+      this.grid.groupModule.expandAll();
+    }
+    if (args.item.id === "collapseall") {
+      this.grid.groupModule.collapseAll();
+    }
     if (args.item.id === "print") {
-      this.grid.detailRowModule.expandAll();
+      this.grid.groupModule.expandAll();
       setTimeout(() => {
         window.print();
       }, 400);

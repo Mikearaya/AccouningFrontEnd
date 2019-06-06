@@ -140,7 +140,6 @@ export class AccountCatagoryApiService extends Subject<
   }
 
   deleteAccountCatagory(id: number): Observable<void> {
-    alert("in");
     return this.httpClient.delete<void>(`${this.url}/${id}`);
   }
 

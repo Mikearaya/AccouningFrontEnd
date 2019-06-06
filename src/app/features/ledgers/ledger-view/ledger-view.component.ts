@@ -64,7 +64,6 @@ export class LedgerViewComponent implements OnInit {
       visible: false,
       width: 90,
       type: "date",
-
       format: "yMd"
     }
   ];
@@ -77,9 +76,7 @@ export class LedgerViewComponent implements OnInit {
   }
 
   deleteLedgerEntry(data: any) {
-    this.ledgerService
-      .deleteLedgerEntry(data["Id"])
-      .subscribe(() => alert("deleted"));
+    this.ledgerService.deleteLedgerEntry(data["Id"]).subscribe();
   }
 
   onDataStateChanged(state: DataStateChangeEventArgs): void {

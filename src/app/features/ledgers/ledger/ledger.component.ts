@@ -55,6 +55,8 @@ export class LedgerComponent implements OnInit {
   public postText = "Post";
   public postStatus: boolean;
   public data: JornalEntryViewModel;
+  public lastSectionBackColor: any;
+  public lastSectionColor: any;
   deletedIds: number[] = [];
 
   constructor(
@@ -80,7 +82,6 @@ export class LedgerComponent implements OnInit {
           this.initializeForm(data);
         });
     }
-
     this.Entries.valueChanges.subscribe(value => this.calculateBalance(value));
   }
   public setPostStatus() {
@@ -88,11 +89,13 @@ export class LedgerComponent implements OnInit {
       if (this.isUpdate) {
         this.enableForm();
         this.Posted.setValue(false);
+      } else {
+        this.Posted.setValue(false);
       }
     } else {
       this.Posted.setValue(true);
       if (this.isUpdate) {
-        this.disableForm();
+        // this.disableForm();
       }
     }
   }
@@ -108,8 +111,12 @@ export class LedgerComponent implements OnInit {
     });
     if (this.creditSum === this.debitSum) {
       this.isEqual = true;
+      this.lastSectionBackColor = "#4d841d55";
+      this.lastSectionColor = "#4d841d";
     } else {
       this.isEqual = false;
+      this.lastSectionBackColor = "#dc354555";
+      this.lastSectionColor = "#dc3545";
     }
   }
   get VoucherId(): FormControl {

@@ -39,7 +39,7 @@ export class SubsidaryLedgerReportComponent implements OnInit {
     this.groupOptions = {
       disablePageWiseAggregates: false,
       showDropArea: false,
-      columns: ["ControlAccountId"]
+      columns: ["AccountId"]
     };
     this.filterOptions = { type: "Menu" };
     this.stateData = { skip: 0, take: 50 };
@@ -60,9 +60,9 @@ export class SubsidaryLedgerReportComponent implements OnInit {
       // { field: "LedgerId", headerText: "Ledgeddddr", width: 150 },
       { field: "Date", headerText: "Date", width: 150 },
       { field: "ReferenceNumber", headerText: "Reference", width: 150 },
-      { field: "Debit", headerText: "Debit", width: 150 },
-      { field: "Credit", headerText: "Credit", width: 150 },
-      { field: "Balance", headerText: "Balance", width: 150 }
+      { field: "Debit", headerText: "Debit", format: "N2", width: 150 },
+      { field: "Credit", headerText: "Credit", format: "N2", width: 150 },
+      { field: "Balance", headerText: "Balance", format: "N2", width: 150 }
     ],
     aggregates: [
       {
@@ -70,11 +70,13 @@ export class SubsidaryLedgerReportComponent implements OnInit {
           {
             type: "Sum",
             field: "Debit",
+            format: "N2",
             footerTemplate: "${Sum}"
           },
           {
             type: "Sum",
             field: "Credit",
+            format: "N2",
             footerTemplate: "${Sum}"
           }
         ]

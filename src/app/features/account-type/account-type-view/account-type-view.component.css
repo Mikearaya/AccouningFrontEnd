@@ -10,4 +10,18 @@
   #accounts_toolbarItems {
     display: none;
   }
+
+  .e-grid.e-default * {
+    height: auto !important;
+    overflow: hidden !important;
+  }
+
+  .e-sortfilterdiv.e-icons.e-ascending.e-icon-ascending {
+    display: none;
+  }
+
+  .e-sortnumber {
+    display: none;
+  }
+
 }
