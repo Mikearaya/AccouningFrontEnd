@@ -86,13 +86,23 @@ export class LedgerComponent implements OnInit {
   public setPostStatus() {
     if (this.Posted.value) {
       if (this.isUpdate) {
-        this.enableForm();
         this.Posted.setValue(false);
+        this.ledgerService
+          .updateLedgerStatus(this.ledgerId, {
+            Id: this.ledgerId,
+            Posted: false
+          })
+          .subscribe(() => this.enableForm());
       }
     } else {
       this.Posted.setValue(true);
       if (this.isUpdate) {
-        this.disableForm();
+        this.ledgerService
+          .updateLedgerStatus(this.ledgerId, {
+            Id: this.ledgerId,
+            Posted: true
+          })
+          .subscribe(() => this.disableForm());
       }
     }
   }

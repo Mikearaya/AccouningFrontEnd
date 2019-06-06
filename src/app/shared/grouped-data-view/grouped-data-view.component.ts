@@ -1,144 +1,145 @@
-/*
- * @CreateTime: Dec 14, 2018 10:22 AM
- * @Author:  Mikael Araya
- * @Contact: MikaelAraya12@gmail.com
- * @Last Modified By: Naol
- * @Last Modified Time: Apr 25, 2019 2:21 PM
- * @Description: Modify Here, Please
- */
-import { Component, OnInit, ViewChild } from "@angular/core";
 import {
-  GridComponent,
+  Component,
+  OnInit,
+  ViewChild,
+  Input,
+  Output,
+  EventEmitter
+} from "@angular/core";
+import { FilterSettingsModel } from "@syncfusion/ej2-treegrid";
+import {
   ExcelExportProperties,
-  GroupSettingsModel,
-  FilterSettingsModel,
-  ToolbarItems,
   TextWrapSettingsModel,
+  ToolbarItems,
   EditSettingsModel,
   SelectionSettingsModel,
   PageSettingsModel,
   CommandModel,
+  GroupSettingsModel,
+  DataStateChangeEventArgs,
   GridModel,
   ActionEventArgs,
   Column,
-  IRow,
-  DataStateChangeEventArgs
-} from "@syncfusion/ej2-angular-grids";
-import { Router, ActivatedRoute } from "@angular/router";
-
-import { HttpErrorResponse } from "@angular/common/http";
-import { ClickEventArgs } from "@syncfusion/ej2-navigations";
-
-import {
-  QueryString,
-  FilterEventModel
-} from "src/app/shared/data-view/data-view.model";
-import { AccountsService } from "../../../core/services/accounts.service";
-import { closest } from "@syncfusion/ej2-base";
-import { Subject } from "rxjs";
+  IRow
+} from "@syncfusion/ej2-grids";
+import { GridComponent } from "@syncfusion/ej2-angular-grids";
 import { PageSizes } from "src/app/page-model";
-import { CustomGridColumns } from 'src/app/shared/data-view/data-view.component';
+import { Subject } from "rxjs";
+import { QueryString, FilterEventModel } from "../data-view/data-view.model";
+import { ActivatedRoute, Router } from "@angular/router";
+import { HttpErrorResponse } from "@angular/common/http";
+import { ClickEventArgs } from "@syncfusion/ej2-navigations/src/toolbar";
+import { CustomGridColumns } from "../data-view/data-view.component";
+import { closest } from "@syncfusion/ej2-base";
 
 @Component({
-  selector: "app-accounts-view",
-  templateUrl: "./accounts-view.component.html",
-  styleUrls: ["./accounts-view.component.css"]
+  selector: "app-grouped-data-view",
+  templateUrl: "./grouped-data-view.component.html",
+  styleUrls: ["./grouped-data-view.component.css"]
 })
-export class AccountsViewComponent implements OnInit {
+export class GroupedDataViewComponent implements OnInit {
   title = "Fiscal Calander Period";
+
+  @Input()
+  public gridCommands: CommandModel[];
 
   @ViewChild("grid")
   public grid: GridComponent;
+
+  @Input()
+  public columnsList: CustomGridColumns[];
+
+  @Input()
+  public data: Subject<DataStateChangeEventArgs>;
+  @Input()
+  public showUpdate: Boolean;
+  @Input()
+  public showDelete: Boolean;
+  @Input()
+  public showView: Boolean;
+  @Input()
+  public showAdd: Boolean = true;
+  @Input()
+  public showPrint: Boolean;
+  @Input()
+  public showPdfExport: Boolean;
+  @Input()
+  public showExcelExport: Boolean;
+  @Input()
+  public showColumnChooser: Boolean;
+  @Input()
+  public enableFilter: Boolean;
+  @Input()
+  public enableSorting: Boolean;
+  @Input()
+  public enablePaging: Boolean;
+  @Input()
+  public enableSearching: Boolean;
+  @Input()
+  public idKey: any;
+  @Input()
+  public pageSize = 10;
+
+  @Input()
+  public pageNumber = 1;
+
+  @Input()
+  public totalPages = 1;
+
+  @Input()
+  public deleteRoute = "";
+  @Input()
+  public editRoute: string;
+  @Input()
+  public addRoute = "";
+  @Input()
+  public allowGrouping: Boolean;
+  @Input()
+  public wrapSettings: TextWrapSettingsModel;
+  @Input()
+  public customAttributes: { class: string };
+
+  @Output()
+  public dataQueried: EventEmitter<string> = new EventEmitter();
+  @Output()
+  public rowSelected: EventEmitter<any> = new EventEmitter();
+  @Output()
+  public deleteRecord: EventEmitter<any> = new EventEmitter();
+  @Output()
+  public editRecord: EventEmitter<any> = new EventEmitter();
+
   public excelExportProperties: ExcelExportProperties;
   public filterSettings: FilterSettingsModel;
   public toolbarOptions: Object[];
-  public wrapSettings: TextWrapSettingsModel;
+
   public toolbar: ToolbarItems[];
   public editSettings: EditSettingsModel;
   public selectionOptions: SelectionSettingsModel;
   public pageSettings: PageSettingsModel;
   public filterOptions: FilterSettingsModel;
-  public commands: CommandModel[];
+  public commands: CommandModel[] = [];
   public groupOptions: GroupSettingsModel = { showDropArea: true };
   public pageSizes: string[] = PageSizes;
   public initialPage: { pageSize: string; pageSizes: string[] };
-  public data: Subject<DataStateChangeEventArgs>;
+
+  @Input()
+  public gridData: Subject<DataStateChangeEventArgs>;
+
+  @Input()
+  public groupBy: string[];
+
+  @Output()
+  public dataStateChaged: EventEmitter<
+    DataStateChangeEventArgs
+  > = new EventEmitter();
+
   public pageOptions: Object;
   public state: DataStateChangeEventArgs;
 
   public childGrid: GridModel;
   query: QueryString;
 
-  public columnBluePrint: CustomGridColumns[] = [
-    {
-      key: "Id",
-      header: "Id",
-      visible: false,
-      width: 30,
-      type: "number"
-    },
-    {
-      key: "AccountId",
-      header: "Account Id",
-      visible: true,
-      width: 30,
-      type: "string"
-    },
-    {
-      key: "AccountName",
-      header: "Account Name",
-      visible: true,
-      width: 90,
-      type: "string"
-    },
-    {
-      key: "Category",
-      header: "Category",
-      visible: true,
-      width: 50,
-      type: "string"
-    },
-    {
-      key: "ParentAccount",
-      header: "Control Account",
-      visible: true,
-      width: 50,
-      type: "string"
-    },
-    {
-      key: "Active",
-      header: "Active",
-      visible: true,
-      width: 90,
-      type: "boolean",
-      format: "yMd"
-    },
-    {
-      key: "DateAdded",
-      header: "Added",
-      visible: false,
-      width: 90,
-      type: "date",
-
-      format: "yMd"
-    },
-    {
-      key: "DateUpdated",
-      header: "Updated",
-      visible: false,
-      width: 90,
-      type: "date",
-
-      format: "yMd"
-    }
-  ];
-
-  constructor(
-    private router: Router,
-    private accountApi: AccountsService,
-    private activatedRoute: ActivatedRoute
-  ) {
-    this.data = this.accountApi;
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
     this.initialPage = {
       pageSize: PageSizes[0],
       pageSizes: this.pageSizes
@@ -146,15 +147,12 @@ export class AccountsViewComponent implements OnInit {
     this.groupOptions = {
       disablePageWiseAggregates: false,
       showDropArea: true,
-      columns: ["ParentAccount"]
+      columns: this.groupBy
     };
 
     this.filterOptions = { type: "Menu" }; // put unique filter menue for each column based on the column type
     this.query = new QueryString();
-  }
-
-  public dataStateChange(state: DataStateChangeEventArgs): void {
-    this.accountApi.execute(state);
+    this.initilizeCommandColumn();
   }
 
   public databound(args) {
@@ -182,49 +180,14 @@ export class AccountsViewComponent implements OnInit {
         id: "Grid_excelexport"
       }
     ];
-    this.commands = [
-      {
-        type: "Edit",
-        buttonOption: {
-          cssClass: "e-flat",
-          iconCss: "e-edit e-icons",
-          click: this.editAccount.bind(this)
-        }
-      },
-      {
-        type: "Delete",
-        buttonOption: {
-          cssClass: "e-flat",
-          iconCss: "e-delete e-icons",
-          click: this.deleteAccount.bind(this)
-        }
-      }
-    ];
+  }
 
-    this.accountApi.execute(state);
+  onDataStateChanged(state: DataStateChangeEventArgs) {
+    this.dataStateChaged.emit(state);
   }
 
   handleError(error: HttpErrorResponse) {
     console.log(error);
-  }
-
-  editAccount(data: Event): void {
-    const rowObj: IRow<Column> = this.grid.getRowObjectFromUID(
-      closest(data.target as Element, ".e-row").getAttribute("data-uid")
-    );
-    if (rowObj.data["Id"]) {
-      this.router.navigate([`${rowObj.data["Id"]}/update`], {
-        relativeTo: this.activatedRoute
-      });
-    }
-  }
-
-  deleteAccount(data: Event): void {
-    const rowObj: IRow<Column> = this.grid.getRowObjectFromUID(
-      closest(data.target as Element, ".e-row").getAttribute("data-uid")
-    );
-
-    this.accountApi.deleteAccount(rowObj.data["Id"]).subscribe();
   }
 
   onDataBound() {
@@ -241,6 +204,7 @@ export class AccountsViewComponent implements OnInit {
     if (args.item.id === "collapseall") {
       this.grid.groupModule.collapseAll();
     }
+
     if (args.item.id === "print") {
       // this.grid.pageSettings.pageSize = this.grid.pageSettings.totalRecordsCount;
       this.grid.groupModule.expandAll();
@@ -256,6 +220,73 @@ export class AccountsViewComponent implements OnInit {
     }
   }
 
+  initilizeCommandColumn(): void {
+    if (this.showUpdate) {
+      this.commands.push({
+        buttonOption: {
+          iconCss: "e-icons e-edit",
+          cssClass: "e-flat",
+          click: this.editAction.bind(this)
+        }
+      });
+    }
+
+    if (this.showDelete) {
+      this.commands.push({
+        buttonOption: {
+          iconCss: "e-icons e-delete",
+          cssClass: "e-flat",
+          click: this.deleteAction.bind(this)
+        }
+      });
+    }
+    if (this.showView) {
+      this.commands.push({
+        buttonOption: {
+          iconCss: "e-icons e-search",
+          cssClass: "e-flat",
+          click: this.viewAction.bind(this)
+        }
+      });
+    }
+  }
+
+  deleteAction(event: Event) {
+    const rowObj: IRow<Column> = this.grid.getRowObjectFromUID(
+      closest(event.target as Element, ".e-row").getAttribute("data-uid")
+    );
+
+    this.deleteRecord.emit(rowObj.data);
+    this.grid.refresh();
+  }
+
+  private editAction(event: Event): void {
+    const rowObj: IRow<Column> = this.grid.getRowObjectFromUID(
+      closest(event.target as Element, ".e-row").getAttribute("data-uid")
+    );
+    const key = this.idKey ? this.idKey : "Id";
+
+    if (this.editRoute) {
+      this.router.navigate([this.editRoute]);
+    } else {
+      this.router.navigate([`${rowObj.data[key]}/update`], {
+        relativeTo: this.activatedRoute
+      });
+    }
+
+    //  this.editRecord.emit(rowObj.data);
+  }
+
+  viewAction(event: Event): void {
+    const rowObj: IRow<Column> = this.grid.getRowObjectFromUID(
+      closest(event.target as Element, ".e-row").getAttribute("data-uid")
+    );
+    const key = this.idKey ? this.idKey : "Id";
+    this.router.navigate([`${rowObj.data[key]}/view`], {
+      relativeTo: this.activatedRoute
+    });
+  }
+
   actionEndHandler(args: ActionEventArgs) {
     switch (args.requestType) {
       case "sorting":
@@ -267,8 +298,6 @@ export class AccountsViewComponent implements OnInit {
         const filteringModel = new FilterEventModel();
         filteringModel.columnName = args["currentFilterObject"]["field"];
         filteringModel.operator = args["currentFilterObject"]["operator"];
-        filteringModel.propertyName = args["currentFilterObject"]["field"];
-        filteringModel.operation = args["currentFilterObject"]["operator"];
         filteringModel.value = args["currentFilterObject"]["value"];
 
         break;
@@ -276,10 +305,14 @@ export class AccountsViewComponent implements OnInit {
         this.query.searchString = args["searchString"];
 
         break;
+      case "paging":
+        this.query.searchString = args["searchString"];
+
+        break;
     }
 
     if (args.requestType !== "refresh") {
-      this.prepareQuery();
+      this.dataQueried.emit(this.prepareQuery());
     }
 
     if (
@@ -289,11 +322,11 @@ export class AccountsViewComponent implements OnInit {
       this.query.pageSize = this.grid.pageSettings.pageSize;
       this.query.pageNumber = this.grid.pageSettings.currentPage;
 
-      this.prepareQuery();
+      this.dataQueried.emit(this.prepareQuery());
     }
   }
 
-  private prepareQuery(): void {
+  private prepareQuery(): string {
     let searchString = `selectedColumns=${this.query.selectedColumns.toString()}&`;
 
     if (this.query.searchString) {
@@ -301,16 +334,16 @@ export class AccountsViewComponent implements OnInit {
     }
 
     if (this.query.sortBy) {
-      searchString += `sortBy=${this.query.sortBy}&`;
-    }
-
-    if (this.query.sortDirection) {
-      searchString += `sortDirection=${this.query.sortDirection}&`;
+      searchString += `sortBy=${this.query.sortBy}&sortDirection=${
+        this.query.sortDirection
+      }&`;
     }
 
     searchString += `pageSize=${this.query.pageSize}&pageNumber=${
       this.query.pageNumber
     }`;
+
+    return searchString;
   }
 
   private getExcelExportProperties(): any {
