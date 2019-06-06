@@ -47,6 +47,7 @@ import { DashboardLayoutModule } from "@syncfusion/ej2-angular-layouts";
 import { ChartModule } from "@syncfusion/ej2-angular-charts";
 import { PrintHeaderComponent } from "./print-header/print-header.component";
 import { DropDownButtonModule } from "@syncfusion/ej2-angular-splitbuttons";
+import { GroupedDataViewComponent } from "./grouped-data-view/grouped-data-view.component";
 
 @NgModule({
   imports: [
@@ -80,6 +81,7 @@ import { DropDownButtonModule } from "@syncfusion/ej2-angular-splitbuttons";
   ],
   exports: [
     CommonModule,
+    GroupedDataViewComponent,
     PageIdentityComponent,
     ButtonModule,
     GridModule,
@@ -126,7 +128,8 @@ import { DropDownButtonModule } from "@syncfusion/ej2-angular-splitbuttons";
     LookupSelectorComponent,
     FilterOptionComponent,
     PaginationComponent,
-    PrintHeaderComponent
+    PrintHeaderComponent,
+    GroupedDataViewComponent
   ],
   providers: []
 })
