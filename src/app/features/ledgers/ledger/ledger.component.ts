@@ -86,11 +86,9 @@ export class LedgerComponent implements OnInit {
   }
   public setPostStatus() {
     if (this.Posted.value) {
+      this.Posted.setValue(false);
       if (this.isUpdate) {
-        this.Posted.setValue(false);
-      } else {
-        this.Posted.setValue(false);
-        this.ledgerService
+                this.ledgerService
           .updateLedgerStatus(this.ledgerId, {
             Id: this.ledgerId,
             Posted: false
