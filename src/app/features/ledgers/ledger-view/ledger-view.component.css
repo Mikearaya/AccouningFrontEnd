@@ -1,1 +1,3 @@
-
+:host(.e-control.e-toolbar.e-lib.e-keyboard) div {
+  display: none !important;
+}

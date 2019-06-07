@@ -73,7 +73,13 @@ export class AccountTypeViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.groupOptions = { columns: ["Type"], showDropArea: false };
+    setTimeout(() => {
+      this.groupOptions = {
+        disablePageWiseAggregates: false,
+        showDropArea: false,
+        columns: ["Type"]
+      };
+    }, 100);
     this.childGrid = {
       queryString: "ParentAccount",
       columns: [

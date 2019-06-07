@@ -70,33 +70,11 @@ export class AccountsScheduleComponent implements OnInit {
       pageSize: PageSizes[0],
       pageSizes: this.pageSizes
     };
-    this.groupOptions = {
-      // disablePageWiseAggregates: false,
-      showDropArea: true,
-      columns: ["ControlAccountId"]
-    };
     this.items = [{ text: "Control Account" }];
 
     this.filterOptions = { type: "Menu" }; // put unique filter menue for each column based on the column type
     this.query = new QueryString();
     this.filterData = new ReportFilterModel();
-  }
-
-  select(args: MenuEventArgs) {
-    if (args.item.text === "Control Account") {
-      this.groupOptions = {
-        disablePageWiseAggregates: false,
-        showDropArea: true,
-        columns: ["ControlAccountId"]
-      };
-    }
-    /*    if (args.item.text === "Subsidary Id") {
-      this.groupOptions = {
-        disablePageWiseAggregates: false,
-        showDropArea: true,
-        columns: ["Subsidary"]
-      };
-    } */
   }
 
   onFilterStateChange(filterData: ReportFilterModel): void {
@@ -113,7 +91,14 @@ export class AccountsScheduleComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.grid.groupModule.collapseAll();
+    setTimeout(() => {
+      this.groupOptions = {
+        disablePageWiseAggregates: false,
+        showDropArea: true,
+        columns: ["ControlAccountId"]
+      };
+    }, 300);
+
     this.pageSettings = { pageSize: 5, pageCount: 4, currentPage: 1 };
     const state = { skip: 0, take: 20 };
 

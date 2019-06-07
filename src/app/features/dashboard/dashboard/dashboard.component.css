@@ -108,3 +108,9 @@
   color: white;
   cursor: pointer;
 }
+
+/* for ledger view */
+
+:host-context(.e-control.e-toolbar.e-lib.e-keyboard) data-view {
+  display: none !important;
+}

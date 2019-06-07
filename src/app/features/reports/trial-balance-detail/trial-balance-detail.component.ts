@@ -91,6 +91,7 @@ export class TrialBalanceDetailComponent implements OnInit {
         })
       )
       .subscribe(e => (this.childGrid.dataSource = e));
+    // this.grid.detailRowModule.expandAll();
 
     this.toolbar = [
       { text: "Expand All", prefixIcon: "e-expand", id: "expandall" },

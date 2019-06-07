@@ -5,7 +5,7 @@
       *ngFor="let items of dashboardItems; let i = index"
     >
       <div class="items-panel" [attr.class]="items.class">
-        <div class="item-name">
+        <div class="item-name" (click)="itemClicked(items)">
           {{ items.name }}
           {{ items.value }}
         </div>
@@ -16,6 +16,22 @@
       </div>
     </div>
   </div>
+  <ejs-dialog
+    #promptDialog
+    [buttons]="promptDlgButtons"
+    [visible]="false"
+    [isModal]="true"
+    [header]="promptHeader"
+    [animationSettings]="animationSettings"
+    [showCloseIcon]="showCloseIcon"
+    [width]="1500"
+    [height]="960"
+  >
+    <ng-template #content>
+      <app-ledger-view><app-data-view></app-data-view> </app-ledger-view>
+    </ng-template>
+  </ejs-dialog>
+
   <div class="row">
     <div class="col-12">
       <ejs-chart

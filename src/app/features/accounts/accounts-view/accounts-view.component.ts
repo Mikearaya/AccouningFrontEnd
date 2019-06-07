@@ -67,7 +67,7 @@ export class AccountsViewComponent implements OnInit {
   public data: Subject<DataStateChangeEventArgs>;
   public pageOptions: Object;
   public state: DataStateChangeEventArgs;
-  public groupBy = ['ParentAccount'];
+  public groupBy = ["ParentAccount"];
 
   public childGrid: GridModel;
   query: QueryString;

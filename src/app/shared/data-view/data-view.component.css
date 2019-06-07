@@ -2,6 +2,10 @@
   font-family: 'Courier New', Courier, monospace
 }
 
+/* .e-toolbar {
+  display: none !important;
+} */
+
 @media print {
   .e-headercell.e-lastcell {
     display: none;

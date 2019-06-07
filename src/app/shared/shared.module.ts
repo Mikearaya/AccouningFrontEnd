@@ -48,6 +48,9 @@ import { ChartModule } from "@syncfusion/ej2-angular-charts";
 import { PrintHeaderComponent } from "./print-header/print-header.component";
 import { DropDownButtonModule } from "@syncfusion/ej2-angular-splitbuttons";
 import { GroupedDataViewComponent } from "./grouped-data-view/grouped-data-view.component";
+import { Dialog } from "@syncfusion/ej2-popups";
+import { DialogModule } from "@syncfusion/ej2-angular-popups";
+import { LedgerViewComponent } from "../features/ledgers/ledger-view/ledger-view.component";
 
 @NgModule({
   imports: [
@@ -77,7 +80,8 @@ import { GroupedDataViewComponent } from "./grouped-data-view/grouped-data-view.
     PagerModule,
     DashboardLayoutModule,
     ChartModule,
-    DropDownButtonModule
+    DropDownButtonModule,
+    DialogModule
   ],
   exports: [
     CommonModule,
@@ -115,7 +119,8 @@ import { GroupedDataViewComponent } from "./grouped-data-view/grouped-data-view.
     DashboardLayoutModule,
     ChartModule,
     DropDownButtonModule,
-    PrintHeaderComponent
+    PrintHeaderComponent,
+    DialogModule
   ],
   declarations: [
     FormOptionsComponent,

@@ -4,7 +4,8 @@ import {
   ViewChild,
   Input,
   Output,
-  EventEmitter
+  EventEmitter,
+  AfterViewInit
 } from "@angular/core";
 import { FilterSettingsModel } from "@syncfusion/ej2-treegrid";
 import {
@@ -121,6 +122,7 @@ export class GroupedDataViewComponent implements OnInit {
   public groupOptions: GroupSettingsModel = { showDropArea: true };
   public pageSizes: string[] = PageSizes;
   public initialPage: { pageSize: string; pageSizes: string[] };
+  public initail = true;
 
   @Input()
   public gridData: Subject<DataStateChangeEventArgs>;
@@ -150,29 +152,46 @@ export class GroupedDataViewComponent implements OnInit {
     this.initilizeCommandColumn();
   }
 
-  public databound(args) {
-    this.grid.groupModule.collapseAll();
-  }
-
   ngOnInit() {
-    // this.grid.groupModule.collapseAll();
-    this.groupOptions = {
-      disablePageWiseAggregates: false,
-      showDropArea: true,
-      columns: this.groupBy
+    setTimeout(() => {
+      this.groupOptions = {
+        disablePageWiseAggregates: false,
+        showDropArea: true,
+        columns: this.groupBy
+      };
+    }, 100);
+    this.pageSettings = {
+      pageSize: 5,
+      pageCount: 4,
+      currentPage: 1
     };
-    this.pageSettings = { pageSize: 5, pageCount: 4, currentPage: 1 };
     const state = { skip: 0, take: 20 };
 
     this.selectionOptions = { type: "Single" }; // allow only single row to be selected at a time for edit or delete
 
     this.editSettings = { allowDeleting: true };
     this.toolbarOptions = [
-      { text: "Create Account", prefixIcon: "e-create", id: "createAccount" },
+      {
+        text: "Create Account",
+        prefixIcon: "e-create",
+        id: "createAccount"
+      },
       "Search",
-      { text: "Expand All", prefixIcon: "e-expand", id: "expandall" },
-      { text: "Collapse All", prefixIcon: "e-collapse", id: "collapseall" },
-      { text: "Print", prefixIcon: "e-print", id: "print" },
+      {
+        text: "Expand All",
+        prefixIcon: "e-expand",
+        id: "expandall"
+      },
+      {
+        text: "Collapse All",
+        prefixIcon: "e-collapse",
+        id: "collapseall"
+      },
+      {
+        text: "Print",
+        prefixIcon: "e-print",
+        id: "print"
+      },
       {
         text: "ExcelExport",
         prefixIcon: "e-Excel_Export",
@@ -180,7 +199,6 @@ export class GroupedDataViewComponent implements OnInit {
       }
     ];
   }
-
   onDataStateChanged(state: DataStateChangeEventArgs) {
     this.dataStateChaged.emit(state);
   }
