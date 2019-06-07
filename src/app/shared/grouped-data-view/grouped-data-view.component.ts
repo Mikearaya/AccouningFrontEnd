@@ -126,7 +126,7 @@ export class GroupedDataViewComponent implements OnInit {
   public gridData: Subject<DataStateChangeEventArgs>;
 
   @Input()
-  public groupBy: string[];
+  public groupBy: string[] = [];
 
   @Output()
   public dataStateChaged: EventEmitter<
@@ -144,11 +144,6 @@ export class GroupedDataViewComponent implements OnInit {
       pageSize: PageSizes[0],
       pageSizes: this.pageSizes
     };
-    this.groupOptions = {
-      disablePageWiseAggregates: false,
-      showDropArea: true,
-      columns: this.groupBy
-    };
 
     this.filterOptions = { type: "Menu" }; // put unique filter menue for each column based on the column type
     this.query = new QueryString();
@@ -161,7 +156,11 @@ export class GroupedDataViewComponent implements OnInit {
 
   ngOnInit() {
     // this.grid.groupModule.collapseAll();
-
+    this.groupOptions = {
+      disablePageWiseAggregates: false,
+      showDropArea: true,
+      columns: this.groupBy
+    };
     this.pageSettings = { pageSize: 5, pageCount: 4, currentPage: 1 };
     const state = { skip: 0, take: 20 };
 
