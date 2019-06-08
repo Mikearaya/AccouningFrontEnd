@@ -12,10 +12,18 @@ import { Subject } from "rxjs";
   // encapsulation: ViewEncapsulation.
 })
 export class LedgerViewComponent implements OnInit {
+  @Input()
   public data: Subject<DataStateChangeEventArgs>;
 
   @Input()
+  public ledgerData: Subject<DataStateChangeEventArgs>;
+
+  @Input()
   public showAddLedger: Boolean = true;
+
+  @Input()
+  public showUnposted = false;
+
   public columnBluePrint: CustomGridColumns[] = [
     {
       key: "Id",
@@ -73,9 +81,14 @@ export class LedgerViewComponent implements OnInit {
 
   constructor(private ledgerService: LedgerService) {
     this.data = this.ledgerService;
+    this.showUnposted = false;
   }
   ngOnInit() {
-    this.ledgerService.execute({ skip: 0, take: 50 });
+    if (this.showUnposted) {
+      this.ledgerService.executeUnpostedEntries({ skip: 0, take: 50 });
+    } else {
+      this.ledgerService.execute({ skip: 0, take: 50 });
+    }
   }
 
   deleteLedgerEntry(data: any) {
@@ -83,6 +96,10 @@ export class LedgerViewComponent implements OnInit {
   }
 
   onDataStateChanged(state: DataStateChangeEventArgs): void {
-    this.ledgerService.execute(state);
+    if (this.showUnposted) {
+      this.ledgerService.executeUnpostedEntries(state);
+    } else {
+      this.ledgerService.execute(state);
+    }
   }
 }

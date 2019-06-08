@@ -29,7 +29,20 @@
     (overlayClick)="onOverlayClick()"
   >
     <ng-template #content>
-      <app-ledger-view [showAddLedger]="false"> </app-ledger-view>
+      <app-data-view
+        [data]="data"
+        [columnsList]="columnBluePrint"
+        [showAdd]="false"
+        [enableSorting]="true"
+        [showUpdate]="true"
+        [showDelete]="true"
+        (deleteRecord)="deleteLedgerEntry($event)"
+        [showPrint]="true"
+        [enableSearching]="true"
+        [enablePaging]="true"
+        (dataStateChaged)="onDataStateChanged($event)"
+        [showColumnChooser]="true"
+      ></app-data-view>
       <!-- <app-data-view [showAdd]="false"></app-data-view> -->
     </ng-template>
   </ejs-dialog>
