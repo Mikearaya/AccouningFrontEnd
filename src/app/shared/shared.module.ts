@@ -48,6 +48,7 @@ import { ChartModule } from "@syncfusion/ej2-angular-charts";
 import { PrintHeaderComponent } from "./print-header/print-header.component";
 import { DropDownButtonModule } from "@syncfusion/ej2-angular-splitbuttons";
 import { GroupedDataViewComponent } from "./grouped-data-view/grouped-data-view.component";
+import { HasClaimDirective } from "./has-claim.directive";
 
 @NgModule({
   imports: [
@@ -115,7 +116,8 @@ import { GroupedDataViewComponent } from "./grouped-data-view/grouped-data-view.
     DashboardLayoutModule,
     ChartModule,
     DropDownButtonModule,
-    PrintHeaderComponent
+    PrintHeaderComponent,
+    HasClaimDirective
   ],
   declarations: [
     FormOptionsComponent,
@@ -129,7 +131,8 @@ import { GroupedDataViewComponent } from "./grouped-data-view/grouped-data-view.
     FilterOptionComponent,
     PaginationComponent,
     PrintHeaderComponent,
-    GroupedDataViewComponent
+    GroupedDataViewComponent,
+    HasClaimDirective
   ],
   providers: []
 })

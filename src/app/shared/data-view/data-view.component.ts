@@ -24,7 +24,8 @@ import {
   Column,
   ActionEventArgs,
   RowSelectEventArgs,
-  DataStateChangeEventArgs
+  DataStateChangeEventArgs,
+  GroupSettings
 } from "@syncfusion/ej2-angular-grids";
 
 import { Subject } from "rxjs";
@@ -98,6 +99,9 @@ export class DataViewComponent implements OnInit {
   @Output()
   public editRecord: EventEmitter<any> = new EventEmitter();
 
+  @Input()
+  public groupByOptions: GroupSettingsModel = {};
+
   @Output()
   public dataStateChaged: EventEmitter<
     DataStateChangeEventArgs
@@ -108,8 +112,6 @@ export class DataViewComponent implements OnInit {
 
   public pageSizes: string[] = PageSizes;
   public initialPage: { pageSize: number; pageSizes: string[] };
-
-  public groupOptions: GroupSettingsModel;
   public filterSettings: FilterSettingsModel;
   public toolbar: Object[] = [];
   public selectOptions: Object;
@@ -124,7 +126,7 @@ export class DataViewComponent implements OnInit {
 
   ngOnInit() {
     this.customAttributes = { class: "custom-grid-header" };
-    this.groupOptions = { showGroupedColumn: true };
+
     this.filterSettings = { type: "Menu" };
     this.selectOptions = { type: "Multiple", persistSelection: true };
     this.editSettings = {
@@ -137,6 +139,11 @@ export class DataViewComponent implements OnInit {
 
     this.initilizeCommandColumn();
     this.initializeToolBar();
+    this.groupByOptions = {
+      disablePageWiseAggregates: false,
+      showDropArea: true,
+      columns: ["ParentAccount"]
+    };
   }
 
   initilizeCommandColumn(): void {

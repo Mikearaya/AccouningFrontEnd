@@ -67,7 +67,7 @@ export class AccountsViewComponent implements OnInit {
   public data: Subject<DataStateChangeEventArgs>;
   public pageOptions: Object;
   public state: DataStateChangeEventArgs;
-  public groupBy = ['ParentAccount'];
+  public groupBy = ["ParentAccount"];
 
   public childGrid: GridModel;
   query: QueryString;
@@ -146,11 +146,6 @@ export class AccountsViewComponent implements OnInit {
       pageSize: PageSizes[0],
       pageSizes: this.pageSizes
     };
-    this.groupOptions = {
-      disablePageWiseAggregates: false,
-      showDropArea: true,
-      columns: ["ParentAccount"]
-    };
 
     this.filterOptions = { type: "Menu" }; // put unique filter menue for each column based on the column type
     this.query = new QueryString();
@@ -204,6 +199,11 @@ export class AccountsViewComponent implements OnInit {
       }
     ];
 
+    this.groupOptions = {
+      disablePageWiseAggregates: false,
+      showDropArea: true,
+      columns: ["ParentAccount"]
+    };
     this.accountApi.execute(state);
   }
 

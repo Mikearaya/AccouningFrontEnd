@@ -3,27 +3,34 @@ import { CommonModule } from "@angular/common";
 import { Routes, RouterModule } from "@angular/router";
 import { AccountsViewComponent } from "./accounts-view/accounts-view.component";
 import { AccountFormComponent } from "./account-form/account-form.component";
+import { AuthGuardGuard } from "src/app/core/services/auth-guard.guard";
 
 const routes: Routes = [
   {
     path: "",
     component: AccountsViewComponent,
+    canActivate: [AuthGuardGuard],
     data: {
-      breadCrum: "View"
+      breadCrum: "View",
+      claimType: "canViewAccounts"
     }
   },
   {
     path: "new",
     component: AccountFormComponent,
+    canActivate: [AuthGuardGuard],
     data: {
-      breadCrum: "Create"
+      breadCrum: "Create",
+      claimType: "canAddAccount"
     }
   },
   {
     path: ":accountId/update",
     component: AccountFormComponent,
+    canActivate: [AuthGuardGuard],
     data: {
-      breadCrum: "Update"
+      breadCrum: "Update",
+      claimType: "canUpdateAccount"
     }
   }
 ];
