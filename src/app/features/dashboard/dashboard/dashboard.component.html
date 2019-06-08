@@ -25,10 +25,12 @@
     [animationSettings]="animationSettings"
     [showCloseIcon]="showCloseIcon"
     [width]="1500"
-    [height]="960"
+    [height]="1200"
+    (overlayClick)="onOverlayClick()"
   >
     <ng-template #content>
-      <app-ledger-view><app-data-view></app-data-view> </app-ledger-view>
+      <app-ledger-view [showAddLedger]="false"> </app-ledger-view>
+      <!-- <app-data-view [showAdd]="false"></app-data-view> -->
     </ng-template>
   </ejs-dialog>
 

@@ -5,6 +5,9 @@
 /* .e-toolbar {
   display: none !important;
 } */
+/* .e-control.e-toolbar.e-lib.e-keyboard {
+  display: none !important;
+} */
 
 @media print {
   .e-headercell.e-lastcell {

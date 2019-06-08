@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 
 import { LedgerService } from "../../../core/services/ledger.service";
 import { CustomGridColumns } from "src/app/shared/data-view/data-view.component";
@@ -9,10 +9,13 @@ import { Subject } from "rxjs";
   selector: "app-ledger-view",
   templateUrl: "./ledger-view.component.html",
   styleUrls: ["./ledger-view.component.css"]
+  // encapsulation: ViewEncapsulation.
 })
 export class LedgerViewComponent implements OnInit {
   public data: Subject<DataStateChangeEventArgs>;
 
+  @Input()
+  public showAddLedger: Boolean = true;
   public columnBluePrint: CustomGridColumns[] = [
     {
       key: "Id",

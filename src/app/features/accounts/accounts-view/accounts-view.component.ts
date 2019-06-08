@@ -84,21 +84,21 @@ export class AccountsViewComponent implements OnInit {
       key: "AccountId",
       header: "Account Id",
       visible: true,
-      width: 30,
+      width: 70,
       type: "string"
     },
     {
       key: "AccountName",
       header: "Account Name",
       visible: true,
-      width: 90,
+      width: 130,
       type: "string"
     },
     {
       key: "Category",
       header: "Category",
       visible: true,
-      width: 50,
+      width: 100,
       type: "string"
     },
     {
@@ -120,7 +120,7 @@ export class AccountsViewComponent implements OnInit {
       key: "DateAdded",
       header: "Added",
       visible: false,
-      width: 90,
+      width: 50,
       type: "date",
 
       format: "yMd"
@@ -129,7 +129,7 @@ export class AccountsViewComponent implements OnInit {
       key: "DateUpdated",
       header: "Updated",
       visible: false,
-      width: 90,
+      width: 50,
       type: "date",
 
       format: "yMd"
@@ -185,24 +185,24 @@ export class AccountsViewComponent implements OnInit {
         id: "Grid_excelexport"
       }
     ];
-    this.commands = [
-      {
-        type: "Edit",
-        buttonOption: {
-          cssClass: "e-flat",
-          iconCss: "e-edit e-icons",
-          click: this.editAccount.bind(this)
-        }
-      },
-      {
-        type: "Delete",
-        buttonOption: {
-          cssClass: "e-flat",
-          iconCss: "e-delete e-icons",
-          click: this.deleteAccount.bind(this)
-        }
-      }
-    ];
+    // this.commands = [
+    //   {
+    //     type: "Edit",
+    //     buttonOption: {
+    //       cssClass: "e-flat",
+    //       iconCss: "e-edit e-icons",
+    //       click: this.editAccount.bind(this)
+    //     }
+    //   },
+    //   {
+    //     type: "Delete",
+    //     buttonOption: {
+    //       cssClass: "e-flat",
+    //       iconCss: "e-delete e-icons",
+    //       click: this.deleteAccount.bind(this)
+    //     }
+    //   }
+    // ];
 
     this.accountApi.execute(state);
   }
@@ -211,28 +211,28 @@ export class AccountsViewComponent implements OnInit {
     console.log(error);
   }
 
-  editAccount(data: Event): void {
-    const rowObj: IRow<Column> = this.grid.getRowObjectFromUID(
-      closest(data.target as Element, ".e-row").getAttribute("data-uid")
-    );
-    if (rowObj.data["Id"]) {
-      this.router.navigate([`${rowObj.data["Id"]}/update`], {
-        relativeTo: this.activatedRoute
-      });
-    }
-  }
+  // editAccount(data: Event): void {
+  //   const rowObj: IRow<Column> = this.grid.getRowObjectFromUID(
+  //     closest(data.target as Element, ".e-row").getAttribute("data-uid")
+  //   );
+  //   if (rowObj.data["Id"]) {
+  //     this.router.navigate([`${rowObj.data["Id"]}/update`], {
+  //       relativeTo: this.activatedRoute
+  //     });
+  //   }
+  // }
 
-  deleteAccount(data: Event): void {
-    const rowObj: IRow<Column> = this.grid.getRowObjectFromUID(
-      closest(data.target as Element, ".e-row").getAttribute("data-uid")
-    );
-    if (confirm("Are you sure to delete")) {
-      this.accountApi.deleteAccount(rowObj.data["Id"]).subscribe();
-    } else {
-      return null;
-    }
-    // this.accountApi.deleteAccount(rowObj.data["Id"]).subscribe();
-  }
+  // deleteAccount(data: Event): void {
+  //   const rowObj: IRow<Column> = this.grid.getRowObjectFromUID(
+  //     closest(data.target as Element, ".e-row").getAttribute("data-uid")
+  //   );
+  //   if (confirm("Are you sure to delete")) {
+  //     this.accountApi.deleteAccount(rowObj.data["Id"]).subscribe();
+  //   } else {
+  //     return null;
+  //   }
+  //   // this.accountApi.deleteAccount(rowObj.data["Id"]).subscribe();
+  // }
 
   onDataBound() {
     this.grid.detailRowModule.expandAll();
@@ -318,6 +318,10 @@ export class AccountsViewComponent implements OnInit {
     searchString += `pageSize=${this.query.pageSize}&pageNumber=${
       this.query.pageNumber
     }`;
+  }
+
+  deleteAccount(data: any) {
+    this.accountApi.deleteAccount(data["Id"]).subscribe();
   }
 
   private getExcelExportProperties(): any {

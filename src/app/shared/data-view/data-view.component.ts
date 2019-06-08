@@ -5,7 +5,8 @@ import {
   ViewChild,
   EventEmitter,
   Output,
-  OnChanges
+  OnChanges,
+  ViewEncapsulation
 } from "@angular/core";
 import { Router, ActivatedRoute } from "@angular/router";
 import { ClickEventArgs } from "@syncfusion/ej2-navigations";
@@ -34,6 +35,7 @@ import { PageSizes } from "src/app/page-model";
   selector: "app-data-view",
   templateUrl: "./data-view.component.html",
   styleUrls: ["./data-view.component.css"]
+  // encapsulation: ViewEncapsulation.ShadowDom
 })
 export class DataViewComponent implements OnInit {
   @Input()
@@ -138,7 +140,6 @@ export class DataViewComponent implements OnInit {
     this.initilizeCommandColumn();
     this.initializeToolBar();
   }
-
   initilizeCommandColumn(): void {
     if (this.showUpdate) {
       this.commands.push({
@@ -156,15 +157,6 @@ export class DataViewComponent implements OnInit {
           iconCss: "e-icons e-delete",
           cssClass: "e-flat",
           click: this.deleteAction.bind(this)
-        }
-      });
-    }
-    if (this.showView) {
-      this.commands.push({
-        buttonOption: {
-          iconCss: "e-icons e-search",
-          cssClass: "e-flat",
-          click: this.viewAction.bind(this)
         }
       });
     }
@@ -201,16 +193,6 @@ export class DataViewComponent implements OnInit {
 
   onDataStateChanged(state: DataStateChangeEventArgs) {
     this.dataStateChaged.emit(state);
-  }
-
-  viewAction(event: Event): void {
-    const rowObj: IRow<Column> = this.grid.getRowObjectFromUID(
-      closest(event.target as Element, ".e-row").getAttribute("data-uid")
-    );
-    const key = this.idKey ? this.idKey : "Id";
-    this.router.navigate([`${rowObj.data[key]}/view`], {
-      relativeTo: this.activatedRoute
-    });
   }
 
   actionEndHandler(args: ActionEventArgs) {

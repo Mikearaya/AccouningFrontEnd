@@ -31,3 +31,27 @@
 .e-ungroupbutton.e-icons.e-icon-hide {
   display: none;
 }
+
+@media print {
+  #accounts_toolbarItems {
+    display: none;
+  }
+
+  .e-grid.e-default * {
+    height: auto !important;
+    overflow: hidden !important;
+  }
+
+  .e-ungroupbutton.e-icons.e-icon-hide {
+    display: none;
+  }
+
+  .e-groupsort.e-icons.e-ascending.e-icon-ascending {
+    display: none;
+  }
+
+  .e-groupsort.e-icons.e-descending.e-icon-descending {
+    display: none;
+  }
+
+}

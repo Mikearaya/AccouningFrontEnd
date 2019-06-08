@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  ViewEncapsulation
+} from "@angular/core";
 import { AccountingApiService } from "src/app/Services/accounting-api.service";
 import { DashboardViewModel } from "src/app/Services/system-data.model";
 import { DialogComponent, DialogUtility } from "@syncfusion/ej2-angular-popups";
@@ -19,7 +25,7 @@ export class DashboardComponent implements OnInit {
   public visible = true;
   public confirmCloseIcon = true;
   // public target: string = ".control-section";
-  public animationSettings: object = { effect: "None" };
+  public animationSettings: object = { effect: "Zoom" };
   public hide: any;
 
   public dashboardItems: {
@@ -72,6 +78,9 @@ export class DashboardComponent implements OnInit {
     }
   ];
 
+  public onOverlayClick() {
+    this.promptDialog.hide();
+  }
   constructor(private accountingService: AccountingApiService) {}
 
   ngOnInit(): void {

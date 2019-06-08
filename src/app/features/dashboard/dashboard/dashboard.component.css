@@ -110,7 +110,18 @@
 }
 
 /* for ledger view */
+:host-context(.e-control.e-toolbar.e-lib.e-keyboard) app-ledger-view>app-data-view {
+  display: none !important;
+}
 
-:host-context(.e-control.e-toolbar.e-lib.e-keyboard) data-view {
+deep {
+  display: none;
+}
+
+:host(.e-control.e-toolbar.e-lib.e-keyboard) {
+  display: none !important;
+}
+
+.e-control.e-toolbar.e-lib.e-keyboard>* {
   display: none !important;
 }
