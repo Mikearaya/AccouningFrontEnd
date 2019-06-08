@@ -1,1 +1,12 @@
 <app-print-header [header]="'Chart of accounts'"></app-print-header>
+<app-grouped-data-view
+  [gridData]="data"
+  [showUpdate]="true"
+  [showDelete]="true"
+  [columnsList]="columnBluePrint"
+  [groupBy]="groupBy"
+  (dataStateChaged)="dataStateChange($event)"
+  (deleteRecord)="deleteAccount($event)"
+  #grid
+>
+</app-grouped-data-view>

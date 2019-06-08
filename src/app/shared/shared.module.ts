@@ -48,7 +48,13 @@ import { ChartModule } from "@syncfusion/ej2-angular-charts";
 import { PrintHeaderComponent } from "./print-header/print-header.component";
 import { DropDownButtonModule } from "@syncfusion/ej2-angular-splitbuttons";
 import { GroupedDataViewComponent } from "./grouped-data-view/grouped-data-view.component";
+<<<<<<< HEAD
 import { HasClaimDirective } from "./has-claim.directive";
+=======
+import { Dialog } from "@syncfusion/ej2-popups";
+import { DialogModule } from "@syncfusion/ej2-angular-popups";
+import { LedgerViewComponent } from "../features/ledgers/ledger-view/ledger-view.component";
+>>>>>>> db6dfaaf51e151d401f4813508f524f156c74420
 
 @NgModule({
   imports: [
@@ -78,7 +84,8 @@ import { HasClaimDirective } from "./has-claim.directive";
     PagerModule,
     DashboardLayoutModule,
     ChartModule,
-    DropDownButtonModule
+    DropDownButtonModule,
+    DialogModule
   ],
   exports: [
     CommonModule,
@@ -117,7 +124,11 @@ import { HasClaimDirective } from "./has-claim.directive";
     ChartModule,
     DropDownButtonModule,
     PrintHeaderComponent,
+<<<<<<< HEAD
     HasClaimDirective
+=======
+    DialogModule
+>>>>>>> db6dfaaf51e151d401f4813508f524f156c74420
   ],
   declarations: [
     FormOptionsComponent,

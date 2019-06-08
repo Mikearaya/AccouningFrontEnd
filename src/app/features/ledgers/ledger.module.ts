@@ -16,6 +16,7 @@ import { LedgerRoutingModule } from "./ledger-routing.module";
 
 @NgModule({
   imports: [CommonModule, SharedModule, LedgerRoutingModule],
+  exports: [LedgerViewComponent],
   declarations: [LedgerComponent, LedgerViewComponent],
   providers: []
 })

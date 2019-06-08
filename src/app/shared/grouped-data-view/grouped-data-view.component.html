@@ -16,8 +16,7 @@
   [showColumnChooser]="true"
   (dataStateChange)="onDataStateChanged($event)"
   [editSettings]="editSettings"
-  [height]="700"
-  databound="databound"
+  [height]="650"
 >
   <e-columns>
     <e-column
@@ -30,7 +29,6 @@
       [visible]="column.visible"
       [type]="column.type"
       [format]="column.format"
-      [visible]="column.visible"
     ></e-column>
     <e-column
       headerText="Actions"

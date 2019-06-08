@@ -1,6 +1,16 @@
-import { Component, OnInit } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  ViewEncapsulation
+} from "@angular/core";
 import { AccountingApiService } from "src/app/Services/accounting-api.service";
 import { DashboardViewModel } from "src/app/Services/system-data.model";
+import { DialogComponent, DialogUtility } from "@syncfusion/ej2-angular-popups";
+import { EmitType } from "@syncfusion/ej2-base";
+import { container } from "@angular/core/src/render3";
+import { contentReady } from "@syncfusion/ej2-grids";
 
 @Component({
   selector: "app-dashboard",
@@ -8,6 +18,16 @@ import { DashboardViewModel } from "src/app/Services/system-data.model";
   styleUrls: ["./dashboard.component.css"]
 })
 export class DashboardComponent implements OnInit {
+  @ViewChild("promptDialog")
+  public promptDialog: DialogComponent;
+  public promptHeader = "Unposted ledger entries";
+  public showCloseIcon = false;
+  public visible = true;
+  public confirmCloseIcon = true;
+  // public target: string = ".control-section";
+  public animationSettings: object = { effect: "Zoom" };
+  public hide: any;
+
   public dashboardItems: {
     name: string;
     class: string;
@@ -46,6 +66,21 @@ export class DashboardComponent implements OnInit {
   public title: string;
   public marker: object;
   public titleStyle: object;
+
+  public promptDlgBtnClick: EmitType<object> = () => {
+    this.promptDialog.hide();
+  };
+
+  public promptDlgButtons: Object[] = [
+    {
+      click: this.promptDlgBtnClick.bind(this),
+      buttonModel: { content: "Cancel" }
+    }
+  ];
+
+  public onOverlayClick() {
+    this.promptDialog.hide();
+  }
   constructor(private accountingService: AccountingApiService) {}
 
   ngOnInit(): void {
@@ -84,5 +119,10 @@ export class DashboardComponent implements OnInit {
         this.dashboardItems[4].value = data.TotalRevenue;
         this.dashboardItems[5].value = data.UnpostedEntries;
       });
+  }
+  itemClicked(items: any) {
+    if (items.name === "Unposted Entries") {
+      this.promptDialog.show();
+    }
   }
 }

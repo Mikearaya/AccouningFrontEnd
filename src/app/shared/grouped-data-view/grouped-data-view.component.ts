@@ -4,9 +4,10 @@ import {
   ViewChild,
   Input,
   Output,
-  EventEmitter
+  EventEmitter,
+  AfterViewInit
 } from "@angular/core";
-import { FilterSettingsModel } from "@syncfusion/ej2-treegrid";
+import { FilterSettingsModel, dataBound } from "@syncfusion/ej2-treegrid";
 import {
   ExcelExportProperties,
   TextWrapSettingsModel,
@@ -20,7 +21,8 @@ import {
   GridModel,
   ActionEventArgs,
   Column,
-  IRow
+  IRow,
+  Grid
 } from "@syncfusion/ej2-grids";
 import { GridComponent } from "@syncfusion/ej2-angular-grids";
 import { PageSizes } from "src/app/page-model";
@@ -40,8 +42,8 @@ import { closest } from "@syncfusion/ej2-base";
 export class GroupedDataViewComponent implements OnInit {
   title = "Fiscal Calander Period";
 
-  @Input()
-  public gridCommands: CommandModel[];
+  // @Input()
+  // public gridCommands: CommandModel[];
 
   @ViewChild("grid")
   public grid: GridComponent;
@@ -52,29 +54,29 @@ export class GroupedDataViewComponent implements OnInit {
   @Input()
   public data: Subject<DataStateChangeEventArgs>;
   @Input()
-  public showUpdate: Boolean;
+  public showUpdate: boolean = true;
   @Input()
-  public showDelete: Boolean;
+  public showDelete: boolean = true;
   @Input()
-  public showView: Boolean;
+  public showView: boolean;
   @Input()
-  public showAdd: Boolean = true;
+  public showAdd = true;
   @Input()
-  public showPrint: Boolean;
+  public showPrint: boolean;
   @Input()
-  public showPdfExport: Boolean;
+  public showPdfExport: boolean;
   @Input()
-  public showExcelExport: Boolean;
+  public showExcelExport: boolean;
   @Input()
-  public showColumnChooser: Boolean;
+  public showColumnChooser: boolean;
   @Input()
-  public enableFilter: Boolean;
+  public enableFilter: boolean;
   @Input()
-  public enableSorting: Boolean;
+  public enableSorting: boolean;
   @Input()
-  public enablePaging: Boolean;
+  public enablePaging: boolean;
   @Input()
-  public enableSearching: Boolean;
+  public enableSearching: boolean;
   @Input()
   public idKey: any;
   @Input()
@@ -121,6 +123,7 @@ export class GroupedDataViewComponent implements OnInit {
   public groupOptions: GroupSettingsModel = { showDropArea: true };
   public pageSizes: string[] = PageSizes;
   public initialPage: { pageSize: string; pageSizes: string[] };
+  public initail = true;
 
   @Input()
   public gridData: Subject<DataStateChangeEventArgs>;
@@ -150,29 +153,46 @@ export class GroupedDataViewComponent implements OnInit {
     this.initilizeCommandColumn();
   }
 
-  public databound(args) {
-    this.grid.groupModule.collapseAll();
-  }
-
   ngOnInit() {
-    // this.grid.groupModule.collapseAll();
-    this.groupOptions = {
-      disablePageWiseAggregates: false,
-      showDropArea: true,
-      columns: this.groupBy
+    setTimeout(() => {
+      this.groupOptions = {
+        disablePageWiseAggregates: false,
+        showDropArea: true,
+        columns: this.groupBy
+      };
+    }, 100);
+    this.pageSettings = {
+      pageSize: 5,
+      pageCount: 4,
+      currentPage: 1
     };
-    this.pageSettings = { pageSize: 5, pageCount: 4, currentPage: 1 };
     const state = { skip: 0, take: 20 };
 
     this.selectionOptions = { type: "Single" }; // allow only single row to be selected at a time for edit or delete
 
     this.editSettings = { allowDeleting: true };
     this.toolbarOptions = [
-      { text: "Create Account", prefixIcon: "e-create", id: "createAccount" },
+      {
+        text: "Create Account",
+        prefixIcon: "e-create",
+        id: "createAccount"
+      },
       "Search",
-      { text: "Expand All", prefixIcon: "e-expand", id: "expandall" },
-      { text: "Collapse All", prefixIcon: "e-collapse", id: "collapseall" },
-      { text: "Print", prefixIcon: "e-print", id: "print" },
+      {
+        text: "Expand All",
+        prefixIcon: "e-expand",
+        id: "expandall"
+      },
+      {
+        text: "Collapse All",
+        prefixIcon: "e-collapse",
+        id: "collapseall"
+      },
+      {
+        text: "Print",
+        prefixIcon: "e-print",
+        id: "print"
+      },
       {
         text: "ExcelExport",
         prefixIcon: "e-Excel_Export",
@@ -180,7 +200,6 @@ export class GroupedDataViewComponent implements OnInit {
       }
     ];
   }
-
   onDataStateChanged(state: DataStateChangeEventArgs) {
     this.dataStateChaged.emit(state);
   }
@@ -239,15 +258,6 @@ export class GroupedDataViewComponent implements OnInit {
         }
       });
     }
-    if (this.showView) {
-      this.commands.push({
-        buttonOption: {
-          iconCss: "e-icons e-search",
-          cssClass: "e-flat",
-          click: this.viewAction.bind(this)
-        }
-      });
-    }
   }
 
   deleteAction(event: Event) {
@@ -255,8 +265,16 @@ export class GroupedDataViewComponent implements OnInit {
       closest(event.target as Element, ".e-row").getAttribute("data-uid")
     );
 
+    if (confirm("Are you sure to delete")) {
+      this.deleteRecord.emit(rowObj.data);
+      alert("Deleted successfully!");
+    } else {
+      return null;
+    }
+
     this.deleteRecord.emit(rowObj.data);
     this.grid.refresh();
+    this.grid.destroyTemplate();
   }
 
   private editAction(event: Event): void {
@@ -274,16 +292,6 @@ export class GroupedDataViewComponent implements OnInit {
     }
 
     //  this.editRecord.emit(rowObj.data);
-  }
-
-  viewAction(event: Event): void {
-    const rowObj: IRow<Column> = this.grid.getRowObjectFromUID(
-      closest(event.target as Element, ".e-row").getAttribute("data-uid")
-    );
-    const key = this.idKey ? this.idKey : "Id";
-    this.router.navigate([`${rowObj.data[key]}/view`], {
-      relativeTo: this.activatedRoute
-    });
   }
 
   actionEndHandler(args: ActionEventArgs) {
