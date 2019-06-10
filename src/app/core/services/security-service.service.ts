@@ -88,7 +88,7 @@ export class SecurityService {
 }
 
 export class AppUserAuth {
-  userName = "";
+  userName = "Appdiv system";
   bearerToken = "";
   isAuthenticated = true;
   claims: ClaimModel[] = [];

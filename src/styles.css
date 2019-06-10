@@ -39,6 +39,28 @@ body {
   background-color: rgb(217, 224, 212);
 }
 
+/* group area of syncfusion grid */
+.e-groupdroparea.e-grouped.e-lib.e-droppable.e-draggable {
+  background: #4d841d55;
+}
+
+.e-grouptext {
+  width: auto !important;
+}
+
+.e-grid .e-groupheadercell {
+  background: #4d841d !important;
+  width: auto !important;
+}
+
+.e-grid.e-groupdroparea * {
+  background-color: #4d841d55 !important;
+}
+
+.e-ungroupbutton.e-icons.e-icon-hide {
+  display: none;
+}
+
 @media print {
   .e-acrdn-item.e-select {
     display: none

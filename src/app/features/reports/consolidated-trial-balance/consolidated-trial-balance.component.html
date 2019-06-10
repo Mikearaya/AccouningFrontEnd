@@ -40,14 +40,32 @@
           headerText="Credit"
           textAlign="Left"
           width="120"
+          format="N2"
         ></e-column>
         <e-column
           field="Debit"
           headerText="Debit"
           textAlign="Left"
           width="120"
+          format="N2"
         ></e-column>
       </e-columns>
+      <e-aggregates>
+        <e-aggregate>
+          <e-columns>
+            <e-column field="Credit" type="sum">
+              <ng-template #footerTemplate let-data>{{
+                data.sum | currency: "":""
+              }}</ng-template>
+            </e-column>
+            <e-column field="Debit" type="sum">
+              <ng-template #footerTemplate let-data>{{
+                data.sum | currency: "":""
+              }}</ng-template>
+            </e-column>
+          </e-columns>
+        </e-aggregate>
+      </e-aggregates>
     </ejs-grid>
   </div>
 </div>

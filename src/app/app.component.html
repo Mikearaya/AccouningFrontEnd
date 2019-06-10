@@ -49,7 +49,13 @@
           isToggle="true"
           (click)="btnClick()"
         ></button>
-
+        <button
+          id="account-dropdown"
+          ejs-dropdownbutton
+          [items]="items"
+          content="{{ securityObject.userName }}"
+          iconCss="fas fa-user"
+        ></button>
         <ejs-dropdownlist
           id="year-dropdown"
           (valueChange)="yearChanged($event)"

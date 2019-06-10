@@ -17,6 +17,7 @@ import {
   SecurityService,
   AppUserAuth
 } from "./core/services/security-service.service";
+import { ItemModel } from "@syncfusion/ej2-splitbuttons";
 
 @Component({
   selector: "app-root",
@@ -26,6 +27,11 @@ import {
 export class AppComponent implements OnInit {
   public securityObject: AppUserAuth;
   public cssClass = "custom";
+  public items: ItemModel[] = [
+    {
+      text: "Sign out"
+    }
+  ];
   constructor(
     private router: Router,
     private accountingApi: AccountingApiService,

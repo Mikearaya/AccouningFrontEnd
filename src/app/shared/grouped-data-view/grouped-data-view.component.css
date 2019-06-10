@@ -10,28 +10,6 @@
   background-color: #eee;
 }
 
-.e-groupdroparea.e-grouped.e-lib.e-droppable.e-draggable {
-  /* display: none; */
-  background: #4d841d55;
-}
-
-.e-grouptext {
-  width: auto;
-}
-
-.e-grid .e-groupheadercell {
-  background: #4d841d;
-  width: auto;
-}
-
-.e-grid.e-groupdroparea * {
-  background-color: #4d841d55 !important;
-}
-
-.e-ungroupbutton.e-icons.e-icon-hide {
-  display: none;
-}
-
 @media print {
   #accounts_toolbarItems {
     display: none;

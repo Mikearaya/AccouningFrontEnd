@@ -15,20 +15,6 @@
   margin-top: 10px;
 }
 
-.e-grid.e-groupdroparea * {
-  background-color: #4d841d !important;
-}
-
-.e-control.e-dropdown-btn.e-lib.e-btn {
-  background: #4d841d;
-  color: white;
-  border-radius: 4px;
-}
-
-.e-ungroupbutton.e-icons.e-icon-hide {
-  display: none;
-}
-
 @media print {
   .e-icons.e-gdiagonaldown.e-icon-gdownarrow {
     display: none;

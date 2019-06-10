@@ -175,6 +175,10 @@ export class DataViewComponent implements OnInit {
     );
     if (confirm("Are you sure to delete")) {
       this.deleteRecord.emit(rowObj.data);
+      // setTimeout(() => {
+      //   this.initialPage = { pageSize: 50, pageSizes: this.pageSizes };
+      // }, 100);
+      // this.initialPage = { pageSize: 50, pageSizes: this.pageSizes };
       alert("Deleted successfully!");
     } else {
       return null;
