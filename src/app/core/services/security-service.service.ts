@@ -39,6 +39,7 @@ export class SecurityService {
 
   logOut() {
     this.resetSecurityObject();
+    window.location.href = "https://www.google.com";
   }
 
   hasClaim(claimType: any, claimValue?: any): boolean {

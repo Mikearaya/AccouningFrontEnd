@@ -52,9 +52,9 @@
         <button
           id="account-dropdown"
           ejs-dropdownbutton
-          [items]="items"
-          content="{{ securityObject?.userName }}"
+          content="Log out {{ securityObject?.userName }}"
           iconCss="fas fa-user"
+          (click)="logOut()"
         ></button>
         <ejs-dropdownlist
           id="year-dropdown"
