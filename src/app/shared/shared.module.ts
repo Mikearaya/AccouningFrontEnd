@@ -53,6 +53,7 @@ import { HasClaimDirective } from "./has-claim.directive";
 import { Dialog } from "@syncfusion/ej2-popups";
 import { DialogModule } from "@syncfusion/ej2-angular-popups";
 import { LedgerViewComponent } from "../features/ledgers/ledger-view/ledger-view.component";
+import { UnAuthorizedPageComponent } from './un-authorized-page/un-authorized-page.component';
 
 @NgModule({
   imports: [
@@ -138,7 +139,8 @@ import { LedgerViewComponent } from "../features/ledgers/ledger-view/ledger-view
     PaginationComponent,
     PrintHeaderComponent,
     GroupedDataViewComponent,
-    HasClaimDirective
+    HasClaimDirective,
+    UnAuthorizedPageComponent
   ],
   providers: []
 })

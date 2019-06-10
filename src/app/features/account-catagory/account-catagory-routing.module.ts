@@ -7,17 +7,17 @@ const routes: Routes = [
   {
     path: "",
     component: AccountCatagoryViewComponent,
-    data: { breadCrum: "View" }
+    data: { breadCrum: "View", claim: "caViewAccountCategory" }
   },
   {
     path: "add",
     component: AccountCatagoryFormComponent,
-    data: { breadCrum: "Add" }
+    data: { breadCrum: "Add", claim: "caAddAccountCategory" }
   },
   {
     path: ":catagoryId/update",
     component: AccountCatagoryFormComponent,
-    data: { breadCrum: "Update" }
+    data: { breadCrum: "Update", claim: "canUpdateAccountCategory" }
   }
 ];
 

@@ -4,12 +4,20 @@ import { LookupViewComponent } from "./lookup-view/lookup-view.component";
 import { LookupFormComponent } from "./lookup-form/lookup-form.component";
 
 const routes: Routes = [
-  { path: "", component: LookupViewComponent, data: { breadCrum: "View" } },
-  { path: "add", component: LookupFormComponent, data: { breadCrum: "Add" } },
+  {
+    path: "",
+    component: LookupViewComponent,
+    data: { breadCrum: "View", claim: "canViewLookup" }
+  },
+  {
+    path: "add",
+    component: LookupFormComponent,
+    data: { breadCrum: "Add", claim: "canAddLookup" }
+  },
   {
     path: ":lookupId/update",
     component: LookupFormComponent,
-    data: { breadCrum: "Update" }
+    data: { breadCrum: "Update", claim: "canUpdateLookup" }
   }
 ];
 

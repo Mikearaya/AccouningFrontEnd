@@ -73,14 +73,30 @@ export class AppComponent implements OnInit {
     if (routerLink !== "parent") {
       this.router.navigate([routerLink]);
     }
+
+    const x = {
+      bearerToken: "asdfghjjklyyrrffghjjj",
+      isAuthenticated: true,
+      claims: [
+        { claimType: "canViewAccount", claimValue: "true" },
+        { claimType: "canAddAccount", claimValue: "true" },
+        { claimType: "canUpdateAccount", claimValue: "true" },
+        { claimType: "canDeleteAccount", claimValue: "false" }
+      ],
+      userName: "Mikael Araya"
+    };
+    localStorage.clear();
+    localStorage.setItem("accountingBearerToken", JSON.stringify(x));
+
+    if (localStorage.getItem("accountingBearerToken") === null) {
+      localStorage.setItem("accountingBearerToken", JSON.stringify(x));
+    }
   }
 
   yearChanged(data: any): void {
     if (data) {
       this.accountingApi.setSelectedYear(data);
     }
-
-    console.log(this.accountingApi.getSelectedYear());
   }
 
   btnClick() {
@@ -91,5 +107,9 @@ export class AppComponent implements OnInit {
       this.togglebtn.content = "";
       this.sidebar.hide();
     }
+  }
+
+  logOut(): void {
+    this.securityService.logOut();
   }
 }

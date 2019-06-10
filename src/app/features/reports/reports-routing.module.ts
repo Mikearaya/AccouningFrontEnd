@@ -13,45 +13,74 @@ const routes: Routes = [
   {
     path: "checklist",
     component: ChecklistComponent,
-    data: { title: "Checklist", breadCrum: "Checklist" }
+    data: {
+      title: "Checklist",
+      breadCrum: "Checklist",
+      claim: "canViewChecklist"
+    }
   },
   {
     path: "subsidaries",
     component: SubsidaryLedgerReportComponent,
-    data: { title: "Subsidary ledger", breadCrum: "Subsidary" }
+    data: {
+      title: "Subsidary ledger",
+      breadCrum: "Subsidary",
+      claim: "canViewSubsidaryLedger"
+    }
   },
   {
     path: "consolidated-trial-balance",
     component: ConsolidatedTrialBalanceComponent,
     data: {
       title: "Consolidated trial balance",
-      breadCrum: "Consolidated trial balance"
+      breadCrum: "Consolidated trial balance",
+      claim: "canViewConsolidatedTrialBalance"
     }
   },
   {
     path: "trial-balance-detail",
     component: TrialBalanceDetailComponent,
-    data: { title: "Trial balance detail", breadCrum: "Trial balance detail" }
+    data: {
+      title: "Trial balance detail",
+      breadCrum: "Trial balance detail",
+      claim: "canViewTrialalaceDetail"
+    }
   },
   {
     path: "balance-sheet",
     component: BalanceSheetComponent,
-    data: { title: "Balance sheet", breadCrum: "Balance sheet" }
+    data: {
+      title: "Balance sheet",
+      breadCrum: "Balance sheet",
+      claim: "canViewBalanceSheet"
+    }
   },
   {
     path: "income-statement",
     component: IncomeStatmentComponent,
-    data: { title: "Income statement", breadCrum: "Income statement" }
+    data: {
+      title: "Income statement",
+      breadCrum: "Income statement",
+      claim: "canViewIncomeStatementu"
+    }
   },
   {
     path: "accounts-schedule",
     component: AccountsScheduleComponent,
-    data: { title: "Accounts Schedule", breadCrum: "Account Schedule" }
+    data: {
+      title: "Accounts Schedule",
+      breadCrum: "Account Schedule",
+      claim: "canViewAccountSchedule"
+    }
   },
   {
     path: "cost-of-goods-sold",
     component: CostOfGoodsSoldComponent,
-    data: { title: "Cost of goods sold", breadCrum: "Cost of goods sold" }
+    data: {
+      title: "Cost of goods sold",
+      breadCrum: "Cost of goods sold",
+      claim: "canViewCostOfGoodsSold"
+    }
   }
 ];
 

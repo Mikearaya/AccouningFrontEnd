@@ -49,7 +49,7 @@
           isToggle="true"
           (click)="btnClick()"
         ></button>
-
+        {{ securityObject?.userName }}
         <ejs-dropdownlist
           id="year-dropdown"
           (valueChange)="yearChanged($event)"

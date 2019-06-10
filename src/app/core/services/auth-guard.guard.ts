@@ -27,13 +27,13 @@ export class AuthGuardGuard implements CanActivate {
     | UrlTree {
     const claimType: string = next.data["claimType"];
 
-    if (
-      this.securityService.securityObject.isAuthenticated ||
-      this.securityService.hasClaim(claimType)
-    ) {
+    if (!this.securityService.securityObject.isAuthenticated) {
+      window.location.href = "https://www.google.com";
+    }
+    if (this.securityService.hasClaim(claimType)) {
       return true;
     } else {
-      window.location.href = "https://www.google.com";
+      this.router.navigate(["unauthorized"]);
     }
 
     return true;

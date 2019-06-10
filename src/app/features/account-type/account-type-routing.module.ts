@@ -7,17 +7,17 @@ const routes: Routes = [
   {
     path: "",
     component: AccountTypeViewComponent,
-    data: { breadCrum: "View" }
+    data: { breadCrum: "View", claim: "caViewAccountType" }
   },
   {
     path: "add",
     component: AccountTypeFormComponent,
-    data: { breadCrum: "Add" }
+    data: { breadCrum: "Add", claim: "canAddAccountType" }
   },
   {
     path: ":accountTypeId/update",
     component: AccountTypeFormComponent,
-    data: { breadCrum: "Update" }
+    data: { breadCrum: "Update", claim: "canUpdateAccountType" }
   }
 ];
 
