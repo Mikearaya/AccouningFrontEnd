@@ -10,7 +10,10 @@ import { DashboardViewModel } from "src/app/Services/system-data.model";
 import { DialogComponent, DialogUtility } from "@syncfusion/ej2-angular-popups";
 import { EmitType } from "@syncfusion/ej2-base";
 import { container } from "@angular/core/src/render3";
-import { contentReady } from "@syncfusion/ej2-grids";
+import { contentReady, DataStateChangeEventArgs } from "@syncfusion/ej2-grids";
+import { LedgerService } from "src/app/core/services/ledger.service";
+import { Subject } from "rxjs";
+import { CustomGridColumns } from "src/app/shared/data-view/data-view.component";
 
 @Component({
   selector: "app-dashboard",
@@ -18,8 +21,18 @@ import { contentReady } from "@syncfusion/ej2-grids";
   styleUrls: ["./dashboard.component.css"]
 })
 export class DashboardComponent implements OnInit {
+  constructor(
+    private accountingService: AccountingApiService,
+    private ledgerService: LedgerService
+  ) {
+    this.data = this.ledgerService;
+    this.ledgerService.executeUnpostedEntries({ skip: 0, take: 50 });
+  }
   @ViewChild("promptDialog")
   public promptDialog: DialogComponent;
+
+  public data: Subject<DataStateChangeEventArgs>;
+
   public promptHeader = "Unposted ledger entries";
   public showCloseIcon = false;
   public visible = true;
@@ -67,21 +80,74 @@ export class DashboardComponent implements OnInit {
   public marker: object;
   public titleStyle: object;
 
-  public promptDlgBtnClick: EmitType<object> = () => {
-    this.promptDialog.hide();
-  };
+  public columnBluePrint: CustomGridColumns[] = [
+    {
+      key: "Id",
+      header: "Id",
+      visible: false,
+      width: 30,
+      type: "number"
+    },
+    {
+      key: "Date",
+      header: "Date",
+      visible: true,
+      width: 30,
+      type: "date",
+      format: "yMd"
+    },
+    {
+      key: "Description",
+      header: "Description",
+      visible: true,
+      width: 90,
+      type: "string"
+    },
+    {
+      key: "Reference",
+      header: "DocumentNo",
+      visible: true,
+      width: 50,
+      type: "string"
+    },
+    {
+      key: "VoucherId",
+      header: "Voucher no",
+      visible: true,
+      width: 50,
+      type: "string"
+    },
+    {
+      key: "DateAdded",
+      header: "Added",
+      visible: false,
+      width: 90,
+      type: "date",
+      format: "yMd"
+    },
+    {
+      key: "DateUpdated",
+      header: "Updated",
+      visible: false,
+      width: 90,
+      type: "date",
+      format: "yMd"
+    }
+  ];
 
   public promptDlgButtons: Object[] = [
     {
-      click: this.promptDlgBtnClick.bind(this),
       buttonModel: { content: "Cancel" }
     }
   ];
 
+  public promptDlgBtnClick: EmitType<object> = () => {
+    this.promptDialog.hide();
+  }
+
   public onOverlayClick() {
     this.promptDialog.hide();
   }
-  constructor(private accountingService: AccountingApiService) {}
 
   ngOnInit(): void {
     this.chartData = [
@@ -98,6 +164,8 @@ export class DashboardComponent implements OnInit {
       { month: "Nov", sales: 25 },
       { month: "Dec", sales: 32 }
     ];
+
+    this.ledgerService.executeUnpostedEntries({ skip: 0, take: 50 });
     this.primaryXAxis = {
       valueType: "Category"
     };
@@ -124,5 +192,13 @@ export class DashboardComponent implements OnInit {
     if (items.name === "Unposted Entries") {
       this.promptDialog.show();
     }
+  }
+
+  deleteLedgerEntry(data: any) {
+    this.ledgerService.deleteLedgerEntry(data["Id"]).subscribe();
+  }
+
+  onDataStateChanged(state: DataStateChangeEventArgs): void {
+    this.ledgerService.executeUnpostedEntries(state);
   }
 }

@@ -142,6 +142,77 @@ export class LedgerService extends Subject<DataStateChangeEventArgs> {
       .pipe((data: any) => data);
   }
 
+  public executeUnpostedEntries(state: any): void {
+    this.getUnpostedEntries(state).subscribe(x =>
+      super.next(x as DataStateChangeEventArgs)
+    );
+  }
+
+  getUnpostedEntries(
+    state: DataStateChangeEventArgs
+  ): Observable<DataStateChangeEventArgs> {
+    if (state.action) {
+      if (state.action.requestType === "filtering") {
+      }
+
+      switch (state.action.requestType) {
+        case "sorting":
+          this.query.sortBy = state.action["columnName"];
+          this.query.sortDirection = state.action["direction"];
+          break;
+        case "filtering":
+          this.query.filter = [];
+
+          state.action["columns"].forEach(element => {
+            this.query.filter.push({
+              propertyName: element.field,
+              operation: element.operator,
+              value: element.value
+            });
+          });
+
+          break;
+        case "searching":
+          this.query.searchString = state.action["searchString"];
+
+          break;
+      }
+    }
+
+    this.query.year = this.accountingApi.getSelectedYear();
+    this.query.pageSize = state.take;
+    this.query.pageNumber = state.skip;
+
+    const pageQuery = `$skip=${state.skip}&$top=${state.take}`;
+    let sortQuery = "";
+
+    if ((state.sorted || []).length) {
+      sortQuery =
+        `&$orderby=` +
+        state.sorted
+          .map((obj: Sorts) => {
+            return obj.direction === "descending"
+              ? `${obj.name} desc`
+              : obj.name;
+          })
+          .reverse()
+          .join(",");
+    }
+
+    return this.httpClient
+      .post(`${this.url}/unposted`, this.query)
+      .pipe(
+        map(
+          (response: any) =>
+            ({
+              result: response["Items"],
+              count: parseInt(response["Count"], 10)
+            } as DataResult)
+        )
+      )
+      .pipe((data: any) => data);
+  }
+
   deleteLedgerEntry(deletedLedgerId: number): Observable<boolean> {
     return this.httpClient.delete<boolean>(`${this.url}/${deletedLedgerId}`);
   }

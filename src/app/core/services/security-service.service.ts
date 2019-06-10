@@ -9,6 +9,10 @@ export class SecurityService {
 
   constructor() {
     this.securityObject = new AppUserAuth();
+
+    this.securityObject = JSON.parse(
+      localStorage.getItem("accountingBearerToken")
+    );
   }
 
   logIn(entity: AppUser): Observable<AppUserAuth> {
@@ -39,7 +43,6 @@ export class SecurityService {
 
   hasClaim(claimType: any, claimValue?: any): boolean {
     let ret = false;
-
     if (typeof claimType === "string") {
       ret = this.isClaimValid(claimType, claimValue);
     } else {
@@ -74,6 +77,12 @@ export class SecurityService {
         claimType = claimType.toLocaleLowerCase();
         claimValue = claimValue ? claimValue : "true";
       }
+
+      const s = auth.claims.find(
+        c =>
+          c.claimType.toLocaleLowerCase() === claimType &&
+          c.claimValue === claimValue
+      );
 
       ret =
         auth.claims.find(

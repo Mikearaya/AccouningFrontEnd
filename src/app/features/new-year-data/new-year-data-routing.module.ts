@@ -6,7 +6,7 @@ const routes: Routes = [
   {
     path: "",
     component: CreateNewYearDataComponent,
-    data: { breadCrum: "create" }
+    data: { breadCrum: "create", claim: "canCreateNewPeriod" }
   }
 ];
 
