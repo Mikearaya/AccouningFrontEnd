@@ -22,8 +22,8 @@ export const NAVIGATION_LINKS = [
         name: "Account chart",
         url: "/accounts",
         expanded: false,
-        enabled: true,
-        selected: false
+        selected: false,
+        enabled: false
       },
       {
         id: "01-02",

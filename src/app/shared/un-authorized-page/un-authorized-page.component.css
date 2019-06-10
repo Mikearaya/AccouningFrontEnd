@@ -1,0 +1,24 @@
+.alert {
+  background: white;
+  height: 100px;
+  padding-top: 15px
+}
+
+i {
+  font-size: 60px;
+  color: red;
+}
+
+.icon {
+  height: 50px;
+  width: 5%;
+  float: left
+}
+
+.text {
+  width: 95%;
+  float: left;
+  font-size: 25px;
+  font-weight: 500;
+  padding: 20px;
+}
