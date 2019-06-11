@@ -50,11 +50,12 @@
           (click)="btnClick()"
         ></button>
         <button
+          [items]="items"
           id="account-dropdown"
           ejs-dropdownbutton
-          content="Log out {{ securityObject?.userName }}"
+          content="{{ securityObject?.userName }}"
           iconCss="fas fa-user"
-          (click)="logOut()"
+          (select)="select($event)"
         ></button>
         <ejs-dropdownlist
           id="year-dropdown"

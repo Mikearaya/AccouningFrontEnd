@@ -17,7 +17,7 @@ import {
   SecurityService,
   AppUserAuth
 } from "./core/services/security-service.service";
-import { ItemModel } from "@syncfusion/ej2-splitbuttons";
+import { ItemModel, MenuEventArgs, Item } from "@syncfusion/ej2-splitbuttons";
 
 @Component({
   selector: "app-root",
@@ -45,7 +45,8 @@ export class AppComponent implements OnInit {
       text: "name",
       child: "subChild",
       expanded: "expanded",
-      selected: "selected"
+      selected: "selected",
+      enabled: "enabled"
     };
   }
   title = "";
@@ -99,6 +100,12 @@ export class AppComponent implements OnInit {
     }
   }
 
+  public select(args: MenuEventArgs) {
+    if (args.item.text === "Sign out") {
+      this.securityService.logOut();
+    }
+  }
+
   yearChanged(data: any): void {
     if (data) {
       this.accountingApi.setSelectedYear(data);
@@ -115,7 +122,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  logOut(): void {
+  /* logOut(): void {
     this.securityService.logOut();
-  }
+  } */
 }
