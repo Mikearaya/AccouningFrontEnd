@@ -33,6 +33,7 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { ClickEventArgs } from "@syncfusion/ej2-navigations/src/toolbar";
 import { CustomGridColumns } from "../data-view/data-view.component";
 import { closest } from "@syncfusion/ej2-base";
+import { SecurityService } from "src/app/core/services/security-service.service";
 
 @Component({
   selector: "app-grouped-data-view",
@@ -54,9 +55,9 @@ export class GroupedDataViewComponent implements OnInit {
   @Input()
   public data: Subject<DataStateChangeEventArgs>;
   @Input()
-  public showUpdate: boolean = true;
+  public showUpdate = true;
   @Input()
-  public showDelete: boolean = true;
+  public showDelete = true;
   @Input()
   public showView: boolean;
   @Input()
@@ -101,6 +102,14 @@ export class GroupedDataViewComponent implements OnInit {
   @Input()
   public customAttributes: { class: string };
 
+  @Input()
+  public updatePrivilage: string;
+  @Input()
+  public deletePrivilage: string;
+
+  @Input()
+  public addPrivilage: string;
+
   @Output()
   public dataQueried: EventEmitter<string> = new EventEmitter();
   @Output()
@@ -142,7 +151,11 @@ export class GroupedDataViewComponent implements OnInit {
   public childGrid: GridModel;
   query: QueryString;
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private securityService: SecurityService
+  ) {
     this.initialPage = {
       pageSize: PageSizes[0],
       pageSizes: this.pageSizes
@@ -172,11 +185,6 @@ export class GroupedDataViewComponent implements OnInit {
 
     this.editSettings = { allowDeleting: true };
     this.toolbarOptions = [
-      {
-        text: "Create Account",
-        prefixIcon: "e-create",
-        id: "createAccount"
-      },
       "Search",
       {
         text: "Expand All",
@@ -199,6 +207,14 @@ export class GroupedDataViewComponent implements OnInit {
         id: "Grid_excelexport"
       }
     ];
+
+    if (this.showAdd && this.securityService.hasClaim(this.addPrivilage)) {
+      this.toolbarOptions.push({
+        text: "Create Account",
+        prefixIcon: "e-create",
+        id: "createAccount"
+      });
+    }
   }
   onDataStateChanged(state: DataStateChangeEventArgs) {
     this.dataStateChaged.emit(state);
@@ -239,7 +255,10 @@ export class GroupedDataViewComponent implements OnInit {
   }
 
   initilizeCommandColumn(): void {
-    if (this.showUpdate) {
+    if (
+      this.showUpdate &&
+      this.securityService.hasClaim(this.updatePrivilage)
+    ) {
       this.commands.push({
         buttonOption: {
           iconCss: "e-icons e-edit",
@@ -249,7 +268,10 @@ export class GroupedDataViewComponent implements OnInit {
       });
     }
 
-    if (this.showDelete) {
+    if (
+      this.showDelete &&
+      this.securityService.hasClaim(this.deletePrivilage)
+    ) {
       this.commands.push({
         buttonOption: {
           iconCss: "e-icons e-delete",

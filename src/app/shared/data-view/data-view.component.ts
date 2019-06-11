@@ -286,6 +286,7 @@ export class DataViewComponent implements OnInit {
 
   initializeToolBar(): void {
     if (this.showAdd && this.securityService.hasClaim(this.addPrivilage)) {
+      console.log("iside ca add function");
       this.toolbar.push("Add");
     }
 

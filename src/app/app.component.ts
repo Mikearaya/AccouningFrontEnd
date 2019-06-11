@@ -88,7 +88,19 @@ export class AppComponent implements OnInit {
         { claimType: "canViewAccount", claimValue: "true" },
         { claimType: "canAddAccount", claimValue: "false" },
         { claimType: "canUpdateAccount", claimValue: "false" },
-        { claimType: "canDeleteAccount", claimValue: "false" }
+        { claimType: "canDeleteAccount", claimValue: "false" },
+        { claimType: "canViewAccountCategory", claimValue: "true" },
+        { claimType: "canAddAccountCategory", claimValue: "true" },
+        { claimType: "canUpdateAccountCategory", claimValue: "false" },
+        { claimType: "canDeleteAccountCategory", claimValue: "true" },
+        { claimType: "canViewLedgerEntry", claimValue: "true" },
+        { claimType: "canAddLedgerEntry", claimValue: "true" },
+        { claimType: "canUpdateLedgerEntry", claimValue: "false" },
+        { claimType: "canDeleteLedgerEntry", claimValue: "true" },
+        { claimType: "canViewLookups", claimValue: "true" },
+        { claimType: "canAddLookups", claimValue: "true" },
+        { claimType: "canUpdateLookups", claimValue: "false" },
+        { claimType: "canDeleteLookups", claimValue: "true" }
       ],
       userName: "Mikael Araya"
     };

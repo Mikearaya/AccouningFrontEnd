@@ -161,7 +161,8 @@ export const NAVIGATION_LINKS = [
         url: "reports/cost-of-goods-sold",
         expanded: false,
         enabled: true,
-        selected: false
+        selected: false,
+        privilage: "canViewCostOfGood"
       }
     ]
   }
