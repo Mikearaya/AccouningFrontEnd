@@ -180,24 +180,6 @@ export class AccountsViewComponent implements OnInit {
         id: "Grid_excelexport"
       }
     ];
-    // this.commands = [
-    //   {
-    //     type: "Edit",
-    //     buttonOption: {
-    //       cssClass: "e-flat",
-    //       iconCss: "e-edit e-icons",
-    //       click: this.editAccount.bind(this)
-    //     }
-    //   },
-    //   {
-    //     type: "Delete",
-    //     buttonOption: {
-    //       cssClass: "e-flat",
-    //       iconCss: "e-delete e-icons",
-    //       click: this.deleteAccount.bind(this)
-    //     }
-    //   }
-    // ];
 
     this.groupOptions = {
       disablePageWiseAggregates: false,
@@ -210,29 +192,6 @@ export class AccountsViewComponent implements OnInit {
   handleError(error: HttpErrorResponse) {
     console.log(error);
   }
-
-  // editAccount(data: Event): void {
-  //   const rowObj: IRow<Column> = this.grid.getRowObjectFromUID(
-  //     closest(data.target as Element, ".e-row").getAttribute("data-uid")
-  //   );
-  //   if (rowObj.data["Id"]) {
-  //     this.router.navigate([`${rowObj.data["Id"]}/update`], {
-  //       relativeTo: this.activatedRoute
-  //     });
-  //   }
-  // }
-
-  // deleteAccount(data: Event): void {
-  //   const rowObj: IRow<Column> = this.grid.getRowObjectFromUID(
-  //     closest(data.target as Element, ".e-row").getAttribute("data-uid")
-  //   );
-  //   if (confirm("Are you sure to delete")) {
-  //     this.accountApi.deleteAccount(rowObj.data["Id"]).subscribe();
-  //   } else {
-  //     return null;
-  //   }
-  //   // this.accountApi.deleteAccount(rowObj.data["Id"]).subscribe();
-  // }
 
   onDataBound() {
     this.grid.detailRowModule.expandAll();
