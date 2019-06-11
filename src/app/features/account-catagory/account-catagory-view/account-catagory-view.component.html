@@ -12,6 +12,9 @@
   [columnsList]="columnBluePrint"
   (dataStateChaged)="onDataStateChange($event)"
   [enableSearching]="true"
+  [addPrivilage]="'canAddAccount'"
+  [updatePrivilage]="'canUpdateAccount'"
+  [deletePrivilage]="'canDeleteAccount'"
   [showColumnChooser]="true"
   #grid
 >

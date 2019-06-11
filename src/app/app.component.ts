@@ -85,8 +85,8 @@ export class AppComponent implements OnInit {
       isAuthenticated: true,
       claims: [
         { claimType: "canViewAccount", claimValue: "true" },
-        { claimType: "canAddAccount", claimValue: "true" },
-        { claimType: "canUpdateAccount", claimValue: "true" },
+        { claimType: "canAddAccount", claimValue: "false" },
+        { claimType: "canUpdateAccount", claimValue: "false" },
         { claimType: "canDeleteAccount", claimValue: "false" }
       ],
       userName: "Mikael Araya"
