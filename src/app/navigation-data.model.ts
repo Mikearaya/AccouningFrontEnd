@@ -16,6 +16,7 @@ export const NAVIGATION_LINKS = [
     url: "parent",
     icon: "fas fa-sitemap",
     selected: false,
+    privilage: "canViewAccount",
     subChild: [
       {
         id: "01-01",
@@ -23,7 +24,8 @@ export const NAVIGATION_LINKS = [
         url: "/accounts",
         expanded: false,
         selected: false,
-        enabled: false
+        enabled: true,
+        privilage: "canViewAccount"
       },
       {
         id: "01-02",
