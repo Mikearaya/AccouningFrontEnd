@@ -124,7 +124,7 @@ export class AppComponent implements OnInit {
           expanded: false,
           enabled: true,
           selected: false,
-          privilage: "canViewLookup"
+          privilage: "canViewLookups"
         }
       ]
     },
@@ -190,7 +190,7 @@ export class AppComponent implements OnInit {
           expanded: false,
           enabled: true,
           selected: false,
-          privilage: "canViewAccount"
+          privilage: "canViewConsolidatedTrialBalance"
         },
         {
           id: "04-08",
@@ -199,7 +199,7 @@ export class AppComponent implements OnInit {
           expanded: false,
           enabled: true,
           selected: false,
-          privilage: "canViewAccount"
+          privilage: "canViewAccountSchedule"
         },
         {
           id: "04-09",
@@ -208,7 +208,7 @@ export class AppComponent implements OnInit {
           expanded: false,
           enabled: true,
           selected: false,
-          privilage: "canViewAccount"
+          privilage: "canViewCostOfGoodsSold"
         }
       ]
     }
@@ -287,21 +287,37 @@ export class AppComponent implements OnInit {
       isAuthenticated: true,
       claims: [
         { claimType: "canViewAccount", claimValue: "true" },
-        { claimType: "canAddAccount", claimValue: "false" },
-        { claimType: "canUpdateAccount", claimValue: "false" },
-        { claimType: "canDeleteAccount", claimValue: "false" },
+        { claimType: "canAddAccount", claimValue: "true" },
+        { claimType: "canUpdateAccount", claimValue: "true" },
+        { claimType: "canDeleteAccount", claimValue: "true" },
         { claimType: "canViewAccountCategory", claimValue: "true" },
         { claimType: "canAddAccountCategory", claimValue: "true" },
-        { claimType: "canUpdateAccountCategory", claimValue: "false" },
+        { claimType: "canUpdateAccountCategory", claimValue: "true" },
         { claimType: "canDeleteAccountCategory", claimValue: "true" },
+        { claimType: "canViewAccountType", claimValue: "true" },
+        { claimType: "canAddAccountType", claimValue: "true" },
+        { claimType: "canUpdateAccountType", claimValue: "true" },
+        { claimType: "canDeleteAccountType", claimValue: "true" },
         { claimType: "canViewLedgerEntry", claimValue: "true" },
+        { claimType: "canCreateNewYear", claimValue: "true" },
         { claimType: "canAddLedgerEntry", claimValue: "true" },
-        { claimType: "canUpdateLedgerEntry", claimValue: "false" },
+        { claimType: "canUpdateLedgerEntry", claimValue: "true" },
         { claimType: "canDeleteLedgerEntry", claimValue: "true" },
         { claimType: "canViewLookups", claimValue: "true" },
         { claimType: "canAddLookups", claimValue: "true" },
         { claimType: "canUpdateLookups", claimValue: "false" },
-        { claimType: "canDeleteLookups", claimValue: "true" }
+        { claimType: "canDeleteLookups", claimValue: "true" },
+        { claimType: "canViewBalanceSheet", claimValue: "true" },
+        { claimType: "canViewIncomeStatement", claimValue: "true" },
+        { claimType: "canViewAccountSchedule", claimValue: "true" },
+        { claimType: "canViewAccountChecklist", claimValue: "true" },
+        { claimType: "canViewConsolidatedTrialBalance", claimValue: "true" },
+        { claimType: "canViewSubsidaryLedger", claimValue: "" },
+        { claimType: "canViewTrialBalanceDetail", claimValue: "false" },
+        {
+          claimType: "canViewCostOfGoodsSold",
+          claimValue: "false"
+        }
       ],
       userName: "Mikael Araya"
     };

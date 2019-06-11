@@ -4,8 +4,7 @@ import {
   ViewChild,
   Input,
   Output,
-  EventEmitter,
-  AfterViewInit
+  EventEmitter
 } from "@angular/core";
 import { FilterSettingsModel, dataBound } from "@syncfusion/ej2-treegrid";
 import {
@@ -140,6 +139,9 @@ export class GroupedDataViewComponent implements OnInit {
   @Input()
   public groupBy: string[] = [];
 
+  @Input()
+  public showSearch: boolean;
+
   @Output()
   public dataStateChaged: EventEmitter<
     DataStateChangeEventArgs
@@ -163,10 +165,18 @@ export class GroupedDataViewComponent implements OnInit {
 
     this.filterOptions = { type: "Menu" }; // put unique filter menue for each column based on the column type
     this.query = new QueryString();
-    this.initilizeCommandColumn();
   }
 
   ngOnInit() {
+    this.toolbarOptions = [];
+    this.initilizeCommandColumn();
+    if (this.showAdd && this.securityService.hasClaim(this.addPrivilage)) {
+      this.toolbarOptions.push({
+        text: "Create Account",
+        prefixIcon: "e-create",
+        id: "createAccount"
+      });
+    }
     setTimeout(() => {
       this.groupOptions = {
         disablePageWiseAggregates: false,
@@ -184,35 +194,35 @@ export class GroupedDataViewComponent implements OnInit {
     this.selectionOptions = { type: "Single" }; // allow only single row to be selected at a time for edit or delete
 
     this.editSettings = { allowDeleting: true };
-    this.toolbarOptions = [
-      "Search",
-      {
-        text: "Expand All",
-        prefixIcon: "e-expand",
-        id: "expandall"
-      },
-      {
-        text: "Collapse All",
-        prefixIcon: "e-collapse",
-        id: "collapseall"
-      },
-      {
+
+    if (this.showSearch) {
+      this.toolbarOptions.push("Search");
+    }
+
+    this.toolbarOptions.push({
+      text: "Expand All",
+      prefixIcon: "e-expand",
+      id: "expandall"
+    });
+    this.toolbarOptions.push({
+      text: "Collapse All",
+      prefixIcon: "e-collapse",
+      id: "collapseall"
+    });
+
+    if (this.showPrint) {
+      this.toolbarOptions.push({
         text: "Print",
         prefixIcon: "e-print",
         id: "print"
-      },
-      {
+      });
+    }
+
+    if (this.showExcelExport) {
+      this.toolbarOptions.push({
         text: "ExcelExport",
         prefixIcon: "e-Excel_Export",
         id: "Grid_excelexport"
-      }
-    ];
-
-    if (this.showAdd && this.securityService.hasClaim(this.addPrivilage)) {
-      this.toolbarOptions.push({
-        text: "Create Account",
-        prefixIcon: "e-create",
-        id: "createAccount"
       });
     }
   }

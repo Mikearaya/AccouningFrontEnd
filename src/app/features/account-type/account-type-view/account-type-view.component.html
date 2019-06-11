@@ -1,115 +1,18 @@
 <app-print-header [header]="'Account types'"></app-print-header>
-<ejs-grid
-  [dataSource]="data | async"
+
+<app-print-header [header]="'Account Type'"></app-print-header>
+<app-grouped-data-view
+  [gridData]="data"
+  [showAdd]="true"
+  [showUpdate]="true"
+  [addPrivilage]="'canAddAccountType'"
+  [updatePrivilage]="'canUpdateAccountType'"
+  [deletePrivilage]="'canDeleteAccountType'"
+  [showDelete]="true"
+  [columnsList]="columnBluePrint"
+  [groupBy]="groupBy"
+  (dataStateChaged)="onDataStateChange($event)"
+  (deleteRecord)="deleteAccountType($event)"
   #grid
-  [allowExcelExport]="true"
-  id="accounts"
-  [toolbar]="toolbarOptions"
-  [allowPaging]="true"
-  [allowFiltering]="true"
-  [allowSorting]="true"
-  [allowResizing]="true"
-  allowFiltering="true"
-  [showColumnChooser]="true"
-  [selectionSettings]="selectionOptions"
-  [allowPdfExport]="true"
-  [allowGrouping]="true"
-  (toolbarClick)="toolbarClick($event)"
-  [pageSettings]="initialPage"
-  [filterSettings]="filterOptions"
-  [showColumnChooser]="true"
-  [groupSettings]="groupOptions"
-  (dataStateChange)="onDataStateChange($event)"
-  [height]="650"
 >
-  <e-columns>
-    <e-column
-      field="Id"
-      textAlign="left"
-      headerText="ID"
-      isPrimaryKey="true"
-      type="number"
-      width="30"
-      editable="false"
-      filterable="false"
-      groupable="false"
-      [visible]="false"
-    >
-    </e-column>
-
-    <e-column
-      field="Type"
-      headerText="Account type"
-      isPrimaryKey="false"
-      type="string"
-      filterable="true"
-      editable="true"
-      groupable="false"
-      [visible]="true"
-    ></e-column>
-    <e-column
-      field="AccountType"
-      textAlign="left"
-      headerText="Type"
-      isPrimaryKey="false"
-      type="string"
-      filterable="true"
-      editable="true"
-      groupable="false"
-      [width]="100"
-    ></e-column>
-
-    <e-column
-      field="IsSummary"
-      textAlign="left"
-      headerText="Summarize report"
-      isPrimaryKey="false"
-      type="bool"
-      editType="booleanedit"
-      filterable="true"
-      editable="true"
-      groupable="true"
-      width="30"
-    ></e-column>
-    <e-column
-      field="DateAdded"
-      textAlign="left"
-      headerText="Added"
-      isPrimaryKey="false"
-      type="datetime"
-      [format]="'yMd'"
-      editType="textbox"
-      filterable="true"
-      editable="true"
-      groupable="false"
-      [width]="100"
-      [visible]="false"
-    ></e-column>
-    <e-column
-      field="DateUpdated"
-      textAlign="left"
-      headerText="Updated"
-      isPrimaryKey="false"
-      type="date"
-      [format]="'yMd'"
-      editType="textbox"
-      filterable="true"
-      editable="true"
-      [visible]="false"
-      groupable="false"
-      [width]="100"
-    ></e-column>
-    <e-column [commands]="commands" [width]="50" textAlign="center"></e-column>
-  </e-columns>
-  <e-aggregates>
-    <e-aggregate>
-      <e-columns>
-        <e-column field="TotalAmount" type="sum" format="C2">
-          <ng-template #groupFooterTemplate let-data
-            >Sum: {{ data.sum }}</ng-template
-          >
-        </e-column>
-      </e-columns>
-    </e-aggregate>
-  </e-aggregates>
-</ejs-grid>
+</app-grouped-data-view>

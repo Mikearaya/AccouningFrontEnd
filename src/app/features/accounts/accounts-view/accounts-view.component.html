@@ -2,6 +2,9 @@
 <app-grouped-data-view
   [gridData]="data"
   [showUpdate]="true"
+  [addPrivilage]="'canAddAccount'"
+  [updatePrivilage]="'canUpdateAccount'"
+  [deletePrivilage]="'canDeleteAccount'"
   [showDelete]="true"
   [columnsList]="columnBluePrint"
   [groupBy]="groupBy"

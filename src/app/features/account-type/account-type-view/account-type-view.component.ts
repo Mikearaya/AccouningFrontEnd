@@ -21,14 +21,14 @@ import {
   FilterEventModel
 } from "src/app/shared/data-view/data-view.model";
 import { Router, ActivatedRoute } from "@angular/router";
-import { AccountsService } from "src/app/core/services/accounts.service";
 import { HttpErrorResponse } from "@angular/common/http";
 import { closest } from "@syncfusion/ej2-base";
 import { ClickEventArgs } from "@syncfusion/ej2-angular-navigations";
-import { AccountTypeViewModel } from "../account-type";
+
 import { AccountTypeService } from "../account-type.service";
 import { PageSizes } from "../../../page-model";
 import { Subject } from "rxjs";
+import { CustomGridColumns } from "src/app/shared/data-view/data-view.component";
 
 @Component({
   selector: "app-account-type-view",
@@ -36,6 +36,57 @@ import { Subject } from "rxjs";
   styleUrls: ["./account-type-view.component.css"]
 })
 export class AccountTypeViewComponent implements OnInit {
+  public groupBy = ["AccountType"];
+
+  public columnBluePrint: CustomGridColumns[] = [
+    {
+      key: "Id",
+      header: "Id",
+      visible: false,
+      width: 30,
+      type: "number"
+    },
+    {
+      key: "Type",
+      header: "Account Type",
+      visible: true,
+      width: 70,
+      type: "string"
+    },
+    {
+      key: "AccountType",
+      header: "Type",
+      visible: true,
+      width: 130,
+      type: "string"
+    },
+    {
+      key: "IsSummary",
+      header: "Summarize Report",
+      visible: false,
+      width: 100,
+      type: "bool"
+    },
+    {
+      key: "DateAdded",
+      header: "Added",
+      visible: false,
+      width: 50,
+      type: "date",
+
+      format: "yMd"
+    },
+    {
+      key: "DateUpdated",
+      header: "Updated",
+      visible: false,
+      width: 50,
+      type: "date",
+
+      format: "yMd"
+    }
+  ];
+
   title = "Fiscal Calander Period";
 
   @ViewChild("grid")
@@ -73,67 +124,6 @@ export class AccountTypeViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    setTimeout(() => {
-      this.groupOptions = {
-        disablePageWiseAggregates: false,
-        showDropArea: false,
-        columns: ["Type"]
-      };
-    }, 100);
-    this.childGrid = {
-      queryString: "ParentAccount",
-      columns: [
-        {
-          field: "Id",
-          headerText: "ID",
-          textAlign: "Right",
-          width: 100
-        },
-        {
-          field: "Type",
-          headerText: "Account Type",
-          textAlign: "Right",
-          width: 120
-        },
-        {
-          field: "AccountType",
-          headerText: "Account Type",
-          textAlign: "Right",
-          width: 120
-        }
-      ]
-    };
-
-    this.filterOptions = { type: "Menu" }; // put unique filter menue for each column based on the column type
-    this.selectionOptions = { type: "Single" }; // allow only single row to be selected at a time for edit or delete
-
-    this.toolbarOptions = [
-      { text: "Create", prefixIcon: "e-create", id: "create" },
-      "Search",
-      { text: "Expand All", prefixIcon: "e-expand", id: "expandall" },
-      { text: "Collapse All", prefixIcon: "e-collapse", id: "collapseall" },
-      { text: "Print", prefixIcon: "e-print", id: "print" }
-    ];
-    this.commands = [
-      {
-        type: "Edit",
-        buttonOption: {
-          cssClass: "e-flat",
-          iconCss: "e-edit e-icons",
-          click: this.editAccountType.bind(this)
-        }
-      },
-      {
-        type: "Delete",
-        buttonOption: {
-          cssClass: "e-flat",
-          iconCss: "e-delete e-icons",
-          click: this.deleteAccountType.bind(this)
-        }
-      }
-    ];
-    this.pageSettings = { pageSize: 15 }; // initial page row size for the grid
-
     this.accountTypeApi.execute({ skip: 0, take: 20 });
   }
 
@@ -170,71 +160,5 @@ export class AccountTypeViewComponent implements OnInit {
 
   onDataBound() {
     this.grid.detailRowModule.expandAll();
-  }
-  // Click handler for when the toolbar is cliked
-  toolbarClick(args: ClickEventArgs): void {
-    console.log(args.item.id);
-    if (args.item.id === "create") {
-      this.router.navigate(["account-types/add"]); // when user click add route to the accounts form
-    }
-    if (args.item.id === "expandall") {
-      this.grid.groupModule.expandAll();
-    }
-    if (args.item.id === "collapseall") {
-      this.grid.groupModule.collapseAll();
-    }
-    if (args.item.id === "print") {
-      this.grid.groupModule.expandAll();
-      setTimeout(() => {
-        window.print();
-      }, 400);
-    }
-  }
-
-  actionEndHandler(args: ActionEventArgs) {
-    switch (args.requestType) {
-      case "sorting":
-        this.query.sortDirection = args["direction"];
-        this.query.sortBy = args["columnName"];
-
-        break;
-      case "filtering":
-        const filteringModel = new FilterEventModel();
-        filteringModel.columnName = args["currentFilterObject"]["field"];
-        filteringModel.operator = args["currentFilterObject"]["operator"];
-        filteringModel.value = args["currentFilterObject"]["value"];
-
-        break;
-      case "searching":
-        this.query.searchString = args["searchString"];
-
-        break;
-    }
-
-    if (args.requestType !== "refresh") {
-      this.prepareQuery();
-    }
-
-    if (
-      this.query.pageSize !== this.grid.pageSettings.pageSize ||
-      this.query.pageNumber !== this.grid.pageSettings.currentPage
-    ) {
-      this.query.pageSize = this.grid.pageSettings.pageSize;
-      this.query.pageNumber = this.grid.pageSettings.currentPage;
-
-      this.prepareQuery();
-    }
-  }
-
-  private prepareQuery(): void {
-    let searchString = `selectedColumns=${this.query.selectedColumns.toString()}&`;
-
-    if (this.query.searchString) {
-      searchString += `searchString=${this.query.searchString}&`;
-    }
-
-    searchString += `pageSize=${this.query.pageSize}&pageNumber=${
-      this.query.pageNumber
-    }`;
   }
 }
