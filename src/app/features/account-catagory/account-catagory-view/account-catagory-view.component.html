@@ -6,12 +6,18 @@
   [pageSize]="20"
   [enableSorting]="true"
   [showUpdate]="true"
+  [addPrivilage]="'canAddAccountCategory'"
+  [updatePrivilage]="'canUpdateAccountCategory'"
+  [deletePrivilage]="'canDeleteAccountCategory'"
   (deleteRecord)="deleteCatagory($event)"
   [showPdfExport]="true"
   [showPrint]="true"
   [columnsList]="columnBluePrint"
   (dataStateChaged)="onDataStateChange($event)"
   [enableSearching]="true"
+  [addPrivilage]="'canAddAccount'"
+  [updatePrivilage]="'canUpdateAccount'"
+  [deletePrivilage]="'canDeleteAccount'"
   [showColumnChooser]="true"
   #grid
 >

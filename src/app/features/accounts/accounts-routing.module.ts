@@ -30,7 +30,7 @@ const routes: Routes = [
     canActivate: [AuthGuardGuard],
     data: {
       breadCrum: "Update",
-      claimType: "canUpdateAccount:false"
+      claimType: "canUpdateAccount"
     }
   }
 ];

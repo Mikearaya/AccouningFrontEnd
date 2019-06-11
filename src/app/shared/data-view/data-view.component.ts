@@ -31,6 +31,7 @@ import {
 
 import { Subject } from "rxjs";
 import { PageSizes } from "src/app/page-model";
+import { SecurityService } from "src/app/core/services/security-service.service";
 
 @Component({
   selector: "app-data-view",
@@ -89,6 +90,14 @@ export class DataViewComponent implements OnInit {
   public allowGrouping: Boolean;
   @Input()
   public wrapSettings: TextWrapSettingsModel;
+
+  @Input()
+  public updatePrivilage: string;
+  @Input()
+  public addPrivilage: string;
+  @Input()
+  public deletePrivilage: string;
+
   @Input()
   public customAttributes: { class: string };
 
@@ -121,7 +130,11 @@ export class DataViewComponent implements OnInit {
   public editSettings: EditSettingsModel;
   public selectionOptions: SelectionSettingsModel;
   private query: QueryString;
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private securityService: SecurityService
+  ) {
     this.initialPage = { pageSize: 50, pageSizes: this.pageSizes };
     this.query = new QueryString();
   }
@@ -148,7 +161,10 @@ export class DataViewComponent implements OnInit {
     };
   }
   initilizeCommandColumn(): void {
-    if (this.showUpdate) {
+    if (
+      this.showUpdate &&
+      this.securityService.hasClaim(this.updatePrivilage)
+    ) {
       this.commands.push({
         buttonOption: {
           iconCss: "e-icons e-edit",
@@ -158,7 +174,10 @@ export class DataViewComponent implements OnInit {
       });
     }
 
-    if (this.showDelete) {
+    if (
+      this.showDelete &&
+      this.securityService.hasClaim(this.deletePrivilage)
+    ) {
       this.commands.push({
         buttonOption: {
           iconCss: "e-icons e-delete",
@@ -266,7 +285,8 @@ export class DataViewComponent implements OnInit {
   }
 
   initializeToolBar(): void {
-    if (this.showAdd) {
+    if (this.showAdd && this.securityService.hasClaim(this.addPrivilage)) {
+      console.log("iside ca add function");
       this.toolbar.push("Add");
     }
 
