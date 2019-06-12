@@ -7,6 +7,7 @@ export interface AccountCategory {
 export interface AccountCatagoryView {
   Id?: number;
   AccountType: string;
+  AccountTypeId: number;
   CategoryName: string;
   DateAdded: Date;
   DateUpdated: Date;

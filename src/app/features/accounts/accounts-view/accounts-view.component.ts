@@ -20,11 +20,7 @@ import {
   CommandModel,
   GridModel,
   ActionEventArgs,
-  Column,
-  IRow,
-  HierarchyGridPrintMode,
-  DataStateChangeEventArgs,
-  dataStateChange
+  DataStateChangeEventArgs
 } from "@syncfusion/ej2-angular-grids";
 import { Router, ActivatedRoute } from "@angular/router";
 
@@ -36,10 +32,10 @@ import {
   FilterEventModel
 } from "src/app/shared/data-view/data-view.model";
 import { AccountsService } from "../../../core/services/accounts.service";
-import { closest } from "@syncfusion/ej2-base";
 import { Subject } from "rxjs";
-import { PageSizes } from "src/app/page-model";
+
 import { CustomGridColumns } from "src/app/shared/data-view/data-view.component";
+import { PageSizes } from "src/app/page-model";
 
 @Component({
   selector: "app-accounts-view",
@@ -180,24 +176,6 @@ export class AccountsViewComponent implements OnInit {
         id: "Grid_excelexport"
       }
     ];
-    // this.commands = [
-    //   {
-    //     type: "Edit",
-    //     buttonOption: {
-    //       cssClass: "e-flat",
-    //       iconCss: "e-edit e-icons",
-    //       click: this.editAccount.bind(this)
-    //     }
-    //   },
-    //   {
-    //     type: "Delete",
-    //     buttonOption: {
-    //       cssClass: "e-flat",
-    //       iconCss: "e-delete e-icons",
-    //       click: this.deleteAccount.bind(this)
-    //     }
-    //   }
-    // ];
 
     this.groupOptions = {
       disablePageWiseAggregates: false,

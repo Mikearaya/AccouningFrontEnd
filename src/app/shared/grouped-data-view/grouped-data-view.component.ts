@@ -240,7 +240,13 @@ export class GroupedDataViewComponent implements OnInit {
   // Click handler for when the toolbar is cliked
   toolbarClick(args: ClickEventArgs): void {
     if (args.item.id === "createAccount") {
-      this.router.navigate(["accounts/new"]); // when user click add route to the accounts form
+      if (this.addRoute.trim().length === 0) {
+        this.router.navigate(["add"], {
+          relativeTo: this.activatedRoute
+        });
+      } else {
+        this.router.navigate([this.addRoute]);
+      }
     }
     if (args.item.id === "expandall") {
       this.grid.groupModule.expandAll();

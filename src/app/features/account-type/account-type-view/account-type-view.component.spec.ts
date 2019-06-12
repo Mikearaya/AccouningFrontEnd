@@ -5,7 +5,7 @@ import { RouterTestingModule } from "@angular/router/testing";
 import { SharedModule } from "src/app/shared/shared.module";
 import { AccountTypeViewComponent } from "./account-type-view.component";
 import { AccountsViewComponent } from "../../accounts/accounts-view/accounts-view.component";
-import { AccountTypeService } from "../account-type.service";
+import { AccountTypeService } from "../../../core/services/account-type.service";
 
 describe("Accounts type view component", () => {
   let router: Router;

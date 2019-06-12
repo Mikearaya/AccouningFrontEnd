@@ -8,7 +8,7 @@ import {
 import { DebugElement } from "@angular/core";
 import { SharedModule } from "src/app/shared/shared.module";
 import { RouterTestingModule } from "@angular/router/testing";
-import { AccountTypeService } from "../account-type.service";
+import { AccountTypeService } from "../../../core/services/account-type.service";
 
 describe(" Account type form component", () => {
   let component: AccountTypeFormComponent;

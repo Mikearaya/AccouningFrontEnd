@@ -16,7 +16,7 @@ const routes: Routes = [
     }
   },
   {
-    path: "new",
+    path: "add",
     component: AccountFormComponent,
     canActivate: [AuthGuardGuard],
     data: {

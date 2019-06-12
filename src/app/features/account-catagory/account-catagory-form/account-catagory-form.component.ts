@@ -23,6 +23,8 @@ import {
   AccountCatagoryView,
   AccountCategoryIndex
 } from "../account-catagory-domain";
+import { TypesIndexView } from "../../account-type/account-type";
+import { AccountTypeService } from "../../../core/services/account-type.service";
 
 @Component({
   selector: "app-account-catagory-form",
@@ -31,7 +33,7 @@ import {
 })
 export class AccountCatagoryFormComponent implements OnInit {
   public catagoryForm: FormGroup;
-  public accountTypes: object;
+  public accountTypes: TypesIndexView[];
   public isUpdate = false;
   public accountCatagoryId: any;
   public accountTypeFields: Object;
@@ -40,12 +42,12 @@ export class AccountCatagoryFormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private accountCatagoryApi: AccountCatagoryApiService,
+    private accountTypeApi: AccountTypeService,
     private location: Location,
     private activatedRoute: ActivatedRoute
   ) {
     // intialize the form
     this.createCatagoryForm();
-    this.accountTypes = ["Asset", "Liability", "Revenue", "Expence", "Capital"];
   }
 
   @ViewChild("statusBtn") statusBtn: ButtonComponent;
@@ -55,6 +57,12 @@ export class AccountCatagoryFormComponent implements OnInit {
     this.accountCatagoryId = this.activatedRoute.snapshot.paramMap.get(
       "catagoryId"
     );
+
+    this.accountTypeApi
+      .getTypesIndex("")
+      .subscribe((data: TypesIndexView[]) => {
+        this.accountTypes = data;
+      });
 
     if (this.accountCatagoryId) {
       // if account catagory id is present get the related account value
@@ -68,8 +76,8 @@ export class AccountCatagoryFormComponent implements OnInit {
     }
 
     this.accountTypeFields = {
-      text: "Account Type",
-      value: "AccountType"
+      text: "Name",
+      value: "Id"
     };
 
     // get account list to fill the Accounts drop down from back end
@@ -101,8 +109,9 @@ export class AccountCatagoryFormComponent implements OnInit {
 
   initializeCatagory(data: AccountCatagoryView) {
     this.catagoryForm = this.formBuilder.group({
+      Id: [data.Id, Validators.required],
       CategoryName: [data.CategoryName, Validators.required],
-      AccountType: [data.AccountType, Validators.required]
+      AccountType: [data.AccountTypeId, Validators.required]
     });
   }
   /*
