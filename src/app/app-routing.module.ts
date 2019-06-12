@@ -10,7 +10,8 @@ const routes: Routes = [
 
     data: {
       breadCrum: "Home"
-    }
+    },
+    canLoad: [AuthGuardGuard]
   },
   { path: "unauthorized", component: UnAuthorizedPageComponent }
 ];

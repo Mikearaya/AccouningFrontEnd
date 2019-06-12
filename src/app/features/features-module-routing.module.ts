@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
+import { AuthGuardGuard } from "../core/services/auth-guard.guard";
 
 const routes: Routes = [
   {
@@ -7,7 +8,8 @@ const routes: Routes = [
     loadChildren: "../features/dashboard/dashboard.module#DashboardModule",
     data: {
       title: "Dashboard"
-    }
+    },
+    pathMatch: "full"
   },
   {
     path: "accounts",

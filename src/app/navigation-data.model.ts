@@ -6,7 +6,8 @@ export const NAVIGATION_LINKS = [
     expanded: false,
     url: "",
     selected: true,
-    icon: "fas fa-columns"
+    icon: "fas fa-columns",
+    privilage: "canViewDashboard"
   },
   {
     id: "01",
@@ -33,7 +34,8 @@ export const NAVIGATION_LINKS = [
         url: "/account-catagories",
         expanded: false,
         enabled: true,
-        selected: false
+        selected: false,
+        privilage: "canViewAccountCategory"
       },
       {
         id: "01-03",
@@ -41,7 +43,8 @@ export const NAVIGATION_LINKS = [
         url: "/account-types",
         expanded: false,
         enabled: true,
-        selected: false
+        selected: false,
+        privilage: "canViewAccountType"
       },
       {
         id: "01-04",
@@ -49,7 +52,8 @@ export const NAVIGATION_LINKS = [
         url: "new-year-data",
         expanded: false,
         enabled: true,
-        selected: false
+        selected: false,
+        privilage: "canCreateNewYear"
       }
     ]
   },
@@ -61,6 +65,7 @@ export const NAVIGATION_LINKS = [
     url: "parent",
     selected: false,
     icon: "fas fa-book-open",
+    privilage: "canViewLedger",
     subChild: [
       {
         id: "02-01",
@@ -68,7 +73,8 @@ export const NAVIGATION_LINKS = [
         url: "/ledgers",
         expanded: false,
         enabled: true,
-        selected: false
+        selected: false,
+        privilage: "canViewLedgerEntry"
       }
     ]
   },
@@ -80,7 +86,7 @@ export const NAVIGATION_LINKS = [
     url: "parent",
     selected: false,
     icon: "fas fa-cogs",
-
+    privilage: "canViewSettings",
     subChild: [
       {
         id: "03-01",
@@ -88,7 +94,8 @@ export const NAVIGATION_LINKS = [
         url: "/lookups",
         expanded: false,
         enabled: true,
-        selected: false
+        selected: false,
+        privilage: "canViewLookups"
       }
     ]
   },
@@ -100,6 +107,7 @@ export const NAVIGATION_LINKS = [
     url: "parent",
     selected: false,
     icon: "fas fa-briefcase",
+    privilage: "canViewReports",
     subChild: [
       {
         id: "04-01",
@@ -107,7 +115,8 @@ export const NAVIGATION_LINKS = [
         url: "/reports/checklist",
         expanded: false,
         enabled: true,
-        selected: false
+        selected: false,
+        privilage: "canViewAccountChecklist"
       },
       {
         id: "04-02",
@@ -115,7 +124,8 @@ export const NAVIGATION_LINKS = [
         url: "/reports/balance-sheet",
         expanded: false,
         enabled: true,
-        selected: false
+        selected: false,
+        privilage: "canViewBalanceSheet"
       },
       {
         id: "04-03",
@@ -123,7 +133,8 @@ export const NAVIGATION_LINKS = [
         url: "reports/income-statement",
         expanded: false,
         enabled: true,
-        selected: false
+        selected: false,
+        privilage: "canViewIncomeStatement"
       },
       {
         id: "04-04",
@@ -131,7 +142,8 @@ export const NAVIGATION_LINKS = [
         url: "reports/subsidaries",
         expanded: false,
         enabled: true,
-        selected: false
+        selected: false,
+        privilage: "canViewSubsidaryLedger"
       },
       {
         id: "04-05",
@@ -139,7 +151,8 @@ export const NAVIGATION_LINKS = [
         url: "reports/trial-balance-detail",
         expanded: false,
         enabled: true,
-        selected: false
+        selected: false,
+        privilage: "canViewTrialBalanceDetail"
       },
       {
         id: "04-06",
@@ -147,7 +160,8 @@ export const NAVIGATION_LINKS = [
         url: "reports/consolidated-trial-balance",
         expanded: false,
         enabled: true,
-        selected: false
+        selected: false,
+        privilage: "canViewConsolidatedTrialBalance"
       },
       {
         id: "04-08",
@@ -155,7 +169,8 @@ export const NAVIGATION_LINKS = [
         url: "reports/accounts-schedule",
         expanded: false,
         enabled: true,
-        selected: false
+        selected: false,
+        privilage: "canViewAccountSchedule"
       },
       {
         id: "04-09",
@@ -164,7 +179,7 @@ export const NAVIGATION_LINKS = [
         expanded: false,
         enabled: true,
         selected: false,
-        privilage: "canViewCostOfGood"
+        privilage: "canViewCostOfGoodsSold"
       }
     ]
   }

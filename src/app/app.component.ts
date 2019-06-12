@@ -17,6 +17,7 @@ import {
   AppUserAuth
 } from "./core/services/security-service.service";
 import { ItemModel, MenuEventArgs, Item } from "@syncfusion/ej2-splitbuttons";
+import { NAVIGATION_LINKS } from "./navigation-data.model";
 
 @Component({
   selector: "app-root",
@@ -26,192 +27,6 @@ import { ItemModel, MenuEventArgs, Item } from "@syncfusion/ej2-splitbuttons";
 export class AppComponent implements OnInit {
   public securityObject: AppUserAuth;
   public cssClass = "custom";
-  public NAVIGATION_LINKS = [
-    {
-      id: "00",
-      name: "Dashboard",
-      enabled: true,
-      expanded: false,
-      url: "",
-      selected: true,
-      icon: "fas fa-columns",
-      privilage: "canViewDashboard"
-    },
-    {
-      id: "01",
-      name: "Account Managment",
-      expanded: false,
-      enabled: true,
-      url: "parent",
-      icon: "fas fa-sitemap",
-      selected: false,
-      privilage: "canViewAccount",
-      subChild: [
-        {
-          id: "01-01",
-          name: "Account chart",
-          url: "/accounts",
-          expanded: false,
-          selected: false,
-          enabled: true,
-          privilage: "canViewAccount"
-        },
-        {
-          id: "01-02",
-          name: "Account catagory",
-          url: "/account-catagories",
-          expanded: false,
-          enabled: true,
-          selected: false,
-          privilage: "canViewAccountCategory"
-        },
-        {
-          id: "01-03",
-          name: "Account Type",
-          url: "/account-types",
-          expanded: false,
-          enabled: true,
-          selected: false,
-          privilage: "canViewAccountType"
-        },
-        {
-          id: "01-04",
-          name: "Create new year data",
-          url: "new-year-data",
-          expanded: false,
-          enabled: true,
-          selected: false,
-          privilage: "canCreateNewYear"
-        }
-      ]
-    },
-    {
-      id: "02",
-      name: "Ledger Entries",
-      expanded: false,
-      enabled: true,
-      url: "parent",
-      selected: false,
-      icon: "fas fa-book-open",
-      privilage: "canViewLedger",
-      subChild: [
-        {
-          id: "02-01",
-          name: "Ledger Entry View",
-          url: "/ledgers",
-          expanded: false,
-          enabled: true,
-          selected: false,
-          privilage: "canViewLedgerEntry"
-        }
-      ]
-    },
-    {
-      id: "03",
-      name: "Settings",
-      expanded: false,
-      enabled: true,
-      url: "parent",
-      selected: false,
-      icon: "fas fa-cogs",
-      privilage: "canViewSettings",
-      subChild: [
-        {
-          id: "03-01",
-          name: "Lookup",
-          url: "/lookups",
-          expanded: false,
-          enabled: true,
-          selected: false,
-          privilage: "canViewLookups"
-        }
-      ]
-    },
-    {
-      id: "04",
-      name: "Reports",
-      expanded: false,
-      enabled: true,
-      url: "parent",
-      selected: false,
-      icon: "fas fa-briefcase",
-      privilage: "canViewReports",
-      subChild: [
-        {
-          id: "04-01",
-          name: "Checklist",
-          url: "/reports/checklist",
-          expanded: false,
-          enabled: true,
-          selected: false,
-          privilage: "canViewAccountChecklist"
-        },
-        {
-          id: "04-02",
-          name: "Balance Sheet",
-          url: "/reports/balance-sheet",
-          expanded: false,
-          enabled: true,
-          selected: false,
-          privilage: "canViewBalanceSheet"
-        },
-        {
-          id: "04-03",
-          name: "Income Statement",
-          url: "reports/income-statement",
-          expanded: false,
-          enabled: true,
-          selected: false,
-          privilage: "canViewIncomeStatement"
-        },
-        {
-          id: "04-04",
-          name: "Subsidiary Ledger",
-          url: "reports/subsidaries",
-          expanded: false,
-          enabled: true,
-          selected: false,
-          privilage: "canViewSubsidaryLedger"
-        },
-        {
-          id: "04-05",
-          name: "Trial Balance detail",
-          url: "reports/trial-balance-detail",
-          expanded: false,
-          enabled: true,
-          selected: false,
-          privilage: "canViewTrialBalanceDetail"
-        },
-        {
-          id: "04-06",
-          name: "Consolidated Trial Balance",
-          url: "reports/consolidated-trial-balance",
-          expanded: false,
-          enabled: true,
-          selected: false,
-          privilage: "canViewConsolidatedTrialBalance"
-        },
-        {
-          id: "04-08",
-          name: "Accounts Schedule",
-          url: "reports/accounts-schedule",
-          expanded: false,
-          enabled: true,
-          selected: false,
-          privilage: "canViewAccountSchedule"
-        },
-        {
-          id: "04-09",
-          name: "Cost of goods sold",
-          url: "reports/cost-of-goods-sold",
-          expanded: false,
-          enabled: true,
-          selected: false,
-          privilage: "canViewCostOfGoodsSold"
-        }
-      ]
-    }
-  ];
   public items: ItemModel[] = [
     {
       text: "Sign out"
@@ -237,23 +52,23 @@ export class AppComponent implements OnInit {
     /*   if (index === 0) {
         return null;
       } */
-    for (let index = 1; index < this.NAVIGATION_LINKS.length; index++) {
+    for (let index = 1; index < this.smartAccountingLinks.length; index++) {
       for (
-        let i = this.NAVIGATION_LINKS[index].subChild.length - 1;
+        let i = this.smartAccountingLinks[index].subChild.length - 1;
         i > -1;
         i--
       ) {
         if (
           !this.securityService.hasClaim(
-            this.NAVIGATION_LINKS[index].subChild[i].privilage
+            this.smartAccountingLinks[index].subChild[i].privilage
           )
         ) {
-          this.NAVIGATION_LINKS[index].subChild.splice(i, 1);
+          this.smartAccountingLinks[index].subChild.splice(i, 1);
         }
       }
 
-      if (this.NAVIGATION_LINKS[index].subChild.length === 0) {
-        this.NAVIGATION_LINKS.splice(index, 1);
+      if (this.smartAccountingLinks[index].subChild.length === 0) {
+        this.smartAccountingLinks.splice(index, 1);
         --index;
       }
     }
@@ -270,7 +85,7 @@ export class AppComponent implements OnInit {
 
   public yearData: AvailableYearsModel[] = [];
 
-  public smartAccountingLinks: object[] = this.NAVIGATION_LINKS;
+  public smartAccountingLinks = NAVIGATION_LINKS;
 
   public field: object;
   public yearFields: { key: string; value: string };
@@ -294,11 +109,11 @@ export class AppComponent implements OnInit {
       bearerToken: "asdfghjjklyyrrffghjjj",
       isAuthenticated: true,
       claims: [
-        { claimType: "canViewAccount", claimValue: "false" },
+        { claimType: "canViewAccount", claimValue: "true" },
         { claimType: "canAddAccount", claimValue: "true" },
         { claimType: "canUpdateAccount", claimValue: "true" },
         { claimType: "canDeleteAccount", claimValue: "true" },
-        { claimType: "canViewAccountCategory", claimValue: "false" },
+        { claimType: "canViewAccountCategory", claimValue: "true" },
         { claimType: "canAddAccountCategory", claimValue: "true" },
         { claimType: "canUpdateAccountCategory", claimValue: "true" },
         { claimType: "canDeleteAccountCategory", claimValue: "true" },
@@ -361,8 +176,4 @@ export class AppComponent implements OnInit {
       this.sidebar.hide();
     }
   }
-
-  /* logOut(): void {
-    this.securityService.logOut();
-  } */
 }
