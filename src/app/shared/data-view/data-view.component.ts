@@ -198,7 +198,6 @@ export class DataViewComponent implements OnInit {
       //   this.initialPage = { pageSize: 50, pageSizes: this.pageSizes };
       // }, 100);
       // this.initialPage = { pageSize: 50, pageSizes: this.pageSizes };
-      alert("Deleted successfully!");
     } else {
       return null;
     }
@@ -286,7 +285,6 @@ export class DataViewComponent implements OnInit {
 
   initializeToolBar(): void {
     if (this.showAdd && this.securityService.hasClaim(this.addPrivilage)) {
-      console.log("iside ca add function");
       this.toolbar.push("Add");
     }
 
@@ -333,10 +331,6 @@ export class DataViewComponent implements OnInit {
   rowIsSelected(event: RowSelectEventArgs): void {
     this.rowSelected.emit(event);
   }
-
-  // deleteCatagory(event: Event) {
-  //   this.deleteRecord.emit(event);
-  // }
 }
 
 export interface CustomGridColumns {

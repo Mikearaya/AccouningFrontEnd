@@ -1,9 +1,8 @@
-import { Component, OnInit, Output, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { AccountCatagoryApiService } from "../../../core/account-catagory-api.service";
 import { DataStateChangeEventArgs } from "@syncfusion/ej2-grids";
 import { Subject } from "rxjs";
 import { DataViewComponent } from "src/app/shared/data-view/data-view.component";
-import { AccountCatagoryView } from "../account-catagory-domain";
 import { PageSizes } from "src/app/page-model";
 
 @Component({
@@ -57,6 +56,13 @@ export class AccountCatagoryViewComponent implements OnInit {
   }
 
   deleteCatagory(data: any) {
-    this.accountCatagApi.deleteAccountCatagory(data["Id"]).subscribe();
+    this.accountCatagApi.deleteAccountCatagory(data["Id"]).subscribe(
+      () => {},
+      () => {
+        alert(
+          "Can not delete account category because it's been used in a transaction"
+        );
+      }
+    );
   }
 }
