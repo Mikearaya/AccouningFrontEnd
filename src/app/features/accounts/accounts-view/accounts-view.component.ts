@@ -189,29 +189,6 @@ export class AccountsViewComponent implements OnInit {
     console.log(error);
   }
 
-  // editAccount(data: Event): void {
-  //   const rowObj: IRow<Column> = this.grid.getRowObjectFromUID(
-  //     closest(data.target as Element, ".e-row").getAttribute("data-uid")
-  //   );
-  //   if (rowObj.data["Id"]) {
-  //     this.router.navigate([`${rowObj.data["Id"]}/update`], {
-  //       relativeTo: this.activatedRoute
-  //     });
-  //   }
-  // }
-
-  // deleteAccount(data: Event): void {
-  //   const rowObj: IRow<Column> = this.grid.getRowObjectFromUID(
-  //     closest(data.target as Element, ".e-row").getAttribute("data-uid")
-  //   );
-  //   if (confirm("Are you sure to delete")) {
-  //     this.accountApi.deleteAccount(rowObj.data["Id"]).subscribe();
-  //   } else {
-  //     return null;
-  //   }
-  //   // this.accountApi.deleteAccount(rowObj.data["Id"]).subscribe();
-  // }
-
   onDataBound() {
     this.grid.detailRowModule.expandAll();
   }

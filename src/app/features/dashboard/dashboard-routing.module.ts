@@ -6,7 +6,6 @@ import { AuthGuardGuard } from "src/app/core/services/auth-guard.guard";
 const routes: Routes = [
   {
     path: "",
-
     component: DashboardComponent,
     data: { breadCrum: "Dashboard" }
   }

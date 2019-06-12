@@ -142,7 +142,7 @@ export class AppComponent implements OnInit {
           expanded: false,
           enabled: true,
           selected: false,
-          privilage: "canViewChecklist"
+          privilage: "canViewAccountChecklist"
         },
         {
           id: "04-02",
@@ -160,7 +160,7 @@ export class AppComponent implements OnInit {
           expanded: false,
           enabled: true,
           selected: false,
-          privilage: "canViewIncomeStatment"
+          privilage: "canViewIncomeStatement"
         },
         {
           id: "04-04",
@@ -232,20 +232,29 @@ export class AppComponent implements OnInit {
       enabled: "enabled"
     };
 
-    this.NAVIGATION_LINKS.forEach((element, index) => {
-      if (index === 0) {
+    /*   if (index === 0) {
         return null;
-      }
-      element.subChild.forEach((el, i) => {
-        if (!this.securityService.hasClaim(el.privilage)) {
-          element.subChild.splice(i, 1);
-          console.log(index, "---", element.subChild);
+      } */
+    for (let index = 1; index < this.NAVIGATION_LINKS.length; index++) {
+      for (
+        let i = this.NAVIGATION_LINKS[index].subChild.length - 1;
+        i > -1;
+        i--
+      ) {
+        if (
+          !this.securityService.hasClaim(
+            this.NAVIGATION_LINKS[index].subChild[i].privilage
+          )
+        ) {
+          this.NAVIGATION_LINKS[index].subChild.splice(i, 1);
         }
-      });
-      if (element.subChild.length === 0) {
-        this.NAVIGATION_LINKS.splice(index, 1);
       }
-    });
+
+      if (this.NAVIGATION_LINKS[index].subChild.length === 0) {
+        this.NAVIGATION_LINKS.splice(index, 1);
+        --index;
+      }
+    }
   }
   title = "";
   @ViewChild("sidebar")
@@ -283,11 +292,11 @@ export class AppComponent implements OnInit {
       bearerToken: "asdfghjjklyyrrffghjjj",
       isAuthenticated: true,
       claims: [
-        { claimType: "canViewAccount", claimValue: "true" },
+        { claimType: "canViewAccount", claimValue: "false" },
         { claimType: "canAddAccount", claimValue: "true" },
         { claimType: "canUpdateAccount", claimValue: "true" },
         { claimType: "canDeleteAccount", claimValue: "true" },
-        { claimType: "canViewAccountCategory", claimValue: "true" },
+        { claimType: "canViewAccountCategory", claimValue: "false" },
         { claimType: "canAddAccountCategory", claimValue: "true" },
         { claimType: "canUpdateAccountCategory", claimValue: "true" },
         { claimType: "canDeleteAccountCategory", claimValue: "true" },
@@ -295,22 +304,25 @@ export class AppComponent implements OnInit {
         { claimType: "canAddAccountType", claimValue: "true" },
         { claimType: "canUpdateAccountType", claimValue: "true" },
         { claimType: "canDeleteAccountType", claimValue: "true" },
-        { claimType: "canViewLedgerEntry", claimValue: "true" },
         { claimType: "canCreateNewYear", claimValue: "true" },
+        { claimType: "canViewLedgerEntry", claimValue: "true" },
         { claimType: "canAddLedgerEntry", claimValue: "true" },
         { claimType: "canUpdateLedgerEntry", claimValue: "true" },
         { claimType: "canDeleteLedgerEntry", claimValue: "true" },
         { claimType: "canViewLookups", claimValue: "true" },
         { claimType: "canAddLookups", claimValue: "true" },
-        { claimType: "canUpdateLookups", claimValue: "false" },
+        { claimType: "canUpdateLookups", claimValue: "true" },
         { claimType: "canDeleteLookups", claimValue: "true" },
         { claimType: "canViewBalanceSheet", claimValue: "true" },
         { claimType: "canViewIncomeStatement", claimValue: "true" },
         { claimType: "canViewAccountSchedule", claimValue: "true" },
         { claimType: "canViewAccountChecklist", claimValue: "true" },
-        { claimType: "canViewConsolidatedTrialBalance", claimValue: "true" },
-        { claimType: "canViewSubsidaryLedger", claimValue: "" },
-        { claimType: "canViewTrialBalanceDetail", claimValue: "false" },
+        {
+          claimType: "canViewConsolidatedTrialBalance",
+          claimValue: "true"
+        },
+        { claimType: "canViewSubsidaryLedger", claimValue: "true" },
+        { claimType: "canViewTrialBalanceDetail", claimValue: "true" },
         {
           claimType: "canViewCostOfGoodsSold",
           claimValue: "true"
