@@ -2,11 +2,13 @@ export class AccountTypeViewModel {
   Id: number;
   Type: string;
   AccountType: string;
-  TypeofId: number;
+  TypeOfId: number;
   IsSummary: boolean;
+  AccountTypeId: number;
 }
 
 export class AccountType {
+  Id?: number;
   Type: string;
   IsTypeOf: number;
   IsSummary: boolean;

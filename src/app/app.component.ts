@@ -2,15 +2,13 @@ import { Component, ViewChild, OnInit } from "@angular/core";
 import {
   TreeViewComponent,
   NodeSelectEventArgs,
-  Sidebar,
   SidebarComponent
 } from "@syncfusion/ej2-angular-navigations";
 import { Router } from "@angular/router";
 import { ButtonComponent } from "@syncfusion/ej2-angular-buttons";
 import { AccountingApiService } from "./Services/accounting-api.service";
 import { AvailableYearsModel } from "./Services/system-data.model";
-// import { NAVIGATION_LINKS } from "./navigation-data.model";
-import { FilterService } from "./shared/filter-option/filter.service";
+
 import { Location } from "@angular/common";
 import {
   SecurityService,

@@ -8,8 +8,12 @@ import {
 import { ActivatedRoute } from "@angular/router";
 import { ButtonComponent } from "@syncfusion/ej2-angular-buttons";
 import { HttpErrorResponse } from "@angular/common/http";
-import { AccountTypeService } from "../account-type.service";
-import { AccountTypeViewModel, TypesIndexView } from "../account-type";
+import { AccountTypeService } from "../../../core/services/account-type.service";
+import {
+  AccountTypeViewModel,
+  TypesIndexView,
+  AccountType
+} from "../account-type";
 import { Location } from "@angular/common";
 
 @Component({
@@ -31,11 +35,12 @@ export class AccountTypeFormComponent implements OnInit {
     private location: Location,
     private activatedRoute: ActivatedRoute
   ) {
-    // intialize the form
-    this.createAccountTypeForm();
     this.typeApi.getTypesIndex().subscribe((data: TypesIndexView[]) => {
       this.Catagories = data;
     });
+    // intialize the form
+    this.createAccountTypeForm();
+
     // this.Catagories = ["Asset", "Liability", "Revenue", "Expence", "Capital"];
   }
 
@@ -86,8 +91,8 @@ export class AccountTypeFormComponent implements OnInit {
 
   initializeType(data: AccountTypeViewModel) {
     this.typeForm = this.formBuilder.group({
-      AccountType: [data.AccountType, Validators.required],
-      Type: [data.Type, Validators.required],
+      AccountType: [data.TypeOfId, Validators.required],
+      Type: [data.AccountType, Validators.required],
       IsSummary: [data.IsSummary, Validators.required]
     });
   }
@@ -98,8 +103,10 @@ export class AccountTypeFormComponent implements OnInit {
   */
   onSubmit() {
     // check if  current operation is update
-    if (!this.isUpdate) {
-      this.typeApi.createAccountType(this.typeForm.value).subscribe(
+    const form = this.prepareData();
+
+    if (!this.isUpdate && form) {
+      this.typeApi.createAccountType(form).subscribe(
         success => {
           alert("Account Type Created Successfully");
           this.location.back(); // on success return back to where the user previously was
@@ -108,18 +115,29 @@ export class AccountTypeFormComponent implements OnInit {
           alert(error.message); // on error show the error message
         }
       );
+    } else if (form) {
+      this.typeApi.updateAccountType(this.accountTypeId, form).subscribe(
+        () => {
+          alert("Account Type Updated Successfully"); // on success return back to where the user previously was
+          this.location.back();
+        },
+        (error: HttpErrorResponse) => {
+          alert(error.message); // on error show the error message
+        }
+      );
+    }
+  }
+
+  prepareData(): AccountType {
+    if (this.typeForm.valid) {
+      return {
+        Id: this.accountTypeId ? this.accountTypeId : 0,
+        IsTypeOf: this.AccountType.value,
+        Type: this.Type.value,
+        IsSummary: this.SummerizeReport.value
+      };
     } else {
-      this.typeApi
-        .updateAccountType(this.accountTypeId, this.typeForm.value)
-        .subscribe(
-          () => {
-            alert("Account Type Updated Successfully"); // on success return back to where the user previously was
-            this.location.back();
-          },
-          (error: HttpErrorResponse) => {
-            alert(error.message); // on error show the error message
-          }
-        );
+      return null;
     }
   }
   cancel() {

@@ -25,7 +25,7 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { closest } from "@syncfusion/ej2-base";
 import { ClickEventArgs } from "@syncfusion/ej2-angular-navigations";
 
-import { AccountTypeService } from "../account-type.service";
+import { AccountTypeService } from "../../../core/services/account-type.service";
 import { PageSizes } from "../../../page-model";
 import { Subject } from "rxjs";
 import { CustomGridColumns } from "src/app/shared/data-view/data-view.component";
@@ -36,7 +36,7 @@ import { CustomGridColumns } from "src/app/shared/data-view/data-view.component"
   styleUrls: ["./account-type-view.component.css"]
 })
 export class AccountTypeViewComponent implements OnInit {
-  public groupBy = ["AccountType"];
+  public groupBy = ["Type"];
 
   public columnBluePrint: CustomGridColumns[] = [
     {

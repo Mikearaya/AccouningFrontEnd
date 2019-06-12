@@ -6,7 +6,7 @@ import {
   AccountType,
   TypesIndexView,
   UpdateAccountType
-} from "./account-type";
+} from "../../features/account-type/account-type";
 import { HttpClient } from "@angular/common/http";
 import { QueryString } from "src/app/shared/data-view/data-view.model";
 import {

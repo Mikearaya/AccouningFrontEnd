@@ -31,6 +31,7 @@ import {
 } from "@syncfusion/ej2-angular-charts";
 import { SystemCacheInterceptorService } from "./services/system-cache-interceptor.service";
 import { SystemCacheService } from "./services/system-cache.service";
+import { AccountTypeService } from "./services/account-type.service";
 
 @NgModule({
   declarations: [],
@@ -59,6 +60,7 @@ import { SystemCacheService } from "./services/system-cache.service";
     LineSeriesService,
     CategoryService,
     SystemCacheService,
+    AccountTypeService,
 
     {
       provide: HTTP_INTERCEPTORS,

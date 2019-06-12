@@ -14,7 +14,7 @@ import {
   AutoCompleteModule
 } from "@syncfusion/ej2-angular-dropdowns";
 import { NumericTextBoxModule } from "@syncfusion/ej2-angular-inputs";
-import { AccountTypeService } from "./account-type.service";
+import { AccountTypeService } from "../../core/services/account-type.service";
 import { CoreModule } from "src/app/core/core.module";
 
 @NgModule({
@@ -34,6 +34,6 @@ import { CoreModule } from "src/app/core/core.module";
     AutoCompleteModule,
     CoreModule
   ],
-  providers: [AccountTypeService]
+  providers: []
 })
 export class AccountTypeModule {}

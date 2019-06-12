@@ -8,7 +8,7 @@ import {
   AccountTypeViewModel,
   AccountType,
   UpdateAccountType
-} from "./account-type";
+} from "../../features/account-type/account-type";
 import { CoreModule } from "src/app/core/core.module";
 import { RouterTestingModule } from "@angular/router/testing";
 
