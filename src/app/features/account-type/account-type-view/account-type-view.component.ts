@@ -147,12 +147,10 @@ export class AccountTypeViewComponent implements OnInit {
   }
 
   deleteAccountType(data: Event): void {
-    const rowObj: IRow<Column> = this.grid.getRowObjectFromUID(
-      closest(data.target as Element, ".e-row").getAttribute("data-uid")
-    );
     if (confirm("Are you sure to delete?")) {
-      this.accountTypeApi.deleteAccountType(rowObj.data["Id"]).subscribe();
-      alert("Deleted successfully!");
+      this.accountTypeApi
+        .deleteAccountType(data["Id"])
+        .subscribe(() => alert("Deleted successfully!"));
     } else {
       return null;
     }

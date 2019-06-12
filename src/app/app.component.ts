@@ -292,11 +292,11 @@ export class AppComponent implements OnInit {
       bearerToken: "asdfghjjklyyrrffghjjj",
       isAuthenticated: true,
       claims: [
-        { claimType: "canViewAccount", claimValue: "false" },
+        { claimType: "canViewAccount", claimValue: "true" },
         { claimType: "canAddAccount", claimValue: "true" },
         { claimType: "canUpdateAccount", claimValue: "true" },
         { claimType: "canDeleteAccount", claimValue: "true" },
-        { claimType: "canViewAccountCategory", claimValue: "false" },
+        { claimType: "canViewAccountCategory", claimValue: "true" },
         { claimType: "canAddAccountCategory", claimValue: "true" },
         { claimType: "canUpdateAccountCategory", claimValue: "true" },
         { claimType: "canDeleteAccountCategory", claimValue: "true" },
