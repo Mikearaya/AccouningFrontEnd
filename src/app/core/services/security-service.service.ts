@@ -9,7 +9,10 @@ export class SecurityService {
 
   constructor() {
     this.securityObject = new AppUserAuth();
-
+    localStorage.setItem(
+      "accountingBearerToken",
+      JSON.stringify(this.securityObject)
+    );
     this.securityObject = JSON.parse(
       localStorage.getItem("accountingBearerToken")
     );
@@ -98,9 +101,9 @@ export class SecurityService {
 }
 
 export class AppUserAuth {
-  userName = "Appdiv system";
+  userName = "";
   bearerToken = "";
-  isAuthenticated = true;
+  isAuthenticated = false;
   claims: ClaimModel[] = [];
 }
 
