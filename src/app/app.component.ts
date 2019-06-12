@@ -174,4 +174,10 @@ export class AppComponent implements OnInit {
       this.sidebar.hide();
     }
   }
+  humanResource() {
+    alert("HR");
+  }
+  inventory() {
+    alert("Inventory");
+  }
 }

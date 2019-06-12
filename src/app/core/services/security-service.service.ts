@@ -9,13 +9,15 @@ export class SecurityService {
 
   constructor() {
     this.securityObject = new AppUserAuth();
-    localStorage.setItem(
-      "accountingBearerToken",
-      JSON.stringify(this.securityObject)
-    );
     this.securityObject = JSON.parse(
       localStorage.getItem("accountingBearerToken")
     );
+    if (localStorage.getItem("accountingBearerToken")) {
+      localStorage.setItem(
+        "accountingBearerToken",
+        JSON.stringify(this.securityObject)
+      );
+    }
   }
 
   logIn(entity: AppUser): Observable<AppUserAuth> {

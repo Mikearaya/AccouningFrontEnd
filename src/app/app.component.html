@@ -50,6 +50,20 @@
           (click)="btnClick()"
         ></button>
         <button
+          ejs-button
+          id="human-resource"
+          iconCss="fas fa-users"
+          content="Human Resource"
+          (click)="humanResource()"
+        ></button>
+        <button
+          ejs-button
+          id="inventory"
+          iconCss="fas fa-boxes"
+          content="Inventory"
+          (click)="inventory()"
+        ></button>
+        <button
           [items]="items"
           id="account-dropdown"
           ejs-dropdownbutton

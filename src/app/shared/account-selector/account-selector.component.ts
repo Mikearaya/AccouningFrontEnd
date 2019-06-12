@@ -71,17 +71,31 @@ export class AccountSelectorComponent implements ControlValueAccessor {
   writeValue(obj: any): void {
     this._value = obj;
 
-    this.accountApi
-      .getAccountIndex("")
-      .subscribe((result: AccountsIndexView[]) => {
-        this.accounts = result;
-        this.data = result;
-
-        if (this._value) {
-          const data = this.accounts.filter(a => a.Id === obj);
-          this.text = data[0].Name;
-        }
+    this.accountApi.getAccountIndex("").subscribe((result: any) => {
+      this.accounts = result;
+      this.data = result;
+      this.data.forEach(e => {
+        obj = e.Id;
       });
+      if (this._value) {
+        /* this.data.forEach(el => {
+            console.log("======", el.Name);
+          }); */
+        // console.log("------------------", this.data);
+        // console.log("------------------", this.accounts);
+        if (obj !== 0) {
+          const data = this.accounts.filter(a => {
+            a.Id === obj;
+          });
+          console.log(`==========-----${obj}-----------`, data);
+        }
+        /*  data.forEach(e => {
+            this.text = e.Name;
+            console.log("----------------", this.text);
+          }); */
+        // console.log("------------------", this.text);
+      }
+    });
   }
   registerOnChange(fn: any): void {
     this.onChanged = fn;

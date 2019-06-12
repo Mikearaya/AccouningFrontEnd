@@ -35,7 +35,7 @@ export class AccountCategorySelectorComponent implements ControlValueAccessor {
 
   public accountCategories: AccountsIndexView[] = [];
   query: Query;
-  public fields: Object = { value: "Name", text: "Name" };
+  public fields: Object = { value: "Id", text: "Name" };
   // set the placeholder to the AutoComplete input
   public text = "";
 
@@ -58,8 +58,10 @@ export class AccountCategorySelectorComponent implements ControlValueAccessor {
       if (this._value) {
         console.log(this._value);
         const data = this.accountCategories.filter(a => a.Id === obj);
-        console.log(data);
-        this.text = data[0].Name;
+        data.forEach(e => {
+          this.text = e.Name;
+          console.log(e.Name);
+        });
       }
     });
   }
