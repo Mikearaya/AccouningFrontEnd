@@ -51,9 +51,7 @@ export class RmHeaderInterceptorService implements HttpInterceptor {
     return next.handle(modifiedRequest).pipe(
       tap((event: HttpEvent<any>) => {
         if (event instanceof HttpResponse && event.status === 201) {
-          alert("Data Saved successfuly");
         } else if (event instanceof HttpResponse && event.status === 204) {
-          alert("Data Updated successfuly");
         }
       }),
       catchError((error: HttpErrorResponse) => {
