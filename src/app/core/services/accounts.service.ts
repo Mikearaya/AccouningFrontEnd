@@ -50,6 +50,16 @@ export class AccountsService extends Subject<DataStateChangeEventArgs> {
     );
   }
 
+  getAccountsListAutoComplete(
+    queryString: QueryString
+  ): Observable<AccountViewModel> {
+    queryString.year = "";
+    return this.httpClient.post<AccountViewModel>(
+      `${this.url}/year=${queryString.year}`,
+      queryString
+    );
+  }
+
   getAccountIndex(searchString: string = ""): Observable<AccountsIndexView[]> {
     return this.httpClient.get<AccountsIndexView[]>(
       `${this.url}/index?searchString=${searchString}`

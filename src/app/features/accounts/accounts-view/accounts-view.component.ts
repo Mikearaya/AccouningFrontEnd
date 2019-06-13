@@ -72,7 +72,7 @@ export class AccountsViewComponent implements OnInit {
     {
       key: "Id",
       header: "Id",
-      visible: true,
+      visible: false,
       width: 30,
       type: "number"
     },

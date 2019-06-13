@@ -4,6 +4,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { AccountsIndexView } from "src/app/features/accounts/accounts";
 import { Input } from "@syncfusion/ej2-inputs";
 import { Predicate, Query } from "@syncfusion/ej2-data/src";
+import { QueryString } from "../data-view/data-view.model";
+import { element } from "@angular/core/src/render3";
 
 @Component({
   selector: "app-account-selector",
@@ -73,27 +75,14 @@ export class AccountSelectorComponent implements ControlValueAccessor {
 
     this.accountApi.getAccountIndex("").subscribe((result: any) => {
       this.accounts = result;
-      this.data = result;
-      this.data.forEach(e => {
-        obj = e.Id;
-      });
       if (this._value) {
-        /* this.data.forEach(el => {
-            console.log("======", el.Name);
-          }); */
-        // console.log("------------------", this.data);
-        // console.log("------------------", this.accounts);
         if (obj !== 0) {
-          const data = this.accounts.filter(a => {
-            a.Id === obj;
-          });
+          const data = this.accounts.filter(a => a.Id === obj);
           console.log(`==========-----${obj}-----------`, data);
+          data.forEach(element => {
+            this.text = element.Name;
+          });
         }
-        /*  data.forEach(e => {
-            this.text = e.Name;
-            console.log("----------------", this.text);
-          }); */
-        // console.log("------------------", this.text);
       }
     });
   }
