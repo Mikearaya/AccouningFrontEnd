@@ -148,10 +148,13 @@ export class ChecklistComponent implements OnInit {
       }, 400);
     }
     if (args.item.id === "Grid_excelexport") {
+      const currentPageSize = this.grid.pageSettings.pageSize;
+      this.grid.pageSettings.pageSize = this.grid.pageSettings.totalRecordsCount;
       this.grid.detailRowModule.expandAll();
       setTimeout(() => {
         this.grid.excelExport();
-      }, 400);
+        this.grid.pageSettings.pageSize = currentPageSize;
+      }, 1000);
     }
   }
 

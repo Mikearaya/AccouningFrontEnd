@@ -370,7 +370,6 @@ export class GroupedDataViewComponent implements OnInit {
     ) {
       this.query.pageSize = this.grid.pageSettings.pageSize;
       this.query.pageNumber = this.grid.pageSettings.currentPage;
-      this.prefernce.setPageSize(this.grid.pageSettings.pageSize);
 
       this.dataQueried.emit(this.prepareQuery());
     }

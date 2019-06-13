@@ -144,9 +144,12 @@ export class SubsidaryLedgerReportComponent implements OnInit {
       }, 1000);
     }
     if (args.item.id === "Grid_excelexport") {
-      this.grid.detailRowModule.expandAll();
+      const currentPageSize = this.grid.pageSettings.pageSize;
+      this.grid.pageSettings.pageSize = this.grid.pageSettings.totalRecordsCount;
+      // this.grid.detailRowModule.expandAll();
       setTimeout(() => {
         this.grid.excelExport();
+        this.grid.pageSettings.pageSize = currentPageSize;
       }, 1000);
     }
   }
