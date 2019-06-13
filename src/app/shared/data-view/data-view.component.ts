@@ -32,6 +32,8 @@ import {
 import { Subject } from "rxjs";
 import { PageSizes, PreferenceSettings } from "src/app/page-model";
 import { SecurityService } from "src/app/core/services/security-service.service";
+import { LedgerViewComponent } from "src/app/features/ledgers/ledger-view/ledger-view.component";
+import { DashboardComponent } from "src/app/features/dashboard/dashboard/dashboard.component";
 
 @Component({
   selector: "app-data-view",
@@ -205,7 +207,7 @@ export class DataViewComponent implements OnInit {
     const key = this.idKey ? this.idKey : "Id";
 
     if (this.editRoute) {
-      this.router.navigate([this.editRoute]);
+      this.router.navigate([`/${this.editRoute}/${rowObj.data[key]}/update`]);
     } else {
       this.router.navigate([`${rowObj.data[key]}/update`], {
         relativeTo: this.activatedRoute

@@ -58,7 +58,13 @@ export class SubsidaryLedgerReportComponent implements OnInit {
         width: 120
       },
       // { field: "LedgerId", headerText: "Ledgeddddr", width: 150 },
-      { field: "Date", headerText: "Date", width: 150 },
+      {
+        field: "Date",
+        headerText: "Date",
+        width: 150,
+        type: "date",
+        format: "yMd"
+      },
       { field: "ReferenceNumber", headerText: "Reference", width: 150 },
       { field: "Debit", headerText: "Debit", format: "N2", width: 150 },
       { field: "Credit", headerText: "Credit", format: "N2", width: 150 },
@@ -146,7 +152,7 @@ export class SubsidaryLedgerReportComponent implements OnInit {
     if (args.item.id === "Grid_excelexport") {
       const currentPageSize = this.grid.pageSettings.pageSize;
       this.grid.pageSettings.pageSize = this.grid.pageSettings.totalRecordsCount;
-      // this.grid.detailRowModule.expandAll();
+      this.grid.detailRowModule.expandAll();
       setTimeout(() => {
         this.grid.excelExport();
         this.grid.pageSettings.pageSize = currentPageSize;
