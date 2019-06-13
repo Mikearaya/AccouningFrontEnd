@@ -154,11 +154,6 @@ export class DataViewComponent implements OnInit {
 
     this.initilizeCommandColumn();
     this.initializeToolBar();
-    this.groupByOptions = {
-      disablePageWiseAggregates: false,
-      showDropArea: true,
-      columns: ["ParentAccount"]
-    };
   }
   initilizeCommandColumn(): void {
     if (
@@ -194,10 +189,6 @@ export class DataViewComponent implements OnInit {
     );
     if (confirm("Are you sure to delete")) {
       this.deleteRecord.emit(rowObj.data);
-      // setTimeout(() => {
-      //   this.initialPage = { pageSize: 50, pageSizes: this.pageSizes };
-      // }, 100);
-      // this.initialPage = { pageSize: 50, pageSizes: this.pageSizes };
     } else {
       return null;
     }
@@ -285,7 +276,11 @@ export class DataViewComponent implements OnInit {
 
   initializeToolBar(): void {
     if (this.showAdd && this.securityService.hasClaim(this.addPrivilage)) {
-      this.toolbar.push("Add");
+      this.toolbar.push({
+        text: "Create",
+        prefixIcon: "e-create",
+        id: "create"
+      });
     }
 
     if (this.showPdfExport) {
@@ -309,7 +304,7 @@ export class DataViewComponent implements OnInit {
 
   toolbarClick(args: ClickEventArgs): void {
     switch (args.item.id) {
-      case "dataview_add":
+      case "create":
         if (this.addRoute.trim().length === 0) {
           this.router.navigate(["add"], { relativeTo: this.activatedRoute });
         } else {
