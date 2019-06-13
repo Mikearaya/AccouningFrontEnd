@@ -53,7 +53,7 @@ body {
   width: auto !important;
 }
 
-.e-grid.e-groupdroparea * {
+.e-grid.e-groupdroparea:hover * {
   background-color: #4d841d55 !important;
 }
 
