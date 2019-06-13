@@ -145,7 +145,7 @@ export class AppComponent implements OnInit {
       ],
       userName: "Mikael Araya"
     };
-    localStorage.clear();
+    localStorage.setItem("accountingBearerToken", null);
     localStorage.setItem("accountingBearerToken", JSON.stringify(x));
 
     if (localStorage.getItem("accountingBearerToken") === null) {

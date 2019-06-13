@@ -35,7 +35,7 @@ import { AccountsService } from "../../../core/services/accounts.service";
 import { Subject } from "rxjs";
 
 import { CustomGridColumns } from "src/app/shared/data-view/data-view.component";
-import { PageSizes } from "src/app/page-model";
+import { PageSizes, PreferenceSettings } from "src/app/page-model";
 
 @Component({
   selector: "app-accounts-view",
@@ -132,6 +132,7 @@ export class AccountsViewComponent implements OnInit {
     }
   ];
 
+  pagePreference = new PreferenceSettings();
   constructor(
     private router: Router,
     private accountApi: AccountsService,
@@ -139,7 +140,7 @@ export class AccountsViewComponent implements OnInit {
   ) {
     this.data = this.accountApi;
     this.initialPage = {
-      pageSize: PageSizes[0],
+      pageSize: this.pagePreference.PageSize.toString(),
       pageSizes: this.pageSizes
     };
 

@@ -136,7 +136,7 @@ export class FilterOptionComponent implements OnInit {
     return this.filterForm.get("EndDate") as FormControl;
   }
 
-  private prepareFilter(): string {
+  public prepareFilter(): string {
     this.searchString = "";
     this.reportQueryModel = new ReportFilterModel();
     if (this.Year.value) {

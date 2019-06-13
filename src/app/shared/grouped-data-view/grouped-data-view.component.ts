@@ -24,7 +24,7 @@ import {
   Grid
 } from "@syncfusion/ej2-grids";
 import { GridComponent } from "@syncfusion/ej2-angular-grids";
-import { PageSizes } from "src/app/page-model";
+import { PageSizes, PreferenceSettings } from "src/app/page-model";
 import { Subject } from "rxjs";
 import { QueryString, FilterEventModel } from "../data-view/data-view.model";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -152,6 +152,7 @@ export class GroupedDataViewComponent implements OnInit {
 
   public childGrid: GridModel;
   query: QueryString;
+  prefernce = new PreferenceSettings();
 
   constructor(
     private router: Router,
@@ -159,7 +160,7 @@ export class GroupedDataViewComponent implements OnInit {
     private securityService: SecurityService
   ) {
     this.initialPage = {
-      pageSize: PageSizes[0],
+      pageSize: this.prefernce.PageSize.toString(),
       pageSizes: this.pageSizes
     };
 
@@ -358,6 +359,7 @@ export class GroupedDataViewComponent implements OnInit {
         break;
     }
 
+    this.prefernce.setPageSize(this.grid.pageSettings.pageSize);
     if (args.requestType !== "refresh") {
       this.dataQueried.emit(this.prepareQuery());
     }
@@ -368,6 +370,7 @@ export class GroupedDataViewComponent implements OnInit {
     ) {
       this.query.pageSize = this.grid.pageSettings.pageSize;
       this.query.pageNumber = this.grid.pageSettings.currentPage;
+      this.prefernce.setPageSize(this.grid.pageSettings.pageSize);
 
       this.dataQueried.emit(this.prepareQuery());
     }

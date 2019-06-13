@@ -30,7 +30,7 @@ import {
 } from "@syncfusion/ej2-angular-grids";
 
 import { Subject } from "rxjs";
-import { PageSizes } from "src/app/page-model";
+import { PageSizes, PreferenceSettings } from "src/app/page-model";
 import { SecurityService } from "src/app/core/services/security-service.service";
 
 @Component({
@@ -72,7 +72,7 @@ export class DataViewComponent implements OnInit {
   @Input()
   public idKey: any;
   @Input()
-  public pageSize = 10;
+  public pageSize = 50;
 
   @Input()
   public pageNumber = 1;
@@ -120,6 +120,7 @@ export class DataViewComponent implements OnInit {
 
   @ViewChild("grid")
   public grid: GridComponent;
+  preference = new PreferenceSettings();
 
   public pageSizes: string[] = PageSizes;
   public initialPage: { pageSize: number; pageSizes: string[] };
@@ -135,7 +136,10 @@ export class DataViewComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private securityService: SecurityService
   ) {
-    this.initialPage = { pageSize: 50, pageSizes: this.pageSizes };
+    this.initialPage = {
+      pageSize: this.preference.PageSize,
+      pageSizes: this.pageSizes
+    };
     this.query = new QueryString();
   }
 
@@ -238,6 +242,8 @@ export class DataViewComponent implements OnInit {
 
         break;
     }
+
+    this.preference.setPageSize(this.grid.pageSettings.pageSize);
 
     if (args.requestType !== "refresh") {
       this.dataQueried.emit(this.prepareQuery());
