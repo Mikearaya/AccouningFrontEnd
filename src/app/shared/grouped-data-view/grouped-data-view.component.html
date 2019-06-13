@@ -13,6 +13,7 @@
   (toolbarClick)="toolbarClick($event)"
   [pageSettings]="initialPage"
   [filterSettings]="filterOptions"
+  (actionComplete)="actionEndHandler($event)"
   [showColumnChooser]="true"
   (dataStateChange)="onDataStateChanged($event)"
   [editSettings]="editSettings"
