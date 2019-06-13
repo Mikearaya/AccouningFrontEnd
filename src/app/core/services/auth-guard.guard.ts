@@ -29,6 +29,8 @@ export class AuthGuardGuard implements CanActivate {
 
     if (!this.securityService.securityObject.isAuthenticated) {
       window.location.href = "https://www.google.com";
+    } else {
+      return true;
     }
     if (this.securityService.hasClaim(claimType)) {
       return true;
@@ -37,5 +39,13 @@ export class AuthGuardGuard implements CanActivate {
     }
 
     return true;
+  }
+  canLoad(): Observable<boolean> | Promise<boolean> | boolean {
+    if (!this.securityService.securityObject.isAuthenticated) {
+      window.location.href = "https://www.google.com";
+      return false;
+    } else {
+      return true;
+    }
   }
 }

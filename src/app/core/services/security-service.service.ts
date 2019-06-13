@@ -9,10 +9,15 @@ export class SecurityService {
 
   constructor() {
     this.securityObject = new AppUserAuth();
-
     this.securityObject = JSON.parse(
       localStorage.getItem("accountingBearerToken")
     );
+    if (localStorage.getItem("accountingBearerToken")) {
+      localStorage.setItem(
+        "accountingBearerToken",
+        JSON.stringify(this.securityObject)
+      );
+    }
   }
 
   logIn(entity: AppUser): Observable<AppUserAuth> {
@@ -98,9 +103,9 @@ export class SecurityService {
 }
 
 export class AppUserAuth {
-  userName = "Appdiv system";
+  userName = "";
   bearerToken = "";
-  isAuthenticated = true;
+  isAuthenticated = false;
   claims: ClaimModel[] = [];
 }
 

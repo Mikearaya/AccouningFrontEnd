@@ -245,3 +245,11 @@ i {
   background: #4d841d !important;
   display: none;
 }
+
+#human-resource,
+#inventory {
+  background: #4d841d;
+  font-size: small;
+  box-shadow: none;
+  color: white;
+}
