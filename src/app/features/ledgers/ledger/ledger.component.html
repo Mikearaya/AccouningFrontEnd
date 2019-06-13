@@ -168,7 +168,7 @@
                   ejs-button
                   cssClass="e-round e-danger e-small"
                   iconCss="e-icons e-close"
-                  *ngIf="Entries.controls.length > 2"
+                  *ngIf="Entries.controls.length > 2 && !isUpdate"
                   (click)="removeRow(i)"
                 ></button>
               </div>

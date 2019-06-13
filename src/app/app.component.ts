@@ -309,7 +309,7 @@ export class AppComponent implements OnInit {
         { claimType: "canAddLedgerEntry", claimValue: "true" },
         { claimType: "canUpdateLedgerEntry", claimValue: "true" },
         { claimType: "canDeleteLedgerEntry", claimValue: "true" },
-        { claimType: "canViewLookups", claimValue: "true" },
+        { claimType: "canViewLookups", claimValue: "false" },
         { claimType: "canAddLookups", claimValue: "true" },
         { claimType: "canUpdateLookups", claimValue: "true" },
         { claimType: "canDeleteLookups", claimValue: "true" },

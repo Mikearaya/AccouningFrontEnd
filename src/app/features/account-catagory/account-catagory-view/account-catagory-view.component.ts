@@ -39,6 +39,20 @@ export class AccountCatagoryViewComponent implements OnInit {
       visible: true,
       width: "50",
       type: "string"
+    },
+    {
+      key: "OverFlowAccount",
+      header: "Overflow Account",
+      visible: false,
+      width: "100",
+      type: "string"
+    },
+    {
+      key: "OverFlowAccountId",
+      header: "Overflow Id",
+      visible: false,
+      width: "40",
+      type: "number"
     }
   ];
   constructor(private accountCatagApi: AccountCatagoryApiService) {

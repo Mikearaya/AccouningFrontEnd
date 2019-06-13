@@ -100,10 +100,15 @@ export class AccountCatagoryFormComponent implements OnInit {
     return this.catagoryForm.get("AccountType") as FormControl;
   }
 
+  get OverFlowAccount(): FormControl {
+    return this.catagoryForm.get("OverFlowAccount") as FormControl;
+  }
+
   createCatagoryForm() {
     this.catagoryForm = this.formBuilder.group({
       CategoryName: ["", Validators.required],
-      AccountType: ["", Validators.required]
+      AccountType: ["", Validators.required],
+      OverFlowAccount: [""]
     });
   }
 
@@ -111,7 +116,8 @@ export class AccountCatagoryFormComponent implements OnInit {
     this.catagoryForm = this.formBuilder.group({
       Id: [data.Id, Validators.required],
       CategoryName: [data.CategoryName, Validators.required],
-      AccountType: [data.AccountTypeId, Validators.required]
+      AccountType: [data.AccountTypeId, Validators.required],
+      OverFlowAccount: [data.OverFlowAccountId]
     });
   }
   /*

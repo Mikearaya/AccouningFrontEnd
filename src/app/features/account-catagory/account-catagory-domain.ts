@@ -2,6 +2,7 @@ export interface AccountCategory {
   Id?: number;
   AccountType: string;
   CatagoryName: string;
+  OverFlowAccount?: number;
 }
 
 export interface AccountCatagoryView {
@@ -9,6 +10,8 @@ export interface AccountCatagoryView {
   AccountType: string;
   AccountTypeId: number;
   CategoryName: string;
+  OverFlowAccountId?: number;
+  OverFlowAccount: string;
   DateAdded: Date;
   DateUpdated: Date;
 }

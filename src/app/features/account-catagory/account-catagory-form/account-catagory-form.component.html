@@ -44,6 +44,14 @@
         </div>
       </div>
       <div class="row">
+        <div class="col-sm-6 col-xs-12">
+          <label for="overflowAccount">Overflow Account</label>
+          <app-account-category-selector
+            formControlName="OverFlowAccount"
+          ></app-account-category-selector>
+        </div>
+      </div>
+      <div class="row">
         <div class="col-12">
           <app-form-options
             [isUpdate]="isUpdate"
