@@ -1,7 +1,6 @@
-/* import { SharedModule } from "src/app/shared/shared.module";
+import { SharedModule } from "src/app/shared/shared.module";
 import { RouterTestingModule } from "@angular/router/testing";
 import { ChecklistComponent } from "./checklist.component";
-import { ChecklistService } from "./checklist.service";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import {
   ComponentFixture,
@@ -10,6 +9,8 @@ import {
   inject
 } from "@angular/core/testing";
 import { ClickEventArgs } from "@syncfusion/ej2-navigations";
+import { CheckListReportApiService } from "./check-list-report-api.service";
+import { AccountingApiService } from "src/app/Services/accounting-api.service";
 
 describe("ChecklistComponent", () => {
   let component: ChecklistComponent;
@@ -20,7 +21,7 @@ describe("ChecklistComponent", () => {
     TestBed.configureTestingModule({
       imports: [SharedModule, RouterTestingModule, HttpClientTestingModule],
       declarations: [ChecklistComponent],
-      providers: [ChecklistService]
+      providers: [CheckListReportApiService, AccountingApiService]
     }).compileComponents();
   }));
 
@@ -33,11 +34,10 @@ describe("ChecklistComponent", () => {
   it("Should be created", () => {
     expect(component).toBeTruthy();
   });
-  it("Should be called clickHandler", () => {
+  it("Should call clickHandler", () => {
     spyOn(component, "clickHandler");
     component.clickHandler(args);
     fixture.detectChanges();
     expect(component.clickHandler).toHaveBeenCalled();
   });
 });
- */

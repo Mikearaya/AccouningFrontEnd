@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { PrintHeaderComponent } from './print-header.component';
+import { PrintHeaderComponent } from "./print-header.component";
 
-describe('PrintHeaderComponent', () => {
+describe("PrintHeaderComponent", () => {
   let component: PrintHeaderComponent;
   let fixture: ComponentFixture<PrintHeaderComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PrintHeaderComponent ]
-    })
-    .compileComponents();
+      declarations: [PrintHeaderComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('PrintHeaderComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

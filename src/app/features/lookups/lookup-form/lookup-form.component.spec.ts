@@ -14,6 +14,7 @@ import { RouterTestingModule } from "@angular/router/testing";
 import { ActivatedRoute, convertToParamMap } from "@angular/router";
 import { LookupFormComponent } from "./lookup-form.component";
 import { LookupService } from "../../../core/services/lookup.service";
+import { AccountingApiService } from "src/app/Services/accounting-api.service";
 
 describe(" Lookup form component", () => {
   let component: LookupFormComponent;
@@ -24,7 +25,7 @@ describe(" Lookup form component", () => {
     const moduleDef: TestModuleMetadata = {
       imports: [SharedModule, RouterTestingModule],
       declarations: [LookupFormComponent],
-      providers: [LookupService]
+      providers: [LookupService, AccountingApiService]
     };
     if (moduleDef.providers && provider) {
       moduleDef.providers.push(provider);
@@ -88,33 +89,4 @@ describe(" Lookup form component", () => {
       });
     });
   });
-
-  // describe("When an id is provided in the url param--(Update lookup form)", () => {
-  //   beforeEach(async(() => {
-  //     makeCompiledTestBed({
-  //       provide: ActivatedRoute,
-  //       useValue: {
-  //         snapshot: {
-  //           paramMap: convertToParamMap({ id: 1 })
-  //         }
-  //       }
-  //     });
-  //   }));
-  //   beforeEach(setupTestVars);
-
-  //   /*  let catagoryId = 1;
-  //   let accountCatagory;
-  //   accountCatagory = ActivatedRoute.snapshot.paramMap.get(catagoryId);
-  //   it("should ..", () => {
-  //     expect(accountCatagory).toBe(1);
-  //   }); */
-  //   describe("Initialize catagory", () => {
-  //     let data: any;
-  //     it("Should be called", () => {
-  //       spyOn(component, "initializeLookup");
-  //       component.initializeLookup(data);
-  //       expect(component.initializeLookup).toHaveBeenCalled();
-  //     });
-  //   });
-  // });
 });

@@ -6,6 +6,7 @@ import { RouterTestingModule } from "@angular/router/testing";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { ReportApiService } from "../report-api.service";
 import { ClickEventArgs } from "@syncfusion/ej2-angular-navigations";
+import { AccountingApiService } from "src/app/Services/accounting-api.service";
 
 describe("ConsolidatedTrialBalanceComponent", () => {
   let component: ConsolidatedTrialBalanceComponent;
@@ -16,7 +17,7 @@ describe("ConsolidatedTrialBalanceComponent", () => {
     TestBed.configureTestingModule({
       imports: [SharedModule, RouterTestingModule, HttpClientTestingModule],
       declarations: [ConsolidatedTrialBalanceComponent],
-      providers: [ReportApiService]
+      providers: [ReportApiService, AccountingApiService]
     }).compileComponents();
   }));
 
@@ -29,7 +30,7 @@ describe("ConsolidatedTrialBalanceComponent", () => {
   it("Should be create", () => {
     expect(component).toBeTruthy();
   });
-  it("Should be called clickHandler", () => {
+  it("Should call clickHandler", () => {
     spyOn(component, "clickHandler");
     component.clickHandler(args);
     fixture.detectChanges();

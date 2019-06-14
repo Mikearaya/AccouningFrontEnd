@@ -6,6 +6,7 @@ import { SharedModule } from "src/app/shared/shared.module";
 import { RouterTestingModule } from "@angular/router/testing";
 import { AccountCategory } from "../account-catagory-domain";
 import { of } from "rxjs";
+import { AccountingApiService } from "src/app/Services/accounting-api.service";
 
 describe("AccountCatagoryViewComponent", () => {
   let component: AccountCatagoryViewComponent;
@@ -15,7 +16,7 @@ describe("AccountCatagoryViewComponent", () => {
     TestBed.configureTestingModule({
       imports: [SharedModule, RouterTestingModule],
       declarations: [AccountCatagoryViewComponent],
-      providers: [AccountCatagoryApiService]
+      providers: [AccountCatagoryApiService, AccountingApiService]
     }).compileComponents();
   }));
 

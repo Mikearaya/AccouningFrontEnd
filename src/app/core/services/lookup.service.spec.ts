@@ -8,6 +8,7 @@ import { LookupView, Lookup } from "../../features/lookups/lookups";
 import { AccountCategory } from "../../features/account-catagory/account-catagory-domain";
 import { RouterTestingModule } from "@angular/router/testing";
 import { CoreModule } from "../core.module";
+import { AccountingApiService } from "src/app/Services/accounting-api.service";
 
 describe("Lookup service", () => {
   let lookupApi: LookupService;
@@ -16,7 +17,7 @@ describe("Lookup service", () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, CoreModule, RouterTestingModule],
-      providers: [LookupService]
+      providers: [LookupService, AccountingApiService]
     });
 
     // inject the service

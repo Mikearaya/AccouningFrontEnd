@@ -15,6 +15,7 @@ import { ActivatedRoute, convertToParamMap } from "@angular/router";
 
 import { AccountCatagoryFormComponent } from "./account-catagory-form.component";
 import { AccountCatagoryApiService } from "../../../core/account-catagory-api.service";
+import { AccountingApiService } from "src/app/Services/accounting-api.service";
 
 describe(" Account catagory form component", () => {
   let component: AccountCatagoryFormComponent;
@@ -26,7 +27,7 @@ describe(" Account catagory form component", () => {
     const moduleDef: TestModuleMetadata = {
       imports: [SharedModule, RouterTestingModule],
       declarations: [AccountCatagoryFormComponent],
-      providers: [AccountCatagoryApiService]
+      providers: [AccountCatagoryApiService, AccountingApiService]
     };
     if (moduleDef.providers && provider) {
       moduleDef.providers.push(provider);

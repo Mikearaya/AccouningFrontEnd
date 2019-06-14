@@ -15,6 +15,7 @@ import {
   IncomeStatmentViewModel,
   BalanceSheetViewModel
 } from "./report";
+import { AccountingApiService } from "src/app/Services/accounting-api.service";
 
 describe("ReportApiService", () => {
   let reportApi: ReportApiService;
@@ -23,7 +24,7 @@ describe("ReportApiService", () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, CoreModule, RouterTestingModule],
-      providers: [ReportApiService]
+      providers: [ReportApiService, AccountingApiService]
     });
 
     reportApi = TestBed.get(ReportApiService);
@@ -196,22 +197,26 @@ describe("ReportApiService", () => {
         Id: 1,
         AccountId: "100",
         AccountName: "acc name",
+        ControlAccountId: 11,
         Entries: [
           {
             AccountId: "100",
             AccountName: "acc name",
+            ControlAccountId: 1001,
             Credit: 2,
             Debit: 2
           },
           {
             AccountId: "100",
             AccountName: "acc name",
+            ControlAccountId: 1001,
             Credit: 2,
             Debit: 2
           },
           {
             AccountId: "100",
             AccountName: "acc name",
+            ControlAccountId: 1001,
             Credit: 2,
             Debit: 2
           }
@@ -221,22 +226,26 @@ describe("ReportApiService", () => {
         Id: 2,
         AccountId: "101",
         AccountName: "acc name",
+        ControlAccountId: 22,
         Entries: [
           {
             AccountId: "100",
             AccountName: "acc name",
+            ControlAccountId: 1011,
             Credit: 2,
             Debit: 2
           },
           {
             AccountId: "100",
             AccountName: "acc name",
+            ControlAccountId: 1011,
             Credit: 2,
             Debit: 2
           },
           {
             AccountId: "100",
             AccountName: "acc name",
+            ControlAccountId: 1011,
             Credit: 2,
             Debit: 2
           }
@@ -327,6 +336,7 @@ describe("ReportApiService", () => {
           }
         ],
         TotalRevenue: 100,
+        CostOfGoodsSold: 1001,
         Expense: [
           {
             AccountType: "Maintainance",
@@ -361,33 +371,33 @@ describe("ReportApiService", () => {
       {
         Assets: [
           {
-            AccountCatagory: "Fixed assets",
+            AccountCategory: "Fixed assets",
             Amount: 1000
           },
           {
-            AccountCatagory: "Stock",
+            AccountCategory: "Stock",
             Amount: 20000
           }
         ],
         TotalAsset: 21000,
         Capitals: [
           {
-            AccountCatagory: "Share capital",
+            AccountCategory: "Share capital",
             Amount: 1000
           },
           {
-            AccountCatagory: "Net capital",
+            AccountCategory: "Net capital",
             Amount: 20000
           }
         ],
         TotalCapital: 21000,
         Liabilities: [
           {
-            AccountCatagory: "Bank overdraft",
+            AccountCategory: "Bank overdraft",
             Amount: 200
           },
           {
-            AccountCatagory: "Devidend payable",
+            AccountCategory: "Devidend payable",
             Amount: 300
           }
         ],

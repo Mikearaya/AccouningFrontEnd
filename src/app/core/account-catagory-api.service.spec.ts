@@ -8,6 +8,7 @@ import { AccountCategory } from "../features/account-catagory/account-catagory-d
 import { Accounts } from "../features/accounts/accounts";
 import { CoreModule } from "./core.module";
 import { RouterTestingModule } from "@angular/router/testing";
+import { AccountingApiService } from "../Services/accounting-api.service";
 
 describe("Account catagories service", () => {
   let catagoryApi: AccountCatagoryApiService;
@@ -16,7 +17,7 @@ describe("Account catagories service", () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, CoreModule, RouterTestingModule],
-      providers: [AccountCatagoryApiService]
+      providers: [AccountCatagoryApiService, AccountingApiService]
     });
 
     // inject the service

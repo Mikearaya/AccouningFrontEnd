@@ -8,6 +8,7 @@ import {
 import { AccountCategorySelectorComponent } from "./account-category-selector.component";
 import { AccountCatagoryApiService } from "src/app/core/account-catagory-api.service";
 import { SharedModule } from "../shared.module";
+import { AccountingApiService } from "src/app/Services/accounting-api.service";
 
 describe("AccountCategorySelectorComponent", () => {
   let component: AccountCategorySelectorComponent;
@@ -16,7 +17,7 @@ describe("AccountCategorySelectorComponent", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [SharedModule],
-      providers: [AccountCatagoryApiService]
+      providers: [AccountCatagoryApiService, AccountingApiService]
     }).compileComponents();
   }));
 

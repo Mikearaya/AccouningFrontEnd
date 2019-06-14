@@ -11,15 +11,16 @@ import {
 } from "../../features/account-type/account-type";
 import { CoreModule } from "src/app/core/core.module";
 import { RouterTestingModule } from "@angular/router/testing";
+import { AccountingApiService } from "src/app/Services/accounting-api.service";
 
-describe("Account type service", () => {
+fdescribe("Account type service", () => {
   let typeApi: AccountTypeService;
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, CoreModule, RouterTestingModule],
-      providers: [AccountTypeService]
+      providers: [AccountTypeService, AccountingApiService]
     });
 
     // inject the service
@@ -32,8 +33,9 @@ describe("Account type service", () => {
       Id: 1,
       Type: "Account1",
       AccountType: "Asset",
-      TypeofId: 1,
-      IsSummary: true
+      TypeOfId: 1,
+      IsSummary: true,
+      AccountTypeId: 11
     };
 
     typeApi.getAccountTypeById(1).subscribe((data: any) => {
@@ -56,31 +58,30 @@ describe("Account type service", () => {
 
     httpMock.verify();
   });
-  it("Should get all account types successfull", () => {
+  fit("Should get all account types successfull", () => {
     const returnedTypes: AccountTypeViewModel[] = [
       {
         Id: 1,
         Type: "Account1",
         AccountType: "Asset",
-        TypeofId: 1,
-        IsSummary: true
+        TypeOfId: 1,
+        IsSummary: true,
+        AccountTypeId: 11
       },
       {
         Id: 2,
         Type: "Account2",
         AccountType: "Expence",
-        TypeofId: 3,
-        IsSummary: true
+        TypeOfId: 3,
+        IsSummary: true,
+        AccountTypeId: 11
       }
     ];
     typeApi.getAccountTypes().subscribe((data: any) => {
       expect(data).toEqual(returnedTypes);
     });
     // telling the httmock what kind of request we expect and toward which url
-    const req = httpMock.expectOne(
-      "http://localhost:5000/account-types?",
-      "call to api"
-    );
+    const req = httpMock.expectOne("account-types?", "call to api");
     expect(req.request.method).toBe("GET");
 
     // fire the request with its data we really expect

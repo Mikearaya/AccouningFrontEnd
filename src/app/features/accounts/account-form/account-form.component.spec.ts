@@ -21,6 +21,7 @@ import { Accounts } from "../accounts";
 import { DebugElement } from "@angular/core";
 import { AccountCatagoryApiService } from "src/app/core/account-catagory-api.service";
 import { ActivatedRoute, convertToParamMap } from "@angular/router";
+import { AccountingApiService } from "src/app/Services/accounting-api.service";
 
 describe(" Account form component", () => {
   let component: AccountFormComponent;
@@ -31,7 +32,11 @@ describe(" Account form component", () => {
     const moduleDef: TestModuleMetadata = {
       imports: [SharedModule, RouterTestingModule],
       declarations: [AccountFormComponent],
-      providers: [AccountsService, AccountCatagoryApiService]
+      providers: [
+        AccountsService,
+        AccountCatagoryApiService,
+        AccountingApiService
+      ]
     };
     if (moduleDef.providers && provider) {
       moduleDef.providers.push(provider);
@@ -85,7 +90,7 @@ describe(" Account form component", () => {
         expect(component.accountForm.valid).toBeFalsy();
       });
       it("Account name field validity", () => {
-        const accountName = component.Name;
+        const accountName = component.AccountName;
         expect(accountName.valid).toBeFalsy();
         accountName.setValue("appdiv");
         expect(accountName.valid).toBeTruthy();
@@ -143,7 +148,7 @@ describe(" Account form component", () => {
         expect(constCenter.value).toEqual("Appdiv");
       });
       it("Should be valid when not empty", () => {
-        component.Name.setValue("Appdiv");
+        component.AccountName.setValue("Appdiv");
         component.CatagoryId.setValue("Appdiv");
         component.AccountId.setValue("Appd");
         component.ParentAccount.setValue("Appdiv");

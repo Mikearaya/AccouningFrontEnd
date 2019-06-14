@@ -18,6 +18,7 @@ import {
 } from "src/app/features/ledgers/ledger";
 import { CoreModule } from "../core.module";
 import { RouterTestingModule } from "@angular/router/testing";
+import { AccountingApiService } from "src/app/Services/accounting-api.service";
 
 describe("Ledger service", () => {
   let ledgerService: LedgerService;
@@ -26,7 +27,7 @@ describe("Ledger service", () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, CoreModule, RouterTestingModule],
-      providers: [LedgerService]
+      providers: [LedgerService, AccountingApiService]
     });
 
     // inject the service

@@ -1,16 +1,21 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { AccountsScheduleComponent } from './accounts-schedule.component';
+import { AccountsScheduleComponent } from "./accounts-schedule.component";
+import { SharedModule } from "src/app/shared/shared.module";
+import { RouterTestingModule } from "@angular/router/testing";
+import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { AccountingApiService } from "src/app/Services/accounting-api.service";
 
-describe('AccountsScheduleComponent', () => {
+describe("AccountsScheduleComponent", () => {
   let component: AccountsScheduleComponent;
   let fixture: ComponentFixture<AccountsScheduleComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AccountsScheduleComponent ]
-    })
-    .compileComponents();
+      imports: [SharedModule, RouterTestingModule, HttpClientTestingModule],
+      declarations: [AccountsScheduleComponent],
+      providers: [AccountingApiService]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +24,7 @@ describe('AccountsScheduleComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });
