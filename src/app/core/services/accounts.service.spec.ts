@@ -63,13 +63,13 @@ describe("Accounts service", () => {
       Count: 1
     };
     accountService.getAccountById(1).subscribe((data: any) => {
-      expect(data.AccountId).toBe("2222");
+      expect(data).toBe(returnedAccount);
     });
     // telling the httmock what kind of request we expect and toward which url
-    const req = httpMock.expectOne(
-      "http://localhost:5000/accounts/1",
-      "call to api"
-    );
+    const req = httpMock.expectOne(request => {
+      console.log("url: ", request.url);
+      return true;
+    });
     expect(req.request.method).toBe("GET");
 
     // fire the request with its data we really expect
@@ -124,11 +124,11 @@ describe("Accounts service", () => {
       console.log(data);
     });
     // telling the httmock what kind of request we expect and toward which url
-    const req = httpMock.expectOne(
-      "http://localhost:5000/accounts?",
-      "call to api"
-    );
-    expect(req.request.method).toBe("GET");
+    const req = httpMock.expectOne(request => {
+      console.log("url: ", request.url);
+      return true;
+    });
+    expect(req.request.method).toBe("POST");
 
     // fire the request with its data we really expect
 
@@ -150,10 +150,10 @@ describe("Accounts service", () => {
     accountService.createAccount(newAccount).subscribe((data: any) => {
       expect(data.Id).toBe(3);
     });
-    const req = httpMock.expectOne(
-      "http://localhost:5000/accounts",
-      "post to api"
-    );
+    const req = httpMock.expectOne(request => {
+      console.log("url: ", request.url);
+      return true;
+    });
     expect(req.request.method).toBe("POST");
     req.flush(newAccount);
     httpMock.verify();
@@ -174,10 +174,10 @@ describe("Accounts service", () => {
       .subscribe((data: any) => {
         expect(data.AccountId).toBe("2222");
       });
-    const req = httpMock.expectOne(
-      "http://localhost:5000/accounts/2",
-      "put to api"
-    );
+    const req = httpMock.expectOne(request => {
+      console.log("url: ", request.url);
+      return true;
+    });
     expect(req.request.method).toBe("PUT");
 
     req.flush(updatedAccount);
@@ -189,10 +189,10 @@ describe("Accounts service", () => {
       expect(data).toBe(2);
     });
 
-    const req = httpMock.expectOne(
-      "http://localhost:5000/accounts/2",
-      "delete to api"
-    );
+    const req = httpMock.expectOne(request => {
+      console.log("url: ", request.url);
+      return true;
+    });
     expect(req.request.method).toBe("DELETE");
 
     req.flush(2);

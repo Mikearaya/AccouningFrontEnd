@@ -15,7 +15,7 @@ import { AccountingApiService } from "src/app/Services/accounting-api.service";
 
 @Injectable()
 export class ReportApiService {
-  private url = "report";
+  public url = "report";
   constructor(
     private httpClient: HttpClient,
     private accountingService: AccountingApiService

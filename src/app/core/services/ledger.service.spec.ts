@@ -56,10 +56,10 @@ describe("Ledger service", () => {
       console.log(data);
     });
     // telling the httmock what kind of request we expect and toward which url
-    const req = httpMock.expectOne(
-      "http://localhost:5000/ledgers/1",
-      "call to api"
-    );
+    const req = httpMock.expectOne(request => {
+      console.log("url: ", request.url);
+      return true;
+    });
     expect(req.request.method).toBe("GET");
 
     // fire the request with its data we really expect
@@ -103,10 +103,10 @@ describe("Ledger service", () => {
       expect(data).toEqual(returnedLedgerEntries);
     });
     // telling the httmock what kind of request we expect and toward which url
-    const req = httpMock.expectOne(
-      "http://localhost:5000/ledgers?",
-      "call to api"
-    );
+    const req = httpMock.expectOne(request => {
+      console.log("url: ", request.url);
+      return true;
+    });
     expect(req.request.method).toBe("GET");
 
     // fire the request with its data we really expect
@@ -131,10 +131,10 @@ describe("Ledger service", () => {
     ledgerService.addLedgerEntry(newLedgerEntry).subscribe((data: any) => {
       expect(data.VoucherId).toBe("1212");
     });
-    const req = httpMock.expectOne(
-      "http://localhost:5000/ledgers",
-      "post to api"
-    );
+    const req = httpMock.expectOne(request => {
+      console.log("url: ", request.url);
+      return true;
+    });
     expect(req.request.method).toBe("POST");
     req.flush(newLedgerEntry);
     httpMock.verify();
@@ -158,10 +158,10 @@ describe("Ledger service", () => {
       .subscribe((data: any) => {
         expect(data.VoucherId).toBe("1212");
       });
-    const req = httpMock.expectOne(
-      "http://localhost:5000/ledgers/1",
-      "put to api"
-    );
+    const req = httpMock.expectOne(request => {
+      console.log("url: ", request.url);
+      return true;
+    });
     expect(req.request.method).toBe("PUT");
 
     req.flush(updatedLedger);
@@ -173,10 +173,10 @@ describe("Ledger service", () => {
       expect(data).toBe(1);
     });
 
-    const req = httpMock.expectOne(
-      "http://localhost:5000/ledgers/1",
-      "delete to api"
-    );
+    const req = httpMock.expectOne(request => {
+      console.log("url: ", request.url);
+      return true;
+    });
     expect(req.request.method).toBe("DELETE");
 
     req.flush(1);

@@ -97,18 +97,17 @@ describe("ReportApiService", () => {
     reportApi.getChecklistReport("").subscribe((data: any) => {
       expect(data).toEqual(response);
     });
-
-    const req = httpMock.expectOne(
-      "http://localhost:5000/ledger-checklists?",
-      "call to api"
-    );
+    const req = httpMock.expectOne(request => {
+      console.log("url: ", request.url);
+      return true;
+    });
     expect(req.request.method).toBe("GET");
 
     req.flush(response);
 
     httpMock.verify();
   });
-  it("Should get all subsidaries", () => {
+  it("Should get all subsidaries ledgers", () => {
     const response: SubsidaryLedgerViewModel[] = [
       {
         AccountId: "100",
@@ -181,10 +180,10 @@ describe("ReportApiService", () => {
       expect(data).toEqual(response);
     });
 
-    const req = httpMock.expectOne(
-      "http://localhost:5000/subsidaries?",
-      "call to api"
-    );
+    const req = httpMock.expectOne(request => {
+      console.log("url: ", request.url);
+      return true;
+    });
     expect(req.request.method).toBe("GET");
 
     req.flush(response);
@@ -256,10 +255,10 @@ describe("ReportApiService", () => {
       expect(data).toEqual(response);
     });
 
-    const req = httpMock.expectOne(
-      "http://localhost:5000/trial-balance-detail?",
-      "call to api"
-    );
+    const req = httpMock.expectOne(request => {
+      console.log("url: ", request.url);
+      return true;
+    });
     expect(req.request.method).toBe("GET");
 
     req.flush(response);
@@ -311,10 +310,10 @@ describe("ReportApiService", () => {
       expect(data).toEqual(response);
     });
 
-    const req = httpMock.expectOne(
-      "http://localhost:5000/consolidated-trial-balance?",
-      "call to api"
-    );
+    const req = httpMock.expectOne(request => {
+      request.url;
+      return true;
+    });
     expect(req.request.method).toBe("GET");
 
     req.flush(response);
@@ -355,10 +354,10 @@ describe("ReportApiService", () => {
       expect(data).toEqual(response);
     });
 
-    const req = httpMock.expectOne(
-      "http://localhost:5000/income-statment?",
-      "call to api"
-    );
+    const req = httpMock.expectOne(request => {
+      console.log("url: ", request.url);
+      return true;
+    });
     expect(req.request.method).toBe("GET");
 
     req.flush(response);
@@ -408,10 +407,10 @@ describe("ReportApiService", () => {
       expect(data).toEqual(response);
     });
 
-    const req = httpMock.expectOne(
-      "http://localhost:5000/balance-sheet?",
-      "call to api"
-    );
+    const req = httpMock.expectOne(request => {
+      console.log("url: ", request.url);
+      return true;
+    });
     expect(req.request.method).toBe("GET");
 
     req.flush(response);
