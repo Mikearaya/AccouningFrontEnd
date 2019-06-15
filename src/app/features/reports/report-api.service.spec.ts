@@ -13,7 +13,9 @@ import {
   TrialBalanceDetailViewModel,
   ConsolidatedTrialBalanceViewModel,
   IncomeStatmentViewModel,
-  BalanceSheetViewModel
+  BalanceSheetViewModel,
+  AccountScheduleModel,
+  CostOfGoodsSoldModel
 } from "./report";
 import { AccountingApiService } from "src/app/Services/accounting-api.service";
 
@@ -404,6 +406,81 @@ describe("ReportApiService", () => {
       }
     ];
     reportApi.getBalanceSheet("").subscribe((data: any) => {
+      expect(data).toEqual(response);
+    });
+
+    const req = httpMock.expectOne(request => {
+      console.log("url: ", request.url);
+      return true;
+    });
+    expect(req.request.method).toBe("GET");
+
+    req.flush(response);
+
+    httpMock.verify();
+  });
+
+  it("Should get account schedule", () => {
+    const response: AccountScheduleModel[] = [
+      {
+        ParentAccountId: 123,
+        ParentAccountName: "parent",
+        Subsidaries: [
+          {
+            SubsidaryId: "123",
+            Subsidary: "subsidary",
+            Credit: 111,
+            Debit: 111,
+            EndingBalance: 222,
+            BeginningBalance: 100
+          },
+          {
+            SubsidaryId: "1233",
+            Subsidary: "subsidary",
+            Credit: 1111,
+            Debit: 1111,
+            EndingBalance: 2222,
+            BeginningBalance: 1000
+          }
+        ]
+      }
+    ];
+    reportApi.getAccountSchedule("").subscribe((data: any) => {
+      expect(data).toEqual(response);
+    });
+
+    const req = httpMock.expectOne(request => {
+      console.log("url: ", request.url);
+      return true;
+    });
+    expect(req.request.method).toBe("GET");
+
+    req.flush(response);
+
+    httpMock.verify();
+  });
+  it("Should get cost of goods sold", () => {
+    const response: CostOfGoodsSoldModel[] = [
+      {
+        Accounts: [
+          {
+            AccountName: "account1",
+            Value: 100
+          },
+          {
+            AccountName: "accoun2",
+            Value: 1000
+          }
+        ],
+        TotalProductionCost: 123,
+        TotalProductionCostForAccount: 1234,
+        WorkInProcessBegining: 111,
+        WorkInProcessEnding: 222,
+        FinishedGoodsBeginning: 112,
+        CostOfAvailableGoods: 221
+      }
+    ];
+    reportApi.getCostOfGoodsSold("").subscribe((data: any) => {
       expect(data).toEqual(response);
     });
 
