@@ -127,15 +127,12 @@ export class AppComponent implements OnInit {
         { claimType: "canViewLookups", claimValue: "false" },
         { claimType: "canAddLookups", claimValue: "true" },
         { claimType: "canUpdateLookups", claimValue: "true" },
-        { claimType: "canDeleteLookups", claimValue: "true" },
+        { claimType: "canDeleteLookups", claimValue: "true" }, 
         { claimType: "canViewBalanceSheet", claimValue: "true" },
         { claimType: "canViewIncomeStatement", claimValue: "true" },
         { claimType: "canViewAccountSchedule", claimValue: "true" },
         { claimType: "canViewAccountChecklist", claimValue: "true" },
-        {
-          claimType: "canViewConsolidatedTrialBalance",
-          claimValue: "true"
-        },
+        { claimType: "canViewConsolidatedTrialBalance", claimValue: "true" },
         { claimType: "canViewSubsidaryLedger", claimValue: "true" },
         { claimType: "canViewTrialBalanceDetail", claimValue: "true" },
         {

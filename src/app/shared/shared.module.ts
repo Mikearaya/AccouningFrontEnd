@@ -54,6 +54,7 @@ import { Dialog } from "@syncfusion/ej2-popups";
 import { DialogModule } from "@syncfusion/ej2-angular-popups";
 import { LedgerViewComponent } from "../features/ledgers/ledger-view/ledger-view.component";
 import { UnAuthorizedPageComponent } from "./un-authorized-page/un-authorized-page.component";
+import { LedgerEntrySelectorComponent } from "./ledger-entry-selector/ledger-entry-selector.component";
 
 @NgModule({
   imports: [
@@ -124,7 +125,8 @@ import { UnAuthorizedPageComponent } from "./un-authorized-page/un-authorized-pa
     DropDownButtonModule,
     PrintHeaderComponent,
     HasClaimDirective,
-    DialogModule
+    DialogModule,
+    LedgerEntrySelectorComponent
   ],
   declarations: [
     FormOptionsComponent,
@@ -140,7 +142,8 @@ import { UnAuthorizedPageComponent } from "./un-authorized-page/un-authorized-pa
     PrintHeaderComponent,
     GroupedDataViewComponent,
     HasClaimDirective,
-    UnAuthorizedPageComponent
+    UnAuthorizedPageComponent,
+    LedgerEntrySelectorComponent
   ],
   providers: []
 })

@@ -1,0 +1,38 @@
+<div class="container-fluid">
+  <div class="col-2">
+    <button
+      type="button"
+      [disabled]="!previous"
+      (click)="changeEntry(previous)"
+      ejs-button
+      *ngIf="showNavigator"
+    >
+      Prev
+    </button>
+  </div>
+  <div class="col-8">
+    <ejs-autocomplete
+      id="account"
+      [enabled]="!disabled"
+      #accountElement
+      name="account"
+      placeholder="search for account"
+      [text]="text"
+      [fields]="fields"
+      (filtering)="onFiltering($event)"
+      [dataSource]="accounts"
+      (change)="entryChanged($event)"
+    ></ejs-autocomplete>
+  </div>
+  <div class="col-2">
+    <button
+      type="button"
+      [disabled]="!next"
+      (click)="changeEntry(next)"
+      ejs-button
+      *ngIf="showNavigator"
+    >
+      Next
+    </button>
+  </div>
+</div>

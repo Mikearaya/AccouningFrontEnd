@@ -84,6 +84,10 @@ export class LedgerComponent implements OnInit {
     }
     this.Entries.valueChanges.subscribe(value => this.calculateBalance(value));
   }
+
+  onEntrySelected(data: JornalEntryViewModel): void {
+    this.initializeForm(data);
+  }
   public setPostStatus() {
     if (this.Posted.value) {
       this.Posted.setValue(false);
@@ -181,6 +185,8 @@ export class LedgerComponent implements OnInit {
     });
   }
   initializeForm(data: JornalEntryViewModel) {
+    this.data = data;
+    this.isUpdate = true;
     this.ledgerForm = this.formBuilder.group({
       VoucherId: [data.VoucherId, Validators.required],
       Reference: [data.Reference],
@@ -196,6 +202,7 @@ export class LedgerComponent implements OnInit {
     if (this.postStatus) {
       this.disableForm();
     }
+    this.VoucherId.setValue(data.VoucherId);
   }
 
   onSubmit() {
@@ -282,7 +289,6 @@ export class LedgerComponent implements OnInit {
     return this.Posted.value && this.isUpdate;
   }
   disableForm() {
-    this.VoucherId.disable();
     this.Description.disable();
     this.Reference.disable();
     this.Date.disable();

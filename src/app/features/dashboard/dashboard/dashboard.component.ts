@@ -1,16 +1,9 @@
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  ElementRef,
-  ViewEncapsulation
-} from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { AccountingApiService } from "src/app/Services/accounting-api.service";
 import { DashboardViewModel } from "src/app/Services/system-data.model";
-import { DialogComponent, DialogUtility } from "@syncfusion/ej2-angular-popups";
+import { DialogComponent } from "@syncfusion/ej2-angular-popups";
 import { EmitType } from "@syncfusion/ej2-base";
-import { container } from "@angular/core/src/render3";
-import { contentReady, DataStateChangeEventArgs } from "@syncfusion/ej2-grids";
+import { DataStateChangeEventArgs } from "@syncfusion/ej2-grids";
 import { LedgerService } from "src/app/core/services/ledger.service";
 import { Subject } from "rxjs";
 import { CustomGridColumns } from "src/app/shared/data-view/data-view.component";

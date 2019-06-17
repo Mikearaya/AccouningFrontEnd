@@ -78,7 +78,7 @@ export class AccountSelectorComponent implements ControlValueAccessor {
       if (this._value) {
         if (obj !== 0) {
           const data = this.accounts.filter(a => a.Id === obj);
-          console.log(`==========-----${obj}-----------`, data);
+
           data.forEach(element => {
             this.text = element.Name;
           });
@@ -95,6 +95,4 @@ export class AccountSelectorComponent implements ControlValueAccessor {
   setDisabledState?(isDisabled: boolean): void {
     this.disabled = isDisabled;
   }
-
-  ngOnInit() {}
 }

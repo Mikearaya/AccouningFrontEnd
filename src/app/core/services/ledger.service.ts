@@ -13,7 +13,8 @@ import {
   JornalEntryViewModel,
   LedgerEntryViewModel,
   UpdateLedgerStatus,
-  LedgerEntry
+  LedgerEntry,
+  LedgerEntryIndexView
 } from "../../features/ledgers/ledger";
 import { AccountingApiService } from "src/app/Services/accounting-api.service";
 import {
@@ -43,6 +44,12 @@ export class LedgerService extends Subject<DataStateChangeEventArgs> {
 
   getLedgerEntryById(id: number): Observable<JornalEntryViewModel> {
     return this.httpClient.get<JornalEntryViewModel>(`${this.url}/${id}`);
+  }
+
+  getLedgerEntryByVoucherId(id: string): Observable<LedgerEntryIndexView> {
+    return this.httpClient.get<LedgerEntryIndexView>(
+      `${this.url}/voucher/${id}`
+    );
   }
 
   addLedgerEntry(newLedger: LedgerEntry): Observable<LedgerEntryViewModel> {

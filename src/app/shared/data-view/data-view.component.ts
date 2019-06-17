@@ -345,3 +345,4 @@ export interface CustomGridColumns {
   textAlign?: string;
   hederAlign?: string;
 }
+

@@ -35,6 +35,8 @@ export class UpdateLedgerStatus {
 }
 
 export class JornalEntryViewModel {
+  Prev?: number;
+  Next?: number;
   Id: number;
   Description: string;
   Date: Date;
@@ -44,4 +46,9 @@ export class JornalEntryViewModel {
   DateAdded: Date;
   DateUpdated: Date;
   Entries: Jornal[] = [];
+}
+
+export interface LedgerEntryIndexView {
+  Id: number;
+  VoucherId: string;
 }
