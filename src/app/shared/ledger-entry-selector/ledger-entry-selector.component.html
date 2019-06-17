@@ -1,38 +1,67 @@
 <div class="container-fluid">
-  <div class="col-2">
-    <button
-      type="button"
-      [disabled]="!previous"
-      (click)="changeEntry(previous)"
-      ejs-button
-      *ngIf="showNavigator"
-    >
-      Prev
-    </button>
+  <div class="row">
+    <div class="col-10">
+      <ejs-autocomplete
+        id="account"
+        [enabled]="!disabled"
+        #accountElement
+        name="account"
+        placeholder="search for account"
+        [text]="text"
+        [fields]="fields"
+        (filtering)="onFiltering($event)"
+        [dataSource]="accounts"
+        (change)="entryChanged($event)"
+        [width]="640"
+      ></ejs-autocomplete>
+    </div>
+    <div class="col-1">
+      <button
+        type="button"
+        id="prev-btn"
+        [disabled]="!previous"
+        (click)="changeEntry(previous)"
+        ejs-button
+        *ngIf="showNavigator"
+        iconCss="fas fa-step-backward"
+      ></button>
+    </div>
+    <div class="col-1">
+      <button
+        type="button"
+        id="nxt-btn"
+        [disabled]="!next"
+        (click)="changeEntry(next)"
+        ejs-button
+        *ngIf="showNavigator"
+        iconCss="fas fa-step-forward"
+      ></button>
+    </div>
   </div>
-  <div class="col-8">
-    <ejs-autocomplete
-      id="account"
-      [enabled]="!disabled"
-      #accountElement
-      name="account"
-      placeholder="search for account"
-      [text]="text"
-      [fields]="fields"
-      (filtering)="onFiltering($event)"
-      [dataSource]="accounts"
-      (change)="entryChanged($event)"
-    ></ejs-autocomplete>
-  </div>
-  <div class="col-2">
-    <button
-      type="button"
-      [disabled]="!next"
-      (click)="changeEntry(next)"
-      ejs-button
-      *ngIf="showNavigator"
-    >
-      Next
-    </button>
-  </div>
+
+  <!--   <div class="row">
+    <div class="col-2">
+      <button
+        type="button"
+        [disabled]="!previous"
+        (click)="changeEntry(previous)"
+        ejs-button
+        *ngIf="showNavigator"
+      >
+        Prev
+      </button>
+    </div>
+    <div class="col-8"></div>
+    <div class="col-2">
+      <button
+        type="button"
+        [disabled]="!next"
+        (click)="changeEntry(next)"
+        ejs-button
+        *ngIf="showNavigator"
+      >
+        Next
+      </button>
+    </div>
+  </div> -->
 </div>

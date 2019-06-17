@@ -1,0 +1,35 @@
+button {
+  height: 25px;
+  font-size: small;
+  background: #4d841d;
+  color: white;
+}
+
+button:hover {
+  background: #4d841d55;
+}
+
+button:active {
+  background: #4d841d55 !important;
+}
+
+.e-input-group.e-control-wrapper.e-ddl {
+  margin-left: -15px;
+}
+
+#prev-btn {
+  float: right;
+}
+
+#nxt-btn {
+  float: left;
+  margin-left: -15px;
+}
+
+.e-input.e-lib.e-keyboard * {
+  text-align: center !important;
+}
+
+i {
+  font-size: 10px;
+}
