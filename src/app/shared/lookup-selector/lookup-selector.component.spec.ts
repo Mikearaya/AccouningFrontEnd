@@ -8,6 +8,7 @@ import {
 import { LookupSelectorComponent } from "./lookup-selector.component";
 import { SharedModule } from "../shared.module";
 import { LookupService } from "src/app/core/services/lookup.service";
+import { AccountingApiService } from "src/app/Services/accounting-api.service";
 
 describe("LookupSelectorComponent", () => {
   let component: LookupSelectorComponent;
@@ -17,7 +18,7 @@ describe("LookupSelectorComponent", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [SharedModule],
-      providers: [LookupService]
+      providers: [LookupService, AccountingApiService]
     }).compileComponents();
   }));
 
@@ -27,7 +28,7 @@ describe("LookupSelectorComponent", () => {
     fixture.detectChanges();
   });
 
-  it("should create", inject([LookupService], lookupApi => {
+  it("should create", () => {
     expect(component).toBeTruthy();
-  }));
+  });
 });

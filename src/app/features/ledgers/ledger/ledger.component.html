@@ -30,8 +30,17 @@
               [value]="Date.value"
               id="date"
               name="date"
+              [ngStyle]="{ display: 'none' }"
             >
             </ejs-datepicker>
+            <ejs-maskedtextbox
+              mask="[0-1][0-3]/[0-3][0-9]/[2-9][0-9][0-9][0-9]"
+              formControlName="Date"
+              [value]="Date.value"
+              id="date"
+              name="date"
+              placeholder="date(mm/dd/yyyy)"
+            ></ejs-maskedtextbox>
 
             <div class="e-error" *ngIf="Date.errors && Date.touched">
               <div *ngIf="Date.errors['required']">

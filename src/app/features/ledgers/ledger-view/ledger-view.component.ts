@@ -95,6 +95,10 @@ export class LedgerViewComponent implements OnInit {
     this.ledgerService.deleteLedgerEntry(data["Id"]).subscribe();
   }
 
+  editLedgerEntry(data: any) {
+    alert("edit");
+  }
+
   onDataStateChanged(state: DataStateChangeEventArgs): void {
     if (this.showUnposted) {
       this.ledgerService.executeUnpostedEntries(state);

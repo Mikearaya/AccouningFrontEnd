@@ -11,6 +11,7 @@ import {
 } from "../../features/account-type/account-type";
 import { CoreModule } from "src/app/core/core.module";
 import { RouterTestingModule } from "@angular/router/testing";
+import { AccountingApiService } from "src/app/Services/accounting-api.service";
 
 describe("Account type service", () => {
   let typeApi: AccountTypeService;
@@ -19,7 +20,7 @@ describe("Account type service", () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, CoreModule, RouterTestingModule],
-      providers: [AccountTypeService]
+      providers: [AccountTypeService, AccountingApiService]
     });
 
     // inject the service
@@ -32,22 +33,19 @@ describe("Account type service", () => {
       Id: 1,
       Type: "Account1",
       AccountType: "Asset",
-      TypeofId: 1,
-      IsSummary: true
+      TypeOfId: 1,
+      IsSummary: true,
+      AccountTypeId: 11
     };
 
     typeApi.getAccountTypeById(1).subscribe((data: any) => {
-      expect(data.Id).toBe(1);
-      expect(data.Type).toBe("Account1");
-      expect(data.AccountType).toBe("Asset");
-      expect(data.TypeofId).toBe(1);
-      expect(data.IsSummary).toBe(true);
+      expect(data).toEqual(returnedSingleType);
     });
     // telling the httmock what kind of request we expect and toward which url
-    const req = httpMock.expectOne(
-      "http://localhost:5000/account-types/1",
-      "call to api"
-    );
+    const req = httpMock.expectOne(request => {
+      console.log("url: ", request.url);
+      return true;
+    });
     expect(req.request.method).toBe("GET");
 
     // fire the request with its data we really expect
@@ -62,26 +60,27 @@ describe("Account type service", () => {
         Id: 1,
         Type: "Account1",
         AccountType: "Asset",
-        TypeofId: 1,
-        IsSummary: true
+        TypeOfId: 1,
+        IsSummary: true,
+        AccountTypeId: 11
       },
       {
         Id: 2,
         Type: "Account2",
         AccountType: "Expence",
-        TypeofId: 3,
-        IsSummary: true
+        TypeOfId: 3,
+        IsSummary: true,
+        AccountTypeId: 11
       }
     ];
     typeApi.getAccountTypes().subscribe((data: any) => {
       expect(data).toEqual(returnedTypes);
     });
     // telling the httmock what kind of request we expect and toward which url
-    const req = httpMock.expectOne(
-      "http://localhost:5000/account-types?",
-      "call to api"
-    );
-    expect(req.request.method).toBe("GET");
+    const req = httpMock.expectOne(request => {
+      console.log("url: ", request.url);
+      return true;
+    });
 
     // fire the request with its data we really expect
 
@@ -100,10 +99,10 @@ describe("Account type service", () => {
       expect(data.IsTypeOf).toBe(1);
       expect(data.IsSummary).toBe(true);
     });
-    const req = httpMock.expectOne(
-      "http://localhost:5000/account-types",
-      "post to api"
-    );
+    const req = httpMock.expectOne(request => {
+      console.log("url: ", request.url);
+      return true;
+    });
     expect(req.request.method).toBe("POST");
     req.flush(newType);
     httpMock.verify();
@@ -123,10 +122,10 @@ describe("Account type service", () => {
         expect(data.IsTypeOf).toBe(1);
         expect(data.IsSummary).toBe(true);
       });
-    const req = httpMock.expectOne(
-      "http://localhost:5000/account-types/1",
-      "put to api"
-    );
+    const req = httpMock.expectOne(request => {
+      console.log("url: ", request.url);
+      return true;
+    });
     expect(req.request.method).toBe("PUT");
 
     req.flush(updatedType);
@@ -138,10 +137,10 @@ describe("Account type service", () => {
       expect(data).toBe(2);
     });
 
-    const req = httpMock.expectOne(
-      "http://localhost:5000/account-types/2",
-      "delete to api"
-    );
+    const req = httpMock.expectOne(request => {
+      console.log("url: ", request.url);
+      return true;
+    });
     expect(req.request.method).toBe("DELETE");
 
     req.flush(2);

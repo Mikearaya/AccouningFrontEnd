@@ -78,7 +78,6 @@ export class AccountSelectorComponent implements ControlValueAccessor {
       if (this._value) {
         if (obj !== 0) {
           const data = this.accounts.filter(a => a.Id === obj);
-
           data.forEach(element => {
             this.text = element.Name;
           });

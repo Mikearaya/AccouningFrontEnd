@@ -16,6 +16,9 @@ import { TestBed } from "@angular/core/testing";
 import { RouterTestingModule } from "@angular/router/testing";
 import { CoreModule } from "../core.module";
 import { SharedModule } from "src/app/shared/shared.module";
+import { QueryString } from "src/app/shared/data-view/data-view.model";
+import { Query } from "@angular/core";
+import { AccountingApiService } from "src/app/Services/accounting-api.service";
 
 describe("Accounts service", () => {
   let accountService: AccountsService;
@@ -29,7 +32,7 @@ describe("Accounts service", () => {
         RouterTestingModule,
         SharedModule
       ],
-      providers: [AccountsService]
+      providers: [AccountsService, AccountingApiService]
     });
 
     // inject the service
@@ -39,29 +42,34 @@ describe("Accounts service", () => {
   // expecting the correct(but faked) result: propery with value
   it("Should get account successfull", () => {
     const returnedAccount: AccountViewModel = {
-      Id: 1,
-      AccountId: "2222",
-      ParentAccount: "parent account",
-      AccountName: "account name",
-      Active: false,
-      Year: "2019",
-      OpeningBalance: 1,
-      ParentAccountId: 1,
-      Category: "catag1",
-      CategoryId: 1,
-      CostCenter: "lookup",
-      DateAdded: "1212",
-      DateUpdated: "12121",
-      CostCenterId: 11
+      Items: [
+        {
+          Id: 1,
+          AccountId: "2222",
+          ParentAccount: "parent account",
+          AccountName: "account name",
+          Active: false,
+          Year: "2019",
+          OpeningBalance: 1,
+          ParentAccountId: 1,
+          Category: "catag1",
+          CategoryId: 1,
+          CostCenter: "lookup",
+          DateAdded: "1212",
+          DateUpdated: "12121",
+          CostCenterId: 11
+        }
+      ],
+      Count: 1
     };
     accountService.getAccountById(1).subscribe((data: any) => {
-      expect(data.AccountId).toBe("2222");
+      expect(data).toBe(returnedAccount);
     });
     // telling the httmock what kind of request we expect and toward which url
-    const req = httpMock.expectOne(
-      "http://localhost:5000/accounts/1",
-      "call to api"
-    );
+    const req = httpMock.expectOne(request => {
+      console.log("url: ", request.url);
+      return true;
+    });
     expect(req.request.method).toBe("GET");
 
     // fire the request with its data we really expect
@@ -71,50 +79,56 @@ describe("Accounts service", () => {
     httpMock.verify();
   });
   it("Should get all account successfull", () => {
+    const query: QueryString = new QueryString();
     const returnedAccounts: AccountViewModel[] = [
       {
-        Id: 1,
-        AccountId: "2222",
-        ParentAccount: "parent account",
-        AccountName: "account name",
-        Active: false,
-        Year: "2019",
-        OpeningBalance: 1,
-        ParentAccountId: 1,
-        Category: "catag1",
-        CategoryId: 1,
-        CostCenter: "lookup",
-        DateAdded: "1212",
-        DateUpdated: "12121",
-        CostCenterId: 11
-      },
-      {
-        Id: 2,
-        AccountId: "2222",
-        ParentAccount: "parent account",
-        AccountName: "account name",
-        Active: false,
-        Year: "2019",
-        OpeningBalance: 1,
-        ParentAccountId: 1,
-        Category: "catag1",
-        CategoryId: 1,
-        CostCenter: "lookup",
-        DateAdded: "1212",
-        DateUpdated: "12121",
-        CostCenterId: 11
+        Items: [
+          {
+            Id: 1,
+            AccountId: "2222",
+            ParentAccount: "parent account",
+            AccountName: "account name",
+            Active: false,
+            Year: "2019",
+            OpeningBalance: 1,
+            ParentAccountId: 1,
+            Category: "catag1",
+            CategoryId: 1,
+            CostCenter: "lookup",
+            DateAdded: "1212",
+            DateUpdated: "12121",
+            CostCenterId: 11
+          },
+          {
+            Id: 2,
+            AccountId: "2222",
+            ParentAccount: "parent account",
+            AccountName: "account name",
+            Active: false,
+            Year: "2019",
+            OpeningBalance: 1,
+            ParentAccountId: 1,
+            Category: "catag1",
+            CategoryId: 1,
+            CostCenter: "lookup",
+            DateAdded: "1212",
+            DateUpdated: "12121",
+            CostCenterId: 11
+          }
+        ],
+        Count: 2
       }
     ];
-    accountService.getAccountsList().subscribe((data: any) => {
+    accountService.getAccountsList(query).subscribe((data: any) => {
       expect(data).toEqual(returnedAccounts);
       console.log(data);
     });
     // telling the httmock what kind of request we expect and toward which url
-    const req = httpMock.expectOne(
-      "http://localhost:5000/accounts?",
-      "call to api"
-    );
-    expect(req.request.method).toBe("GET");
+    const req = httpMock.expectOne(request => {
+      console.log("url: ", request.url);
+      return true;
+    });
+    expect(req.request.method).toBe("POST");
 
     // fire the request with its data we really expect
 
@@ -136,10 +150,10 @@ describe("Accounts service", () => {
     accountService.createAccount(newAccount).subscribe((data: any) => {
       expect(data.Id).toBe(3);
     });
-    const req = httpMock.expectOne(
-      "http://localhost:5000/accounts",
-      "post to api"
-    );
+    const req = httpMock.expectOne(request => {
+      console.log("url: ", request.url);
+      return true;
+    });
     expect(req.request.method).toBe("POST");
     req.flush(newAccount);
     httpMock.verify();
@@ -160,10 +174,10 @@ describe("Accounts service", () => {
       .subscribe((data: any) => {
         expect(data.AccountId).toBe("2222");
       });
-    const req = httpMock.expectOne(
-      "http://localhost:5000/accounts/2",
-      "put to api"
-    );
+    const req = httpMock.expectOne(request => {
+      console.log("url: ", request.url);
+      return true;
+    });
     expect(req.request.method).toBe("PUT");
 
     req.flush(updatedAccount);
@@ -175,10 +189,10 @@ describe("Accounts service", () => {
       expect(data).toBe(2);
     });
 
-    const req = httpMock.expectOne(
-      "http://localhost:5000/accounts/2",
-      "delete to api"
-    );
+    const req = httpMock.expectOne(request => {
+      console.log("url: ", request.url);
+      return true;
+    });
     expect(req.request.method).toBe("DELETE");
 
     req.flush(2);

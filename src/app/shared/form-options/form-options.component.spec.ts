@@ -1,12 +1,15 @@
 import { FormOptionsComponent } from "./form-options.component";
-
+import { Router } from "@angular/router";
+import { Location } from "@angular/common";
 describe("Form option component", () => {
-  let location;
+  let location: Location;
   let component: FormOptionsComponent;
+  let router: Router;
 
   beforeEach(() => {
     location = jasmine.createSpyObj("Location", ["back"]);
-    component = new FormOptionsComponent(location);
+    router = jasmine.createSpyObj("Router", ["Navigate"]);
+    component = new FormOptionsComponent(location, router);
   });
 
   it("should be created", () => {

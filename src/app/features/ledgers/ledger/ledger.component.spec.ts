@@ -16,8 +16,9 @@ import { LedgerComponent } from "./ledger.component";
 import { LedgerService } from "src/app/core/services/ledger.service";
 import { AccountsService } from "src/app/core/services/accounts.service";
 import { doesNotThrow } from "assert";
+import { AccountingApiService } from "src/app/Services/accounting-api.service";
 
-describe(" ledger form component", () => {
+describe("ledger form component", () => {
   let component: LedgerComponent;
   let fixture: ComponentFixture<LedgerComponent>;
   let debugEl: DebugElement;
@@ -26,7 +27,7 @@ describe(" ledger form component", () => {
     const moduleDef: TestModuleMetadata = {
       imports: [SharedModule, RouterTestingModule],
       declarations: [LedgerComponent],
-      providers: [LedgerService, AccountsService]
+      providers: [LedgerService, AccountsService, AccountingApiService]
     };
     if (moduleDef.providers && provider) {
       moduleDef.providers.push(provider);
@@ -123,8 +124,8 @@ describe(" ledger form component", () => {
         const entries = component.Entries;
         expect(entries.valid).toBeFalsy();
         entries.setValue([
-          { AccountId: "01", Credit: 2, Debit: 2 },
-          { AccountId: "02", Credit: 12, Debit: 12 }
+          { AccountId: new Object(), Credit: 2, Debit: 2 },
+          { AccountId: new Object(), Credit: 12, Debit: 12 }
         ]);
         expect(entries.valid).toBeTruthy();
         expect(entries.length).toEqual(2);
@@ -135,10 +136,9 @@ describe(" ledger form component", () => {
         component.Date.setValue(new Date());
         component.Description.setValue("Appdiv");
         component.Reference.setValue("Appdiv");
-        // component.Type.setValue("Appdiv");
         component.Entries.setValue([
-          { AccountId: "01", Credit: 2, Debit: 2 },
-          { AccountId: "02", Credit: 12, Debit: 12 }
+          { AccountId: new Object(), Credit: 2, Debit: 2 },
+          { AccountId: new Object(), Credit: 12, Debit: 12 }
         ]);
         expect(component.ledgerForm.valid).toBeTruthy();
       });

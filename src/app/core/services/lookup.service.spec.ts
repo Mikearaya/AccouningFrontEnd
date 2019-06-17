@@ -8,6 +8,7 @@ import { LookupView, Lookup } from "../../features/lookups/lookups";
 import { AccountCategory } from "../../features/account-catagory/account-catagory-domain";
 import { RouterTestingModule } from "@angular/router/testing";
 import { CoreModule } from "../core.module";
+import { AccountingApiService } from "src/app/Services/accounting-api.service";
 
 describe("Lookup service", () => {
   let lookupApi: LookupService;
@@ -16,7 +17,7 @@ describe("Lookup service", () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, CoreModule, RouterTestingModule],
-      providers: [LookupService]
+      providers: [LookupService, AccountingApiService]
     });
 
     // inject the service
@@ -37,10 +38,10 @@ describe("Lookup service", () => {
       expect(data.Value).toBe("value");
     });
     // telling the httmock what kind of request we expect and toward which url
-    const req = httpMock.expectOne(
-      "http://localhost:5000/system-lookups/1",
-      "call to api"
-    );
+    const req = httpMock.expectOne(request => {
+      console.log("url: ", request.url);
+      return true;
+    });
     expect(req.request.method).toBe("GET");
 
     // fire the request with its data we really expect
@@ -66,10 +67,10 @@ describe("Lookup service", () => {
       expect(data).toEqual(returnedLookups);
     });
     // telling the httmock what kind of request we expect and toward which url
-    const req = httpMock.expectOne(
-      "http://localhost:5000/system-lookups?",
-      "call to api"
-    );
+    const req = httpMock.expectOne(request => {
+      console.log("url: ", request.url);
+      return true;
+    });
     expect(req.request.method).toBe("GET");
 
     // fire the request with its data we really expect
@@ -89,10 +90,10 @@ describe("Lookup service", () => {
       expect(data.Type).toBe("type");
       expect(data.Value).toBe("value");
     });
-    const req = httpMock.expectOne(
-      "http://localhost:5000/system-lookups",
-      "post to api"
-    );
+    const req = httpMock.expectOne(request => {
+      console.log("url: ", request.url);
+      return true;
+    });
     expect(req.request.method).toBe("POST");
     req.flush(newLookup);
     httpMock.verify();
@@ -108,10 +109,10 @@ describe("Lookup service", () => {
       expect(data.Type).toBe("type");
       expect(data.Value).toBe("value");
     });
-    const req = httpMock.expectOne(
-      "http://localhost:5000/system-lookups",
-      "put to api"
-    );
+    const req = httpMock.expectOne(request => {
+      console.log("url: ", request.url);
+      return true;
+    });
     expect(req.request.method).toBe("PUT");
 
     req.flush(updatedLookup);
@@ -123,10 +124,10 @@ describe("Lookup service", () => {
       expect(data).toBe(2);
     });
 
-    const req = httpMock.expectOne(
-      "http://localhost:5000/system-lookups/2",
-      "delete to api"
-    );
+    const req = httpMock.expectOne(request => {
+      console.log("url: ", request.url);
+      return true;
+    });
     expect(req.request.method).toBe("DELETE");
 
     req.flush(2);

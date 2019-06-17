@@ -13,8 +13,11 @@ import {
   TrialBalanceDetailViewModel,
   ConsolidatedTrialBalanceViewModel,
   IncomeStatmentViewModel,
-  BalanceSheetViewModel
+  BalanceSheetViewModel,
+  AccountScheduleModel,
+  CostOfGoodsSoldModel
 } from "./report";
+import { AccountingApiService } from "src/app/Services/accounting-api.service";
 
 describe("ReportApiService", () => {
   let reportApi: ReportApiService;
@@ -23,7 +26,7 @@ describe("ReportApiService", () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, CoreModule, RouterTestingModule],
-      providers: [ReportApiService]
+      providers: [ReportApiService, AccountingApiService]
     });
 
     reportApi = TestBed.get(ReportApiService);
@@ -96,18 +99,17 @@ describe("ReportApiService", () => {
     reportApi.getChecklistReport("").subscribe((data: any) => {
       expect(data).toEqual(response);
     });
-
-    const req = httpMock.expectOne(
-      "http://localhost:5000/ledger-checklists?",
-      "call to api"
-    );
+    const req = httpMock.expectOne(request => {
+      console.log("url: ", request.url);
+      return true;
+    });
     expect(req.request.method).toBe("GET");
 
     req.flush(response);
 
     httpMock.verify();
   });
-  it("Should get all subsidaries", () => {
+  it("Should get all subsidaries ledgers", () => {
     const response: SubsidaryLedgerViewModel[] = [
       {
         AccountId: "100",
@@ -180,10 +182,10 @@ describe("ReportApiService", () => {
       expect(data).toEqual(response);
     });
 
-    const req = httpMock.expectOne(
-      "http://localhost:5000/subsidaries?",
-      "call to api"
-    );
+    const req = httpMock.expectOne(request => {
+      console.log("url: ", request.url);
+      return true;
+    });
     expect(req.request.method).toBe("GET");
 
     req.flush(response);
@@ -196,22 +198,26 @@ describe("ReportApiService", () => {
         Id: 1,
         AccountId: "100",
         AccountName: "acc name",
+        ControlAccountId: 11,
         Entries: [
           {
             AccountId: "100",
             AccountName: "acc name",
+            ControlAccountId: 1001,
             Credit: 2,
             Debit: 2
           },
           {
             AccountId: "100",
             AccountName: "acc name",
+            ControlAccountId: 1001,
             Credit: 2,
             Debit: 2
           },
           {
             AccountId: "100",
             AccountName: "acc name",
+            ControlAccountId: 1001,
             Credit: 2,
             Debit: 2
           }
@@ -221,22 +227,26 @@ describe("ReportApiService", () => {
         Id: 2,
         AccountId: "101",
         AccountName: "acc name",
+        ControlAccountId: 22,
         Entries: [
           {
             AccountId: "100",
             AccountName: "acc name",
+            ControlAccountId: 1011,
             Credit: 2,
             Debit: 2
           },
           {
             AccountId: "100",
             AccountName: "acc name",
+            ControlAccountId: 1011,
             Credit: 2,
             Debit: 2
           },
           {
             AccountId: "100",
             AccountName: "acc name",
+            ControlAccountId: 1011,
             Credit: 2,
             Debit: 2
           }
@@ -247,10 +257,10 @@ describe("ReportApiService", () => {
       expect(data).toEqual(response);
     });
 
-    const req = httpMock.expectOne(
-      "http://localhost:5000/trial-balance-detail?",
-      "call to api"
-    );
+    const req = httpMock.expectOne(request => {
+      console.log("url: ", request.url);
+      return true;
+    });
     expect(req.request.method).toBe("GET");
 
     req.flush(response);
@@ -302,10 +312,10 @@ describe("ReportApiService", () => {
       expect(data).toEqual(response);
     });
 
-    const req = httpMock.expectOne(
-      "http://localhost:5000/consolidated-trial-balance?",
-      "call to api"
-    );
+    const req = httpMock.expectOne(request => {
+      request.url;
+      return true;
+    });
     expect(req.request.method).toBe("GET");
 
     req.flush(response);
@@ -327,6 +337,7 @@ describe("ReportApiService", () => {
           }
         ],
         TotalRevenue: 100,
+        CostOfGoodsSold: 1001,
         Expense: [
           {
             AccountType: "Maintainance",
@@ -345,10 +356,10 @@ describe("ReportApiService", () => {
       expect(data).toEqual(response);
     });
 
-    const req = httpMock.expectOne(
-      "http://localhost:5000/income-statment?",
-      "call to api"
-    );
+    const req = httpMock.expectOne(request => {
+      console.log("url: ", request.url);
+      return true;
+    });
     expect(req.request.method).toBe("GET");
 
     req.flush(response);
@@ -361,33 +372,33 @@ describe("ReportApiService", () => {
       {
         Assets: [
           {
-            AccountCatagory: "Fixed assets",
+            AccountCategory: "Fixed assets",
             Amount: 1000
           },
           {
-            AccountCatagory: "Stock",
+            AccountCategory: "Stock",
             Amount: 20000
           }
         ],
         TotalAsset: 21000,
         Capitals: [
           {
-            AccountCatagory: "Share capital",
+            AccountCategory: "Share capital",
             Amount: 1000
           },
           {
-            AccountCatagory: "Net capital",
+            AccountCategory: "Net capital",
             Amount: 20000
           }
         ],
         TotalCapital: 21000,
         Liabilities: [
           {
-            AccountCatagory: "Bank overdraft",
+            AccountCategory: "Bank overdraft",
             Amount: 200
           },
           {
-            AccountCatagory: "Devidend payable",
+            AccountCategory: "Devidend payable",
             Amount: 300
           }
         ],
@@ -398,10 +409,85 @@ describe("ReportApiService", () => {
       expect(data).toEqual(response);
     });
 
-    const req = httpMock.expectOne(
-      "http://localhost:5000/balance-sheet?",
-      "call to api"
-    );
+    const req = httpMock.expectOne(request => {
+      console.log("url: ", request.url);
+      return true;
+    });
+    expect(req.request.method).toBe("GET");
+
+    req.flush(response);
+
+    httpMock.verify();
+  });
+
+  it("Should get account schedule", () => {
+    const response: AccountScheduleModel[] = [
+      {
+        ParentAccountId: 123,
+        ParentAccountName: "parent",
+        Subsidaries: [
+          {
+            SubsidaryId: "123",
+            Subsidary: "subsidary",
+            Credit: 111,
+            Debit: 111,
+            EndingBalance: 222,
+            BeginningBalance: 100
+          },
+          {
+            SubsidaryId: "1233",
+            Subsidary: "subsidary",
+            Credit: 1111,
+            Debit: 1111,
+            EndingBalance: 2222,
+            BeginningBalance: 1000
+          }
+        ]
+      }
+    ];
+    reportApi.getAccountSchedule("").subscribe((data: any) => {
+      expect(data).toEqual(response);
+    });
+
+    const req = httpMock.expectOne(request => {
+      console.log("url: ", request.url);
+      return true;
+    });
+    expect(req.request.method).toBe("GET");
+
+    req.flush(response);
+
+    httpMock.verify();
+  });
+  it("Should get cost of goods sold", () => {
+    const response: CostOfGoodsSoldModel[] = [
+      {
+        Accounts: [
+          {
+            AccountName: "account1",
+            Value: 100
+          },
+          {
+            AccountName: "accoun2",
+            Value: 1000
+          }
+        ],
+        TotalProductionCost: 123,
+        TotalProductionCostForAccount: 1234,
+        WorkInProcessBegining: 111,
+        WorkInProcessEnding: 222,
+        FinishedGoodsBeginning: 112,
+        CostOfAvailableGoods: 221
+      }
+    ];
+    reportApi.getCostOfGoodsSold("").subscribe((data: any) => {
+      expect(data).toEqual(response);
+    });
+
+    const req = httpMock.expectOne(request => {
+      console.log("url: ", request.url);
+      return true;
+    });
     expect(req.request.method).toBe("GET");
 
     req.flush(response);

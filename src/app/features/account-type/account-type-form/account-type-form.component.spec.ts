@@ -9,6 +9,7 @@ import { DebugElement } from "@angular/core";
 import { SharedModule } from "src/app/shared/shared.module";
 import { RouterTestingModule } from "@angular/router/testing";
 import { AccountTypeService } from "../../../core/services/account-type.service";
+import { AccountingApiService } from "src/app/Services/accounting-api.service";
 
 describe(" Account type form component", () => {
   let component: AccountTypeFormComponent;
@@ -19,7 +20,7 @@ describe(" Account type form component", () => {
     const moduleDef: TestModuleMetadata = {
       imports: [SharedModule, RouterTestingModule],
       declarations: [AccountTypeFormComponent],
-      providers: [AccountTypeService]
+      providers: [AccountTypeService, AccountingApiService]
     };
     if (moduleDef.providers && provider) {
       moduleDef.providers.push(provider);

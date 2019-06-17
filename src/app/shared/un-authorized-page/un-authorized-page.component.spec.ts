@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { UnAuthorizedPageComponent } from './un-authorized-page.component';
+import { UnAuthorizedPageComponent } from "./un-authorized-page.component";
 
-describe('UnAuthorizedPageComponent', () => {
+describe("UnAuthorizedPageComponent", () => {
   let component: UnAuthorizedPageComponent;
   let fixture: ComponentFixture<UnAuthorizedPageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UnAuthorizedPageComponent ]
-    })
-    .compileComponents();
+      declarations: [UnAuthorizedPageComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('UnAuthorizedPageComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

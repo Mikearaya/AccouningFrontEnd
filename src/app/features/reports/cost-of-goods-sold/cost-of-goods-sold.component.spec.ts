@@ -1,16 +1,22 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { CostOfGoodsSoldComponent } from './cost-of-goods-sold.component';
+import { CostOfGoodsSoldComponent } from "./cost-of-goods-sold.component";
+import { ReportApiService } from "../report-api.service";
+import { RouterTestingModule } from "@angular/router/testing";
+import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { SharedModule } from "src/app/shared/shared.module";
+import { AccountingApiService } from "src/app/Services/accounting-api.service";
 
-describe('CostOfGoodsSoldComponent', () => {
+describe("CostOfGoodsSoldComponent", () => {
   let component: CostOfGoodsSoldComponent;
   let fixture: ComponentFixture<CostOfGoodsSoldComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CostOfGoodsSoldComponent ]
-    })
-    .compileComponents();
+      imports: [SharedModule, RouterTestingModule, HttpClientTestingModule],
+      declarations: [CostOfGoodsSoldComponent],
+      providers: [ReportApiService, AccountingApiService]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +25,7 @@ describe('CostOfGoodsSoldComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

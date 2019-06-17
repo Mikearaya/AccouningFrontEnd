@@ -28,17 +28,17 @@ import {
 @Injectable()
 export class RmHeaderInterceptorService implements HttpInterceptor {
   constructor(private location: ActivatedRoute) {
-    createSpinner({
+    /*   createSpinner({
       // Specify the target for the spinner to show
       target: document.getElementById("spinner-container")
-    });
+    }); */
   }
 
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    showSpinner(document.getElementById("spinner-container"));
+    // showSpinner(document.getElementById("spinner-container"));
     const requestUrl = request.url;
     const started = Date.now();
     const modifiedRequest = request.clone({
@@ -62,7 +62,7 @@ export class RmHeaderInterceptorService implements HttpInterceptor {
         return throwError(error);
       }),
       finalize(() => {
-        hideSpinner(document.getElementById("spinner-container"));
+        // hideSpinner(document.getElementById("spinner-container"));
         const elapsed = Date.now() - started;
         const msg = `${request.method} "${
           request.urlWithParams

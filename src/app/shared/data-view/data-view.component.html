@@ -12,14 +12,13 @@
   allowResizing="true"
   allowFiltering="showFilter"
   [filterSettings]="filterSettings"
-  [allowGrouping]="groupByOptions != null ? true : false"
   (toolbarClick)="toolbarClick($event)"
   (rowSelected)="rowIsSelected($event)"
   (actionComplete)="actionEndHandler($event)"
   [allowPdfExport]="showPdfExport"
   [showColumnChooser]="showColumnChooser"
   (dataStateChange)="onDataStateChanged($event)"
-  [height]="700"
+  [height]="715"
 >
   <e-columns>
     <e-column

@@ -107,4 +107,9 @@ body {
   .e-icons.e-gdiagonaldown.e-icon-gdownarrow {
     display: none;
   }
+
+  .e-grid.e-default * {
+    height: auto !important;
+    overflow: hidden !important;
+  }
 }

@@ -137,9 +137,11 @@ export class AccountsScheduleComponent implements OnInit {
       }, 300);
     }
     if (args.item.id === "Grid_excelexport") {
+      const currentPageSize = this.grid.pageSettings.pageSize;
       this.grid.pageSettings.pageSize = this.grid.pageSettings.totalRecordsCount;
       setTimeout(() => {
         this.grid.excelExport(this.getExcelExportProperties());
+        this.grid.pageSettings.pageSize = currentPageSize;
       }, 1000);
     }
   }

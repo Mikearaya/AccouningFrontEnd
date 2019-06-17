@@ -32,6 +32,8 @@ import {
 import { Subject } from "rxjs";
 import { PageSizes, PreferenceSettings } from "src/app/page-model";
 import { SecurityService } from "src/app/core/services/security-service.service";
+import { LedgerViewComponent } from "src/app/features/ledgers/ledger-view/ledger-view.component";
+import { DashboardComponent } from "src/app/features/dashboard/dashboard/dashboard.component";
 
 @Component({
   selector: "app-data-view",
@@ -158,11 +160,6 @@ export class DataViewComponent implements OnInit {
 
     this.initilizeCommandColumn();
     this.initializeToolBar();
-    this.groupByOptions = {
-      disablePageWiseAggregates: false,
-      showDropArea: true,
-      columns: ["ParentAccount"]
-    };
   }
   initilizeCommandColumn(): void {
     if (
@@ -210,7 +207,7 @@ export class DataViewComponent implements OnInit {
     const key = this.idKey ? this.idKey : "Id";
 
     if (this.editRoute) {
-      this.router.navigate([this.editRoute]);
+      this.router.navigate([`/${this.editRoute}/${rowObj.data[key]}/update`]);
     } else {
       this.router.navigate([`${rowObj.data[key]}/update`], {
         relativeTo: this.activatedRoute
@@ -287,7 +284,11 @@ export class DataViewComponent implements OnInit {
 
   initializeToolBar(): void {
     if (this.showAdd && this.securityService.hasClaim(this.addPrivilage)) {
-      this.toolbar.push("Add");
+      this.toolbar.push({
+        text: "Create",
+        prefixIcon: "e-create",
+        id: "create"
+      });
     }
 
     if (this.showPdfExport) {
@@ -311,7 +312,7 @@ export class DataViewComponent implements OnInit {
 
   toolbarClick(args: ClickEventArgs): void {
     switch (args.item.id) {
-      case "dataview_add":
+      case "create":
         if (this.addRoute.trim().length === 0) {
           this.router.navigate(["add"], { relativeTo: this.activatedRoute });
         } else {

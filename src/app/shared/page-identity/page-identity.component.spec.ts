@@ -12,7 +12,8 @@ describe("Page identity Component", () => {
 
   it("should be created", async(() => {
     const fixture = TestBed.createComponent(PageIdentityComponent);
-    const component = fixture.debugElement.componentInstance;
+    // const component = fixture.debugElement.componentInstance;
+    const component = new PageIdentityComponent();
     expect(component).toBeTruthy();
   }));
 });

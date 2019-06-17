@@ -5,6 +5,7 @@ import { SharedModule } from "src/app/shared/shared.module";
 import { RouterTestingModule } from "@angular/router/testing";
 import { HttpClientTestingModule } from "@angular/common/http/testing";
 import { ReportApiService } from "../report-api.service";
+import { AccountingApiService } from "src/app/Services/accounting-api.service";
 
 describe("BalanceSheetComponent", () => {
   let component: BalanceSheetComponent;
@@ -14,7 +15,7 @@ describe("BalanceSheetComponent", () => {
     TestBed.configureTestingModule({
       imports: [SharedModule, RouterTestingModule, HttpClientTestingModule],
       declarations: [BalanceSheetComponent],
-      providers: [ReportApiService]
+      providers: [ReportApiService, AccountingApiService]
     }).compileComponents();
   }));
 

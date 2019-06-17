@@ -1,22 +1,30 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { async, TestBed } from "@angular/core/testing";
 
 import { GroupedDataViewComponent } from "./grouped-data-view.component";
+import { Router, ActivatedRoute, convertToParamMap } from "@angular/router";
+import { SecurityService } from "src/app/core/services/security-service.service";
 
 describe("GroupedDataViewComponent", () => {
   let component: GroupedDataViewComponent;
-  let fixture: ComponentFixture<GroupedDataViewComponent>;
-
+  let router: Router;
+  let activatedRoute;
+  const securityService: SecurityService = new SecurityService();
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [GroupedDataViewComponent]
-    }).compileComponents();
+    router = jasmine.createSpyObj("Router", ["Navigate"]);
+    activatedRoute = {
+      provide: ActivatedRoute,
+      useValue: {
+        snapshot: {
+          paramMap: convertToParamMap({ id: 1 })
+        }
+      }
+    };
   }));
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(GroupedDataViewComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+  component = new GroupedDataViewComponent(
+    router,
+    activatedRoute,
+    securityService
+  );
 
   it("should create", () => {
     expect(component).toBeTruthy();

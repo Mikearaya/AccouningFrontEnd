@@ -27,7 +27,7 @@ export class DashboardComponent implements OnInit {
   public data: Subject<DataStateChangeEventArgs>;
 
   public promptHeader = "Unposted ledger entries";
-  public showCloseIcon = false;
+  public showCloseIcon = true;
   public visible = true;
   public confirmCloseIcon = true;
   // public target: string = ".control-section";
@@ -136,7 +136,7 @@ export class DashboardComponent implements OnInit {
 
   public promptDlgBtnClick: EmitType<object> = () => {
     this.promptDialog.hide();
-  }
+  };
 
   public onOverlayClick() {
     this.promptDialog.hide();

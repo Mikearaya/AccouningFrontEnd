@@ -8,6 +8,7 @@ import { AccountCategory } from "../features/account-catagory/account-catagory-d
 import { Accounts } from "../features/accounts/accounts";
 import { CoreModule } from "./core.module";
 import { RouterTestingModule } from "@angular/router/testing";
+import { AccountingApiService } from "../Services/accounting-api.service";
 
 describe("Account catagories service", () => {
   let catagoryApi: AccountCatagoryApiService;
@@ -16,7 +17,7 @@ describe("Account catagories service", () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, CoreModule, RouterTestingModule],
-      providers: [AccountCatagoryApiService]
+      providers: [AccountCatagoryApiService, AccountingApiService]
     });
 
     // inject the service
@@ -37,10 +38,10 @@ describe("Account catagories service", () => {
       expect(data.CatagoryName).toBe("Catag1");
     });
     // telling the httmock what kind of request we expect and toward which url
-    const req = httpMock.expectOne(
-      "http://localhost:5000/account-categories/1",
-      "call to api"
-    );
+    const req = httpMock.expectOne(request => {
+      console.log("url: ", request.url);
+      return true;
+    });
     expect(req.request.method).toBe("GET");
 
     // fire the request with its data we really expect
@@ -66,10 +67,10 @@ describe("Account catagories service", () => {
       expect(data).toEqual(returnedCatagories);
     });
     // telling the httmock what kind of request we expect and toward which url
-    const req = httpMock.expectOne(
-      "http://localhost:5000/account-categories?",
-      "call to api"
-    );
+    const req = httpMock.expectOne(request => {
+      console.log("url: ", request.url);
+      return true;
+    });
     expect(req.request.method).toBe("GET");
 
     // fire the request with its data we really expect
@@ -89,10 +90,10 @@ describe("Account catagories service", () => {
       expect(data.AccountType).toBe("Expence");
       expect(data.CatagoryName).toBe("Catag2");
     });
-    const req = httpMock.expectOne(
-      "http://localhost:5000/account-categories",
-      "post to api"
-    );
+    const req = httpMock.expectOne(request => {
+      console.log("url: ", request.url);
+      return true;
+    });
     expect(req.request.method).toBe("POST");
     req.flush(newCatagory);
     httpMock.verify();
@@ -110,10 +111,10 @@ describe("Account catagories service", () => {
         expect(data.AccountType).toBe("Expence");
         expect(data.CatagoryName).toBe("Catag2");
       });
-    const req = httpMock.expectOne(
-      "http://localhost:5000/account-categories/2",
-      "put to api"
-    );
+    const req = httpMock.expectOne(request => {
+      console.log("url: ", request.url);
+      return true;
+    });
     expect(req.request.method).toBe("PUT");
 
     req.flush(updatedCatagory);
@@ -125,10 +126,10 @@ describe("Account catagories service", () => {
       expect(data).toBe(2);
     });
 
-    const req = httpMock.expectOne(
-      "http://localhost:5000/account-categories/2",
-      "delete to api"
-    );
+    const req = httpMock.expectOne(request => {
+      console.log("url: ", request.url);
+      return true;
+    });
     expect(req.request.method).toBe("DELETE");
 
     req.flush(2);

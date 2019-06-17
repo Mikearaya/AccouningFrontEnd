@@ -9,6 +9,7 @@ import { AccountSelectorComponent } from "./account-selector.component";
 import { AccountsService } from "src/app/core/services/accounts.service";
 import { RouterTestingModule } from "@angular/router/testing";
 import { SharedModule } from "../shared.module";
+import { AccountingApiService } from "src/app/Services/accounting-api.service";
 
 describe("AccountSelectorComponent", () => {
   let component: AccountSelectorComponent;
@@ -17,7 +18,7 @@ describe("AccountSelectorComponent", () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [SharedModule, RouterTestingModule],
-      providers: [AccountsService]
+      providers: [AccountsService, AccountingApiService]
     }).compileComponents();
   }));
 
