@@ -140,7 +140,7 @@ export class AppComponent implements OnInit {
           claimValue: "true"
         }
       ],
-      userName: "Mikael Araya"
+      userName: "Admin"
     };
     localStorage.setItem("accountingBearerToken", null);
     localStorage.setItem("accountingBearerToken", JSON.stringify(x));
