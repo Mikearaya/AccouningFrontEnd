@@ -9,7 +9,7 @@ export interface DashboardViewModel {
   TotalLiability: number;
   TotalExpense: number;
   UnpostedEntries: number;
-  SalesSummary: SalesSummary[];
+  SalesSummert: SalesSummary[];
 }
 
 export class SalesSummary {

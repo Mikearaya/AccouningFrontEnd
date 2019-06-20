@@ -136,7 +136,7 @@ export class DashboardComponent implements OnInit {
 
   public promptDlgBtnClick: EmitType<object> = () => {
     this.promptDialog.hide();
-  };
+  }
 
   public onOverlayClick() {
     this.promptDialog.hide();
@@ -163,7 +163,7 @@ export class DashboardComponent implements OnInit {
       valueType: "Category"
     };
     this.marker = { visible: true, width: 10, height: 10 };
-    this.title = "Unemployment Rates 1975-2010";
+    this.title = "Current Year Sales";
     this.titleStyle = {
       size: "18px",
       color: "Red",
@@ -179,6 +179,7 @@ export class DashboardComponent implements OnInit {
         this.dashboardItems[3].value = data.TotalExpense;
         this.dashboardItems[4].value = data.TotalRevenue;
         this.dashboardItems[5].value = data.UnpostedEntries;
+        this.chartData = data.SalesSummert;
       });
   }
   itemClicked(items: any) {

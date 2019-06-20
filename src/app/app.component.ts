@@ -127,7 +127,7 @@ export class AppComponent implements OnInit {
         { claimType: "canViewLookups", claimValue: "true" },
         { claimType: "canAddLookups", claimValue: "true" },
         { claimType: "canUpdateLookups", claimValue: "true" },
-        { claimType: "canDeleteLookups", claimValue: "true" }, 
+        { claimType: "canDeleteLookups", claimValue: "true" },
         { claimType: "canViewBalanceSheet", claimValue: "true" },
         { claimType: "canViewIncomeStatement", claimValue: "true" },
         { claimType: "canViewAccountSchedule", claimValue: "true" },
@@ -172,9 +172,9 @@ export class AppComponent implements OnInit {
     }
   }
   humanResource() {
-    alert("HR");
+    window.location.href = `/smarthrm`;
   }
   inventory() {
-    alert("Inventory");
+    window.location.href = `/smart_inventory`;
   }
 }
