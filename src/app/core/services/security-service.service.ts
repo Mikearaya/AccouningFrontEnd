@@ -34,7 +34,7 @@ export class SecurityService {
       );
       this.httpClient
         .get<AppUserAuth>(
-          `http://erp.net/smarthrm/authenticate/my_role/accounting`
+          `http://erp.net/smarthrm/authenticate/my_role/finance`
         )
         .subscribe(
           (data: AppUserAuth) => (this.securityObject = data),
