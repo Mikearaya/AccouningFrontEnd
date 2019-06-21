@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { of, Observable } from "rxjs";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 
 @Injectable({
   providedIn: "root"
@@ -7,7 +8,7 @@ import { of, Observable } from "rxjs";
 export class SecurityService {
   securityObject: AppUserAuth;
 
-  constructor() {
+  constructor(private httpClient: HttpClient) {
     this.securityObject = new AppUserAuth();
     this.securityObject = JSON.parse(
       localStorage.getItem("accountingBearerToken")
@@ -20,14 +21,26 @@ export class SecurityService {
     }
   }
 
-  logIn(entity: AppUser): Observable<AppUserAuth> {
+  logIn(): Observable<AppUserAuth> {
     this.resetSecurityObject();
 
-    if (this.securityObject.userName !== "") {
+    if (
+      this.securityObject.userName !== "" &&
+      this.securityObject.isAuthenticated
+    ) {
       localStorage.setItem(
         "accountingBearerToken",
         this.securityObject.bearerToken
       );
+      this.httpClient
+        .get<AppUserAuth>(
+          `http://erp.net/smarthrm/authenticate/my_role/accounting`
+        )
+        .subscribe(
+          (data: AppUserAuth) => (this.securityObject = data),
+          (error: HttpErrorResponse) =>
+            (window.location.href = `http://erp.net/smarthrm/authenticate/logout`)
+        );
     }
 
     return of<AppUserAuth>(this.securityObject);

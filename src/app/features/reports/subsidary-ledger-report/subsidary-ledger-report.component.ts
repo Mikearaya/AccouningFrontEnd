@@ -57,7 +57,6 @@ export class SubsidaryLedgerReportComponent implements OnInit {
         textAlign: "Left",
         width: 120
       },
-      // { field: "LedgerId", headerText: "Ledgeddddr", width: 150 },
       {
         field: "Date",
         headerText: "Date",

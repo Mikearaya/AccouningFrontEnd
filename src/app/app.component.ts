@@ -103,7 +103,7 @@ export class AppComponent implements OnInit {
       this.router.navigate([routerLink]);
     }
 
-    const x = {
+    /*  const x = {
       bearerToken: "asdfghjjklyyrrffghjjj",
       isAuthenticated: true,
       claims: [
@@ -141,13 +141,15 @@ export class AppComponent implements OnInit {
         }
       ],
       userName: "Admin"
-    };
-    localStorage.setItem("accountingBearerToken", null);
-    localStorage.setItem("accountingBearerToken", JSON.stringify(x));
+    }; */
+    /*     localStorage.setItem("accountingBearerToken", null);
+    localStorage.setItem("accountingBearerToken", JSON.stringify(x)); */
 
-    if (localStorage.getItem("accountingBearerToken") === null) {
+    /*     if (localStorage.getItem("accountingBearerToken") === null) {
       localStorage.setItem("accountingBearerToken", JSON.stringify(x));
-    }
+    } */
+
+    this.securityService.logIn().subscribe();
   }
 
   public select(args: MenuEventArgs) {
