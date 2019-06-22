@@ -67,7 +67,6 @@ export class RmHeaderInterceptorService implements HttpInterceptor {
         const msg = `${request.method} "${
           request.urlWithParams
         }" in ${elapsed} ms.`;
-        console.log(msg);
       })
     );
   }

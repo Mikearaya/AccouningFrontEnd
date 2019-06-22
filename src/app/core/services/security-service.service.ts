@@ -2,37 +2,64 @@ import { Injectable } from "@angular/core";
 import { of, Observable } from "rxjs";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 
-@Injectable({
-  providedIn: "root"
-})
+@Injectable()
 export class SecurityService {
   securityObject: AppUserAuth;
-
+  x = {
+    bearerToken: "asdfghjjklyyrrffghjjj",
+    isAuthenticated: true,
+    claims: [
+      { claimType: "canViewAccount", claimValue: "true" },
+      { claimType: "canAddNewAccount", claimValue: "true" },
+      { claimType: "canEditAccount", claimValue: "true" },
+      { claimType: "canDeleteAccount", claimValue: "true" },
+      { claimType: "canViewAccountCategory", claimValue: "true" },
+      { claimType: "canAddNewAccountCategory", claimValue: "true" },
+      { claimType: "canEditAccountCategory", claimValue: "true" },
+      { claimType: "canDeleteAccountCategory", claimValue: "true" },
+      { claimType: "canViewAccountType", claimValue: "true" },
+      { claimType: "canAddNewAccountType", claimValue: "true" },
+      { claimType: "canEditAccountType", claimValue: "true" },
+      { claimType: "canDeleteAccountType", claimValue: "true" },
+      { claimType: "canCreateNewYear", claimValue: "true" },
+      { claimType: "canViewLedgerEntry", claimValue: "true" },
+      { claimType: "canAddNewLedgerEntry", claimValue: "true" },
+      { claimType: "canEditLedgerEntry", claimValue: "true" },
+      { claimType: "canDeleteLedgerEntry", claimValue: "true" },
+      { claimType: "canViewLookups", claimValue: "true" },
+      { claimType: "canAddNewLookups", claimValue: "true" },
+      { claimType: "canEditLookups", claimValue: "true" },
+      { claimType: "canDeleteLookups", claimValue: "true" },
+      { claimType: "canViewBalanceSheet", claimValue: "true" },
+      { claimType: "canViewIncomeStatement", claimValue: "true" },
+      { claimType: "canViewAccountSchedule", claimValue: "true" },
+      { claimType: "canViewAccountChecklist", claimValue: "true" },
+      { claimType: "canViewConsolidatedTrialBalance", claimValue: "true" },
+      { claimType: "canViewSubsidaryLedger", claimValue: "true" },
+      { claimType: "canViewTrialBalanceDetail", claimValue: "true" },
+      {
+        claimType: "canViewCostOfGoodsSold",
+        claimValue: "true"
+      }
+    ],
+    userName: "Admin"
+  };
   constructor(private httpClient: HttpClient) {
     this.securityObject = new AppUserAuth();
-    this.securityObject = JSON.parse(
-      localStorage.getItem("accountingBearerToken")
-    );
+    localStorage.setItem("accountingBearerToken", JSON.stringify(this.x));
+
     if (localStorage.getItem("accountingBearerToken")) {
-      localStorage.setItem(
-        "accountingBearerToken",
-        JSON.stringify(this.securityObject)
+      this.securityObject = JSON.parse(
+        localStorage.getItem("accountingBearerToken")
       );
     }
   }
 
   logIn(): Observable<AppUserAuth> {
-    this.resetSecurityObject();
+    //    this.resetSecurityObject();
 
-    if (
-      this.securityObject.userName !== "" &&
-      this.securityObject.isAuthenticated
-    ) {
-      localStorage.setItem(
-        "accountingBearerToken",
-        this.securityObject.bearerToken
-      );
-      this.httpClient
+    if (!this.securityObject.isAuthenticated) {
+      /*       this.httpClient
         .get<AppUserAuth>(
           `http://erp.net/smarthrm/authenticate/my_role/finance`
         )
@@ -40,10 +67,11 @@ export class SecurityService {
           (data: AppUserAuth) => (this.securityObject = data),
           (error: HttpErrorResponse) =>
             (window.location.href = `http://erp.net/smarthrm/authenticate/logout`)
-        );
+        ); */
     }
+    localStorage.setItem("accountingBearerToken", JSON.stringify(this.x));
 
-    return of<AppUserAuth>(this.securityObject);
+    return of<AppUserAuth>(this.x);
   }
 
   resetSecurityObject(): void {
@@ -57,7 +85,7 @@ export class SecurityService {
 
   logOut() {
     this.resetSecurityObject();
-    window.location.href = "https://www.google.com";
+    window.location.href = "http://erp.net/smarthrm/authenticate/logout";
   }
 
   hasClaim(claimType: any, claimValue?: any): boolean {

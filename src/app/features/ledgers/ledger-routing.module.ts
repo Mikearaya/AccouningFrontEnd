@@ -3,11 +3,13 @@ import { CommonModule } from "@angular/common";
 import { LedgerComponent } from "./ledger/ledger.component";
 import { Routes, RouterModule } from "@angular/router";
 import { LedgerViewComponent } from "./ledger-view/ledger-view.component";
+import { AuthGuardGuard } from "src/app/core/services/auth-guard.guard";
 
 const routes: Routes = [
   {
     path: "",
     component: LedgerViewComponent,
+    canActivate: [AuthGuardGuard],
     data: {
       breadCrum: "View",
       claim: "canViewLedgerEntries"
@@ -16,15 +18,17 @@ const routes: Routes = [
   {
     path: "add",
     component: LedgerComponent,
+    canActivate: [AuthGuardGuard],
     data: {
       breadCrum: "Add",
-      claim: "canAddLedgerEntries"
+      claim: "canAddNewLedgerEntries"
     }
   }, // when creating a new organization data
   {
     path: ":ledgerId/update",
     component: LedgerComponent,
-    data: { breadCrum: "Update", claim: "canUpdateLedgerEntry" }
+    canActivate: [AuthGuardGuard],
+    data: { breadCrum: "Update", claim: "canEditLedgerEntry" }
   }
 ];
 @NgModule({

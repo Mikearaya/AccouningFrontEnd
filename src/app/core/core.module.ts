@@ -32,6 +32,7 @@ import {
 import { SystemCacheInterceptorService } from "./services/system-cache-interceptor.service";
 import { SystemCacheService } from "./services/system-cache.service";
 import { AccountTypeService } from "./services/account-type.service";
+import { AuthGuardGuard } from "./services/auth-guard.guard";
 
 @NgModule({
   declarations: [],
@@ -72,7 +73,8 @@ import { AccountTypeService } from "./services/account-type.service";
       provide: HTTP_INTERCEPTORS,
       useClass: SystemCacheInterceptorService,
       multi: true
-    }
+    },
+    AuthGuardGuard
   ]
 })
 export class CoreModule {}

@@ -14,6 +14,7 @@ import { LookupsModule } from "./features/lookups/lookups.module";
 import { SharedModule } from "./shared/shared.module";
 import { AccountingApiService } from "./Services/accounting-api.service";
 import { DashboardLayoutModule } from "@syncfusion/ej2-angular-layouts";
+import { SecurityService } from "./core/services/security-service.service";
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,7 +30,7 @@ import { DashboardLayoutModule } from "@syncfusion/ej2-angular-layouts";
     DashboardLayoutModule,
     SharedModule
   ],
-  providers: [AccountingApiService],
+  providers: [SecurityService, AccountingApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

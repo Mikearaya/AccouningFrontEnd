@@ -8,78 +8,87 @@ import { BalanceSheetComponent } from "./balance-sheet/balance-sheet.component";
 import { IncomeStatmentComponent } from "./income-statment/income-statment.component";
 import { AccountsScheduleComponent } from "./accounts-schedule/accounts-schedule.component";
 import { CostOfGoodsSoldComponent } from "./cost-of-goods-sold/cost-of-goods-sold.component";
+import { AuthGuardGuard } from "src/app/core/services/auth-guard.guard";
 
 const routes: Routes = [
   {
     path: "checklist",
     component: ChecklistComponent,
+    canActivate: [AuthGuardGuard],
     data: {
       title: "Checklist",
       breadCrum: "Checklist",
-      claim: "canViewChecklist"
+      claimType: "canViewChecklist"
     }
   },
   {
     path: "subsidaries",
     component: SubsidaryLedgerReportComponent,
+    canActivate: [AuthGuardGuard],
     data: {
       title: "Subsidary ledger",
       breadCrum: "Subsidary",
-      claim: "canViewSubsidaryLedger"
+      claimType: "canViewSubsidaryLedger"
     }
   },
   {
     path: "consolidated-trial-balance",
     component: ConsolidatedTrialBalanceComponent,
+    canActivate: [AuthGuardGuard],
     data: {
       title: "Consolidated trial balance",
       breadCrum: "Consolidated trial balance",
-      claim: "canViewConsolidatedTrialBalance"
+      claimType: "canViewConsolidatedTrialBalance"
     }
   },
   {
     path: "trial-balance-detail",
     component: TrialBalanceDetailComponent,
+    canActivate: [AuthGuardGuard],
     data: {
       title: "Trial balance detail",
       breadCrum: "Trial balance detail",
-      claim: "canViewTrialalaceDetail"
+      claimType: "canViewTrialalaceDetail"
     }
   },
   {
     path: "balance-sheet",
     component: BalanceSheetComponent,
+    canActivate: [AuthGuardGuard],
     data: {
       title: "Balance sheet",
       breadCrum: "Balance sheet",
-      claim: "canViewBalanceSheet"
+      claimType: "canViewBalanceSheet"
     }
   },
   {
     path: "income-statement",
     component: IncomeStatmentComponent,
+    canActivate: [AuthGuardGuard],
     data: {
       title: "Income statement",
       breadCrum: "Income statement",
-      claim: "canViewIncomeStatementu"
+      claimType: "canViewIncomeStatementu"
     }
   },
   {
     path: "accounts-schedule",
     component: AccountsScheduleComponent,
+    canActivate: [AuthGuardGuard],
     data: {
       title: "Accounts Schedule",
       breadCrum: "Account Schedule",
-      claim: "canViewAccountSchedule"
+      claimType: "canViewAccountSchedule"
     }
   },
   {
     path: "cost-of-goods-sold",
     component: CostOfGoodsSoldComponent,
+    canActivate: [AuthGuardGuard],
     data: {
       title: "Cost of goods sold",
       breadCrum: "Cost of goods sold",
-      claim: "canViewCostOfGoodsSold"
+      claimType: "canViewCostOfGoodsSold"
     }
   }
 ];

@@ -62,6 +62,7 @@ export class AppComponent implements OnInit {
           )
         ) {
           this.smartAccountingLinks[index].subChild.splice(i, 1);
+        } else {
         }
       }
 
@@ -102,8 +103,8 @@ export class AppComponent implements OnInit {
     if (routerLink !== "parent") {
       this.router.navigate([routerLink]);
     }
-
-    /*  const x = {
+    /*
+    const x = {
       bearerToken: "asdfghjjklyyrrffghjjj",
       isAuthenticated: true,
       claims: [
@@ -141,14 +142,14 @@ export class AppComponent implements OnInit {
         }
       ],
       userName: "Admin"
-    }; */
-    /*     localStorage.setItem("accountingBearerToken", null);
-    localStorage.setItem("accountingBearerToken", JSON.stringify(x)); */
+    };
+    localStorage.setItem("accountingBearerToken", null);
+    localStorage.setItem("accountingBearerToken", JSON.stringify(x));
 
-    /*     if (localStorage.getItem("accountingBearerToken") === null) {
+    if (localStorage.getItem("accountingBearerToken") === null) {
       localStorage.setItem("accountingBearerToken", JSON.stringify(x));
-    } */
-
+    }
+ */
     this.securityService.logIn().subscribe();
   }
 

@@ -9,14 +9,14 @@ import {
 import { Observable } from "rxjs";
 import { SecurityService } from "./security-service.service";
 
-@Injectable({
-  providedIn: "root"
-})
+@Injectable()
 export class AuthGuardGuard implements CanActivate {
   constructor(
     private securityService: SecurityService,
     private router: Router
-  ) {}
+  ) {
+    this.securityService.logIn().subscribe();
+  }
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -28,10 +28,11 @@ export class AuthGuardGuard implements CanActivate {
     const claimType: string = next.data["claimType"];
 
     if (!this.securityService.securityObject.isAuthenticated) {
-      window.location.href = "https://www.google.com";
+      window.location.href = "http://erp.net/smarthrm/authenticate/logout";
     } else {
       return true;
     }
+
     if (this.securityService.hasClaim(claimType)) {
       return true;
     } else {
@@ -42,7 +43,7 @@ export class AuthGuardGuard implements CanActivate {
   }
   canLoad(): Observable<boolean> | Promise<boolean> | boolean {
     if (!this.securityService.securityObject.isAuthenticated) {
-      window.location.href = "https://www.google.com";
+      window.location.href = "http://erp.net/smarthrm/authenticate/logout";
       return false;
     } else {
       return true;
