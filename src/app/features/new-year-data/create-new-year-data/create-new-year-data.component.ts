@@ -3,20 +3,7 @@ import { AccountingApiService } from "src/app/Services/accounting-api.service";
 
 @Component({
   selector: "app-create-new-year-data",
-  template: `
-    <div class="container">
-      <div class="row text-center">
-        <div class="col-6 ">
-          <button ejs-button class="e-primary" (click)="create()">
-            Create
-          </button>
-        </div>
-        <div class="col-6">
-          <button ejs-button class="e-danger" (click)="delete()">Delete</button>
-        </div>
-      </div>
-    </div>
-  `,
+  template: "./create-new-year-data.component.html",
   styleUrls: ["./create-new-year-data.component.css"]
 })
 export class CreateNewYearDataComponent implements OnInit {
