@@ -46,7 +46,7 @@ export class SecurityService {
   };
   constructor(private httpClient: HttpClient) {
     this.securityObject = new AppUserAuth();
-    localStorage.setItem("accountingBearerToken", JSON.stringify(this.x));
+    // localStorage.setItem("accountingBearerToken", JSON.stringify(this.x));
 
     if (localStorage.getItem("accountingBearerToken")) {
       this.securityObject = JSON.parse(
@@ -56,18 +56,19 @@ export class SecurityService {
   }
 
   logIn(): Observable<AppUserAuth> {
-    //    this.resetSecurityObject();
 
     if (!this.securityObject.isAuthenticated) {
-      /*       this.httpClient
+      this.httpClient
         .get<AppUserAuth>(
           `http://erp.net/smarthrm/authenticate/my_role/finance`
         )
         .subscribe(
           (data: AppUserAuth) => (this.securityObject = data),
           (error: HttpErrorResponse) =>
-            (window.location.href = `http://erp.net/smarthrm/authenticate/logout`)
-        ); */
+            (window.location.href = `http://${
+              window.location.hostname
+            }/smarthrm/authenticate/logout`)
+        );
     }
     localStorage.setItem("accountingBearerToken", JSON.stringify(this.x));
 
@@ -85,7 +86,9 @@ export class SecurityService {
 
   logOut() {
     this.resetSecurityObject();
-    window.location.href = "http://erp.net/smarthrm/authenticate/logout";
+    window.location.href = `http://${
+      window.location.hostname
+    }/smarthrm/authenticate/logout`;
   }
 
   hasClaim(claimType: any, claimValue?: any): boolean {

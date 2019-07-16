@@ -24,6 +24,10 @@ export class AccountingApiService {
     return this.httpClient.post<void>(`accounts/create-new-year`, {});
   }
 
+  deleteFiscalPeriod(): Observable<void> {
+    return this.httpClient.post<void>(`accounts/delete-year`, {});
+  }
+
   getDashboardReport(): Observable<DashboardViewModel> {
     return this.httpClient.get<DashboardViewModel>(`report/dashboard`);
   }

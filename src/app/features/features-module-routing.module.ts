@@ -42,7 +42,7 @@ const routes: Routes = [
     loadChildren:
       "../features/new-year-data/new-year-data.module#NewYearDataModule",
     data: {
-      title: "New year data",
+      title: "Fiscal Year",
       breadCrum: "New year data"
     }
   },

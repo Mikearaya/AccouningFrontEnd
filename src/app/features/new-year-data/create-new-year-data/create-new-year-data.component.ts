@@ -1,18 +1,20 @@
 import { Component, OnInit, AfterViewInit } from "@angular/core";
 import { AccountingApiService } from "src/app/Services/accounting-api.service";
-import { HttpErrorResponse } from "@angular/common/http";
-import {
-  createSpinner,
-  showSpinner,
-  hideSpinner,
-  setSpinner
-} from "@syncfusion/ej2-angular-popups";
 
 @Component({
   selector: "app-create-new-year-data",
   template: `
-    <div>
-      <button ejs-button class="e-primary" (click)="create()">Create</button>
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-6 ">
+          <button ejs-button class="e-primary" (click)="create()">
+            Create
+          </button>
+        </div>
+        <div class="col-6">
+          <button ejs-button class="e-danger" (click)="delete()">Delete</button>
+        </div>
+      </div>
     </div>
   `,
   styleUrls: ["./create-new-year-data.component.css"]
@@ -25,11 +27,23 @@ export class CreateNewYearDataComponent implements OnInit {
       .createNextFiscalPeriod()
       .subscribe(
         () => alert("Accounts for the next fiscal period created successfuly"),
-        (error: HttpErrorResponse) => alert(error.message)
+        () => alert("unable to create fiscal year at this period")
+      );
+  }
+
+  delete() {
+    this.accountingApi
+      .deleteFiscalPeriod()
+      .subscribe(
+        e => alert("deleted fiscal year successfuly"),
+        () =>
+          alert(
+            "unable to delete fiscal year accounts, one or more accounts have entries under them"
+          )
       );
   }
   ngOnInit() {
-    //createSpinner() method is used to create spinner
+    // createSpinner() method is used to create spinner
     // showSpinner() will make the spinner visible
   }
 }
