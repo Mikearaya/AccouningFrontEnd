@@ -48,29 +48,29 @@ export class DataViewComponent implements OnInit {
   @Input()
   public data: Subject<DataStateChangeEventArgs>;
   @Input()
-  public showUpdate: Boolean;
+  public showUpdate: boolean;
   @Input()
-  public showDelete: Boolean;
+  public showDelete: boolean;
   @Input()
-  public showView: Boolean;
+  public showView: boolean;
   @Input()
-  public showAdd: Boolean = true;
+  public showAdd = true;
   @Input()
-  public showPrint: Boolean;
+  public showPrint: boolean;
   @Input()
-  public showPdfExport: Boolean;
+  public showPdfExport: boolean;
   @Input()
-  public showExcelExport: Boolean;
+  public showExcelExport: boolean;
   @Input()
-  public showColumnChooser: Boolean;
+  public showColumnChooser: boolean;
   @Input()
-  public enableFilter: Boolean;
+  public enableFilter: boolean;
   @Input()
-  public enableSorting: Boolean;
+  public enableSorting: boolean;
   @Input()
-  public enablePaging: Boolean;
+  public enablePaging: boolean;
   @Input()
-  public enableSearching: Boolean;
+  public enableSearching: boolean;
   @Input()
   public idKey: any;
   @Input()
@@ -89,7 +89,7 @@ export class DataViewComponent implements OnInit {
   @Input()
   public addRoute = "";
   @Input()
-  public allowGrouping: Boolean;
+  public allowGrouping: boolean;
   @Input()
   public wrapSettings: TextWrapSettingsModel;
 
@@ -127,8 +127,8 @@ export class DataViewComponent implements OnInit {
   public pageSizes: string[] = PageSizes;
   public initialPage: { pageSize: number; pageSizes: string[] };
   public filterSettings: FilterSettingsModel;
-  public toolbar: Object[] = [];
-  public selectOptions: Object;
+  public toolbar: object[] = [];
+  public selectOptions: object;
   public commands: CommandModel[] = [];
   public editSettings: EditSettingsModel;
   public selectionOptions: SelectionSettingsModel;
@@ -282,6 +282,15 @@ export class DataViewComponent implements OnInit {
     return searchString;
   }
 
+  private createLink(label: string): any {
+    const data = {
+      text: label,
+      prefixIcon: "e-create",
+      id: "create"
+    };
+    return data;
+  }
+
   initializeToolBar(): void {
     if (this.showAdd && this.securityService.hasClaim(this.addPrivilage)) {
       this.toolbar.push({
@@ -292,21 +301,21 @@ export class DataViewComponent implements OnInit {
     }
 
     if (this.showPdfExport) {
-      this.toolbar.push("PdfExport");
+      this.toolbar.push(this.createLink('PdfExport'));
     }
     if (this.showExcelExport) {
-      this.toolbar.push("ExcelExport");
+      this.toolbar.push(this.createLink('ExcelExport'));
     }
     if (this.showPrint) {
-      this.toolbar.push("Print");
+      this.toolbar.push(this.createLink('Print'));
     }
 
     if (this.enableSearching) {
-      this.toolbar.push("Search");
+      this.toolbar.push(this.createLink('Search'));
     }
 
     if (this.showColumnChooser) {
-      this.toolbar.push("ColumnChooser");
+      this.toolbar.push(this.createLink('ColumnChooser'));
     }
   }
 
