@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from "@angular/core";
+import { Component, OnInit, AfterViewInit, ViewChild } from "@angular/core";
 import {
   FormGroup,
   FormBuilder,
@@ -58,6 +58,10 @@ export class LedgerComponent implements OnInit {
   public lastSectionBackColor: any;
   public lastSectionColor: any;
   deletedIds: number[] = [];
+  @ViewChild("element") element;
+  @ViewChild("element") title;
+  @ViewChild("element") content;
+  public position = { X: "Right" };
 
   constructor(
     private formBuilder: FormBuilder,
@@ -162,6 +166,15 @@ export class LedgerComponent implements OnInit {
     }
     return null;
   }
+  myDate(date: any) {
+    const dateString = date.toString();
+    const year = dateString.substring(0, 2);
+    const month = dateString.substring(2, 4);
+    const day = dateString.substring(4, 8);
+    const myDate = day + "/" + month + "/" + year;
+
+    return myDate;
+  }
 
   createForm() {
     this.ledgerForm = this.formBuilder.group({
@@ -169,7 +182,7 @@ export class LedgerComponent implements OnInit {
       Reference: [""],
       Posted: [false],
       Description: ["", Validators.required],
-      Date: ["", Validators.required],
+      Date: [this.myDate(""), Validators.required],
       Entries: this.formBuilder.array([
         this.formBuilder.group({
           AccountId: ["", [Validators.required, this.RequireMatch]],
@@ -211,7 +224,7 @@ export class LedgerComponent implements OnInit {
       this.ledgerService.addLedgerEntry(formData).subscribe(
         (data: LedgerEntryViewModel) => {
           alert("Ledger entry made successfully");
-          this.isUpdate = true;
+          // this.isUpdate = true;
           this.createForm();
         },
         (error: HttpErrorResponse) => console.log(error)
@@ -253,7 +266,7 @@ export class LedgerComponent implements OnInit {
 
     const ledger = new LedgerEntry();
     ledger.Id = this.ledgerId ? this.ledgerId : 0;
-    ledger.Date = form.Date;
+    ledger.Date = this.myDate(this.Date.value);
     ledger.Description = form.Description;
     ledger.VoucherId = form.VoucherId;
     ledger.Reference = form.Reference;
@@ -300,5 +313,16 @@ export class LedgerComponent implements OnInit {
     this.Reference.enable();
     this.Date.enable();
     this.Entries.enable();
+  }
+  onCreate() {
+    this.toastShow();
+  }
+  btnClick() {
+    this.toastShow();
+  }
+  toastShow() {
+    setTimeout(() => {
+      this.element.show();
+    }, 700);
   }
 }

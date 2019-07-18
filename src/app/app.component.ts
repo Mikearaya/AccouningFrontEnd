@@ -23,6 +23,7 @@ import { NAVIGATION_LINKS } from "./navigation-data.model";
   styleUrls: ["./app.component.css"]
 })
 export class AppComponent implements OnInit {
+  public selectedYear;
   public securityObject: AppUserAuth;
   public cssClass = "custom";
   public items: ItemModel[] = [
@@ -94,6 +95,9 @@ export class AppComponent implements OnInit {
       .subscribe((data: AvailableYearsModel[]) => (this.yearData = data));
 
     this.securityObject = this.securityService.securityObject;
+    this.selectedYear = this.accountingApi.getSelectedYear();
+    // alert(this.selectedYear);
+    console.log("----------", this.selectedYear);
   }
 
   public loadRoutingContent(args: NodeSelectEventArgs): void {

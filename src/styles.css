@@ -23,6 +23,10 @@ body {
   content: '\e242';
 }
 
+.e-Pdf_Export::before {
+  content: '\e240';
+}
+
 .e-expand::before {
   content: '\e919';
 }

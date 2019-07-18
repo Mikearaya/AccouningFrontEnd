@@ -3,7 +3,7 @@ import { AccountingApiService } from "src/app/Services/accounting-api.service";
 
 @Component({
   selector: "app-create-new-year-data",
-  template: "./create-new-year-data.component.html",
+  templateUrl: "./create-new-year-data.component.html",
   styleUrls: ["./create-new-year-data.component.css"]
 })
 export class CreateNewYearDataComponent implements OnInit {
