@@ -34,12 +34,12 @@
             >
             </ejs-datepicker>
             <ejs-maskedtextbox
-              mask="[2-9][0-9][0-9][0-9]/[0-2][0-3]/[0-3][0-9]"
+              mask="[[0-3][0-9]/[0-1][0-3]/[2-9][0-9][0-9][0-9]"
               formControlName="Date"
               [value]="Date.value"
               id="date"
               name="date"
-              placeholder="date(mm/dd/yyyy)"
+              placeholder="date(dd/mm/yyyy)"
             ></ejs-maskedtextbox>
 
             <div class="e-error" *ngIf="Date.errors && Date.touched">
@@ -220,13 +220,13 @@
                 }"
               >
                 <div class="row">
-                  <div class="col-6">
+                  <div class="col-5">
                     <small
                       >Difference:
                       {{ debitSum - creditSum | currency: "":"" }}</small
                     >
                   </div>
-                  <div class="col-6">
+                  <div class="col-7">
                     <p *ngIf="!isEqual">
                       <small>Credit And Debit amount are not Equal</small>
                     </p>
