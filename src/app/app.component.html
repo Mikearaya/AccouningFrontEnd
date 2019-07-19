@@ -76,12 +76,12 @@
           (valueChange)="yearChanged($event)"
           [dataSource]="yearData"
           [fields]="yearFields"
-          [value]="selectedYear"
+          value="{{ selectedYear }}"
           [width]="100"
           placeholder="Year"
         ></ejs-dropdownlist>
+        {{ selectedYear }}
       </div>
-
       <!--  <ejs-toolbar>
         <e-items> </e-items>
       </ejs-toolbar> -->
