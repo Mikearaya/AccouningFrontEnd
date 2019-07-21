@@ -1,12 +1,8 @@
-
-
-
 button {
   width: 140px;
   height: 45px;
   text-transform: uppercase;
   color: white;
-
   border: none;
   border-radius: 45px;
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 1);
@@ -18,10 +14,35 @@ button {
 
 
 button.e-primary {
-    background: #4d841d;
+  background: #4d841d;
+}
+
+button.e-danger {
+  background: red;
 }
 
 
-button.e-danger {
-    background: red;
+.card {
+  margin-top: 5%;
+  background-color: #D4E6F122;
+}
+
+.card-body {
+  padding: 2%;
+}
+
+.container {
+  display: grid;
+  justify-content: center;
+}
+
+.info {
+  min-height: 100px;
+  text-align: center;
+}
+
+.button-cont {
+  padding-left: 40%;
+  padding-right: 40%;
+  margin-top: 15px;
 }

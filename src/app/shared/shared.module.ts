@@ -55,6 +55,7 @@ import { DialogModule } from "@syncfusion/ej2-angular-popups";
 import { LedgerViewComponent } from "../features/ledgers/ledger-view/ledger-view.component";
 import { UnAuthorizedPageComponent } from "./un-authorized-page/un-authorized-page.component";
 import { LedgerEntrySelectorComponent } from "./ledger-entry-selector/ledger-entry-selector.component";
+import { ToastModule } from "@syncfusion/ej2-angular-notifications";
 
 @NgModule({
   imports: [
@@ -85,7 +86,8 @@ import { LedgerEntrySelectorComponent } from "./ledger-entry-selector/ledger-ent
     DashboardLayoutModule,
     ChartModule,
     DropDownButtonModule,
-    DialogModule
+    DialogModule,
+    ToastModule
   ],
   exports: [
     CommonModule,
@@ -126,7 +128,8 @@ import { LedgerEntrySelectorComponent } from "./ledger-entry-selector/ledger-ent
     PrintHeaderComponent,
     HasClaimDirective,
     DialogModule,
-    LedgerEntrySelectorComponent
+    LedgerEntrySelectorComponent,
+    ToastModule
   ],
   declarations: [
     FormOptionsComponent,

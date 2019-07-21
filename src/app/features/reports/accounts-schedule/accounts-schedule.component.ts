@@ -130,18 +130,20 @@ export class AccountsScheduleComponent implements OnInit {
       this.grid.groupModule.collapseAll();
     }
     if (args.item.id === "print") {
+      // const currentPageSize = this.grid.pageSettings.pageSize;
       // this.grid.pageSettings.pageSize = this.grid.pageSettings.totalRecordsCount;
       this.grid.groupModule.expandAll();
       setTimeout(() => {
         window.print();
-      }, 300);
+        // this.grid.pageSettings.pageSize = currentPageSize;
+      }, 1000);
     }
     if (args.item.id === "Grid_excelexport") {
-      const currentPageSize = this.grid.pageSettings.pageSize;
-      this.grid.pageSettings.pageSize = this.grid.pageSettings.totalRecordsCount;
+      // const currentPageSize = this.grid.pageSettings.pageSize;
+      // this.grid.pageSettings.pageSize = this.grid.pageSettings.totalRecordsCount;
       setTimeout(() => {
         this.grid.excelExport(this.getExcelExportProperties());
-        this.grid.pageSettings.pageSize = currentPageSize;
+        // this.grid.pageSettings.pageSize = currentPageSize;
       }, 1000);
     }
   }

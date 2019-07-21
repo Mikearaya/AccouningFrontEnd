@@ -15,9 +15,12 @@ export class AccountingApiService {
 
   setSelectedYear(newYear: string): void {
     this.selectedYear = newYear;
+    localStorage.setItem("selectedYear", this.selectedYear);
   }
   getSelectedYear(): string {
-    return this.selectedYear;
+    const selectedYear = localStorage.getItem("selectedYear");
+    // alert(selYear);
+    return selectedYear;
   }
 
   createNextFiscalPeriod(): Observable<void> {

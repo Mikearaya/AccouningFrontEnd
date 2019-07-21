@@ -282,14 +282,14 @@ export class DataViewComponent implements OnInit {
     return searchString;
   }
 
-  private createLink(label: string): any {
+  /*  private createLink(label: string): any {
     const data = {
       text: label,
       prefixIcon: "e-create",
       id: "create"
     };
     return data;
-  }
+  } */
 
   initializeToolBar(): void {
     if (this.showAdd && this.securityService.hasClaim(this.addPrivilage)) {
@@ -301,21 +301,31 @@ export class DataViewComponent implements OnInit {
     }
 
     if (this.showPdfExport) {
-      this.toolbar.push(this.createLink('PdfExport'));
+      this.toolbar.push({
+        text: "PdfExport",
+        prefixIcon: "e-Pdf_Export",
+        id: "pdfExport"
+      });
     }
     if (this.showExcelExport) {
-      this.toolbar.push(this.createLink('ExcelExport'));
+      this.toolbar.push({
+        text: "ExcelExport",
+        prefixIcon: "e-Excel_Export",
+        id: "excelExport"
+      });
     }
     if (this.showPrint) {
-      this.toolbar.push(this.createLink('Print'));
+      this.toolbar.push({
+        text: "Print",
+        prefixIcon: "e-print",
+        id: "print"
+      });
     }
 
     if (this.enableSearching) {
-      this.toolbar.push(this.createLink('Search'));
     }
 
     if (this.showColumnChooser) {
-      this.toolbar.push(this.createLink('ColumnChooser'));
     }
   }
 
@@ -328,13 +338,13 @@ export class DataViewComponent implements OnInit {
           this.router.navigate([this.addRoute]);
         }
         break;
-      case "dataview_pdfexport":
+      case "pdfExport":
         this.grid.pdfExport();
         break;
-      case "dataview_excelexport":
+      case "excelExport":
         this.grid.excelExport();
         break;
-      case "dataview_print":
+      case "print":
         window.print();
         break;
     }
@@ -355,4 +365,3 @@ export interface CustomGridColumns {
   textAlign?: string;
   hederAlign?: string;
 }
-

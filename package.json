@@ -29,6 +29,7 @@
     "@syncfusion/ej2-angular-layouts": "^17.1.48",
     "@syncfusion/ej2-angular-lists": "^16.4.52",
     "@syncfusion/ej2-angular-navigations": "^16.4.54",
+    "@syncfusion/ej2-angular-notifications": "^17.2.34",
     "@syncfusion/ej2-angular-popups": "^16.4.54",
     "@syncfusion/ej2-angular-splitbuttons": "^17.1.50",
     "@syncfusion/ej2-angular-treegrid": "^17.1.47",

@@ -36,7 +36,8 @@
               "./node_modules/@syncfusion/ej2-treegrid/styles/material.css",
               "./node_modules/@syncfusion/ej2-layouts/styles/material.css",
               "./node_modules/@syncfusion/ej2-angular-layouts/styles/material.css",
-              "./node_modules/@syncfusion/ej2-angular-splitbuttons/styles/material.css"
+              "./node_modules/@syncfusion/ej2-angular-splitbuttons/styles/material.css",
+              "./node_modules/@syncfusion/ej2-angular-notifications/styles/material.css"
             ],
             "scripts": [],
             "es5BrowserSupport": true

@@ -1,4 +1,11 @@
-import { Component, OnInit, AfterViewInit } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  AfterViewInit,
+  ViewChild,
+  ElementRef,
+  HostListener
+} from "@angular/core";
 import {
   FormGroup,
   FormBuilder,
@@ -20,6 +27,10 @@ import {
   LedgerEntryViewModel
 } from "../ledger";
 import { ActivatedRoute } from "@angular/router";
+import {
+  ToastComponent,
+  ToastCloseArgs
+} from "@syncfusion/ej2-angular-notifications";
 
 function balanceChecker(): ValidatorFn {
   return (c: AbstractControl): { [key: string]: boolean } | null => {
@@ -58,6 +69,32 @@ export class LedgerComponent implements OnInit {
   public lastSectionBackColor: any;
   public lastSectionColor: any;
   deletedIds: number[] = [];
+  @ViewChild("toasttype")
+  public toastObj: ToastComponent;
+  @ViewChild("successToast") btnsuccess: ElementRef;
+  public position: object = { X: "Center" };
+  public toasts: { [key: string]: Object }[] = [
+    {
+      title: "Success!",
+      content: "Ledger entry Updated Successfully",
+      cssClass: "e-toast-success",
+      icon: "e-success toast-icons"
+    }
+  ];
+  public successClick(): void {
+    setTimeout(() => {
+      this.toastObj.show(this.toasts[0]);
+    }, 10);
+  }
+  /*   public onclose(e: ToastCloseArgs): void {
+    if (e.toastContainer.childElementCount === 0) {
+      let hideBtn: HTMLElement = document.getElementById("hideTosat");
+      hideBtn.style.display = "none";
+    }
+  } */
+  /* public onBeforeOpen(): void {
+    let hideBtn: HTMLElement = document.getElementById("hideTosat");
+  } */
 
   constructor(
     private formBuilder: FormBuilder,
@@ -162,6 +199,15 @@ export class LedgerComponent implements OnInit {
     }
     return null;
   }
+  myDate(date: any) {
+    const dateString = date.toString();
+    const year = dateString.substring(0, 2);
+    const month = dateString.substring(2, 4);
+    const day = dateString.substring(4, 8);
+    const myDate = day + "/" + month + "/" + year;
+
+    return myDate;
+  }
 
   createForm() {
     this.ledgerForm = this.formBuilder.group({
@@ -169,7 +215,7 @@ export class LedgerComponent implements OnInit {
       Reference: [""],
       Posted: [false],
       Description: ["", Validators.required],
-      Date: ["", Validators.required],
+      Date: [this.myDate(""), Validators.required],
       Entries: this.formBuilder.array([
         this.formBuilder.group({
           AccountId: ["", [Validators.required, this.RequireMatch]],
@@ -210,8 +256,9 @@ export class LedgerComponent implements OnInit {
     if (!this.isUpdate) {
       this.ledgerService.addLedgerEntry(formData).subscribe(
         (data: LedgerEntryViewModel) => {
-          alert("Ledger entry made successfully");
-          this.isUpdate = true;
+          // alert("Ledger entry made successfully");
+          this.successClick();
+          // this.isUpdate = true;
           this.createForm();
         },
         (error: HttpErrorResponse) => console.log(error)
@@ -253,7 +300,7 @@ export class LedgerComponent implements OnInit {
 
     const ledger = new LedgerEntry();
     ledger.Id = this.ledgerId ? this.ledgerId : 0;
-    ledger.Date = form.Date;
+    ledger.Date = this.myDate(this.Date.value);
     ledger.Description = form.Description;
     ledger.VoucherId = form.VoucherId;
     ledger.Reference = form.Reference;

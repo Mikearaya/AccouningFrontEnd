@@ -28,7 +28,7 @@ export class AuthGuardGuard implements CanActivate {
     const claimType: string = next.data["claimType"];
 
     if (!this.securityService.securityObject.isAuthenticated) {
-      window.location.href = "http://erp.net/smarthrm/authenticate/logout";
+      window.location.href = `http://${window.location.hostname}/smarthrm/authenticate/logout`;
     } else {
       return true;
     }
@@ -43,7 +43,7 @@ export class AuthGuardGuard implements CanActivate {
   }
   canLoad(): Observable<boolean> | Promise<boolean> | boolean {
     if (!this.securityService.securityObject.isAuthenticated) {
-      window.location.href = "http://erp.net/smarthrm/authenticate/logout";
+      window.location.href = `http://${window.location.hostname}/smarthrm/authenticate/logout`;
       return false;
     } else {
       return true;

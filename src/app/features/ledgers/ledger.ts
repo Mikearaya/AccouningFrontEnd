@@ -3,7 +3,7 @@ import { updateData } from "@syncfusion/ej2-grids";
 export class LedgerEntryViewModel {
   Id: number;
   Description: string;
-  Date: Date;
+  Date: string;
   Reference: string;
   VoucherId: string;
   Posted: boolean;
@@ -14,7 +14,7 @@ export class LedgerEntryViewModel {
 export class LedgerEntry {
   Id?: number;
   Description: string;
-  Date: Date;
+  Date: string;
   Reference: string;
   VoucherId: string;
   Posted?: boolean;
@@ -39,7 +39,7 @@ export class JornalEntryViewModel {
   Next?: number;
   Id: number;
   Description: string;
-  Date: Date;
+  Date: string;
   Reference: string;
   VoucherId: string;
   Posted: boolean;
