@@ -1,5 +1,5 @@
 import { Component, OnInit, forwardRef, OnChanges, Input } from "@angular/core";
-import { Query } from "@syncfusion/ej2-data";
+import { Query, Predicate } from "@syncfusion/ej2-data";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { LookupService } from "src/app/core/services/lookup.service";
 import { LookupsIndexView } from "src/app/features/lookups/lookups";
@@ -16,6 +16,7 @@ import { LookupsIndexView } from "src/app/features/lookups/lookups";
       [enabled]="!disabled"
       [fields]="fields"
       [dataSource]="lookups"
+      (filtering)="onFiltering($event)"
       (change)="lookupChanged($event)"
     ></ejs-autocomplete>
   `,
@@ -41,6 +42,20 @@ export class LookupSelectorComponent
   public fields: object = { value: "Id", text: "Name" };
   // set the placeholder to the AutoComplete input
   public text = "";
+
+  public onFiltering(e) {
+    e.preventDefaultAction = true;
+    const predicate = new Predicate("Name", "Contains", e.text);
+
+    let query = new Query();
+    // frame the query based on search string with filter type.
+    query = e.text !== "" ? query.where(predicate) : query;
+    // pass the filter data source, filter query to updateData method.
+
+    this.lookupApi.getLookupIndex(this.type, e.text).subscribe(data => {
+      e.updateData(data);
+    });
+  }
 
   lookupChanged($event: any) {
     if ($event.itemData) {
@@ -70,7 +85,7 @@ export class LookupSelectorComponent
   ngOnChanges() {}
 
   ngOnInit() {
-    this.lookupApi.getLookUpType(this.type).subscribe((responseData: any) => {
+    this.lookupApi.getLookupIndex(this.type).subscribe((responseData: any) => {
       this.lookups = responseData.Items;
       if (this._value) {
         const data = this.lookups.filter(a => a.Id === this._value);

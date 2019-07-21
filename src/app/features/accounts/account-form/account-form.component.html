@@ -25,9 +25,10 @@
           </div>
         </div>
         <div class="col-6">
-          <label for="parentAccount"> Parent Account</label>
+          <label for="parentAccount"> GL Account</label>
           <div>
             <app-account-selector
+              [accountType]="'Control'"
               formControlName="ParentAccount"
             ></app-account-selector>
             <div

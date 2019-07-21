@@ -38,9 +38,12 @@ export class LookupService extends Subject<DataStateChangeEventArgs> {
     return this.httpClient.get<LookupView>(`${this.url}/${id}`);
   }
 
-  getLookupIndex(searchString: string = ""): Observable<LookupsIndexView[]> {
+  getLookupIndex(
+    type: string,
+    searchString: string = ""
+  ): Observable<LookupsIndexView[]> {
     return this.httpClient.get<LookupsIndexView[]>(
-      `${this.url}?type=cost center${searchString}`
+      `${this.url}/index?type=${type}&searchString=${searchString}`
     );
   }
 

@@ -1,6 +1,6 @@
 import { Component, OnInit, forwardRef, OnChanges } from "@angular/core";
 import { AccountCatagoryApiService } from "src/app/core/account-catagory-api.service";
-import { Query } from "@syncfusion/ej2-data";
+import { Query, Predicate } from "@syncfusion/ej2-data";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { AccountsIndexView } from "src/app/features/accounts/accounts";
 
@@ -15,6 +15,7 @@ import { AccountsIndexView } from "src/app/features/accounts/accounts";
       [enabled]="!disabled"
       [text]="text"
       [fields]="fields"
+      (filtering)="onFiltering($event)"
       [dataSource]="accountCategories"
       (change)="categoryChanged($event)"
     ></ejs-autocomplete>
@@ -65,6 +66,21 @@ export class AccountCategorySelectorComponent implements ControlValueAccessor {
       }
     });
   }
+
+  public onFiltering(e) {
+    e.preventDefaultAction = true;
+    const predicate = new Predicate("Name", "Contains", e.text);
+
+    let query = new Query();
+    // frame the query based on search string with filter type.
+    query = e.text !== "" ? query.where(predicate) : query;
+    // pass the filter data source, filter query to updateData method.
+
+    this.accountApi.getAccountCatagoryIndex(e.text).subscribe(data => {
+      e.updateData(data);
+    });
+  }
+
   registerOnChange(fn: any): void {
     this.onChanged = fn;
   }

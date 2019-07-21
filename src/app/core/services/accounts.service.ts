@@ -60,9 +60,12 @@ export class AccountsService extends Subject<DataStateChangeEventArgs> {
     );
   }
 
-  getAccountIndex(searchString: string = ""): Observable<AccountsIndexView[]> {
+  getAccountIndex(
+    type: string = "All",
+    searchString: string = ""
+  ): Observable<AccountsIndexView[]> {
     return this.httpClient.get<AccountsIndexView[]>(
-      `${this.url}/index?searchString=${searchString}`
+      `${this.url}/index?searchString=${searchString}&type=${type}`
     );
   }
 

@@ -1,11 +1,7 @@
-import { Component, OnInit, forwardRef, OnChanges } from "@angular/core";
+import { Component, forwardRef, Input } from "@angular/core";
 import { AccountsService } from "src/app/core/services/accounts.service";
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
-import { AccountsIndexView } from "src/app/features/accounts/accounts";
-import { Input } from "@syncfusion/ej2-inputs";
 import { Predicate, Query } from "@syncfusion/ej2-data/src";
-import { QueryString } from "../data-view/data-view.model";
-import { element } from "@angular/core/src/render3";
 
 @Component({
   selector: "app-account-selector",
@@ -34,6 +30,9 @@ import { element } from "@angular/core/src/render3";
 })
 export class AccountSelectorComponent implements ControlValueAccessor {
   constructor(private accountApi: AccountsService) {}
+  @Input()
+  public accountType = "All";
+
   public _value: any;
   public disabled: boolean;
   public data;
@@ -59,12 +58,14 @@ export class AccountSelectorComponent implements ControlValueAccessor {
 
     let query = new Query();
     // frame the query based on search string with filter type.
-    query = e.text != "" ? query.where(predicate) : query;
+    query = e.text !== "" ? query.where(predicate) : query;
     // pass the filter data source, filter query to updateData method.
 
-    this.accountApi.getAccountIndex(e.text).subscribe(data => {
-      e.updateData(data);
-    });
+    this.accountApi
+      .getAccountIndex(this.accountType, e.text)
+      .subscribe(data => {
+        e.updateData(data);
+      });
   }
 
   onChanged: any = () => {};
@@ -73,17 +74,19 @@ export class AccountSelectorComponent implements ControlValueAccessor {
   writeValue(obj: any): void {
     this._value = obj;
 
-    this.accountApi.getAccountIndex("").subscribe((result: any) => {
-      this.accounts = result;
-      if (this._value) {
-        if (obj !== 0) {
-          const data = this.accounts.filter(a => a.Id === obj);
-          data.forEach(element => {
-            this.text = element.Name;
-          });
+    this.accountApi
+      .getAccountIndex(this.accountType, "")
+      .subscribe((result: any) => {
+        this.accounts = result;
+        if (this._value) {
+          if (obj !== 0) {
+            const data = this.accounts.filter(a => a.Id === obj);
+            data.forEach(elemnt => {
+              this.text = elemnt.Name;
+            });
+          }
         }
-      }
-    });
+      });
   }
   registerOnChange(fn: any): void {
     this.onChanged = fn;
