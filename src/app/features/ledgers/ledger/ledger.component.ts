@@ -269,7 +269,6 @@ export class LedgerComponent implements OnInit {
     });
 
     this.deletedIds.forEach(element => {
-      alert(element);
       ledger.DeletedIds.push(element);
     });
 
