@@ -48,7 +48,7 @@ export class LedgerService extends Subject<DataStateChangeEventArgs> {
 
   getLedgerEntryByVoucherId(id: string): Observable<LedgerEntryIndexView> {
     return this.httpClient.get<LedgerEntryIndexView>(
-      `${this.url}/voucher/${id}`
+      `${this.url}/voucher?id=${id}`
     );
   }
 

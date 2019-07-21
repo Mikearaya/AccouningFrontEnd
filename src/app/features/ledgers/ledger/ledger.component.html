@@ -79,7 +79,6 @@
           <!-- <div class="col-1"></div> -->
           <div class="col-2" id="post-button">
             <button
-              [disabled]="!isEqual"
               id="add-button"
               [ngClass]="this.Posted.value ? 'bg-danger' : 'e-info'"
               type="button"
@@ -244,14 +243,9 @@
     [submitDisabled]="ledgerForm.invalid"
   ></app-form-options>
 </form>
-<!-- <ejs-toast #element (created)="onCreate($event)" [position]="position">
-  <ng-template #title>
-    <div>success</div>
-  </ng-template>
-  <ng-template #content>
-    <div>Ledger entry made successfully!</div>
-  </ng-template>
-</ejs-toast>
-<button ejs-button [isPrimary]="true" (click)="btnClick($event)">
-  Show Toast
-</button> -->
+<div class="col-lg-12 control-section">
+  <div class="sample_container toast-type-section">
+    <ejs-toast #toasttype id="toasttype" [position]="position"></ejs-toast>
+    <div id="toast_default_target"></div>
+  </div>
+</div>

@@ -205,11 +205,13 @@ export class AccountsViewComponent implements OnInit {
       this.grid.groupModule.collapseAll();
     }
     if (args.item.id === "print") {
+      // const currentPageSize = this.grid.pageSettings.pageSize;
       // this.grid.pageSettings.pageSize = this.grid.pageSettings.totalRecordsCount;
       this.grid.groupModule.expandAll();
       setTimeout(() => {
         window.print();
-      }, 300);
+        // this.grid.pageSettings.pageSize = currentPageSize;
+      }, 1000);
     }
     if (args.item.id === "Grid_excelexport") {
       this.grid.pageSettings.pageSize = this.grid.pageSettings.totalRecordsCount;

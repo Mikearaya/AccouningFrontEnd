@@ -60,10 +60,12 @@ export class AccountsService extends Subject<DataStateChangeEventArgs> {
     );
   }
 
-  getAccountIndex(searchString: string = ""): Observable<AccountsIndexView[]> {
-    return this.httpClient.get<AccountsIndexView[]>(
-      `${this.url}/index?searchString=${searchString}&year=${this.year}`
-    );
+  getAccountIndex(
+    type: string = "All",
+    searchString: string = ""
+  ): Observable<AccountsIndexView[]> {
+    return this.httpClient.get<AccountsIndexView[]>(`${this.url}/index?searchString=${searchString}&year=${this.year}&type=${type}`);
+
   }
 
   // Creates a new instance of Account record in the system amd returns an observable

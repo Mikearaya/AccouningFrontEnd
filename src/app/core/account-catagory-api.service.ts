@@ -43,9 +43,9 @@ export class AccountCatagoryApiService extends Subject<
     return this.httpClient.get<AccountCatagoryView>(`${this.url}/${id}`);
   }
 
-  getAccountCatagoryIndex(): Observable<AccountCategoryIndex[]> {
+  getAccountCatagoryIndex(searchString: string = ''): Observable<AccountCategoryIndex[]> {
     return this.httpClient.get<AccountCategoryIndex[]>(
-      `account-categories/index`
+      `account-categories/index?searchString=${searchString}`
     );
   }
 

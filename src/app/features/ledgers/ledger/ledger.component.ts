@@ -1,4 +1,11 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  AfterViewInit,
+  ViewChild,
+  ElementRef,
+  HostListener
+} from "@angular/core";
 import {
   FormGroup,
   FormBuilder,
@@ -20,6 +27,10 @@ import {
   LedgerEntryViewModel
 } from "../ledger";
 import { ActivatedRoute } from "@angular/router";
+import {
+  ToastComponent,
+  ToastCloseArgs
+} from "@syncfusion/ej2-angular-notifications";
 
 function balanceChecker(): ValidatorFn {
   return (c: AbstractControl): { [key: string]: boolean } | null => {
@@ -58,10 +69,32 @@ export class LedgerComponent implements OnInit {
   public lastSectionBackColor: any;
   public lastSectionColor: any;
   deletedIds: number[] = [];
-  @ViewChild("element") element;
-  @ViewChild("element") title;
-  @ViewChild("element") content;
-  public position = { X: "Right" };
+  @ViewChild("toasttype")
+  public toastObj: ToastComponent;
+  @ViewChild("successToast") btnsuccess: ElementRef;
+  public position: object = { X: "Center" };
+  public toasts: { [key: string]: Object }[] = [
+    {
+      title: "Success!",
+      content: "Ledger entry Updated Successfully",
+      cssClass: "e-toast-success",
+      icon: "e-success toast-icons"
+    }
+  ];
+  public successClick(): void {
+    setTimeout(() => {
+      this.toastObj.show(this.toasts[0]);
+    }, 10);
+  }
+  /*   public onclose(e: ToastCloseArgs): void {
+    if (e.toastContainer.childElementCount === 0) {
+      let hideBtn: HTMLElement = document.getElementById("hideTosat");
+      hideBtn.style.display = "none";
+    }
+  } */
+  /* public onBeforeOpen(): void {
+    let hideBtn: HTMLElement = document.getElementById("hideTosat");
+  } */
 
   constructor(
     private formBuilder: FormBuilder,
@@ -223,7 +256,8 @@ export class LedgerComponent implements OnInit {
     if (!this.isUpdate) {
       this.ledgerService.addLedgerEntry(formData).subscribe(
         (data: LedgerEntryViewModel) => {
-          alert("Ledger entry made successfully");
+          // alert("Ledger entry made successfully");
+          this.successClick();
           // this.isUpdate = true;
           this.createForm();
         },
@@ -282,7 +316,6 @@ export class LedgerComponent implements OnInit {
     });
 
     this.deletedIds.forEach(element => {
-      alert(element);
       ledger.DeletedIds.push(element);
     });
 
@@ -313,16 +346,5 @@ export class LedgerComponent implements OnInit {
     this.Reference.enable();
     this.Date.enable();
     this.Entries.enable();
-  }
-  onCreate() {
-    this.toastShow();
-  }
-  btnClick() {
-    this.toastShow();
-  }
-  toastShow() {
-    setTimeout(() => {
-      this.element.show();
-    }, 700);
   }
 }
