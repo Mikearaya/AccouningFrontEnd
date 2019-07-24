@@ -155,11 +155,13 @@ export class LedgerComponent implements OnInit {
     this.creditSum = 0;
 
     value.forEach(element => {
-      this.debitSum += element.Debit;
-      this.creditSum += element.Credit;
+      this.debitSum = this.debitSum + element.Debit;
+      this.creditSum = this.creditSum + element.Credit;
     });
+
     if (this.creditSum === this.debitSum) {
       this.isEqual = true;
+
       this.lastSectionBackColor = "#4d841d55";
       this.lastSectionColor = "#4d841d";
     } else {
@@ -232,6 +234,7 @@ export class LedgerComponent implements OnInit {
   }
   initializeForm(data: JornalEntryViewModel) {
     this.data = data;
+    this.ledgerId = data.Id;
     this.isUpdate = true;
     this.ledgerForm = this.formBuilder.group({
       VoucherId: [data.VoucherId, Validators.required],

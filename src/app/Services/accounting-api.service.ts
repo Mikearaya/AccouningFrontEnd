@@ -1,13 +1,15 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { AvailableYearsModel, DashboardViewModel } from "./system-data.model";
-import { Observable } from "rxjs";
+import { Observable, BehaviorSubject } from "rxjs";
 
 @Injectable()
 export class AccountingApiService {
   private selectedYear = "";
-
-  constructor(private httpClient: HttpClient) {}
+  public $CurrentYear: BehaviorSubject<string> = new BehaviorSubject("");
+  constructor(private httpClient: HttpClient) {
+    this.$CurrentYear.next(this.getSelectedYear());
+  }
 
   getAvailableYears(): Observable<AvailableYearsModel[]> {
     return this.httpClient.get<AvailableYearsModel[]>(`system-lookups/years`);
@@ -16,6 +18,7 @@ export class AccountingApiService {
   setSelectedYear(newYear: string): void {
     this.selectedYear = newYear;
     localStorage.setItem("selectedYear", this.selectedYear);
+    this.$CurrentYear.next(this.selectedYear);
   }
   getSelectedYear(): string {
     const selectedYear = localStorage.getItem("selectedYear");

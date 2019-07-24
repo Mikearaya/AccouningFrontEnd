@@ -7,7 +7,7 @@
  * @Description: Modify Here, Please
  */
 import { Injectable } from "@angular/core";
-import { Observable, of, Subject } from "rxjs";
+import { Observable, of, Subject, BehaviorSubject } from "rxjs";
 import { HttpClient } from "@angular/common/http";
 import { catchError, map } from "rxjs/operators";
 import {
@@ -64,8 +64,11 @@ export class AccountsService extends Subject<DataStateChangeEventArgs> {
     type: string = "All",
     searchString: string = ""
   ): Observable<AccountsIndexView[]> {
-    return this.httpClient.get<AccountsIndexView[]>(`${this.url}/index?searchString=${searchString}&year=${this.year}&type=${type}`);
-
+    return this.httpClient.get<AccountsIndexView[]>(
+      `${this.url}/index?searchString=${searchString}&year=${
+        this.year
+      }&type=${type}`
+    );
   }
 
   // Creates a new instance of Account record in the system amd returns an observable
@@ -111,7 +114,6 @@ export class AccountsService extends Subject<DataStateChangeEventArgs> {
           this.query.sortDirection = state.action["direction"];
           break;
         case "filtering":
-          console.log(state.action);
           this.query.filter = [];
 
           state.action["columns"].forEach(element => {

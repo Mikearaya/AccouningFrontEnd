@@ -94,10 +94,11 @@ export class AppComponent implements OnInit {
       .getAvailableYears()
       .subscribe((data: AvailableYearsModel[]) => (this.yearData = data));
 
+    this.accountingApi.$CurrentYear.subscribe(a => {
+      this.selectedYear = a;
+    });
     this.securityObject = this.securityService.securityObject;
     this.selectedYear = this.accountingApi.getSelectedYear();
-    // alert(this.selectedYear);
-    console.log("----------", this.selectedYear);
   }
 
   public loadRoutingContent(args: NodeSelectEventArgs): void {
