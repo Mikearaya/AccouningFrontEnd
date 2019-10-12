@@ -119,6 +119,7 @@ export class LedgerEntrySelectorComponent implements ControlValueAccessor {
   }
 
   changeEntry(id: number) {
+    console.log("changed event");
     this.ledgerApi
       .getLedgerEntryById(id)
       .subscribe((e: JornalEntryViewModel) => {

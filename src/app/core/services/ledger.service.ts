@@ -29,6 +29,7 @@ import { map } from "rxjs/operators";
 export class LedgerService extends Subject<DataStateChangeEventArgs> {
   private url = "ledgers";
   private query = new QueryString();
+  private time = Math.random() * 1000;
   constructor(
     private httpClient: HttpClient,
     private accountingApi: AccountingApiService
@@ -43,7 +44,9 @@ export class LedgerService extends Subject<DataStateChangeEventArgs> {
   }
 
   getLedgerEntryById(id: number): Observable<JornalEntryViewModel> {
-    return this.httpClient.get<JornalEntryViewModel>(`${this.url}/${id}`);
+    return this.httpClient.get<JornalEntryViewModel>(
+      `${this.url}/${id}&timestamp=${this.time}`
+    );
   }
 
   getLedgerEntryByVoucherId(id: string): Observable<LedgerEntryIndexView> {
