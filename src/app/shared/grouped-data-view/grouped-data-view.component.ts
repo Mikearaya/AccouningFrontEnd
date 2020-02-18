@@ -391,10 +391,14 @@ export class GroupedDataViewComponent implements OnInit {
         }
 
         if (this.query.sortBy) {
-            searchString += `sortBy=${this.query.sortBy}&sortDirection=${this.query.sortDirection}&`;
+            searchString += `sortBy=${this.query.sortBy}&sortDirection=${
+                this.query.sortDirection
+            }&`;
         }
 
-        searchString += `pageSize=${this.query.pageSize}&pageNumber=${this.query.pageNumber}`;
+        searchString += `pageSize=${this.query.pageSize}&pageNumber=${
+            this.query.pageNumber
+        }`;
 
         return searchString;
     }

@@ -69,7 +69,9 @@ export class AccountsService extends Subject<DataStateChangeEventArgs> {
         searchString: string = ''
     ): Observable<AccountsIndexView[]> {
         return this.httpClient.get<AccountsIndexView[]>(
-            `${this.url}/index?searchString=${searchString}&year=${this.year}&type=${type}`
+            `${this.url}/index?searchString=${searchString}&year=${
+                this.year
+            }&type=${type}`
         );
     }
 
