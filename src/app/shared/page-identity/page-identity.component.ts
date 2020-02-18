@@ -1,12 +1,14 @@
-import { Component, OnInit } from "@angular/core";
+/** @format */
+
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: "app-page-identity",
-  templateUrl: "./page-identity.component.html",
-  styleUrls: ["./page-identity.component.css"]
+    selector: 'app-page-identity',
+    templateUrl: './page-identity.component.html',
+    styleUrls: ['./page-identity.component.css'],
 })
 export class PageIdentityComponent implements OnInit {
-  constructor() {}
+    constructor() {}
 
-  ngOnInit() {}
+    ngOnInit() {}
 }

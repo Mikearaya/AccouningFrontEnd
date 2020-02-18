@@ -1,12 +1,14 @@
-import { TestBed } from "@angular/core/testing";
+/** @format */
 
-import { SystemCacheService } from "./system-cache.service";
+import { TestBed } from '@angular/core/testing';
 
-describe("SystemCacheService", () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+import { SystemCacheService } from './system-cache.service';
 
-  it("should be created", () => {
-    const service: SystemCacheService = new SystemCacheService();
-    expect(service).toBeTruthy();
-  });
+describe('SystemCacheService', () => {
+    beforeEach(() => TestBed.configureTestingModule({}));
+
+    it('should be created', () => {
+        const service: SystemCacheService = new SystemCacheService();
+        expect(service).toBeTruthy();
+    });
 });

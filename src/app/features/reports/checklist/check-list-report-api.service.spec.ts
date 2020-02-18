@@ -1,19 +1,21 @@
-import { TestBed } from "@angular/core/testing";
+/** @format */
 
-import { CheckListReportApiService } from "./check-list-report-api.service";
-import { HttpClient } from "@angular/common/http";
-import { AccountingApiService } from "src/app/Services/accounting-api.service";
+import { TestBed } from '@angular/core/testing';
 
-describe("CheckListReportApiService", () => {
-  let httpClient: HttpClient;
-  let accountingApiService: AccountingApiService;
-  beforeEach(() => TestBed.configureTestingModule({}));
+import { CheckListReportApiService } from './check-list-report-api.service';
+import { HttpClient } from '@angular/common/http';
+import { AccountingApiService } from 'src/app/Services/accounting-api.service';
 
-  it("should be created", () => {
-    const service: CheckListReportApiService = new CheckListReportApiService(
-      httpClient,
-      accountingApiService
-    );
-    expect(service).toBeTruthy();
-  });
+describe('CheckListReportApiService', () => {
+    let httpClient: HttpClient;
+    let accountingApiService: AccountingApiService;
+    beforeEach(() => TestBed.configureTestingModule({}));
+
+    it('should be created', () => {
+        const service: CheckListReportApiService = new CheckListReportApiService(
+            httpClient,
+            accountingApiService
+        );
+        expect(service).toBeTruthy();
+    });
 });

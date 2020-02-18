@@ -1,31 +1,37 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+/** @format */
 
-import { CostOfGoodsSoldComponent } from "./cost-of-goods-sold.component";
-import { ReportApiService } from "../report-api.service";
-import { RouterTestingModule } from "@angular/router/testing";
-import { HttpClientTestingModule } from "@angular/common/http/testing";
-import { SharedModule } from "src/app/shared/shared.module";
-import { AccountingApiService } from "src/app/Services/accounting-api.service";
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-describe("CostOfGoodsSoldComponent", () => {
-  let component: CostOfGoodsSoldComponent;
-  let fixture: ComponentFixture<CostOfGoodsSoldComponent>;
+import { CostOfGoodsSoldComponent } from './cost-of-goods-sold.component';
+import { ReportApiService } from '../report-api.service';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { AccountingApiService } from 'src/app/Services/accounting-api.service';
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [SharedModule, RouterTestingModule, HttpClientTestingModule],
-      declarations: [CostOfGoodsSoldComponent],
-      providers: [ReportApiService, AccountingApiService]
-    }).compileComponents();
-  }));
+describe('CostOfGoodsSoldComponent', () => {
+    let component: CostOfGoodsSoldComponent;
+    let fixture: ComponentFixture<CostOfGoodsSoldComponent>;
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(CostOfGoodsSoldComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            imports: [
+                SharedModule,
+                RouterTestingModule,
+                HttpClientTestingModule,
+            ],
+            declarations: [CostOfGoodsSoldComponent],
+            providers: [ReportApiService, AccountingApiService],
+        }).compileComponents();
+    }));
 
-  it("should create", () => {
-    expect(component).toBeTruthy();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(CostOfGoodsSoldComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
+
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

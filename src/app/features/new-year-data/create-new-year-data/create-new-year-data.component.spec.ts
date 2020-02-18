@@ -1,35 +1,41 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+/** @format */
 
-import { CreateNewYearDataComponent } from "./create-new-year-data.component";
-import { AccountingApiService } from "src/app/Services/accounting-api.service";
-import { HttpClient } from "@angular/common/http";
-import { SharedModule } from "src/app/shared/shared.module";
-import { RouterTestingModule } from "@angular/router/testing";
-import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-describe("CreateNewYearDataComponent", () => {
-  let component: CreateNewYearDataComponent;
-  let fixture: ComponentFixture<CreateNewYearDataComponent>;
-  let httpClient: HttpClient;
-  let accountingApiService: AccountingApiService = new AccountingApiService(
-    httpClient
-  );
+import { CreateNewYearDataComponent } from './create-new-year-data.component';
+import { AccountingApiService } from 'src/app/Services/accounting-api.service';
+import { HttpClient } from '@angular/common/http';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [SharedModule, RouterTestingModule, HttpClientTestingModule],
-      declarations: [CreateNewYearDataComponent],
-      providers: [AccountingApiService]
-    }).compileComponents();
-  }));
+describe('CreateNewYearDataComponent', () => {
+    let component: CreateNewYearDataComponent;
+    let fixture: ComponentFixture<CreateNewYearDataComponent>;
+    let httpClient: HttpClient;
+    const accountingApiService: AccountingApiService = new AccountingApiService(
+        httpClient
+    );
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(CreateNewYearDataComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            imports: [
+                SharedModule,
+                RouterTestingModule,
+                HttpClientTestingModule,
+            ],
+            declarations: [CreateNewYearDataComponent],
+            providers: [AccountingApiService],
+        }).compileComponents();
+    }));
 
-  it("should create", () => {
-    expect(component).toBeTruthy();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(CreateNewYearDataComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
+
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

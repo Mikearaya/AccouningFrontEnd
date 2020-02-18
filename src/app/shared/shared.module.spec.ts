@@ -1,13 +1,15 @@
-import { SharedModule } from "./shared.module";
+/** @format */
 
-describe("SharedModule", () => {
-  let sharedModule: SharedModule;
+import { SharedModule } from './shared.module';
 
-  beforeEach(() => {
-    sharedModule = new SharedModule();
-  });
+describe('SharedModule', () => {
+    let sharedModule: SharedModule;
 
-  it("should create an instance", () => {
-    expect(sharedModule).toBeTruthy();
-  });
+    beforeEach(() => {
+        sharedModule = new SharedModule();
+    });
+
+    it('should create an instance', () => {
+        expect(sharedModule).toBeTruthy();
+    });
 });

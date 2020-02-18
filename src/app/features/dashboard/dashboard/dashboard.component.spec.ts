@@ -1,34 +1,40 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+/** @format */
 
-import { DashboardComponent } from "./dashboard.component";
-import { RouterTestingModule } from "@angular/router/testing";
-import { SharedModule } from "src/app/shared/shared.module";
-import { HttpClientTestingModule } from "@angular/common/http/testing";
-import { AccountingApiService } from "src/app/Services/accounting-api.service";
-import { LedgerService } from "src/app/core/services/ledger.service";
-import { LedgerViewComponent } from "../../ledgers/ledger-view/ledger-view.component";
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-describe("DashboardComponent", () => {
-  let component: DashboardComponent;
-  let fixture: ComponentFixture<DashboardComponent>;
-  let ledgerService: LedgerService;
-  let accountingAService: AccountingApiService;
+import { DashboardComponent } from './dashboard.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { AccountingApiService } from 'src/app/Services/accounting-api.service';
+import { LedgerService } from 'src/app/core/services/ledger.service';
+import { LedgerViewComponent } from '../../ledgers/ledger-view/ledger-view.component';
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [SharedModule, RouterTestingModule, HttpClientTestingModule],
-      declarations: [DashboardComponent, LedgerViewComponent],
-      providers: [LedgerService, AccountingApiService]
-    }).compileComponents();
-  }));
+describe('DashboardComponent', () => {
+    let component: DashboardComponent;
+    let fixture: ComponentFixture<DashboardComponent>;
+    let ledgerService: LedgerService;
+    let accountingAService: AccountingApiService;
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(DashboardComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            imports: [
+                SharedModule,
+                RouterTestingModule,
+                HttpClientTestingModule,
+            ],
+            declarations: [DashboardComponent, LedgerViewComponent],
+            providers: [LedgerService, AccountingApiService],
+        }).compileComponents();
+    }));
 
-  it("should create", () => {
-    expect(component).toBeTruthy();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(DashboardComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
+
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

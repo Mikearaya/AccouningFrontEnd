@@ -1,30 +1,36 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+/** @format */
 
-import { AccountsScheduleComponent } from "./accounts-schedule.component";
-import { SharedModule } from "src/app/shared/shared.module";
-import { RouterTestingModule } from "@angular/router/testing";
-import { HttpClientTestingModule } from "@angular/common/http/testing";
-import { AccountingApiService } from "src/app/Services/accounting-api.service";
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-describe("AccountsScheduleComponent", () => {
-  let component: AccountsScheduleComponent;
-  let fixture: ComponentFixture<AccountsScheduleComponent>;
+import { AccountsScheduleComponent } from './accounts-schedule.component';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { AccountingApiService } from 'src/app/Services/accounting-api.service';
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [SharedModule, RouterTestingModule, HttpClientTestingModule],
-      declarations: [AccountsScheduleComponent],
-      providers: [AccountingApiService]
-    }).compileComponents();
-  }));
+describe('AccountsScheduleComponent', () => {
+    let component: AccountsScheduleComponent;
+    let fixture: ComponentFixture<AccountsScheduleComponent>;
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(AccountsScheduleComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            imports: [
+                SharedModule,
+                RouterTestingModule,
+                HttpClientTestingModule,
+            ],
+            declarations: [AccountsScheduleComponent],
+            providers: [AccountingApiService],
+        }).compileComponents();
+    }));
 
-  it("should create", () => {
-    expect(component).toBeTruthy();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(AccountsScheduleComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
+
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

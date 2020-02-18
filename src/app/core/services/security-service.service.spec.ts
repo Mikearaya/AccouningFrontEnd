@@ -1,11 +1,13 @@
-import { TestBed } from "@angular/core/testing";
-import { SecurityService } from "./security-service.service";
+/** @format */
 
-describe("SecurityServiceService", () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+import { TestBed } from '@angular/core/testing';
+import { SecurityService } from './security-service.service';
 
-  it("should be created", () => {
-    const service: SecurityService = TestBed.get(SecurityService);
-    expect(service).toBeTruthy();
-  });
+describe('SecurityServiceService', () => {
+    beforeEach(() => TestBed.configureTestingModule({}));
+
+    it('should be created', () => {
+        const service: SecurityService = TestBed.get(SecurityService);
+        expect(service).toBeTruthy();
+    });
 });

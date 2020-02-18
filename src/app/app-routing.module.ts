@@ -1,23 +1,25 @@
-import { NgModule } from "@angular/core";
-import { Routes, RouterModule } from "@angular/router";
-import { AuthGuardGuard } from "./core/services/auth-guard.guard";
-import { UnAuthorizedPageComponent } from "./shared/un-authorized-page/un-authorized-page.component";
+/** @format */
+
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { AuthGuardGuard } from './core/services/auth-guard.guard';
+import { UnAuthorizedPageComponent } from './shared/un-authorized-page/un-authorized-page.component';
 
 const routes: Routes = [
-  {
-    path: "",
-    loadChildren: "../app/features/features-module.module#FeaturesModule",
+    {
+        path: '',
+        loadChildren: '../app/features/features-module.module#FeaturesModule',
 
-    data: {
-      breadCrum: "Home"
+        data: {
+            breadCrum: 'Home',
+        },
+        canLoad: [AuthGuardGuard],
     },
-    canLoad: [AuthGuardGuard]
-  },
-  { path: "unauthorized", component: UnAuthorizedPageComponent }
+    { path: 'unauthorized', component: UnAuthorizedPageComponent },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule],
 })
 export class AppRoutingModule {}

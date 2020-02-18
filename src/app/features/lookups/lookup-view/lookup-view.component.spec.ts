@@ -1,59 +1,61 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
-import { SharedModule } from "src/app/shared/shared.module";
-import { RouterTestingModule } from "@angular/router/testing";
-import { of } from "rxjs";
-import { LookupViewComponent } from "./lookup-view.component";
-import { LookupService } from "../../../core/services/lookup.service";
-import { Lookup } from "../lookups";
-import { AccountingApiService } from "src/app/Services/accounting-api.service";
+/** @format */
 
-describe("LookupViewComponent", () => {
-  let component: LookupViewComponent;
-  let fixture: ComponentFixture<LookupViewComponent>;
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { RouterTestingModule } from '@angular/router/testing';
+import { of } from 'rxjs';
+import { LookupViewComponent } from './lookup-view.component';
+import { LookupService } from '../../../core/services/lookup.service';
+import { Lookup } from '../lookups';
+import { AccountingApiService } from 'src/app/Services/accounting-api.service';
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [SharedModule, RouterTestingModule],
-      declarations: [LookupViewComponent],
-      providers: [LookupService, AccountingApiService]
-    }).compileComponents();
-  }));
+describe('LookupViewComponent', () => {
+    let component: LookupViewComponent;
+    let fixture: ComponentFixture<LookupViewComponent>;
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(LookupViewComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            imports: [SharedModule, RouterTestingModule],
+            declarations: [LookupViewComponent],
+            providers: [LookupService, AccountingApiService],
+        }).compileComponents();
+    }));
 
-  it("Should be created", async(() => {
-    expect(component).toBeTruthy();
-  }));
-  describe("Delete catagory", () => {
-    it("Should be called", () => {
-      spyOn(component, "deleteLookup");
-      component.deleteLookup("Id");
-      expect(component.deleteLookup).toHaveBeenCalled();
+    beforeEach(() => {
+        fixture = TestBed.createComponent(LookupViewComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
     });
-  });
-  describe("ngOnInit", () => {
-    it("Should be called and list all lookups", () => {
-      const response: Lookup[] = [
-        {
-          Id: 1,
-          Type: "Appdiv",
-          Value: "123"
-        },
-        {
-          Id: 2,
-          Type: "appdiv",
-          Value: "456"
-        }
-      ];
-      /*    spyOn(component, "loadLookups").and.returnValue(of(response));
+
+    it('Should be created', async(() => {
+        expect(component).toBeTruthy();
+    }));
+    describe('Delete catagory', () => {
+        it('Should be called', () => {
+            spyOn(component, 'deleteLookup');
+            component.deleteLookup('Id');
+            expect(component.deleteLookup).toHaveBeenCalled();
+        });
+    });
+    describe('ngOnInit', () => {
+        it('Should be called and list all lookups', () => {
+            const response: Lookup[] = [
+                {
+                    Id: 1,
+                    Type: 'Appdiv',
+                    Value: '123',
+                },
+                {
+                    Id: 2,
+                    Type: 'appdiv',
+                    Value: '456',
+                },
+            ];
+            /*    spyOn(component, "loadLookups").and.returnValue(of(response));
       component.loadLookups();
       fixture.detectChanges();
       expect(component.loadLookups).toHaveBeenCalled();
       expect(response.length).toEqual(2); */
+        });
     });
-  });
 });

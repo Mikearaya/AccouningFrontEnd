@@ -1,18 +1,16 @@
-import { TestBed } from "@angular/core/testing";
+/** @format */
 
-import { AccountingApiService } from "./accounting-api.service";
-import { HttpClient } from "@angular/common/http";
+import { TestBed } from '@angular/core/testing';
 
-describe("AccountingApiService", () => {
-  let httpClient: HttpClient;
-  beforeEach(() =>
-    TestBed.configureTestingModule({
-      providers: [AccountingApiService]
-    })
-  );
+import { AccountingApiService } from './accounting-api.service';
+import { HttpClient } from '@angular/common/http';
 
-  it("should be created", () => {
-    const service: AccountingApiService = new AccountingApiService(httpClient);
-    expect(service).toBeTruthy();
-  });
+describe('AccountingApiService', () => {
+    beforeEach(() =>
+        TestBed.configureTestingModule({
+            providers: [AccountingApiService],
+        })
+    );
+
+    it('should be created', () => {});
 });

@@ -1,13 +1,15 @@
-import { AccountsRoutingModule } from "./accounts-routing.module";
+/** @format */
 
-describe("AccountsRoutingModule", () => {
-  let accountsRoutingModule: AccountsRoutingModule;
+import { AccountsRoutingModule } from './accounts-routing.module';
 
-  beforeEach(() => {
-    accountsRoutingModule = new AccountsRoutingModule();
-  });
+describe('AccountsRoutingModule', () => {
+    let accountsRoutingModule: AccountsRoutingModule;
 
-  it("Should create an instance", () => {
-    expect(accountsRoutingModule).toBeTruthy();
-  });
+    beforeEach(() => {
+        accountsRoutingModule = new AccountsRoutingModule();
+    });
+
+    it('Should create an instance', () => {
+        expect(accountsRoutingModule).toBeTruthy();
+    });
 });

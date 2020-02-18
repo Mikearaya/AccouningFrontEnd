@@ -1,19 +1,21 @@
-import { TestBed } from "@angular/core/testing";
+/** @format */
 
-import { SubsidaryLedgerApiService } from "./subsidary-ledger-api.service";
-import { HttpClient } from "@angular/common/http";
-import { AccountingApiService } from "src/app/Services/accounting-api.service";
+import { TestBed } from '@angular/core/testing';
 
-describe("SubsidaryLedgerApiService", () => {
-  let httpClient: HttpClient;
-  let accountingApiService: AccountingApiService;
-  beforeEach(() => TestBed.configureTestingModule({}));
+import { SubsidaryLedgerApiService } from './subsidary-ledger-api.service';
+import { HttpClient } from '@angular/common/http';
+import { AccountingApiService } from 'src/app/Services/accounting-api.service';
 
-  it("should be created", () => {
-    const service: SubsidaryLedgerApiService = new SubsidaryLedgerApiService(
-      httpClient,
-      accountingApiService
-    );
-    expect(service).toBeTruthy();
-  });
+describe('SubsidaryLedgerApiService', () => {
+    let httpClient: HttpClient;
+    let accountingApiService: AccountingApiService;
+    beforeEach(() => TestBed.configureTestingModule({}));
+
+    it('should be created', () => {
+        const service: SubsidaryLedgerApiService = new SubsidaryLedgerApiService(
+            httpClient,
+            accountingApiService
+        );
+        expect(service).toBeTruthy();
+    });
 });

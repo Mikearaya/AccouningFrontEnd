@@ -1,19 +1,21 @@
-import { TestBed } from "@angular/core/testing";
+/** @format */
 
-import { TrialBalanceDetailApiService } from "./trial-balance-detail-api.service";
-import { HttpClient } from "@angular/common/http";
-import { AccountingApiService } from "src/app/Services/accounting-api.service";
+import { TestBed } from '@angular/core/testing';
 
-describe("TrialBalanceDetailApiService", () => {
-  let httpClient: HttpClient;
-  let accountingApiService: AccountingApiService;
-  beforeEach(() => TestBed.configureTestingModule({}));
+import { TrialBalanceDetailApiService } from './trial-balance-detail-api.service';
+import { HttpClient } from '@angular/common/http';
+import { AccountingApiService } from 'src/app/Services/accounting-api.service';
 
-  it("should be created", () => {
-    const service: TrialBalanceDetailApiService = new TrialBalanceDetailApiService(
-      httpClient,
-      accountingApiService
-    );
-    expect(service).toBeTruthy();
-  });
+describe('TrialBalanceDetailApiService', () => {
+    let httpClient: HttpClient;
+    let accountingApiService: AccountingApiService;
+    beforeEach(() => TestBed.configureTestingModule({}));
+
+    it('should be created', () => {
+        const service: TrialBalanceDetailApiService = new TrialBalanceDetailApiService(
+            httpClient,
+            accountingApiService
+        );
+        expect(service).toBeTruthy();
+    });
 });

@@ -1,13 +1,15 @@
-import { LedgerRoutingModule } from "./ledger-routing.module";
+/** @format */
 
-describe("AccountsRoutingModule", () => {
-  let ledgerRoutingModule: LedgerRoutingModule;
+import { LedgerRoutingModule } from './ledger-routing.module';
 
-  beforeEach(() => {
-    ledgerRoutingModule = new LedgerRoutingModule();
-  });
+describe('AccountsRoutingModule', () => {
+    let ledgerRoutingModule: LedgerRoutingModule;
 
-  it("Should create an instance", () => {
-    expect(ledgerRoutingModule).toBeTruthy();
-  });
+    beforeEach(() => {
+        ledgerRoutingModule = new LedgerRoutingModule();
+    });
+
+    it('Should create an instance', () => {
+        expect(ledgerRoutingModule).toBeTruthy();
+    });
 });

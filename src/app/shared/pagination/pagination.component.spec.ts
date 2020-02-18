@@ -1,19 +1,21 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+/** @format */
 
-import { PaginationComponent } from "./pagination.component";
-import { SharedModule } from "../shared.module";
-import { RouterTestingModule } from "@angular/router/testing";
-import { BrowserDynamicTestingModule } from "@angular/platform-browser-dynamic/testing";
-import { CoreModule } from "src/app/core/core.module";
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-describe("PaginationComponent", () => {
-  let component: PaginationComponent;
+import { PaginationComponent } from './pagination.component';
+import { SharedModule } from '../shared.module';
+import { RouterTestingModule } from '@angular/router/testing';
+import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
+import { CoreModule } from 'src/app/core/core.module';
 
-  beforeEach(() => {
-    component = new PaginationComponent();
-  });
+describe('PaginationComponent', () => {
+    let component: PaginationComponent;
 
-  it("should create", () => {
-    expect(component).toBeTruthy();
-  });
+    beforeEach(() => {
+        component = new PaginationComponent();
+    });
+
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

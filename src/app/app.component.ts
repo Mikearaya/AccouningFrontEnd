@@ -1,114 +1,116 @@
-import { Component, ViewChild, OnInit } from "@angular/core";
-import {
-  TreeViewComponent,
-  NodeSelectEventArgs,
-  SidebarComponent
-} from "@syncfusion/ej2-angular-navigations";
-import { Router } from "@angular/router";
-import { ButtonComponent } from "@syncfusion/ej2-angular-buttons";
-import { AccountingApiService } from "./Services/accounting-api.service";
-import { AvailableYearsModel } from "./Services/system-data.model";
+/** @format */
 
-import { Location } from "@angular/common";
+import { Component, ViewChild, OnInit } from '@angular/core';
 import {
-  SecurityService,
-  AppUserAuth
-} from "./core/services/security-service.service";
-import { ItemModel, MenuEventArgs, Item } from "@syncfusion/ej2-splitbuttons";
-import { NAVIGATION_LINKS } from "./navigation-data.model";
+    TreeViewComponent,
+    NodeSelectEventArgs,
+    SidebarComponent,
+} from '@syncfusion/ej2-angular-navigations';
+import { Router } from '@angular/router';
+import { ButtonComponent } from '@syncfusion/ej2-angular-buttons';
+import { AccountingApiService } from './Services/accounting-api.service';
+import { AvailableYearsModel } from './Services/system-data.model';
+
+import { Location } from '@angular/common';
+import {
+    SecurityService,
+    AppUserAuth,
+} from './core/services/security-service.service';
+import { ItemModel, MenuEventArgs, Item } from '@syncfusion/ej2-splitbuttons';
+import { NAVIGATION_LINKS } from './navigation-data.model';
 
 @Component({
-  selector: "app-root",
-  templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.css"]
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  public selectedYear;
-  public securityObject: AppUserAuth;
-  public cssClass = "custom";
-  public items: ItemModel[] = [
-    {
-      text: "Sign out"
-    }
-  ];
-  constructor(
-    private router: Router,
-    private accountingApi: AccountingApiService,
-    private location: Location,
-    private securityService: SecurityService
-  ) {
-    this.yearFields = { key: "Year", value: "Year" };
-    this.field = {
-      dataSource: this.smartAccountingLinks,
-      id: "id",
-      text: "name",
-      child: "subChild",
-      expanded: "expanded",
-      selected: "selected",
-      enabled: "enabled"
-    };
+    public selectedYear;
+    public securityObject: AppUserAuth;
+    public cssClass = 'custom';
+    public items: ItemModel[] = [
+        {
+            text: 'Sign out',
+        },
+    ];
+    constructor(
+        private router: Router,
+        private accountingApi: AccountingApiService,
+        private location: Location,
+        private securityService: SecurityService
+    ) {
+        this.yearFields = { key: 'Year', value: 'Year' };
+        this.field = {
+            dataSource: this.smartAccountingLinks,
+            id: 'id',
+            text: 'name',
+            child: 'subChild',
+            expanded: 'expanded',
+            selected: 'selected',
+            enabled: 'enabled',
+        };
 
-    /*   if (index === 0) {
+        /*   if (index === 0) {
         return null;
       } */
-    for (let index = 1; index < this.smartAccountingLinks.length; index++) {
-      for (
-        let i = this.smartAccountingLinks[index].subChild.length - 1;
-        i > -1;
-        i--
-      ) {
-        if (
-          !this.securityService.hasClaim(
-            this.smartAccountingLinks[index].subChild[i].privilage
-          )
-        ) {
-          this.smartAccountingLinks[index].subChild.splice(i, 1);
-        } else {
+        for (let index = 1; index < this.smartAccountingLinks.length; index++) {
+            for (
+                let i = this.smartAccountingLinks[index].subChild.length - 1;
+                i > -1;
+                i--
+            ) {
+                if (
+                    !this.securityService.hasClaim(
+                        this.smartAccountingLinks[index].subChild[i].privilage
+                    )
+                ) {
+                    this.smartAccountingLinks[index].subChild.splice(i, 1);
+                } else {
+                }
+            }
+
+            if (this.smartAccountingLinks[index].subChild.length === 0) {
+                this.smartAccountingLinks.splice(index, 1);
+                --index;
+            }
         }
-      }
-
-      if (this.smartAccountingLinks[index].subChild.length === 0) {
-        this.smartAccountingLinks.splice(index, 1);
-        --index;
-      }
     }
-  }
-  title = "";
-  @ViewChild("sidebar")
-  public sidebar: SidebarComponent;
-  public type = "Auto";
-  public target = ".content";
-  @ViewChild("tree")
-  public tree: TreeViewComponent;
-  @ViewChild("togglebtn")
-  public togglebtn: ButtonComponent;
+    title = '';
+    @ViewChild('sidebar')
+    public sidebar: SidebarComponent;
+    public type = 'Auto';
+    public target = '.content';
+    @ViewChild('tree')
+    public tree: TreeViewComponent;
+    @ViewChild('togglebtn')
+    public togglebtn: ButtonComponent;
 
-  public yearData: AvailableYearsModel[] = [];
+    public yearData: AvailableYearsModel[] = [];
 
-  public smartAccountingLinks = NAVIGATION_LINKS;
+    public smartAccountingLinks = NAVIGATION_LINKS;
 
-  public field: object;
-  public yearFields: { key: string; value: string };
-  ngOnInit(): void {
-    this.accountingApi
-      .getAvailableYears()
-      .subscribe((data: AvailableYearsModel[]) => (this.yearData = data));
+    public field: object;
+    public yearFields: { key: string; value: string };
+    ngOnInit(): void {
+        this.accountingApi
+            .getAvailableYears()
+            .subscribe((data: AvailableYearsModel[]) => (this.yearData = data));
 
-    this.accountingApi.$CurrentYear.subscribe(a => {
-      this.selectedYear = a;
-    });
-    this.securityObject = this.securityService.securityObject;
-    this.selectedYear = this.accountingApi.getSelectedYear();
-  }
-
-  public loadRoutingContent(args: NodeSelectEventArgs): void {
-    const data: any = this.tree.getTreeData(args.node);
-    const routerLink: string = data[0].url;
-
-    if (routerLink !== "parent") {
-      this.router.navigate([routerLink]);
+        this.accountingApi.$CurrentYear.subscribe((a) => {
+            this.selectedYear = a;
+        });
+        this.securityObject = this.securityService.securityObject;
+        this.selectedYear = this.accountingApi.getSelectedYear();
     }
-    /*
+
+    public loadRoutingContent(args: NodeSelectEventArgs): void {
+        const data: any = this.tree.getTreeData(args.node);
+        const routerLink: string = data[0].url;
+
+        if (routerLink !== 'parent') {
+            this.router.navigate([routerLink]);
+        }
+        /*
     const x = {
       bearerToken: "asdfghjjklyyrrffghjjj",
       isAuthenticated: true,
@@ -155,34 +157,34 @@ export class AppComponent implements OnInit {
       localStorage.setItem("accountingBearerToken", JSON.stringify(x));
     }
  */
-    this.securityService.logIn().subscribe();
-  }
-
-  public select(args: MenuEventArgs) {
-    if (args.item.text === "Sign out") {
-      this.securityService.logOut();
+        this.securityService.logIn().subscribe();
     }
-  }
 
-  yearChanged(data: any): void {
-    if (data) {
-      this.accountingApi.setSelectedYear(data);
+    public select(args: MenuEventArgs) {
+        if (args.item.text === 'Sign out') {
+            this.securityService.logOut();
+        }
     }
-  }
 
-  btnClick() {
-    if (this.togglebtn.element.classList.contains("e-active")) {
-      this.togglebtn.content = "";
-      this.sidebar.show();
-    } else {
-      this.togglebtn.content = "";
-      this.sidebar.hide();
+    yearChanged(data: any): void {
+        if (data) {
+            this.accountingApi.setSelectedYear(data);
+        }
     }
-  }
-  humanResource() {
-    window.location.href = `/smarthrm`;
-  }
-  inventory() {
-    window.location.href = `/smart_inventory`;
-  }
+
+    btnClick() {
+        if (this.togglebtn.element.classList.contains('e-active')) {
+            this.togglebtn.content = '';
+            this.sidebar.show();
+        } else {
+            this.togglebtn.content = '';
+            this.sidebar.hide();
+        }
+    }
+    humanResource() {
+        window.location.href = `/smarthrm`;
+    }
+    inventory() {
+        window.location.href = `/smart_inventory`;
+    }
 }

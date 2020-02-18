@@ -1,24 +1,26 @@
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+/** @format */
 
-import { PrintHeaderComponent } from "./print-header.component";
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-describe("PrintHeaderComponent", () => {
-  let component: PrintHeaderComponent;
-  let fixture: ComponentFixture<PrintHeaderComponent>;
+import { PrintHeaderComponent } from './print-header.component';
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [PrintHeaderComponent]
-    }).compileComponents();
-  }));
+describe('PrintHeaderComponent', () => {
+    let component: PrintHeaderComponent;
+    let fixture: ComponentFixture<PrintHeaderComponent>;
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(PrintHeaderComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [PrintHeaderComponent],
+        }).compileComponents();
+    }));
 
-  it("should create", () => {
-    expect(component).toBeTruthy();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(PrintHeaderComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
+
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });
