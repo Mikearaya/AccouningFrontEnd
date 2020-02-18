@@ -34,12 +34,12 @@ export class AccountFormComponent implements OnInit {
     public organizationList: AccountsIndexView[]; // holds organization for the drop down
     public accountForm: FormGroup; // tmain formgroup
 
-    public isUpdate: Boolean = false; // used as a flag to determine current operation
-    public accountFields: Object; // holds the serlected fields to display on the drop down
+    public isUpdate: boolean; // used as a flag to determine current operation
+    public accountFields: object; // holds the serlected fields to display on the drop down
     public organizationQuery: Query; // used  to filter the fields we want to use for organization
-    public organizationFields: Object; // holds the selected fields to display on the drop down
+    public organizationFields: object; // holds the selected fields to display on the drop down
     public calendarQuery: Query; // used  to filter the fields we want to use for calander period
-    public calendarFields: Object; // holds the selected fields to display on the drop down
+    public calendarFields: object; // holds the selected fields to display on the drop down
 
     public accountId: number; // used to hold the account Id passed in the route
     public textString = '9099 00';

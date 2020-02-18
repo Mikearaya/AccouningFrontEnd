@@ -23,7 +23,7 @@ describe(' Account catagory form component', () => {
     let component: AccountCatagoryFormComponent;
     let fixture: ComponentFixture<AccountCatagoryFormComponent>;
     let debugEl: DebugElement;
-    let activatedRoute;
+    const activatedRoute = null;
 
     const makeCompiledTestBed = (provider?: object): void => {
         const moduleDef: TestModuleMetadata = {
@@ -132,7 +132,7 @@ describe(' Account catagory form component', () => {
       expect(accountCatagory).toBe(1);
     }); */
         describe('Initialize catagory', () => {
-            let data: any;
+            const data: any = null;
             it('Should be called', () => {
                 spyOn(component, 'initializeCatagory');
                 component.initializeCatagory(data);

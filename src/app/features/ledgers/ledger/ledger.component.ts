@@ -75,7 +75,7 @@ export class LedgerComponent implements OnInit {
     public toastObj: ToastComponent;
     @ViewChild('successToast') btnsuccess: ElementRef;
     public position: object = { X: 'Center' };
-    public toasts: { [key: string]: Object }[] = [
+    public toasts: { [key: string]: any }[] = [
         {
             title: 'Success!',
             content: 'Ledger entry Updated Successfully',

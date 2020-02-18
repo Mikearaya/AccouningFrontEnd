@@ -53,7 +53,7 @@ export class AccountsViewComponent implements OnInit {
     public grid: GridComponent;
     public excelExportProperties: ExcelExportProperties;
     public filterSettings: FilterSettingsModel;
-    public toolbarOptions: Object[];
+    public toolbarOptions: object[];
     public wrapSettings: TextWrapSettingsModel;
     public toolbar: ToolbarItems[];
     public editSettings: EditSettingsModel;
@@ -65,7 +65,7 @@ export class AccountsViewComponent implements OnInit {
     public pageSizes: string[] = PageSizes;
     public initialPage: { pageSize: string; pageSizes: string[] };
     public data: Subject<DataStateChangeEventArgs>;
-    public pageOptions: Object;
+    public pageOptions: object;
     public state: DataStateChangeEventArgs;
     public groupBy = ['ParentAccount'];
 
@@ -175,7 +175,7 @@ export class AccountsViewComponent implements OnInit {
                 prefixIcon: 'e-create',
                 id: 'createAccount',
             },
-            'Search',
+
             { text: 'Expand All', prefixIcon: 'e-expand', id: 'expandall' },
             {
                 text: 'Collapse All',

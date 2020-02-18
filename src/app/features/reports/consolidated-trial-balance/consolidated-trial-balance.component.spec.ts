@@ -13,7 +13,7 @@ import { AccountingApiService } from 'src/app/Services/accounting-api.service';
 describe('ConsolidatedTrialBalanceComponent', () => {
     let component: ConsolidatedTrialBalanceComponent;
     let fixture: ComponentFixture<ConsolidatedTrialBalanceComponent>;
-    let args: ClickEventArgs;
+    const args: ClickEventArgs = null;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({

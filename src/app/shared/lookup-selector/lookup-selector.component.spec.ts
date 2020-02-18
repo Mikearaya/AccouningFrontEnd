@@ -15,7 +15,7 @@ import { AccountingApiService } from 'src/app/Services/accounting-api.service';
 describe('LookupSelectorComponent', () => {
     let component: LookupSelectorComponent;
     let fixture: ComponentFixture<LookupSelectorComponent>;
-    let lookupApi: LookupService;
+    const lookupApi: LookupService = null;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({

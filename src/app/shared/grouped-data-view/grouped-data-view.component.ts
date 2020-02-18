@@ -97,7 +97,7 @@ export class GroupedDataViewComponent implements OnInit {
     @Input()
     public addRoute = '';
     @Input()
-    public allowGrouping: Boolean;
+    public allowGrouping: boolean;
     @Input()
     public wrapSettings: TextWrapSettingsModel;
     @Input()
@@ -122,7 +122,7 @@ export class GroupedDataViewComponent implements OnInit {
 
     public excelExportProperties: ExcelExportProperties;
     public filterSettings: FilterSettingsModel;
-    public toolbarOptions: Object[];
+    public toolbarOptions: object[];
 
     public toolbar: ToolbarItems[];
     public editSettings: EditSettingsModel;
@@ -149,7 +149,7 @@ export class GroupedDataViewComponent implements OnInit {
         DataStateChangeEventArgs
     > = new EventEmitter();
 
-    public pageOptions: Object;
+    public pageOptions: object;
     public state: DataStateChangeEventArgs;
 
     public childGrid: GridModel;
@@ -199,7 +199,11 @@ export class GroupedDataViewComponent implements OnInit {
         this.editSettings = { allowDeleting: true };
 
         if (this.showSearch) {
-            this.toolbarOptions.push('Search');
+            this.toolbarOptions.push({
+                text: 'Search',
+                prefixIcon: 'e-create',
+                id: 'createAccount',
+            });
         }
 
         this.toolbarOptions.push({
@@ -387,14 +391,10 @@ export class GroupedDataViewComponent implements OnInit {
         }
 
         if (this.query.sortBy) {
-            searchString += `sortBy=${this.query.sortBy}&sortDirection=${
-                this.query.sortDirection
-            }&`;
+            searchString += `sortBy=${this.query.sortBy}&sortDirection=${this.query.sortDirection}&`;
         }
 
-        searchString += `pageSize=${this.query.pageSize}&pageNumber=${
-            this.query.pageNumber
-        }`;
+        searchString += `pageSize=${this.query.pageSize}&pageNumber=${this.query.pageNumber}`;
 
         return searchString;
     }

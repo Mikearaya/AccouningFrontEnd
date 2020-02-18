@@ -17,7 +17,7 @@ import { AccountingApiService } from 'src/app/Services/accounting-api.service';
 describe('ChecklistComponent', () => {
     let component: ChecklistComponent;
     let fixture: ComponentFixture<ChecklistComponent>;
-    let args: ClickEventArgs;
+    const args: ClickEventArgs = null;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({

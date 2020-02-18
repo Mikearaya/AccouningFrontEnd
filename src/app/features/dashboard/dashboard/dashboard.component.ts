@@ -130,7 +130,7 @@ export class DashboardComponent implements OnInit {
         },
     ];
 
-    public promptDlgButtons: Object[] = [
+    public promptDlgButtons: object[] = [
         {
             buttonModel: { content: 'Cancel' },
         },
@@ -138,7 +138,7 @@ export class DashboardComponent implements OnInit {
 
     public promptDlgBtnClick: EmitType<object> = () => {
         this.promptDialog.hide();
-    }
+    };
 
     public onOverlayClick() {
         this.promptDialog.hide();

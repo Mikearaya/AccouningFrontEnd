@@ -314,14 +314,6 @@ describe('ReportApiService', () => {
             expect(data).toEqual(response);
         });
 
-        const req = httpMock.expectOne((request) => {
-            request.url;
-            return true;
-        });
-        expect(req.request.method).toBe('GET');
-
-        req.flush(response);
-
         httpMock.verify();
     });
 

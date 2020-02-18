@@ -75,7 +75,7 @@ export class AccountsService extends Subject<DataStateChangeEventArgs> {
 
     // Creates a new instance of Account record in the system amd returns an observable
     // of the new Account information on success
-    createAccount(newAccount: Accounts): Observable<Accounts> {
+    createAccount(newAccount: Accounts): Observable<Accounts | {}> {
         return this.httpClient
             .post<Accounts>(`${this.url}`, newAccount)
             .pipe(catchError(this.handleError));
@@ -83,7 +83,7 @@ export class AccountsService extends Subject<DataStateChangeEventArgs> {
 
     // Update a single instance of Account record and returns a boolean depending on the success or
     // failure of the operation
-    updateAccount(id: number, updatedAccount: Accounts): Observable<void> {
+    updateAccount(id: number, updatedAccount: Accounts): Observable<void | {}> {
         updatedAccount.Id = id;
         return this.httpClient
             .put<void>(`${this.url}/${updatedAccount.Id}`, updatedAccount)
@@ -91,7 +91,7 @@ export class AccountsService extends Subject<DataStateChangeEventArgs> {
     }
 
     // deletes a single instance of Account record and returns boolean based on the outcome of the operation
-    deleteAccount(id: number): Observable<void> {
+    deleteAccount(id: number): Observable<void | {}> {
         return this.httpClient
             .delete<void>(`${this.url}/${id}`)
             .pipe(catchError(this.handleError));

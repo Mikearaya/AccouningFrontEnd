@@ -13,8 +13,8 @@ import { LedgerViewComponent } from '../../ledgers/ledger-view/ledger-view.compo
 describe('DashboardComponent', () => {
     let component: DashboardComponent;
     let fixture: ComponentFixture<DashboardComponent>;
-    let ledgerService: LedgerService;
-    let accountingAService: AccountingApiService;
+    const ledgerService: LedgerService = null;
+    const accountingAService: AccountingApiService = null;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({

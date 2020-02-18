@@ -30,7 +30,7 @@ import {
 })
 export class LedgerEntrySelectorComponent implements ControlValueAccessor {
     constructor(private ledgerApi: LedgerService) {}
-    public _value: any;
+    public value: any;
     public disabled: boolean;
     public data;
 
@@ -89,7 +89,7 @@ export class LedgerEntrySelectorComponent implements ControlValueAccessor {
     onTouched: any = () => {};
 
     writeValue(obj: any): void {
-        this._value = obj;
+        this.value = obj;
 
         if (obj != null && obj) {
             this.text = obj;
@@ -100,7 +100,7 @@ export class LedgerEntrySelectorComponent implements ControlValueAccessor {
                     this.next = result.Next;
                     this.previous = result.Prev;
 
-                    if (this._value) {
+                    if (this.value) {
                         if (obj !== 0) {
                             const data = this.accounts.filter(
                                 (a) => a.Id === obj

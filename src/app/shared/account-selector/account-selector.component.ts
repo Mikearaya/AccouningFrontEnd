@@ -35,7 +35,7 @@ export class AccountSelectorComponent implements ControlValueAccessor {
     @Input()
     public accountType = 'All';
 
-    public _value: any;
+    public value: any;
     public disabled: boolean;
     public data;
 
@@ -74,16 +74,18 @@ export class AccountSelectorComponent implements ControlValueAccessor {
     onTouched: any = () => {};
 
     writeValue(obj: any): void {
-        this._value = obj;
+        this.value = obj;
 
         this.accountApi
             .getAccountIndex(this.accountType, '')
             .subscribe((result: any) => {
                 this.accounts = result;
-                if (this._value) {
+                if (this.value) {
                     if (obj !== 0) {
-                        const data = this.accounts.filter((a) => a.Id === obj);
-                        data.forEach((elemnt) => {
+                        const dataAcc = this.accounts.filter(
+                            (a) => a.Id === obj
+                        );
+                        dataAcc.forEach((elemnt) => {
                             this.text = elemnt.Name;
                         });
                     }

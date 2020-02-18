@@ -3,12 +3,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { RouterTestingModule } from '@angular/router/testing';
-import { of } from 'rxjs';
+
 import { LedgerViewComponent } from './ledger-view.component';
 import { LedgerService } from 'src/app/core/services/ledger.service';
-import { LedgerEntryViewModel, JornalEntryViewModel, Jornal } from '../ledger';
+import { JornalEntryViewModel } from '../ledger';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { resolveComponentResources } from '@angular/core/src/metadata/resource_loading';
+
 import { AccountingApiService } from 'src/app/Services/accounting-api.service';
 
 describe('LedgerViewComponent', () => {
@@ -49,7 +49,7 @@ describe('LedgerViewComponent', () => {
                 {
                     Id: 1,
                     VoucherId: '1212',
-                    Date: new Date(),
+                    Date: new Date().toString(),
                     Description: 'description',
                     Reference: 'refernce',
                     Posted: true,
@@ -63,7 +63,7 @@ describe('LedgerViewComponent', () => {
                 {
                     Id: 1,
                     VoucherId: '1234',
-                    Date: new Date(),
+                    Date: new Date().toString(),
                     Description: 'description',
                     Reference: 'refernce',
                     Posted: true,

@@ -13,7 +13,7 @@ describe('Accounts type view component', () => {
     let router: Router;
     let activatedRoute;
     let component: AccountTypeViewComponent;
-    let typeService: AccountTypeService;
+    const typeService: AccountTypeService = null;
 
     beforeEach(async(() => {
         router = jasmine.createSpyObj('Router', ['navigate']);

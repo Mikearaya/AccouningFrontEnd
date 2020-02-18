@@ -12,7 +12,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 describe('CreateNewYearDataComponent', () => {
     let component: CreateNewYearDataComponent;
     let fixture: ComponentFixture<CreateNewYearDataComponent>;
-    let httpClient: HttpClient;
+    const httpClient: HttpClient = null;
     const accountingApiService: AccountingApiService = new AccountingApiService(
         httpClient
     );

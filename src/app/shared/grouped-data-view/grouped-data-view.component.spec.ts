@@ -10,7 +10,7 @@ describe('GroupedDataViewComponent', () => {
     let component: GroupedDataViewComponent;
     let router: Router;
     let activatedRoute;
-    const securityService: SecurityService = new SecurityService();
+    const securityService: SecurityService = null;
     beforeEach(async(() => {
         router = jasmine.createSpyObj('Router', ['Navigate']);
         activatedRoute = {

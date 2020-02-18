@@ -34,7 +34,7 @@ import { LookupsIndexView } from 'src/app/features/lookups/lookups';
 export class LookupSelectorComponent
     implements OnInit, OnChanges, ControlValueAccessor {
     constructor(private lookupApi: LookupService) {}
-    public _value: any;
+    public value: any;
     public disabled: boolean;
     @Input()
     public type: string;
@@ -72,7 +72,7 @@ export class LookupSelectorComponent
     onTouched: any = () => {};
 
     writeValue(obj: number): void {
-        this._value = obj;
+        this.value = obj;
     }
     registerOnChange(fn: any): void {
         this.onChanged = fn;
@@ -91,9 +91,9 @@ export class LookupSelectorComponent
             .getLookupIndex(this.type)
             .subscribe((responseData: any) => {
                 this.lookups = responseData.Items;
-                if (this._value) {
+                if (this.value) {
                     const data = this.lookups.filter(
-                        (a) => a.Id === this._value
+                        (a) => a.Id === this.value
                     );
                     this.text = data[0].Name;
                 }

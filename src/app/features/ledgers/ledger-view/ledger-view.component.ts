@@ -21,7 +21,7 @@ export class LedgerViewComponent implements OnInit {
     public ledgerData: Subject<DataStateChangeEventArgs>;
 
     @Input()
-    public showAddLedger: Boolean = true;
+    public showAddLedger: boolean;
 
     @Input()
     public showUnposted = false;
@@ -84,6 +84,7 @@ export class LedgerViewComponent implements OnInit {
     constructor(private ledgerService: LedgerService) {
         this.data = this.ledgerService;
         this.showUnposted = false;
+        this.showAddLedger = true;
     }
     ngOnInit() {
         if (this.showUnposted) {

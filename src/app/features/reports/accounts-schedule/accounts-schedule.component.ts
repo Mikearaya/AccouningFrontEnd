@@ -13,8 +13,6 @@ import {
     GroupSettingsModel,
     DataStateChangeEventArgs,
     GridModel,
-    ActionEventArgs,
-    Toolbar,
 } from '@syncfusion/ej2-grids';
 import { GridComponent } from '@syncfusion/ej2-angular-grids';
 import { PageSizes } from 'src/app/page-model';
@@ -26,9 +24,7 @@ import {
 import { ReportFilterModel } from 'src/app/shared/filter-option/filter';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ClickEventArgs } from '@syncfusion/ej2-angular-navigations';
-import { ItemModel, MenuEventArgs } from '@syncfusion/ej2-splitbuttons';
-import { ToolbarItem } from '@syncfusion/ej2-treegrid';
-import { asap } from 'rxjs/internal/scheduler/asap';
+import { ItemModel } from '@syncfusion/ej2-splitbuttons';
 
 @Component({
     selector: 'app-accounts-schedule',
@@ -42,7 +38,7 @@ export class AccountsScheduleComponent implements OnInit {
     public grid: GridComponent;
     public excelExportProperties: ExcelExportProperties;
     public filterSettings: FilterSettingsModel;
-    public toolbarOptions: Object[];
+    public toolbarOptions: object[];
     public wrapSettings: TextWrapSettingsModel;
     public toolbar: ToolbarItems[];
     public editSettings: EditSettingsModel;
@@ -55,7 +51,7 @@ export class AccountsScheduleComponent implements OnInit {
     public initialPage: { pageSize: string; pageSizes: string[] };
 
     public data: Subject<DataStateChangeEventArgs>;
-    public pageOptions: Object;
+    public pageOptions: object;
     public state: DataStateChangeEventArgs;
     filterData: ReportFilterModel;
     stateData: DataStateChangeEventArgs;

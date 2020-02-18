@@ -33,12 +33,12 @@ import { AccountsIndexView } from 'src/app/features/accounts/accounts';
 })
 export class AccountCategorySelectorComponent implements ControlValueAccessor {
     constructor(private accountApi: AccountCatagoryApiService) {}
-    public _value: any;
+    public value: any;
     public disabled: boolean;
 
     public accountCategories: AccountsIndexView[] = [];
     query: Query;
-    public fields: Object = { value: 'Id', text: 'Name' };
+    public fields: object = { value: 'Id', text: 'Name' };
     // set the placeholder to the AutoComplete input
     public text = '';
 
@@ -55,13 +55,15 @@ export class AccountCategorySelectorComponent implements ControlValueAccessor {
     onTouched: any = () => {};
 
     writeValue(obj: number): void {
-        this._value = obj;
+        this.value = obj;
         this.accountApi.getAccountCatagoryIndex().subscribe((data: any) => {
             this.accountCategories = data;
-            if (this._value) {
-                console.log(this._value);
-                const data = this.accountCategories.filter((a) => a.Id === obj);
-                data.forEach((e) => {
+            if (this.value) {
+                console.log(this.value);
+                const dataCat = this.accountCategories.filter(
+                    (a) => a.Id === obj
+                );
+                dataCat.forEach((e) => {
                     this.text = e.Name;
                     console.log(e.Name);
                 });

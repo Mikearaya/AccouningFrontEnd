@@ -40,8 +40,8 @@ export class AccountCatagoryFormComponent implements OnInit {
     public accountTypes: TypesIndexView[];
     public isUpdate = false;
     public accountCatagoryId: any;
-    public accountTypeFields: Object;
-    public accountTypeList: Object;
+    public accountTypeFields: object;
+    public accountTypeList: object;
 
     constructor(
         private formBuilder: FormBuilder,

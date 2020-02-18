@@ -12,7 +12,7 @@ import { AccountingApiService } from 'src/app/Services/accounting-api.service';
 describe('SubsidaryLedgerReportComponent', () => {
     let component: SubsidaryLedgerReportComponent;
     let fixture: ComponentFixture<SubsidaryLedgerReportComponent>;
-    let args: ClickEventArgs;
+    const args: ClickEventArgs = null;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({

@@ -64,12 +64,16 @@ export class SecurityService {
         if (!this.securityObject.isAuthenticated && true) {
             this.httpClient
                 .get<AppUserAuth>(
-                    `http://${window.location.hostname}/smarthrm/authenticate/my_role/finance`
+                    `http://${
+                        window.location.hostname
+                    }/smarthrm/authenticate/my_role/finance`
                 )
                 .subscribe(
                     (data: AppUserAuth) => (this.securityObject = data),
                     (error: HttpErrorResponse) =>
-                        (window.location.href = `http://${window.location.hostname}/smarthrm/authenticate/logout`)
+                        (window.location.href = `http://${
+                            window.location.hostname
+                        }/smarthrm/authenticate/logout`)
                 );
         }
         localStorage.setItem('accountingBearerToken', JSON.stringify(this.x));
@@ -88,7 +92,9 @@ export class SecurityService {
 
     logOut() {
         this.resetSecurityObject();
-        window.location.href = `http://${window.location.hostname}/smarthrm/authenticate/logout`;
+        window.location.href = `http://${
+            window.location.hostname
+        }/smarthrm/authenticate/logout`;
     }
 
     hasClaim(claimType: any, claimValue?: any): boolean {

@@ -7,8 +7,8 @@ import { AccountingApiService } from 'src/app/Services/accounting-api.service';
 import { HttpClient } from '@angular/common/http';
 
 describe('ConsolidatedTrialBalanceApiService', () => {
-    let httpClient: HttpClient;
-    let accountingApiService: AccountingApiService;
+    const httpClient: HttpClient = null;
+    const accountingApiService: AccountingApiService = null;
     beforeEach(() => TestBed.configureTestingModule({}));
 
     it('should be created', () => {

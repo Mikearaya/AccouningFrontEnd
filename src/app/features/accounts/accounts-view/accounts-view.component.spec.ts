@@ -11,7 +11,7 @@ describe('Accounts view component', () => {
     let router: Router;
     let activatedRoute;
     let component: AccountsViewComponent;
-    let accountsService: AccountsService;
+    const accountsService: AccountsService = null;
 
     beforeEach(async(() => {
         router = jasmine.createSpyObj('Router', ['navigate']);
