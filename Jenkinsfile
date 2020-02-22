@@ -15,14 +15,8 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'ng run-script test'
+                sh 'ng test'
             }
-        }        
-        stage('Deploy') {
-            steps {
-                sh 'rm ../../apps/*'
-                sh 'cp ./dist/apps/* ../../apps/'
-            }
-        }             
+        }                
     }
 }
