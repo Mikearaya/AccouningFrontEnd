@@ -5,17 +5,21 @@
 Finance ERP module that can be used from small to medium companies to record daily transactions and genererate useful reports. features include:
 
 -   Account managment
--   double entry
+-   Double entry
 -   Account Category Managment
 -   Generate Income statement
 -   Generate Cost of good report
 -   Multiple level Account Managment
 
 ![screenshot](./screenshot-1.png)
+
 ![screenshot](./screenshot-2.png)
 
 ## Built with
 
+-   HTML
+-   CSS
+-   Javascript
 -   Angular 7
 
 [Demo Video](https://youtu.be/fGH0igQ8uu8)
