@@ -1,18 +1,22 @@
+<!-- @format -->
+
 # Accounting ERP module Front-end
 
 Finance ERP module that can be used from small to medium companies to record daily transactions and genererate useful reports. features include:
-- Account managment
-- double entry
-- Account Category Managment
-- Generate Income statement
-- Generate Cost of good report
 
+-   Account managment
+-   double entry
+-   Account Category Managment
+-   Generate Income statement
+-   Generate Cost of good report
+-   Multiple level Account Managment
 
-![screenshot](./assets/images/screenshot.png)
-
+![screenshot](./screenshot-1.png)
+![screenshot](./screenshot-2.png)
 
 ## Built with
-- Angular 7
+
+-   Angular 7
 
 [Demo Video](https://youtu.be/fGH0igQ8uu8)
 
@@ -40,9 +44,9 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 👤 **Mikael Araya**
 
-- Github: [@mikearaya](https://github.com/mikearaya)
-- Twitter: [@mikearaya12](https://twitter.com/mikearaya12)
-- Linkedin: [linkedin](https://linkedin.com/in/mikael-araya)
+-   Github: [@mikearaya](https://github.com/mikearaya)
+-   Twitter: [@mikearaya12](https://twitter.com/mikearaya12)
+-   Linkedin: [linkedin](https://linkedin.com/in/mikael-araya)
 
 ## 🤝 Contributing
 
@@ -57,4 +61,3 @@ Give a ⭐️ if you like this project!
 ## 📝 License
 
 This project is [MIT](lic.url) licensed.
-
