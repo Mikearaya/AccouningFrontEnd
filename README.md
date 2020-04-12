@@ -1,6 +1,20 @@
-# AccountingFront
+# Accounting ERP module Front-end
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.8.
+Finance ERP module that can be used from small to medium companies to record daily transactions and genererate useful reports. features include:
+- Account managment
+- double entry
+- Account Category Managment
+- Generate Income statement
+- Generate Cost of good report
+
+
+![screenshot](./assets/images/screenshot.png)
+
+
+## Built with
+- Angular 7
+
+[Demo Video](https://youtu.be/fGH0igQ8uu8)
 
 ## Development server
 
@@ -18,10 +32,29 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+## Authors
+
+👤 **Mikael Araya**
+
+- Github: [@mikearaya](https://github.com/mikearaya)
+- Twitter: [@mikearaya12](https://twitter.com/mikearaya12)
+- Linkedin: [linkedin](https://linkedin.com/in/mikael-araya)
+
+## 🤝 Contributing
+
+Contributions, issues and feature requests are welcome!
+
+Feel free to check the [issues page](issues/).
+
+## Show your support
+
+Give a ⭐️ if you like this project!
+
+## 📝 License
+
+This project is [MIT](lic.url) licensed.
+
